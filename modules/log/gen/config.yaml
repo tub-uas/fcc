@@ -1,8 +1,0 @@
----
- active-modules:
-   - raiIn
-   - raiOut
-   - sFusion
-   - ahrs
-   - air
-   - ctrl

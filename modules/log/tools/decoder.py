@@ -74,9 +74,6 @@ if __name__ == '__main__':
     parser.add_argument("-d", "--dstDir", type=str, default="../decoded", help="directory that will house the decoded log files")
     args = parser.parse_args()
 
-    # print(args.srcDir)
-    # print(args.dstDir)
-
     if not os.path.isdir(args.srcDir):
         raise ValueError("srcDir is not a directory")
 
@@ -90,12 +87,6 @@ if __name__ == '__main__':
     conf = conf.Conf()
     conf.readConf()
 
-    # pp.pprint(conf.activeIdlPaths)
-    # pp.pprint(conf.activeModules)
-    # pp.pprint(conf.allModules)
-    # pp.pprint(conf.allIdlPaths)
-    # pp.pprint(conf.currentDir)
-
     for mod, dir in conf.activeIdlPaths.items():
 
         print("Decoding " + mod + " ...", end='')
@@ -106,8 +97,6 @@ if __name__ == '__main__':
 
         srcFile = os.path.join(args.srcDir, mod + ".log")
         dstFile = os.path.join(args.dstDir, mod + ".txt")
-        # print(srcFile)
-        # print(dstFile)
 
         d = Dec(mod, srcFile, dstFile, i.objs)
         d.decode()
