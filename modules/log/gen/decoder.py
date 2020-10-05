@@ -23,17 +23,19 @@ class Dec():
     def sizeLookup(self, x):
         return {
             'unsigned long long': 8,
-            'float': 4,
-            'boolean': 1,
             'unsigned short': 2,
+            'float': 4,
+            'double': 8,
+            'boolean': 1,
         }[x]
 
     def typeLookup(self, x):
         return {
             'unsigned long long': 'Q',
-            'float': 'f',
-            'boolean': 'b', # or '?' for True/False instead of 1/0
             'unsigned short': 'H',
+            'float': 'f',
+            'double': 'd',
+            'boolean': 'b', # or '?' for True/False instead of 1/0
         }[x]
 
     @property
