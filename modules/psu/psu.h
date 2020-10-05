@@ -1,5 +1,5 @@
-#ifndef AHRS_H
-#define AHRS_H
+#ifndef PSU_H
+#define PSU_H
 
 #include <iostream>
 #include <mutex>
@@ -72,4 +72,4 @@ private:
 
 };
 
-#endif // AHRS_H
+#endif // PSU_H
