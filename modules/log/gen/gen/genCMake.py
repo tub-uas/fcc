@@ -1,8 +1,7 @@
-from idl import Idl
+from util.idl import Idl
 
-import re
 import os
-import shutil
+import pprint as pp
 
 class GenCMake():
 
@@ -33,9 +32,9 @@ class GenCMake():
             self._data = f.readlines()
 
         with open(os.path.join(self._dst, self._fileName), 'w') as f:
-            for d in self._data:
-                f.write(d)
-                if '###PYTHON_GEN_ADD_LIBRARY' in d:
+            for l in self._data:
+                f.write(l)
+                if '###PYTHON_GEN_ADD_LIBRARY' in l:
                     f.writelines(self.addLibrary)
-                elif '###PYTHON_GEN_TARGET_LINK' in d:
+                elif '###PYTHON_GEN_TARGET_LINK' in l:
                     f.writelines(self.targetLink)

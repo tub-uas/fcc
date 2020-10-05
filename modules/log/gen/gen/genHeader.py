@@ -1,8 +1,7 @@
-from idl import Idl
+from util.idl import Idl
 
-import re
 import os
-import shutil
+import pprint as pp
 
 class GenHeader():
 
@@ -58,13 +57,13 @@ class GenHeader():
                     raise
 
         with open(os.path.join(self._dst, self._fileName), 'w') as f:
-            for d in self._data:
-                f.write(d)
-                if '/***PYTHON_GEN_PUBSUB*/' in d:
+            for l in self._data:
+                f.write(l)
+                if '/***PYTHON_GEN_PUBSUB*/' in l:
                     f.writelines(self.pubSub)
-                elif '/***PYTHON_GEN_DATA_MUTEX*/' in d:
+                elif '/***PYTHON_GEN_DATA_MUTEX*/' in l:
                     f.writelines(self.dataMutex)
-                elif '/***PYTHON_GEN_TOPIC*/' in d:
+                elif '/***PYTHON_GEN_TOPIC*/' in l:
                     f.writelines(self.topic)
-                elif '/***PYTHON_GEN_FILES*/' in d:
+                elif '/***PYTHON_GEN_FILES*/' in l:
                     f.writelines(self.files)

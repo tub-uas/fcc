@@ -1,8 +1,6 @@
-from idl import Idl
+from util.idl import Idl
 
-import re
 import os
-import shutil
 import pprint as pp
 
 class GenSource():
@@ -143,21 +141,21 @@ class GenSource():
                     raise
 
         with open(os.path.join(self._dst, self._fileName), 'w') as f:
-            for d in self._data:
-                f.write(d)
-                if '/***PYTHON_GEN_ON_DATA_CALLBACK*/' in d:
+            for l in self._data:
+                f.write(l)
+                if '/***PYTHON_GEN_ON_DATA_CALLBACK*/' in l:
                     f.writelines(self.dataCallback)
-                elif '/***PYTHON_GEN_CONSTR*/' in d:
+                elif '/***PYTHON_GEN_CONSTR*/' in l:
                     f.writelines(self.constr)
-                elif '/***PYTHON_GEN_DELETE*/' in d:
+                elif '/***PYTHON_GEN_DELETE*/' in l:
                     f.writelines(self.delete)
-                elif '/***PYTHON_GEN_CLOSE_FILES*/' in d:
+                elif '/***PYTHON_GEN_CLOSE_FILES*/' in l:
                     f.writelines(self.close)
-                elif '/***PYTHON_GEN_REGISTER_TYPE*/' in d:
+                elif '/***PYTHON_GEN_REGISTER_TYPE*/' in l:
                     f.writelines(self.registerType)
-                elif '/***PYTHON_GEN_CREATE_DATAREADER*/' in d:
+                elif '/***PYTHON_GEN_CREATE_DATAREADER*/' in l:
                     f.writelines(self.createDatareader)
-                elif '/***PYTHON_GEN_OPEN_FILES*/' in d:
+                elif '/***PYTHON_GEN_OPEN_FILES*/' in l:
                     f.writelines(self.openFiles)
-                elif '/***PYTHON_GEN_WRITE_FILES*/' in d:
+                elif '/***PYTHON_GEN_WRITE_FILES*/' in l:
                     f.writelines(self.writeFiles)
