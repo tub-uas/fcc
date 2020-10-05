@@ -110,12 +110,9 @@ class GenSource():
                       "\t\t\tstd::cout << \"newData%s\" << std::endl;\n" % (Idl.toUp(mod))])
             i = Idl(mod, dir)
             i.decodeIdl()
-            # pp.pprint(i.objs)
             for t in i.objs:
-                # sprint(t[0])
                 if t[0][-1] == "]":
                     t[0] = t[0].split("[", 1)[0]
-                    # print(t[0])
                     c.extend(["\t\t\tfor (unsigned int i=0; i<listener.data%s.%s().size(); i++) {\n" % (Idl.toUp(mod), Idl.toLow(t[0]))])
                     c.extend(["\t\t\t\t%sFile.write(reinterpret_cast<const char*>(&listener.data%s.%s().at(i)), sizeof(listener.data%s.%s().at(i)));\n" % (Idl.toLow(mod), Idl.toUp(mod), Idl.toLow(t[0]), Idl.toUp(mod), Idl.toLow(t[0]))])
                     c.extend(["\t\t\t}\n"])
