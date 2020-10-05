@@ -281,13 +281,15 @@ void Ctrl::run() {
 				dataCtrl.eta(listener.dataRaiIn.pitch());
 				dataCtrl.zeta(listener.dataRaiIn.yaw());
 
+				pidPitch.reset();
 				// pidYaw.reset();
 
 			} else if (listener.dataRaiIn.fltMode() == Mixer::NAV) {
 				dataCtrl.xi(outRoll);
 				dataCtrl.eta(outPitch);
+				dataCtrl.zeta(listener.dataRaiIn.yaw());
+
 				// dataCtrl.zeta(outYaw);
-				listener.dataRaiIn.yaw();
 			}
 
 			dataCtrl.etaT(listener.dataRaiIn.thr());
