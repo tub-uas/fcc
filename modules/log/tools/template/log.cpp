@@ -125,8 +125,8 @@ void Log::run() {
 
 		/***PYTHON_GEN_WRITE_FILES*/
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
+		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 	}
 }
