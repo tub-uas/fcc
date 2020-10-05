@@ -1,3 +1,4 @@
+import pprint as pp
 
 class Idl():
 
@@ -5,6 +6,7 @@ class Idl():
         self._name = name
         self._dir = dir
         self._objs = []
+        self._expObjs = []
 
     @property
     def name(self):
@@ -35,8 +37,24 @@ class Idl():
         return self._objs
 
     @property
+    def expObjs(self):
+        return self._expObjs
+
+    @property
     def objsNames(self):
         return list(map(lambda x: x[0], self._objs))
+
+    def expandArrays(self, x):
+        expanded = list()
+        for obj in self._objs:
+            if obj[0][-1] == "]":
+                name = obj[0].split("[", 1)[0]
+                nums = int(obj[0].split("[", 1)[1][:-1])
+                for i in range(0, nums):
+                    expanded.append([name+"["+str(i)+"]", obj[1]])
+            else:
+                expanded.append(obj)
+        return expanded
 
     def decodeIdl(self):
         with open(self.dir) as f:
@@ -51,3 +69,4 @@ class Idl():
         #     print(line.split())
 
         self._objs = list(map(lambda x: [x[-1][:-1], ' '.join(x[:-1])], self._objs[1:-1]))
+        self._expObjs = self.expandArrays(self._objs)

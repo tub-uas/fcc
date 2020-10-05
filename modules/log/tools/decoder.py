@@ -93,12 +93,11 @@ if __name__ == '__main__':
 
         i = Idl(mod, dir)
         i.decodeIdl()
-        pp.pprint(i.objs)
 
         srcFile = os.path.join(args.srcDir, mod + ".log")
         dstFile = os.path.join(args.dstDir, mod + ".txt")
 
-        d = Dec(mod, srcFile, dstFile, i.objs)
+        d = Dec(mod, srcFile, dstFile, i.expObjs)
         d.decode()
 
         print(" done")
