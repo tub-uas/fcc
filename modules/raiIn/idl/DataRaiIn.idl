@@ -1,0 +1,11 @@
+struct DataRaiIn {
+	unsigned long long  time;
+	float               senseTime;
+	unsigned short      chnl[12];
+	float               roll;
+	float               pitch;
+	float               yaw;
+	float               thr;
+	unsigned short      fltMode;
+	boolean             alive;
+};

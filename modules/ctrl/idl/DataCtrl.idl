@@ -1,0 +1,10 @@
+struct DataCtrl {
+	unsigned long long time;
+	float              xi;      // aka. aileron
+	float              eta;     // aka. elevator
+	float              zeta;    // aka. rudder
+	float              etaT;    // aka. throttle
+	float              etaF;    // aka. flaps
+	unsigned short     fltMode;
+	boolean            alive;
+};

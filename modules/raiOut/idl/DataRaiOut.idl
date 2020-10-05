@@ -1,0 +1,10 @@
+struct DataRaiOut {
+	unsigned long long  time;
+	unsigned short      chnl[12];
+	float               roll;
+	float               pitch;
+	float               yaw;
+	float               thr;
+	unsigned short      fltMode;
+	boolean             alive;
+};

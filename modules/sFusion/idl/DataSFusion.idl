@@ -1,0 +1,25 @@
+struct DataSFusion {
+	unsigned long long time;
+	float    phi;
+	float    the;
+	float    psi;
+	float    p0;
+	float    p1;
+	float    p2;
+	float    p3;
+	float    press;
+	float    temp;
+	float    posN;
+	float    posE;
+	float    posD;
+	float    speedX;
+	float    speedY;
+	float    speedZ;
+	float    windX;
+	float    windY;
+	float    windZ;
+	float    ssa;
+	float    aoa;
+	float    gamma;
+	boolean  alive;
+};

@@ -1,0 +1,14 @@
+struct DataGps {
+	unsigned long long time;
+	float    senseTime;
+	double   lat;
+	double   lon;
+	float    alt;
+	float    gs;
+	float    course;
+	float    pdop;
+	float    hdop;
+	float    vdop;
+	float    sats;
+	boolean  alive;
+};

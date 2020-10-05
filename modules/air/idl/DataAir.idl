@@ -1,0 +1,10 @@
+struct DataAir {
+	unsigned long long time;
+	float    senseTime;
+	float    dynamicPress;
+	float    velocity;
+	float    baroPress;
+	float    density;
+	float    temp;
+	boolean  alive;
+};
