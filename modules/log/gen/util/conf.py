@@ -1,4 +1,4 @@
-from idl import Idl
+from util.idl import Idl
 
 import yaml
 import os

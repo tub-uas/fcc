@@ -1,4 +1,3 @@
-import re
 
 class Idl():
 
@@ -6,18 +5,6 @@ class Idl():
         self._name = name
         self._dir = dir
         self._objs = []
-        # self._types = {
-        # 'char':               'char',
-        # 'octet':              'uint8_t',
-        # 'short':              'int16_t',
-        # 'unsigned short':     'uint16_t',
-        # 'long long':          'int64_t',
-        # 'unsigned long long': 'uint64_t',
-        # 'float':              'float',
-        # 'double':             'double',
-        # 'long double long':   'double',
-        # 'boolean':            'bool',
-        # }
 
     @property
     def name(self):

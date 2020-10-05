@@ -1,25 +1,18 @@
-import conf
-import idl
-import genCMake
-import genHeader
-import genSource
+from util import conf
+from gen import genCMake
+from gen import genHeader
+from gen import genSource
 
 import os
-import pprint as pp
-import sys
-import struct
 import argparse
 import shutil
-
-# TODO handle arrays (and other file types)
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Logger generator')
-    parser.add_argument("-g", "--generatedDir", type=str, default="generated", help="directory that will house the generated c++ files")
+    parser.add_argument("-g", "--generatedDir", type=str, default="../generated", help="directory that will house the generated c++ files")
     parser.add_argument("-t", "--templateDir", type=str, default="../template", help="path to template c++ files")
     args = parser.parse_args()
-
 
     if not os.path.exists(args.generatedDir):
         try:
@@ -30,7 +23,6 @@ if __name__ == '__main__':
 
     conf = conf.Conf()
     conf.readConf()
-
 
     genCM = genCMake.GenCMake(conf.activeModulesUp, os.path.join(args.templateDir, "CMakeLists.txt"), args.generatedDir)
     genCM.gen()
