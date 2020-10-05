@@ -36,6 +36,8 @@
 // == UTIL ====================================================================
 #include "../../util/timer/timer.h"
 
+#define TELEMETRY_COM_PORT  "/dev/ttyUSB0"
+
 using namespace eprosima::fastdds::dds;
 
 

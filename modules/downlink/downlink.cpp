@@ -257,7 +257,7 @@ bool Downlink::init() {
         return false;
     }
 
-    if (serial.init("/dev/ttyUSB0",B115200) != true) {
+    if (serial.init(TELEMETRY_COM_PORT,B115200) != true) {
         return false;
     }
     

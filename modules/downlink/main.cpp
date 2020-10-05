@@ -15,7 +15,7 @@ int32_t main(void) {
         downlink->run();
     }
     else {
-        std::cout << "[FAILED]";        
+        std::cout << "[FAILED]" << std::endl;        
     }
     std::cout << "Closing Downlink" << std::endl;
     delete downlink;
