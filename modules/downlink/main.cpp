@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdint>
-#include "downlink_subscriber.h"
+#include "downlink.h"
 
 
 
@@ -8,7 +8,7 @@
 
 int32_t main(void) {
     
-    AlxSys_downlink *downlink = new AlxSys_downlink();
+    Downlink *downlink = new Downlink();
     std::cout << "DOWNLINK ..." << std::endl;
     if(downlink->init()) {
         std::cout << "[START]" << std::endl;

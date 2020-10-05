@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<mavlink>
+    <include>common.xml</include>
+    <dialect>10</dialect>
+    <messages>
+        <message id="10000" name="DataRaiIn">
+            <description>Data from rc2s in</description>
+            <field type="uint64_t" name="time">Time.</field>
+            <field type="float" name="senseTime">Sensetime.</field>
+            <field type="uint16_t[12]" name="channels">Channels.</field>
+            <field type="float" name="roll">Setpoint ailleron.</field>
+            <field type="float" name="pitch">Setpoint elevator.</field>
+            <field type="float" name="yaw">Setpoint rudder.</field>
+            <field type="float" name="thr">Setpoint thrust.</field>
+            <field type="uint16_t" name="fltmode">Flightmode.</field>
+            <field type="uint8_t" name="alive"> Alive.</field>
+        </message>
+        <message id="15000" name="DataRaiOut">
+            <description>Data from rc2s in</description>
+            <field type="uint64_t" name="time">Time.</field>
+            <field type="uint16_t[12]" name="chnls">Channels.</field>
+            <field type="float" name="roll">Output ailleron.</field>
+            <field type="float" name="pitch">Output elevator.</field>
+            <field type="float" name="yaw">Output rudder.</field>
+            <field type="float" name="thr">Output thrust.</field>
+            <field type="uint16_t" name="fltMode">Flightmode.</field>
+            <field type="uint8_t" name="alive"> Alive.</field>
+        </message>
+        
+        <message id="20000" name="DataAhrs">
+            <description>Data from AHRS</description>
+            <field type="uint64_t" name="time">Time.</field>
+            <field type="float" name="senseTime">Sensetime.</field>
+            <field type="float" name="gX">gyro X-axis.</field>
+            <field type="float" name="gY">gyro Y-axis.</field>
+            <field type="float" name="gZ">gyro Z-axis.</field>
+            <field type="float" name="aX">accl X-axis.</field>
+            <field type="float" name="aY">accl Y-axis.</field>
+            <field type="float" name="aZ">accl Z-axis.</field>
+            <field type="float" name="mX">magn X-axis.</field>
+            <field type="float" name="mY">magn Y-axis.</field>
+            <field type="float" name="mZ">magn Z-axis.</field>
+            <field type="float" name="temp">Temperature.</field>
+            <field type="float" name="baro_ahrs">Barometric pressure ahrs.</field>
+            <field type="float" name="phi">Phi.</field>
+            <field type="float" name="the">Theta.</field>
+            <field type="float" name="psi">Psi.</field>
+            <field type="float" name="q0">q0.</field>
+            <field type="float" name="q1">q1.</field>
+            <field type="float" name="q2">q2.</field>
+            <field type="float" name="q3">q3.</field>
+            <field type="uint8_t" name="alive">Alive.</field>
+        </message>
+        <message id="30000" name="DataAir">
+            <description>Data from AIR</description>
+            <field type="uint64_t" name="time">Time.</field>
+            <field type="float" name="senseTime">Sensetime.</field>
+            <field type="float" name="TAS">Velocity (TAS).</field>
+            <field type="float" name="baro_air">Barometric pressure air.</field>
+            <field type="float" name="density">Density.</field>
+            <field type="float" name="temp">Temperature.</field>
+            <field type="uint8_t" name="alive">Alive.</field>
+        </message>
+        <message id="40000" name="DataSfusion">
+            <description>Data from SFUSION</description>
+            <field type="uint64_t" name="time">Time.</field>
+            <field type="float" name="phi">Phi.</field>
+            <field type="float" name="the">Theta.</field>
+            <field type="float" name="psi">Psi.</field>
+            <field type="float" name="q0">q0.</field>
+            <field type="float" name="q1">q1.</field>
+            <field type="float" name="q2">q2.</field>
+            <field type="float" name="q3">q3.</field>
+            <field type="float" name="baro_fused">Barometric pressure sfusion.</field>
+            <field type="float" name="temp_fused">Temperature.</field>
+            <field type="float" name="posN">Position North.</field>
+            <field type="float" name="posE">Position East.</field>
+            <field type="float" name="posD">Position Down.</field>
+            <field type="float" name="speedN">Speed North.</field>
+            <field type="float" name="speedE">Speed East.</field>
+            <field type="float" name="speedD">Speed Down.</field>
+            <field type="float" name="WindN">Wind North.</field>
+            <field type="float" name="WindE">Wind East.</field>
+            <field type="float" name="WindD">Wind Down.</field>
+            <field type="float" name="ssa">Sideslip angle estimation.</field>
+            <field type="float" name="aoa">Angle of attack estimation.</field>
+            <field type="float" name="gamma">Pathangle estimation.</field>
+            <field type="uint8_t" name="alive">Alive.</field>
+        </message>
+        <message id="50000" name="DataCtrl">
+            <description>Data from CTRL</description>
+            <field type="uint64_t" name="time">Time.</field>
+            <field type="float" name="xi">ailleron (ctrl).</field>
+            <field type="float" name="eta">elevator (ctrl).</field>
+            <field type="float" name="zeta">rudder (ctrl).</field>
+            <field type="float" name="etaT">thrust (ctrl).</field>
+            <field type="float" name="etaF">flaps (ctrl).</field>
+            <field type="uint8_t" name="alive">alive.</field>
+        </message>
+    </messages>
+</mavlink>
