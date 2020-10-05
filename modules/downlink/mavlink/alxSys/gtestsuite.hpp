@@ -15,21 +15,25 @@ using namespace mavlink;
 #endif
 
 
-TEST(alxSys, RC2SIN)
+TEST(alxSys, DataRaiIn)
 {
     mavlink::mavlink_message_t msg;
     mavlink::MsgMap map1(msg);
     mavlink::MsgMap map2(msg);
 
-    mavlink::alxSys::msg::RC2SIN packet_in{};
-    packet_in.setPoint_aill = 17.0;
-    packet_in.setPoint_elev = 45.0;
-    packet_in.setPoint_rudd = 73.0;
-    packet_in.setPoint_thrt = 101.0;
-    packet_in.control_law = 18067;
+    mavlink::alxSys::msg::DataRaiIn packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.channels = {{ 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }};
+    packet_in.roll = 101.0;
+    packet_in.pitch = 129.0;
+    packet_in.yaw = 157.0;
+    packet_in.thr = 185.0;
+    packet_in.fltmode = 19939;
+    packet_in.alive = 39;
 
-    mavlink::alxSys::msg::RC2SIN packet1{};
-    mavlink::alxSys::msg::RC2SIN packet2{};
+    mavlink::alxSys::msg::DataRaiIn packet1{};
+    mavlink::alxSys::msg::DataRaiIn packet2{};
 
     packet1 = packet_in;
 
@@ -41,35 +45,43 @@ TEST(alxSys, RC2SIN)
 
     packet2.deserialize(map2);
 
-    EXPECT_EQ(packet1.setPoint_aill, packet2.setPoint_aill);
-    EXPECT_EQ(packet1.setPoint_elev, packet2.setPoint_elev);
-    EXPECT_EQ(packet1.setPoint_rudd, packet2.setPoint_rudd);
-    EXPECT_EQ(packet1.setPoint_thrt, packet2.setPoint_thrt);
-    EXPECT_EQ(packet1.control_law, packet2.control_law);
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.senseTime, packet2.senseTime);
+    EXPECT_EQ(packet1.channels, packet2.channels);
+    EXPECT_EQ(packet1.roll, packet2.roll);
+    EXPECT_EQ(packet1.pitch, packet2.pitch);
+    EXPECT_EQ(packet1.yaw, packet2.yaw);
+    EXPECT_EQ(packet1.thr, packet2.thr);
+    EXPECT_EQ(packet1.fltmode, packet2.fltmode);
+    EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
 #ifdef TEST_INTEROP
-TEST(alxSys_interop, RC2SIN)
+TEST(alxSys_interop, DataRaiIn)
 {
     mavlink_message_t msg;
 
     // to get nice print
     memset(&msg, 0, sizeof(msg));
 
-    mavlink_rc2sin_t packet_c {
-         17.0, 45.0, 73.0, 101.0, 18067
+    mavlink_dataraiin_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, { 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }, 19939, 39
     };
 
-    mavlink::alxSys::msg::RC2SIN packet_in{};
-    packet_in.setPoint_aill = 17.0;
-    packet_in.setPoint_elev = 45.0;
-    packet_in.setPoint_rudd = 73.0;
-    packet_in.setPoint_thrt = 101.0;
-    packet_in.control_law = 18067;
+    mavlink::alxSys::msg::DataRaiIn packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.channels = {{ 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }};
+    packet_in.roll = 101.0;
+    packet_in.pitch = 129.0;
+    packet_in.yaw = 157.0;
+    packet_in.thr = 185.0;
+    packet_in.fltmode = 19939;
+    packet_in.alive = 39;
 
-    mavlink::alxSys::msg::RC2SIN packet2{};
+    mavlink::alxSys::msg::DataRaiIn packet2{};
 
-    mavlink_msg_rc2sin_encode(1, 1, &msg, &packet_c);
+    mavlink_msg_dataraiin_encode(1, 1, &msg, &packet_c);
 
     // simulate message-handling callback
     [&packet2](const mavlink_message_t *cmsg) {
@@ -78,11 +90,15 @@ TEST(alxSys_interop, RC2SIN)
         packet2.deserialize(map2);
     } (&msg);
 
-    EXPECT_EQ(packet_in.setPoint_aill, packet2.setPoint_aill);
-    EXPECT_EQ(packet_in.setPoint_elev, packet2.setPoint_elev);
-    EXPECT_EQ(packet_in.setPoint_rudd, packet2.setPoint_rudd);
-    EXPECT_EQ(packet_in.setPoint_thrt, packet2.setPoint_thrt);
-    EXPECT_EQ(packet_in.control_law, packet2.control_law);
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
+    EXPECT_EQ(packet_in.channels, packet2.channels);
+    EXPECT_EQ(packet_in.roll, packet2.roll);
+    EXPECT_EQ(packet_in.pitch, packet2.pitch);
+    EXPECT_EQ(packet_in.yaw, packet2.yaw);
+    EXPECT_EQ(packet_in.thr, packet2.thr);
+    EXPECT_EQ(packet_in.fltmode, packet2.fltmode);
+    EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
     PRINT_MSG(msg);
@@ -90,30 +106,24 @@ TEST(alxSys_interop, RC2SIN)
 }
 #endif
 
-TEST(alxSys, AHRS)
+TEST(alxSys, DataRaiOut)
 {
     mavlink::mavlink_message_t msg;
     mavlink::MsgMap map1(msg);
     mavlink::MsgMap map2(msg);
 
-    mavlink::alxSys::msg::AHRS packet_in{};
-    packet_in.timestamp = 963497464;
-    packet_in.gX = 45.0;
-    packet_in.gY = 73.0;
-    packet_in.gZ = 101.0;
-    packet_in.aX = 129.0;
-    packet_in.aY = 157.0;
-    packet_in.aZ = 185.0;
-    packet_in.mX = 213.0;
-    packet_in.mY = 241.0;
-    packet_in.mZ = 269.0;
-    packet_in.Phi = 297.0;
-    packet_in.Tht = 325.0;
-    packet_in.Psi = 353.0;
-    packet_in.alive = 161;
+    mavlink::alxSys::msg::DataRaiOut packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.chnls = {{ 18483, 18484, 18485, 18486, 18487, 18488, 18489, 18490, 18491, 18492, 18493, 18494 }};
+    packet_in.roll = 73.0;
+    packet_in.pitch = 101.0;
+    packet_in.yaw = 129.0;
+    packet_in.thr = 157.0;
+    packet_in.fltMode = 19731;
+    packet_in.alive = 27;
 
-    mavlink::alxSys::msg::AHRS packet1{};
-    mavlink::alxSys::msg::AHRS packet2{};
+    mavlink::alxSys::msg::DataRaiOut packet1{};
+    mavlink::alxSys::msg::DataRaiOut packet2{};
 
     packet1 = packet_in;
 
@@ -125,7 +135,108 @@ TEST(alxSys, AHRS)
 
     packet2.deserialize(map2);
 
-    EXPECT_EQ(packet1.timestamp, packet2.timestamp);
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.chnls, packet2.chnls);
+    EXPECT_EQ(packet1.roll, packet2.roll);
+    EXPECT_EQ(packet1.pitch, packet2.pitch);
+    EXPECT_EQ(packet1.yaw, packet2.yaw);
+    EXPECT_EQ(packet1.thr, packet2.thr);
+    EXPECT_EQ(packet1.fltMode, packet2.fltMode);
+    EXPECT_EQ(packet1.alive, packet2.alive);
+}
+
+#ifdef TEST_INTEROP
+TEST(alxSys_interop, DataRaiOut)
+{
+    mavlink_message_t msg;
+
+    // to get nice print
+    memset(&msg, 0, sizeof(msg));
+
+    mavlink_dataraiout_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, { 18483, 18484, 18485, 18486, 18487, 18488, 18489, 18490, 18491, 18492, 18493, 18494 }, 19731, 27
+    };
+
+    mavlink::alxSys::msg::DataRaiOut packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.chnls = {{ 18483, 18484, 18485, 18486, 18487, 18488, 18489, 18490, 18491, 18492, 18493, 18494 }};
+    packet_in.roll = 73.0;
+    packet_in.pitch = 101.0;
+    packet_in.yaw = 129.0;
+    packet_in.thr = 157.0;
+    packet_in.fltMode = 19731;
+    packet_in.alive = 27;
+
+    mavlink::alxSys::msg::DataRaiOut packet2{};
+
+    mavlink_msg_dataraiout_encode(1, 1, &msg, &packet_c);
+
+    // simulate message-handling callback
+    [&packet2](const mavlink_message_t *cmsg) {
+        MsgMap map2(cmsg);
+
+        packet2.deserialize(map2);
+    } (&msg);
+
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.chnls, packet2.chnls);
+    EXPECT_EQ(packet_in.roll, packet2.roll);
+    EXPECT_EQ(packet_in.pitch, packet2.pitch);
+    EXPECT_EQ(packet_in.yaw, packet2.yaw);
+    EXPECT_EQ(packet_in.thr, packet2.thr);
+    EXPECT_EQ(packet_in.fltMode, packet2.fltMode);
+    EXPECT_EQ(packet_in.alive, packet2.alive);
+
+#ifdef PRINT_MSG
+    PRINT_MSG(msg);
+#endif
+}
+#endif
+
+TEST(alxSys, DataAhrs)
+{
+    mavlink::mavlink_message_t msg;
+    mavlink::MsgMap map1(msg);
+    mavlink::MsgMap map2(msg);
+
+    mavlink::alxSys::msg::DataAhrs packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.gX = 101.0;
+    packet_in.gY = 129.0;
+    packet_in.gZ = 157.0;
+    packet_in.aX = 185.0;
+    packet_in.aY = 213.0;
+    packet_in.aZ = 241.0;
+    packet_in.mX = 269.0;
+    packet_in.mY = 297.0;
+    packet_in.mZ = 325.0;
+    packet_in.temp = 353.0;
+    packet_in.baro_ahrs = 381.0;
+    packet_in.phi = 409.0;
+    packet_in.the = 437.0;
+    packet_in.psi = 465.0;
+    packet_in.q0 = 493.0;
+    packet_in.q1 = 521.0;
+    packet_in.q2 = 549.0;
+    packet_in.q3 = 577.0;
+    packet_in.alive = 1;
+
+    mavlink::alxSys::msg::DataAhrs packet1{};
+    mavlink::alxSys::msg::DataAhrs packet2{};
+
+    packet1 = packet_in;
+
+    //std::cout << packet1.to_yaml() << std::endl;
+
+    packet1.serialize(map1);
+
+    mavlink::mavlink_finalize_message(&msg, 1, 1, packet1.MIN_LENGTH, packet1.LENGTH, packet1.CRC_EXTRA);
+
+    packet2.deserialize(map2);
+
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.senseTime, packet2.senseTime);
     EXPECT_EQ(packet1.gX, packet2.gX);
     EXPECT_EQ(packet1.gY, packet2.gY);
     EXPECT_EQ(packet1.gZ, packet2.gZ);
@@ -135,43 +246,56 @@ TEST(alxSys, AHRS)
     EXPECT_EQ(packet1.mX, packet2.mX);
     EXPECT_EQ(packet1.mY, packet2.mY);
     EXPECT_EQ(packet1.mZ, packet2.mZ);
-    EXPECT_EQ(packet1.Phi, packet2.Phi);
-    EXPECT_EQ(packet1.Tht, packet2.Tht);
-    EXPECT_EQ(packet1.Psi, packet2.Psi);
+    EXPECT_EQ(packet1.temp, packet2.temp);
+    EXPECT_EQ(packet1.baro_ahrs, packet2.baro_ahrs);
+    EXPECT_EQ(packet1.phi, packet2.phi);
+    EXPECT_EQ(packet1.the, packet2.the);
+    EXPECT_EQ(packet1.psi, packet2.psi);
+    EXPECT_EQ(packet1.q0, packet2.q0);
+    EXPECT_EQ(packet1.q1, packet2.q1);
+    EXPECT_EQ(packet1.q2, packet2.q2);
+    EXPECT_EQ(packet1.q3, packet2.q3);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
 #ifdef TEST_INTEROP
-TEST(alxSys_interop, AHRS)
+TEST(alxSys_interop, DataAhrs)
 {
     mavlink_message_t msg;
 
     // to get nice print
     memset(&msg, 0, sizeof(msg));
 
-    mavlink_ahrs_t packet_c {
-         963497464, 45.0, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 161
+    mavlink_dataahrs_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 493.0, 521.0, 549.0, 577.0, 1
     };
 
-    mavlink::alxSys::msg::AHRS packet_in{};
-    packet_in.timestamp = 963497464;
-    packet_in.gX = 45.0;
-    packet_in.gY = 73.0;
-    packet_in.gZ = 101.0;
-    packet_in.aX = 129.0;
-    packet_in.aY = 157.0;
-    packet_in.aZ = 185.0;
-    packet_in.mX = 213.0;
-    packet_in.mY = 241.0;
-    packet_in.mZ = 269.0;
-    packet_in.Phi = 297.0;
-    packet_in.Tht = 325.0;
-    packet_in.Psi = 353.0;
-    packet_in.alive = 161;
+    mavlink::alxSys::msg::DataAhrs packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.gX = 101.0;
+    packet_in.gY = 129.0;
+    packet_in.gZ = 157.0;
+    packet_in.aX = 185.0;
+    packet_in.aY = 213.0;
+    packet_in.aZ = 241.0;
+    packet_in.mX = 269.0;
+    packet_in.mY = 297.0;
+    packet_in.mZ = 325.0;
+    packet_in.temp = 353.0;
+    packet_in.baro_ahrs = 381.0;
+    packet_in.phi = 409.0;
+    packet_in.the = 437.0;
+    packet_in.psi = 465.0;
+    packet_in.q0 = 493.0;
+    packet_in.q1 = 521.0;
+    packet_in.q2 = 549.0;
+    packet_in.q3 = 577.0;
+    packet_in.alive = 1;
 
-    mavlink::alxSys::msg::AHRS packet2{};
+    mavlink::alxSys::msg::DataAhrs packet2{};
 
-    mavlink_msg_ahrs_encode(1, 1, &msg, &packet_c);
+    mavlink_msg_dataahrs_encode(1, 1, &msg, &packet_c);
 
     // simulate message-handling callback
     [&packet2](const mavlink_message_t *cmsg) {
@@ -180,7 +304,8 @@ TEST(alxSys_interop, AHRS)
         packet2.deserialize(map2);
     } (&msg);
 
-    EXPECT_EQ(packet_in.timestamp, packet2.timestamp);
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
     EXPECT_EQ(packet_in.gX, packet2.gX);
     EXPECT_EQ(packet_in.gY, packet2.gY);
     EXPECT_EQ(packet_in.gZ, packet2.gZ);
@@ -190,9 +315,15 @@ TEST(alxSys_interop, AHRS)
     EXPECT_EQ(packet_in.mX, packet2.mX);
     EXPECT_EQ(packet_in.mY, packet2.mY);
     EXPECT_EQ(packet_in.mZ, packet2.mZ);
-    EXPECT_EQ(packet_in.Phi, packet2.Phi);
-    EXPECT_EQ(packet_in.Tht, packet2.Tht);
-    EXPECT_EQ(packet_in.Psi, packet2.Psi);
+    EXPECT_EQ(packet_in.temp, packet2.temp);
+    EXPECT_EQ(packet_in.baro_ahrs, packet2.baro_ahrs);
+    EXPECT_EQ(packet_in.phi, packet2.phi);
+    EXPECT_EQ(packet_in.the, packet2.the);
+    EXPECT_EQ(packet_in.psi, packet2.psi);
+    EXPECT_EQ(packet_in.q0, packet2.q0);
+    EXPECT_EQ(packet_in.q1, packet2.q1);
+    EXPECT_EQ(packet_in.q2, packet2.q2);
+    EXPECT_EQ(packet_in.q3, packet2.q3);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -201,20 +332,23 @@ TEST(alxSys_interop, AHRS)
 }
 #endif
 
-TEST(alxSys, AIR)
+TEST(alxSys, DataAir)
 {
     mavlink::mavlink_message_t msg;
     mavlink::MsgMap map1(msg);
     mavlink::MsgMap map2(msg);
 
-    mavlink::alxSys::msg::AIR packet_in{};
-    packet_in.timestamp = 963497464;
-    packet_in.aspd = 45.0;
-    packet_in.altb = 73.0;
-    packet_in.alive = 41;
+    mavlink::alxSys::msg::DataAir packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.TAS = 101.0;
+    packet_in.baro_air = 129.0;
+    packet_in.density = 157.0;
+    packet_in.temp = 185.0;
+    packet_in.alive = 89;
 
-    mavlink::alxSys::msg::AIR packet1{};
-    mavlink::alxSys::msg::AIR packet2{};
+    mavlink::alxSys::msg::DataAir packet1{};
+    mavlink::alxSys::msg::DataAir packet2{};
 
     packet1 = packet_in;
 
@@ -226,33 +360,39 @@ TEST(alxSys, AIR)
 
     packet2.deserialize(map2);
 
-    EXPECT_EQ(packet1.timestamp, packet2.timestamp);
-    EXPECT_EQ(packet1.aspd, packet2.aspd);
-    EXPECT_EQ(packet1.altb, packet2.altb);
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.senseTime, packet2.senseTime);
+    EXPECT_EQ(packet1.TAS, packet2.TAS);
+    EXPECT_EQ(packet1.baro_air, packet2.baro_air);
+    EXPECT_EQ(packet1.density, packet2.density);
+    EXPECT_EQ(packet1.temp, packet2.temp);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
 #ifdef TEST_INTEROP
-TEST(alxSys_interop, AIR)
+TEST(alxSys_interop, DataAir)
 {
     mavlink_message_t msg;
 
     // to get nice print
     memset(&msg, 0, sizeof(msg));
 
-    mavlink_air_t packet_c {
-         963497464, 45.0, 73.0, 41
+    mavlink_dataair_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 89
     };
 
-    mavlink::alxSys::msg::AIR packet_in{};
-    packet_in.timestamp = 963497464;
-    packet_in.aspd = 45.0;
-    packet_in.altb = 73.0;
-    packet_in.alive = 41;
+    mavlink::alxSys::msg::DataAir packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.TAS = 101.0;
+    packet_in.baro_air = 129.0;
+    packet_in.density = 157.0;
+    packet_in.temp = 185.0;
+    packet_in.alive = 89;
 
-    mavlink::alxSys::msg::AIR packet2{};
+    mavlink::alxSys::msg::DataAir packet2{};
 
-    mavlink_msg_air_encode(1, 1, &msg, &packet_c);
+    mavlink_msg_dataair_encode(1, 1, &msg, &packet_c);
 
     // simulate message-handling callback
     [&packet2](const mavlink_message_t *cmsg) {
@@ -261,9 +401,12 @@ TEST(alxSys_interop, AIR)
         packet2.deserialize(map2);
     } (&msg);
 
-    EXPECT_EQ(packet_in.timestamp, packet2.timestamp);
-    EXPECT_EQ(packet_in.aspd, packet2.aspd);
-    EXPECT_EQ(packet_in.altb, packet2.altb);
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
+    EXPECT_EQ(packet_in.TAS, packet2.TAS);
+    EXPECT_EQ(packet_in.baro_air, packet2.baro_air);
+    EXPECT_EQ(packet_in.density, packet2.density);
+    EXPECT_EQ(packet_in.temp, packet2.temp);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -272,17 +415,39 @@ TEST(alxSys_interop, AIR)
 }
 #endif
 
-TEST(alxSys, SFUSION)
+TEST(alxSys, DataSfusion)
 {
     mavlink::mavlink_message_t msg;
     mavlink::MsgMap map1(msg);
     mavlink::MsgMap map2(msg);
 
-    mavlink::alxSys::msg::SFUSION packet_in{};
-    packet_in.timestamp = 963497464;
+    mavlink::alxSys::msg::DataSfusion packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.phi = 73.0;
+    packet_in.the = 101.0;
+    packet_in.psi = 129.0;
+    packet_in.q0 = 157.0;
+    packet_in.q1 = 185.0;
+    packet_in.q2 = 213.0;
+    packet_in.q3 = 241.0;
+    packet_in.baro_fused = 269.0;
+    packet_in.temp_fused = 297.0;
+    packet_in.posN = 325.0;
+    packet_in.posE = 353.0;
+    packet_in.posD = 381.0;
+    packet_in.speedN = 409.0;
+    packet_in.speedE = 437.0;
+    packet_in.speedD = 465.0;
+    packet_in.WindN = 493.0;
+    packet_in.WindE = 521.0;
+    packet_in.WindD = 549.0;
+    packet_in.ssa = 577.0;
+    packet_in.aoa = 605.0;
+    packet_in.gamma = 633.0;
+    packet_in.alive = 25;
 
-    mavlink::alxSys::msg::SFUSION packet1{};
-    mavlink::alxSys::msg::SFUSION packet2{};
+    mavlink::alxSys::msg::DataSfusion packet1{};
+    mavlink::alxSys::msg::DataSfusion packet2{};
 
     packet1 = packet_in;
 
@@ -294,27 +459,71 @@ TEST(alxSys, SFUSION)
 
     packet2.deserialize(map2);
 
-    EXPECT_EQ(packet1.timestamp, packet2.timestamp);
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.phi, packet2.phi);
+    EXPECT_EQ(packet1.the, packet2.the);
+    EXPECT_EQ(packet1.psi, packet2.psi);
+    EXPECT_EQ(packet1.q0, packet2.q0);
+    EXPECT_EQ(packet1.q1, packet2.q1);
+    EXPECT_EQ(packet1.q2, packet2.q2);
+    EXPECT_EQ(packet1.q3, packet2.q3);
+    EXPECT_EQ(packet1.baro_fused, packet2.baro_fused);
+    EXPECT_EQ(packet1.temp_fused, packet2.temp_fused);
+    EXPECT_EQ(packet1.posN, packet2.posN);
+    EXPECT_EQ(packet1.posE, packet2.posE);
+    EXPECT_EQ(packet1.posD, packet2.posD);
+    EXPECT_EQ(packet1.speedN, packet2.speedN);
+    EXPECT_EQ(packet1.speedE, packet2.speedE);
+    EXPECT_EQ(packet1.speedD, packet2.speedD);
+    EXPECT_EQ(packet1.WindN, packet2.WindN);
+    EXPECT_EQ(packet1.WindE, packet2.WindE);
+    EXPECT_EQ(packet1.WindD, packet2.WindD);
+    EXPECT_EQ(packet1.ssa, packet2.ssa);
+    EXPECT_EQ(packet1.aoa, packet2.aoa);
+    EXPECT_EQ(packet1.gamma, packet2.gamma);
+    EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
 #ifdef TEST_INTEROP
-TEST(alxSys_interop, SFUSION)
+TEST(alxSys_interop, DataSfusion)
 {
     mavlink_message_t msg;
 
     // to get nice print
     memset(&msg, 0, sizeof(msg));
 
-    mavlink_sfusion_t packet_c {
-         963497464
+    mavlink_datasfusion_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 493.0, 521.0, 549.0, 577.0, 605.0, 633.0, 25
     };
 
-    mavlink::alxSys::msg::SFUSION packet_in{};
-    packet_in.timestamp = 963497464;
+    mavlink::alxSys::msg::DataSfusion packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.phi = 73.0;
+    packet_in.the = 101.0;
+    packet_in.psi = 129.0;
+    packet_in.q0 = 157.0;
+    packet_in.q1 = 185.0;
+    packet_in.q2 = 213.0;
+    packet_in.q3 = 241.0;
+    packet_in.baro_fused = 269.0;
+    packet_in.temp_fused = 297.0;
+    packet_in.posN = 325.0;
+    packet_in.posE = 353.0;
+    packet_in.posD = 381.0;
+    packet_in.speedN = 409.0;
+    packet_in.speedE = 437.0;
+    packet_in.speedD = 465.0;
+    packet_in.WindN = 493.0;
+    packet_in.WindE = 521.0;
+    packet_in.WindD = 549.0;
+    packet_in.ssa = 577.0;
+    packet_in.aoa = 605.0;
+    packet_in.gamma = 633.0;
+    packet_in.alive = 25;
 
-    mavlink::alxSys::msg::SFUSION packet2{};
+    mavlink::alxSys::msg::DataSfusion packet2{};
 
-    mavlink_msg_sfusion_encode(1, 1, &msg, &packet_c);
+    mavlink_msg_datasfusion_encode(1, 1, &msg, &packet_c);
 
     // simulate message-handling callback
     [&packet2](const mavlink_message_t *cmsg) {
@@ -323,7 +532,29 @@ TEST(alxSys_interop, SFUSION)
         packet2.deserialize(map2);
     } (&msg);
 
-    EXPECT_EQ(packet_in.timestamp, packet2.timestamp);
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.phi, packet2.phi);
+    EXPECT_EQ(packet_in.the, packet2.the);
+    EXPECT_EQ(packet_in.psi, packet2.psi);
+    EXPECT_EQ(packet_in.q0, packet2.q0);
+    EXPECT_EQ(packet_in.q1, packet2.q1);
+    EXPECT_EQ(packet_in.q2, packet2.q2);
+    EXPECT_EQ(packet_in.q3, packet2.q3);
+    EXPECT_EQ(packet_in.baro_fused, packet2.baro_fused);
+    EXPECT_EQ(packet_in.temp_fused, packet2.temp_fused);
+    EXPECT_EQ(packet_in.posN, packet2.posN);
+    EXPECT_EQ(packet_in.posE, packet2.posE);
+    EXPECT_EQ(packet_in.posD, packet2.posD);
+    EXPECT_EQ(packet_in.speedN, packet2.speedN);
+    EXPECT_EQ(packet_in.speedE, packet2.speedE);
+    EXPECT_EQ(packet_in.speedD, packet2.speedD);
+    EXPECT_EQ(packet_in.WindN, packet2.WindN);
+    EXPECT_EQ(packet_in.WindE, packet2.WindE);
+    EXPECT_EQ(packet_in.WindD, packet2.WindD);
+    EXPECT_EQ(packet_in.ssa, packet2.ssa);
+    EXPECT_EQ(packet_in.aoa, packet2.aoa);
+    EXPECT_EQ(packet_in.gamma, packet2.gamma);
+    EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
     PRINT_MSG(msg);
@@ -331,21 +562,23 @@ TEST(alxSys_interop, SFUSION)
 }
 #endif
 
-TEST(alxSys, RC2SOUT)
+TEST(alxSys, DataCtrl)
 {
     mavlink::mavlink_message_t msg;
     mavlink::MsgMap map1(msg);
     mavlink::MsgMap map2(msg);
 
-    mavlink::alxSys::msg::RC2SOUT packet_in{};
-    packet_in.out_aill = 17.0;
-    packet_in.out_elev = 45.0;
-    packet_in.out_rudd = 73.0;
-    packet_in.out_thrt = 101.0;
-    packet_in.control_law = 18067;
+    mavlink::alxSys::msg::DataCtrl packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.xi = 73.0;
+    packet_in.eta = 101.0;
+    packet_in.zeta = 129.0;
+    packet_in.etaT = 157.0;
+    packet_in.etaF = 185.0;
+    packet_in.alive = 89;
 
-    mavlink::alxSys::msg::RC2SOUT packet1{};
-    mavlink::alxSys::msg::RC2SOUT packet2{};
+    mavlink::alxSys::msg::DataCtrl packet1{};
+    mavlink::alxSys::msg::DataCtrl packet2{};
 
     packet1 = packet_in;
 
@@ -357,35 +590,39 @@ TEST(alxSys, RC2SOUT)
 
     packet2.deserialize(map2);
 
-    EXPECT_EQ(packet1.out_aill, packet2.out_aill);
-    EXPECT_EQ(packet1.out_elev, packet2.out_elev);
-    EXPECT_EQ(packet1.out_rudd, packet2.out_rudd);
-    EXPECT_EQ(packet1.out_thrt, packet2.out_thrt);
-    EXPECT_EQ(packet1.control_law, packet2.control_law);
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.xi, packet2.xi);
+    EXPECT_EQ(packet1.eta, packet2.eta);
+    EXPECT_EQ(packet1.zeta, packet2.zeta);
+    EXPECT_EQ(packet1.etaT, packet2.etaT);
+    EXPECT_EQ(packet1.etaF, packet2.etaF);
+    EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
 #ifdef TEST_INTEROP
-TEST(alxSys_interop, RC2SOUT)
+TEST(alxSys_interop, DataCtrl)
 {
     mavlink_message_t msg;
 
     // to get nice print
     memset(&msg, 0, sizeof(msg));
 
-    mavlink_rc2sout_t packet_c {
-         17.0, 45.0, 73.0, 101.0, 18067
+    mavlink_datactrl_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 89
     };
 
-    mavlink::alxSys::msg::RC2SOUT packet_in{};
-    packet_in.out_aill = 17.0;
-    packet_in.out_elev = 45.0;
-    packet_in.out_rudd = 73.0;
-    packet_in.out_thrt = 101.0;
-    packet_in.control_law = 18067;
+    mavlink::alxSys::msg::DataCtrl packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.xi = 73.0;
+    packet_in.eta = 101.0;
+    packet_in.zeta = 129.0;
+    packet_in.etaT = 157.0;
+    packet_in.etaF = 185.0;
+    packet_in.alive = 89;
 
-    mavlink::alxSys::msg::RC2SOUT packet2{};
+    mavlink::alxSys::msg::DataCtrl packet2{};
 
-    mavlink_msg_rc2sout_encode(1, 1, &msg, &packet_c);
+    mavlink_msg_datactrl_encode(1, 1, &msg, &packet_c);
 
     // simulate message-handling callback
     [&packet2](const mavlink_message_t *cmsg) {
@@ -394,11 +631,13 @@ TEST(alxSys_interop, RC2SOUT)
         packet2.deserialize(map2);
     } (&msg);
 
-    EXPECT_EQ(packet_in.out_aill, packet2.out_aill);
-    EXPECT_EQ(packet_in.out_elev, packet2.out_elev);
-    EXPECT_EQ(packet_in.out_rudd, packet2.out_rudd);
-    EXPECT_EQ(packet_in.out_thrt, packet2.out_thrt);
-    EXPECT_EQ(packet_in.control_law, packet2.control_law);
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.xi, packet2.xi);
+    EXPECT_EQ(packet_in.eta, packet2.eta);
+    EXPECT_EQ(packet_in.zeta, packet2.zeta);
+    EXPECT_EQ(packet_in.etaT, packet2.etaT);
+    EXPECT_EQ(packet_in.etaF, packet2.etaF);
+    EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
     PRINT_MSG(msg);

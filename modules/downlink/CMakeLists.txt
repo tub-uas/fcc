@@ -31,33 +31,32 @@ endif()
 
 # message(STATUS "CONFIGURING DOWNLINK...")
 
-add_library(topic_ahrs  ../ahrs/idl/topic_ahrs.cxx
-                        ../ahrs/idl/topic_ahrsPubSubTypes.cxx)
-add_library(topic_air   ../air/idl/topic_air.cxx
-                        ../air/idl/topic_airPubSubTypes.cxx)
-add_library(topic_gps   ../gps/idl/topic_gps.cxx
-                        ../gps/idl/topic_gpsPubSubTypes.cxx)
-add_library(topic_ctrl  ../ctrl/idl/topic_ctrl.cxx
-                        ../ctrl/idl/topic_ctrlPubSubTypes.cxx)
-add_library(topic_mainin    ../mainin/idl/topic_mainin.cxx
-                            ../mainin/idl/topic_maininPubSubTypes.cxx)
-add_library(topic_mainout   ../mainout/idl/topic_mainout.cxx
-                            ../mainout/idl/topic_mainoutPubSubTypes.cxx)
-add_library(topic_sfusion  ../sfusion/idl/topic_sfusion.cxx
-                        ../sfusion/idl/topic_sfusionPubSubTypes.cxx)
-add_library(drv_serial  ../../driver/drv_serial/drv_serial.cpp)
-add_library(drv_timer   ../../driver/drv_timer/drv_timer.cpp)
+add_library(dataAhrs  ../ahrs/idl/DataAhrs.cxx
+                        ../ahrs/idl/DataAhrsPubSubTypes.cxx)
+add_library(dataAir   ../air/idl/DataAir.cxx
+                        ../air/idl/DataAirPubSubTypes.cxx)
+#add_library(topic_gps   ../gps/idl/topic_gps.cxx
+#                        ../gps/idl/topic_gpsPubSubTypes.cxx)
+add_library(dataCtrl  ../ctrl/idl/DataCtrl.cxx
+                        ../ctrl/idl/DataCtrlPubSubTypes.cxx)
+add_library(dataRaiIn    ../raiIn/idl/DataRaiIn.cxx
+                            ../raiIn/idl/DataRaiInPubSubTypes.cxx)
+add_library(dataRaiOut   ../raiOut/idl/DataRaiOut.cxx
+                            ../raiOut/idl/DataRaiOutPubSubTypes.cxx)
+add_library(dataSFusion  ../sFusion/idl/DataSFusion.cxx
+                        ../sFusion/idl/DataSFusionPubSubTypes.cxx)
+add_library(serial  ../../driver/drv_serial/drv_serial.cpp)
+add_library(timer   ../../util/timer/timer.cpp)
 
 
-add_executable(fcc_downlink downlink_subscriber.cpp main.cpp  )
+add_executable(fcc_downlink downlink.cpp main.cpp  )
 target_link_libraries(fcc_downlink  fastcdr
                                 fastrtps
-                                topic_ahrs
-                                topic_air
-                                topic_gps
-                                topic_ctrl
-                                topic_mainin
-                                topic_mainout
-                                topic_sfusion
-                                drv_serial
-                                drv_timer)
+                                dataAhrs
+                                dataAir
+                                dataCtrl
+                                dataRaiIn
+                                dataRaiOut
+                                dataSFusion
+                                serial
+                                timer)
