@@ -118,7 +118,7 @@ void RaiIn::publish() {
 
 void RaiIn::run() {
 
-	std::cout << this->name << " run" << std::endl;
+	// std::cout << this->name << " run" << std::endl;
 
 	while (1) {
 

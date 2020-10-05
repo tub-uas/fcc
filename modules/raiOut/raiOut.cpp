@@ -199,10 +199,9 @@ void RaiOut::publish() {
 
 void RaiOut::run() {
 
-
 	while (1) {
 
-		std::cout << this->name << " run" << std::endl;
+		// std::cout << this->name << " run" << std::endl;
 
 		if (listener.newDataCtrl) {
 

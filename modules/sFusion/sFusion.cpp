@@ -202,7 +202,6 @@ bool SFusion::init() {
 
 void SFusion::publish() {
 
-
 	while (1) {
 
 		std::cout << this->name << " publish" << std::endl;
@@ -228,7 +227,7 @@ void SFusion::run() {
 
 	while (1) {
 
-		std::cout << this->name << " run" << std::endl;
+		// std::cout << this->name << " run" << std::endl;
 
 		if (listener.newDataAhrs || listener.newDataAir) {
 

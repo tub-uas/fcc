@@ -240,7 +240,7 @@ void Ctrl::run() {
 
 	while (1) {
 
-		std::cout << this->name << " run" << std::endl;
+		// std::cout << this->name << " run" << std::endl;
 
 		if (listener.newDataRaiIn /*|| listener.newDataSFusion*/) { // Chris will dass wir nur auf raiIn triggern
 
