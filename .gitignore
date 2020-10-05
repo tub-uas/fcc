@@ -1,0 +1,15 @@
+*
+!*.*
+!*/
+
+**/test
+**/build
+**/install
+**/avs_logs
+**/out-temp
+**/temp
+*.dat
+*.pyc
+
+
+*cache*
