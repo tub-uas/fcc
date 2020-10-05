@@ -110,7 +110,7 @@ void Air::publish() {
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(10);
 	}
 
 }
@@ -140,7 +140,7 @@ void Air::run() {
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(1);
 
 	}
 
