@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 
-declare -a ACTIVE_MODULES=("raiIn" "ahrs" "air" "sFusion" "ctrl" "raiOut") # "raiOut" "ctrl" "ahrs" "air" "sFusion"
-# declare -a ACTIVE_MODULES=("raiIn" "raiOut")
+declare -a ACTIVE_MODULES=("raiIn" "ahrs" "air" "psu" "sFusion" "ctrl" "raiOut")
 
 MODULE_DIR=./../modules
 BUILD_DIR=/build
