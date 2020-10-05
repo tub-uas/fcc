@@ -1,23 +1,27 @@
 #include <iostream>
 #include <cstdint>
-#include "gps_publisher.h"
+#include <thread>
 
+#include "gps.h"
 
+int main(int argc, const char* argv[]) {
 
+	(void) argc;
+	(void) argv;
 
+	Gps *gps = new Gps();
 
-int32_t main(void) {
-    
-    AlxSys_gps *gps = new AlxSys_gps();
-    std::cout << "GPS ..." << std::endl;
-    if(gps->init()) {
-        std::cout << "[START]" << std::endl;
-        gps->run();
-    }
-    else {
-        std::cout << "[FAILED]";        
-    }
-    std::cout << "Closing gps" << std::endl;
-    delete gps;
-    return 0;
+	std::cout << gps->name << " start" << std::endl;
+
+	if (gps->init()) {
+		std::thread run([&] (Gps *gps) { gps->run(); }, gps);
+		std::thread publish([&] (Gps *gps) { gps->publish(); }, gps);
+		run.join();
+		publish.join();
+	}
+
+	std::cout << gps->name << " stop" << std::endl;
+
+	delete gps;
+	return 0;
 }
