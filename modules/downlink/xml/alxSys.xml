@@ -26,7 +26,6 @@
             <field type="uint16_t" name="fltMode">Flightmode.</field>
             <field type="uint8_t" name="alive"> Alive.</field>
         </message>
-        
         <message id="20000" name="DataAhrs">
             <description>Data from AHRS</description>
             <field type="uint64_t" name="time">Time.</field>
