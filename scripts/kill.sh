@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a ACTIVE_MODULES=("raiIn" "raiOut" "ahrs" "air" "gps" "ctrl" "sFusion" "logger")
+declare -a ACTIVE_MODULES=("raiIn" "raiOut" "ahrs" "air" "gps" "psu" "ctrl" "sFusion" "log")
 
 MODULE_DIR=./../modules
 BUILD_DIR=/build
