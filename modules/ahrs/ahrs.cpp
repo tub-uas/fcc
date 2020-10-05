@@ -85,9 +85,9 @@ bool Ahrs::init() {
 		return false;
 	}
 
-	// if (ahrsCom.init() == false) {
-	// 	return false;
-	// }
+	if (ahrsCom.init() == false) {
+		return false;
+	}
 
 	return true;
 }
@@ -122,65 +122,38 @@ void Ahrs::run() {
 
 		// std::cout << this->name << " run" << std::endl;
 
-		// if (ahrsCom.receive()) {
-		//
-		// 	std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-		//
-		// 	dataAhrs.senseTime(ahrsCom.time);
-		// 	dataAhrs.gyrX(ahrsCom.gyr[0]);
-		// 	dataAhrs.gyrY(ahrsCom.gyr[1]);
-		// 	dataAhrs.gyrZ(ahrsCom.gyr[2]);
-		// 	dataAhrs.accX(ahrsCom.acc[0]);
-		// 	dataAhrs.accY(ahrsCom.acc[1]);
-		// 	dataAhrs.accZ(ahrsCom.acc[2]);
-		// 	dataAhrs.magX(ahrsCom.mag[0]);
-		// 	dataAhrs.magY(ahrsCom.mag[1]);
-		// 	dataAhrs.magZ(ahrsCom.mag[3]);
-		// 	dataAhrs.temp(ahrsCom.temp);
-		// 	dataAhrs.press(ahrsCom.press);
-		// 	dataAhrs.phi(ahrsCom.att[0]);
-		// 	dataAhrs.the(ahrsCom.att[1]);
-		// 	dataAhrs.psi(ahrsCom.att[2]);
-		// 	dataAhrs.p0(-1.0);
-		// 	dataAhrs.p1(-2.0);
-		// 	dataAhrs.p2(-3.0);
-		// 	dataAhrs.p3(-4.0);
-		//
-		// 	dataAhrsLock.unlock();
-		//
-		// 	// ahrsCom.print();
-		// }
-		//
-		// static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
-		// std::this_thread::sleep_until(next_wakeup);
-		// next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
+		if (ahrsCom.receive()) {
 
+			std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
 
-		std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-		dataAhrs.senseTime(1.1);
-		dataAhrs.gyrX(1.0);
-		dataAhrs.gyrY(2.1);
-		dataAhrs.gyrZ(3.2);
-		dataAhrs.accX(4.0);
-		dataAhrs.accY(5.1);
-		dataAhrs.accZ(6.2);
-		dataAhrs.magX(7.0);
-		dataAhrs.magY(8.1);
-		dataAhrs.magZ(9.3);
-		dataAhrs.temp(10.1);
-		dataAhrs.press(11.3);
-		dataAhrs.phi(34.0);
-		dataAhrs.the(34.1);
-		dataAhrs.psi(34.2);
-		dataAhrs.p0(-1.0);
-		dataAhrs.p1(-2.0);
-		dataAhrs.p2(-3.0);
-		dataAhrs.p3(-4.0);
-		dataAhrsLock.unlock();
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+			dataAhrs.senseTime(ahrsCom.time);
+			dataAhrs.gyrX(ahrsCom.gyr[0]);
+			dataAhrs.gyrY(ahrsCom.gyr[1]);
+			dataAhrs.gyrZ(ahrsCom.gyr[2]);
+			dataAhrs.accX(ahrsCom.acc[0]);
+			dataAhrs.accY(ahrsCom.acc[1]);
+			dataAhrs.accZ(ahrsCom.acc[2]);
+			dataAhrs.magX(ahrsCom.mag[0]);
+			dataAhrs.magY(ahrsCom.mag[1]);
+			dataAhrs.magZ(ahrsCom.mag[3]);
+			dataAhrs.temp(ahrsCom.temp);
+			dataAhrs.press(ahrsCom.press);
+			dataAhrs.phi(ahrsCom.att[0]);
+			dataAhrs.the(ahrsCom.att[1]);
+			dataAhrs.psi(ahrsCom.att[2]);
+			dataAhrs.p0(-1.0);
+			dataAhrs.p1(-2.0);
+			dataAhrs.p2(-3.0);
+			dataAhrs.p3(-4.0);
+
+			dataAhrsLock.unlock();
+
+			// ahrsCom.print();
+		}
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
-
+		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 
 	}
 

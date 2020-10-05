@@ -85,9 +85,9 @@ bool Air::init() {
 		return false;
 	}
 
-	// if (airCom.init() == false) {
-	// 	return false;
-	// }
+	if (airCom.init() == false) {
+		return false;
+	}
 
 	return true;
 }
@@ -122,38 +122,25 @@ void Air::run() {
 
 		// std::cout << this->name << " run" << std::endl;
 
-		// if (airCom.receive()) {
-		//
-		// 	std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-		//
-		// 	dataAir.senseTime(airCom.time);
-		// 	dataAir.dynamicPress(airCom.dynamicPress);
-		// 	dataAir.velocity(airCom.velocity);
-		// 	dataAir.baroPress(airCom.baroPress);
-		// 	dataAir.density(airCom.density);
-		// 	dataAir.temp(airCom.temp);
-		//
-		// 	dataAirLock.unlock();
-		//
-		// 	// airCom.print();
-		// }
-		//
-		// static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
-		// std::this_thread::sleep_until(next_wakeup);
-		// next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
+		if (airCom.receive()) {
 
+			std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
 
-		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-		dataAir.senseTime(1.0);
-		dataAir.dynamicPress(1.1);
-		dataAir.velocity(1.2);
-		dataAir.baroPress(1.3);
-		dataAir.density(1.4);
-		dataAir.temp(1.5);
-		dataAirLock.unlock();
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+			dataAir.senseTime(airCom.time);
+			dataAir.dynamicPress(airCom.dynamicPress);
+			dataAir.velocity(airCom.velocity);
+			dataAir.baroPress(airCom.baroPress);
+			dataAir.density(airCom.density);
+			dataAir.temp(airCom.temp);
+
+			dataAirLock.unlock();
+
+			// airCom.print();
+		}
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 
 	}
 
