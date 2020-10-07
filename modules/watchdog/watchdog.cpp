@@ -274,6 +274,11 @@ void Watchdog::run() {
 	while (1) {
 		// std::cout << this->name << " run" << std::endl;
 
+		static bool toggle = true;
+		drv_led_set_green(toggle);
+		drv_led_set_yellow(!toggle);
+		toggle = !toggle;
+
 		if (listener.newDataRaiIn) {
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
 			std::cout << "newDataRaiIn" << std::endl;
@@ -337,8 +342,8 @@ void Watchdog::run() {
 			listener.newDataCtrl = false;
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1000);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(1000);
 	}
 }
