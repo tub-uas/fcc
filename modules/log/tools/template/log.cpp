@@ -5,7 +5,7 @@
 #include <typeinfo>
 #include <fstream>
 #include <cstdint>
-#include <endian.h> // TODO implement plafform independent endianess (host to little endian)
+#include <endian.h> // todo: implement plafform independent endianess (host to little endian)
 
 #include <boost/filesystem.hpp>
 
