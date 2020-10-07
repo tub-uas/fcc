@@ -26,10 +26,10 @@ void Listener::on_publication_matched(DataWriter*,
 }
 
 Gps::Gps() : participant(nullptr),
-               publisher(nullptr),
-               topicGps(nullptr),
-               writerGps(nullptr),
-               typeGps(new DataGpsPubSubType()) {
+             publisher(nullptr),
+             topicGps(nullptr),
+             writerGps(nullptr),
+             typeGps(new DataGpsPubSubType()) {
 }
 
 Gps::~Gps() {
