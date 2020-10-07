@@ -14,7 +14,7 @@ namespace msg {
  */
 struct HIL_GPS : mavlink::Message {
     static constexpr msgid_t MSG_ID = 113;
-    static constexpr size_t LENGTH = 37;
+    static constexpr size_t LENGTH = 39;
     static constexpr size_t MIN_LENGTH = 36;
     static constexpr uint8_t CRC_EXTRA = 124;
     static constexpr auto NAME = "HIL_GPS";
@@ -34,6 +34,7 @@ struct HIL_GPS : mavlink::Message {
     uint16_t cog; /*< [cdeg] Course over ground (NOT heading, but direction of movement), 0.0..359.99 degrees. If unknown, set to: 65535 */
     uint8_t satellites_visible; /*<  Number of satellites visible. If unknown, set to 255 */
     uint8_t id; /*<  GPS ID (zero indexed). Used for multiple GPS inputs */
+    uint16_t yaw; /*< [cdeg] Yaw of vehicle relative to Earth's North, zero means not available, use 36000 for north */
 
 
     inline std::string get_name(void) const override
@@ -65,6 +66,7 @@ struct HIL_GPS : mavlink::Message {
         ss << "  cog: " << cog << std::endl;
         ss << "  satellites_visible: " << +satellites_visible << std::endl;
         ss << "  id: " << +id << std::endl;
+        ss << "  yaw: " << yaw << std::endl;
 
         return ss.str();
     }
@@ -87,6 +89,7 @@ struct HIL_GPS : mavlink::Message {
         map << fix_type;                      // offset: 34
         map << satellites_visible;            // offset: 35
         map << id;                            // offset: 36
+        map << yaw;                           // offset: 37
     }
 
     inline void deserialize(mavlink::MsgMap &map) override
@@ -105,6 +108,7 @@ struct HIL_GPS : mavlink::Message {
         map >> fix_type;                      // offset: 34
         map >> satellites_visible;            // offset: 35
         map >> id;                            // offset: 36
+        map >> yaw;                           // offset: 37
     }
 };
 

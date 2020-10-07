@@ -21,7 +21,7 @@ namespace common {
 /**
  * Array of msg_entry needed for @p mavlink_parse_char() (trought @p mavlink_get_msg_entry())
  */
-constexpr std::array<mavlink_msg_entry_t, 201> MESSAGE_ENTRIES {{ {0, 50, 9, 9, 0, 0, 0}, {1, 124, 31, 31, 0, 0, 0}, {2, 137, 12, 12, 0, 0, 0}, {4, 237, 14, 14, 3, 12, 13}, {5, 217, 28, 28, 1, 0, 0}, {6, 104, 3, 3, 0, 0, 0}, {7, 119, 32, 32, 0, 0, 0}, {8, 117, 36, 36, 0, 0, 0}, {11, 89, 6, 6, 1, 4, 0}, {20, 214, 20, 20, 3, 2, 3}, {21, 159, 2, 2, 3, 0, 1}, {22, 220, 25, 25, 0, 0, 0}, {23, 168, 23, 23, 3, 4, 5}, {24, 24, 30, 52, 0, 0, 0}, {25, 23, 101, 101, 0, 0, 0}, {26, 170, 22, 24, 0, 0, 0}, {27, 144, 26, 29, 0, 0, 0}, {28, 67, 16, 16, 0, 0, 0}, {29, 115, 14, 14, 0, 0, 0}, {30, 39, 28, 28, 0, 0, 0}, {31, 246, 32, 48, 0, 0, 0}, {32, 185, 28, 28, 0, 0, 0}, {33, 104, 28, 28, 0, 0, 0}, {34, 237, 22, 22, 0, 0, 0}, {35, 244, 22, 22, 0, 0, 0}, {36, 222, 21, 37, 0, 0, 0}, {37, 212, 6, 7, 3, 4, 5}, {38, 9, 6, 7, 3, 4, 5}, {39, 254, 37, 38, 3, 32, 33}, {40, 230, 4, 5, 3, 2, 3}, {41, 28, 4, 4, 3, 2, 3}, {42, 28, 2, 2, 0, 0, 0}, {43, 132, 2, 3, 3, 0, 1}, {44, 221, 4, 5, 3, 2, 3}, {45, 232, 2, 3, 3, 0, 1}, {46, 11, 2, 2, 0, 0, 0}, {47, 153, 3, 4, 3, 0, 1}, {48, 41, 13, 21, 1, 12, 0}, {49, 39, 12, 20, 0, 0, 0}, {50, 78, 37, 37, 3, 18, 19}, {51, 196, 4, 5, 3, 2, 3}, {52, 132, 7, 7, 0, 0, 0}, {54, 15, 27, 27, 3, 24, 25}, {55, 3, 25, 25, 0, 0, 0}, {61, 167, 72, 72, 0, 0, 0}, {62, 183, 26, 26, 0, 0, 0}, {63, 119, 181, 181, 0, 0, 0}, {64, 191, 225, 225, 0, 0, 0}, {65, 118, 42, 42, 0, 0, 0}, {66, 148, 6, 6, 3, 2, 3}, {67, 21, 4, 4, 0, 0, 0}, {69, 243, 11, 11, 1, 10, 0}, {70, 124, 18, 38, 3, 16, 17}, {73, 38, 37, 38, 3, 32, 33}, {74, 20, 20, 20, 0, 0, 0}, {75, 158, 35, 35, 3, 30, 31}, {76, 152, 33, 33, 3, 30, 31}, {77, 143, 3, 10, 3, 8, 9}, {80, 14, 4, 4, 3, 2, 3}, {81, 106, 22, 22, 0, 0, 0}, {82, 49, 39, 39, 3, 36, 37}, {83, 22, 37, 37, 0, 0, 0}, {84, 143, 53, 53, 3, 50, 51}, {85, 140, 51, 51, 0, 0, 0}, {86, 5, 53, 53, 3, 50, 51}, {87, 150, 51, 51, 0, 0, 0}, {89, 231, 28, 28, 0, 0, 0}, {90, 183, 56, 56, 0, 0, 0}, {91, 63, 42, 42, 0, 0, 0}, {92, 54, 33, 33, 0, 0, 0}, {93, 47, 81, 81, 0, 0, 0}, {100, 175, 26, 34, 0, 0, 0}, {101, 102, 32, 117, 0, 0, 0}, {102, 158, 32, 117, 0, 0, 0}, {103, 208, 20, 57, 0, 0, 0}, {104, 56, 32, 116, 0, 0, 0}, {105, 93, 62, 63, 0, 0, 0}, {106, 138, 44, 44, 0, 0, 0}, {107, 108, 64, 64, 0, 0, 0}, {108, 32, 84, 84, 0, 0, 0}, {109, 185, 9, 9, 0, 0, 0}, {110, 84, 254, 254, 3, 1, 2}, {111, 34, 16, 16, 0, 0, 0}, {112, 174, 12, 12, 0, 0, 0}, {113, 124, 36, 37, 0, 0, 0}, {114, 237, 44, 44, 0, 0, 0}, {115, 4, 64, 64, 0, 0, 0}, {116, 76, 22, 24, 0, 0, 0}, {117, 128, 6, 6, 3, 4, 5}, {118, 56, 14, 14, 0, 0, 0}, {119, 116, 12, 12, 3, 10, 11}, {120, 134, 97, 97, 0, 0, 0}, {121, 237, 2, 2, 3, 0, 1}, {122, 203, 2, 2, 3, 0, 1}, {123, 250, 113, 113, 3, 0, 1}, {124, 87, 35, 37, 0, 0, 0}, {125, 203, 6, 6, 0, 0, 0}, {126, 220, 79, 79, 0, 0, 0}, {127, 25, 35, 35, 0, 0, 0}, {128, 226, 35, 35, 0, 0, 0}, {129, 46, 22, 24, 0, 0, 0}, {130, 29, 13, 13, 0, 0, 0}, {131, 223, 255, 255, 0, 0, 0}, {132, 85, 14, 39, 0, 0, 0}, {133, 6, 18, 18, 0, 0, 0}, {134, 229, 43, 43, 0, 0, 0}, {135, 203, 8, 8, 0, 0, 0}, {136, 1, 22, 22, 0, 0, 0}, {137, 195, 14, 14, 0, 0, 0}, {138, 109, 36, 120, 0, 0, 0}, {139, 168, 43, 43, 3, 41, 42}, {140, 181, 41, 41, 0, 0, 0}, {141, 47, 32, 32, 0, 0, 0}, {142, 72, 243, 243, 0, 0, 0}, {143, 131, 14, 14, 0, 0, 0}, {144, 127, 93, 93, 0, 0, 0}, {146, 103, 100, 100, 0, 0, 0}, {147, 154, 36, 41, 0, 0, 0}, {148, 178, 60, 78, 0, 0, 0}, {149, 200, 30, 60, 0, 0, 0}, {162, 189, 8, 9, 0, 0, 0}, {230, 163, 42, 42, 0, 0, 0}, {231, 105, 40, 40, 0, 0, 0}, {232, 151, 63, 65, 0, 0, 0}, {233, 35, 182, 182, 0, 0, 0}, {234, 150, 40, 40, 0, 0, 0}, {235, 179, 42, 42, 0, 0, 0}, {241, 90, 32, 32, 0, 0, 0}, {242, 104, 52, 60, 0, 0, 0}, {243, 85, 53, 61, 1, 52, 0}, {244, 95, 6, 6, 0, 0, 0}, {245, 130, 2, 2, 0, 0, 0}, {246, 184, 38, 38, 0, 0, 0}, {247, 81, 19, 19, 0, 0, 0}, {248, 8, 254, 254, 3, 3, 4}, {249, 204, 36, 36, 0, 0, 0}, {250, 49, 30, 30, 0, 0, 0}, {251, 170, 18, 18, 0, 0, 0}, {252, 44, 18, 18, 0, 0, 0}, {253, 83, 51, 54, 0, 0, 0}, {254, 46, 9, 9, 0, 0, 0}, {256, 71, 42, 42, 3, 8, 9}, {257, 131, 9, 9, 0, 0, 0}, {258, 187, 32, 232, 3, 0, 1}, {259, 92, 235, 235, 0, 0, 0}, {260, 146, 5, 13, 0, 0, 0}, {261, 179, 27, 27, 0, 0, 0}, {262, 12, 18, 22, 0, 0, 0}, {263, 133, 255, 255, 0, 0, 0}, {264, 49, 28, 28, 0, 0, 0}, {265, 26, 16, 20, 0, 0, 0}, {266, 193, 255, 255, 3, 2, 3}, {267, 35, 255, 255, 3, 2, 3}, {268, 14, 4, 4, 3, 2, 3}, {269, 109, 213, 213, 0, 0, 0}, {270, 59, 19, 19, 0, 0, 0}, {280, 166, 33, 33, 0, 0, 0}, {281, 0, 9, 9, 0, 0, 0}, {282, 123, 35, 35, 3, 32, 33}, {283, 247, 98, 98, 0, 0, 0}, {284, 99, 32, 32, 3, 30, 31}, {285, 137, 40, 40, 3, 38, 39}, {286, 210, 53, 53, 3, 50, 51}, {299, 19, 96, 98, 0, 0, 0}, {300, 217, 22, 22, 0, 0, 0}, {301, 243, 58, 58, 0, 0, 0}, {310, 28, 17, 17, 0, 0, 0}, {311, 95, 116, 116, 0, 0, 0}, {320, 243, 20, 20, 3, 2, 3}, {321, 88, 2, 2, 3, 0, 1}, {322, 243, 149, 149, 0, 0, 0}, {323, 78, 147, 147, 3, 0, 1}, {324, 132, 146, 146, 0, 0, 0}, {330, 23, 158, 167, 0, 0, 0}, {331, 91, 230, 232, 0, 0, 0}, {332, 236, 239, 239, 0, 0, 0}, {333, 231, 109, 109, 0, 0, 0}, {334, 135, 14, 14, 0, 0, 0}, {335, 225, 24, 24, 0, 0, 0}, {339, 199, 5, 5, 0, 0, 0}, {340, 99, 70, 70, 0, 0, 0}, {350, 232, 20, 252, 0, 0, 0}, {360, 11, 25, 25, 0, 0, 0}, {370, 98, 73, 73, 0, 0, 0}, {371, 161, 50, 50, 0, 0, 0}, {373, 192, 34, 34, 0, 0, 0}, {375, 251, 140, 140, 0, 0, 0}, {380, 232, 20, 20, 0, 0, 0}, {385, 147, 133, 133, 3, 2, 3}, {390, 156, 238, 238, 0, 0, 0}, {395, 163, 156, 156, 0, 0, 0}, {400, 110, 254, 254, 3, 4, 5}, {401, 183, 6, 6, 3, 4, 5}, {9000, 113, 137, 137, 0, 0, 0}, {12900, 114, 44, 44, 3, 0, 1}, {12901, 254, 59, 59, 3, 30, 31}, {12902, 49, 53, 53, 3, 4, 5}, {12903, 249, 46, 46, 3, 0, 1}, {12904, 203, 46, 46, 3, 20, 21}, {12905, 49, 43, 43, 3, 0, 1}, {12915, 62, 254, 254, 3, 0, 1} }};
+constexpr std::array<mavlink_msg_entry_t, 215> MESSAGE_ENTRIES {{ {0, 50, 9, 9, 0, 0, 0}, {1, 124, 31, 31, 0, 0, 0}, {2, 137, 12, 12, 0, 0, 0}, {4, 237, 14, 14, 3, 12, 13}, {5, 217, 28, 28, 1, 0, 0}, {6, 104, 3, 3, 0, 0, 0}, {7, 119, 32, 32, 0, 0, 0}, {8, 117, 36, 36, 0, 0, 0}, {11, 89, 6, 6, 1, 4, 0}, {19, 137, 24, 24, 3, 4, 5}, {20, 214, 20, 20, 3, 2, 3}, {21, 159, 2, 2, 3, 0, 1}, {22, 220, 25, 25, 0, 0, 0}, {23, 168, 23, 23, 3, 4, 5}, {24, 24, 30, 52, 0, 0, 0}, {25, 23, 101, 101, 0, 0, 0}, {26, 170, 22, 24, 0, 0, 0}, {27, 144, 26, 29, 0, 0, 0}, {28, 67, 16, 16, 0, 0, 0}, {29, 115, 14, 16, 0, 0, 0}, {30, 39, 28, 28, 0, 0, 0}, {31, 246, 32, 48, 0, 0, 0}, {32, 185, 28, 28, 0, 0, 0}, {33, 104, 28, 28, 0, 0, 0}, {34, 237, 22, 22, 0, 0, 0}, {35, 244, 22, 22, 0, 0, 0}, {36, 222, 21, 37, 0, 0, 0}, {37, 212, 6, 7, 3, 4, 5}, {38, 9, 6, 7, 3, 4, 5}, {39, 254, 37, 38, 3, 32, 33}, {40, 230, 4, 5, 3, 2, 3}, {41, 28, 4, 4, 3, 2, 3}, {42, 28, 2, 2, 0, 0, 0}, {43, 132, 2, 3, 3, 0, 1}, {44, 221, 4, 5, 3, 2, 3}, {45, 232, 2, 3, 3, 0, 1}, {46, 11, 2, 2, 0, 0, 0}, {47, 153, 3, 4, 3, 0, 1}, {48, 41, 13, 21, 1, 12, 0}, {49, 39, 12, 20, 0, 0, 0}, {50, 78, 37, 37, 3, 18, 19}, {51, 196, 4, 5, 3, 2, 3}, {52, 132, 7, 7, 0, 0, 0}, {54, 15, 27, 27, 3, 24, 25}, {55, 3, 25, 25, 0, 0, 0}, {61, 167, 72, 72, 0, 0, 0}, {62, 183, 26, 26, 0, 0, 0}, {63, 119, 181, 181, 0, 0, 0}, {64, 191, 225, 225, 0, 0, 0}, {65, 118, 42, 42, 0, 0, 0}, {66, 148, 6, 6, 3, 2, 3}, {67, 21, 4, 4, 0, 0, 0}, {69, 243, 11, 11, 1, 10, 0}, {70, 124, 18, 38, 3, 16, 17}, {73, 38, 37, 38, 3, 32, 33}, {74, 20, 20, 20, 0, 0, 0}, {75, 158, 35, 35, 3, 30, 31}, {76, 152, 33, 33, 3, 30, 31}, {77, 143, 3, 10, 3, 8, 9}, {80, 14, 4, 4, 3, 2, 3}, {81, 106, 22, 22, 0, 0, 0}, {82, 49, 39, 39, 3, 36, 37}, {83, 22, 37, 37, 0, 0, 0}, {84, 143, 53, 53, 3, 50, 51}, {85, 140, 51, 51, 0, 0, 0}, {86, 5, 53, 53, 3, 50, 51}, {87, 150, 51, 51, 0, 0, 0}, {89, 231, 28, 28, 0, 0, 0}, {90, 183, 56, 56, 0, 0, 0}, {91, 63, 42, 42, 0, 0, 0}, {92, 54, 33, 33, 0, 0, 0}, {93, 47, 81, 81, 0, 0, 0}, {100, 175, 26, 34, 0, 0, 0}, {101, 102, 32, 117, 0, 0, 0}, {102, 158, 32, 117, 0, 0, 0}, {103, 208, 20, 57, 0, 0, 0}, {104, 56, 32, 116, 0, 0, 0}, {105, 93, 62, 63, 0, 0, 0}, {106, 138, 44, 44, 0, 0, 0}, {107, 108, 64, 65, 0, 0, 0}, {108, 32, 84, 84, 0, 0, 0}, {109, 185, 9, 9, 0, 0, 0}, {110, 84, 254, 254, 3, 1, 2}, {111, 34, 16, 16, 0, 0, 0}, {112, 174, 12, 12, 0, 0, 0}, {113, 124, 36, 39, 0, 0, 0}, {114, 237, 44, 44, 0, 0, 0}, {115, 4, 64, 64, 0, 0, 0}, {116, 76, 22, 24, 0, 0, 0}, {117, 128, 6, 6, 3, 4, 5}, {118, 56, 14, 14, 0, 0, 0}, {119, 116, 12, 12, 3, 10, 11}, {120, 134, 97, 97, 0, 0, 0}, {121, 237, 2, 2, 3, 0, 1}, {122, 203, 2, 2, 3, 0, 1}, {123, 250, 113, 113, 3, 0, 1}, {124, 87, 35, 37, 0, 0, 0}, {125, 203, 6, 6, 0, 0, 0}, {126, 220, 79, 79, 0, 0, 0}, {127, 25, 35, 35, 0, 0, 0}, {128, 226, 35, 35, 0, 0, 0}, {129, 46, 22, 24, 0, 0, 0}, {130, 29, 13, 13, 0, 0, 0}, {131, 223, 255, 255, 0, 0, 0}, {132, 85, 14, 39, 0, 0, 0}, {133, 6, 18, 18, 0, 0, 0}, {134, 229, 43, 43, 0, 0, 0}, {135, 203, 8, 8, 0, 0, 0}, {136, 1, 22, 22, 0, 0, 0}, {137, 195, 14, 16, 0, 0, 0}, {138, 109, 36, 120, 0, 0, 0}, {139, 168, 43, 43, 3, 41, 42}, {140, 181, 41, 41, 0, 0, 0}, {141, 47, 32, 32, 0, 0, 0}, {142, 72, 243, 243, 0, 0, 0}, {143, 131, 14, 16, 0, 0, 0}, {144, 127, 93, 93, 0, 0, 0}, {146, 103, 100, 100, 0, 0, 0}, {147, 154, 36, 54, 0, 0, 0}, {148, 178, 60, 78, 0, 0, 0}, {149, 200, 30, 60, 0, 0, 0}, {162, 189, 8, 9, 0, 0, 0}, {192, 36, 44, 54, 0, 0, 0}, {225, 208, 65, 65, 0, 0, 0}, {230, 163, 42, 42, 0, 0, 0}, {231, 105, 40, 40, 0, 0, 0}, {232, 151, 63, 65, 0, 0, 0}, {233, 35, 182, 182, 0, 0, 0}, {234, 150, 40, 40, 0, 0, 0}, {235, 179, 42, 42, 0, 0, 0}, {241, 90, 32, 32, 0, 0, 0}, {242, 104, 52, 60, 0, 0, 0}, {243, 85, 53, 61, 1, 52, 0}, {244, 95, 6, 6, 0, 0, 0}, {245, 130, 2, 2, 0, 0, 0}, {246, 184, 38, 38, 0, 0, 0}, {247, 81, 19, 19, 0, 0, 0}, {248, 8, 254, 254, 3, 3, 4}, {249, 204, 36, 36, 0, 0, 0}, {250, 49, 30, 30, 0, 0, 0}, {251, 170, 18, 18, 0, 0, 0}, {252, 44, 18, 18, 0, 0, 0}, {253, 83, 51, 54, 0, 0, 0}, {254, 46, 9, 9, 0, 0, 0}, {256, 71, 42, 42, 3, 8, 9}, {257, 131, 9, 9, 0, 0, 0}, {258, 187, 32, 232, 3, 0, 1}, {259, 92, 235, 235, 0, 0, 0}, {260, 146, 5, 13, 0, 0, 0}, {261, 179, 27, 27, 0, 0, 0}, {262, 12, 18, 22, 0, 0, 0}, {263, 133, 255, 255, 0, 0, 0}, {264, 49, 28, 28, 0, 0, 0}, {265, 26, 16, 20, 0, 0, 0}, {266, 193, 255, 255, 3, 2, 3}, {267, 35, 255, 255, 3, 2, 3}, {268, 14, 4, 4, 3, 2, 3}, {269, 109, 213, 213, 0, 0, 0}, {270, 59, 19, 19, 0, 0, 0}, {271, 22, 52, 52, 0, 0, 0}, {275, 126, 31, 31, 0, 0, 0}, {276, 18, 49, 49, 0, 0, 0}, {280, 166, 33, 33, 0, 0, 0}, {281, 48, 13, 13, 0, 0, 0}, {282, 123, 35, 35, 3, 32, 33}, {283, 33, 144, 144, 0, 0, 0}, {284, 99, 32, 32, 3, 30, 31}, {285, 137, 40, 40, 3, 38, 39}, {286, 210, 53, 53, 3, 50, 51}, {287, 74, 23, 23, 3, 20, 21}, {288, 99, 23, 23, 3, 20, 21}, {290, 221, 42, 42, 0, 0, 0}, {291, 10, 57, 57, 0, 0, 0}, {299, 19, 96, 98, 0, 0, 0}, {300, 217, 22, 22, 0, 0, 0}, {301, 243, 58, 58, 0, 0, 0}, {310, 28, 17, 17, 0, 0, 0}, {311, 95, 116, 116, 0, 0, 0}, {320, 243, 20, 21, 3, 2, 3}, {321, 88, 2, 3, 3, 0, 1}, {322, 243, 149, 149, 0, 0, 0}, {323, 78, 147, 147, 3, 0, 1}, {324, 132, 146, 146, 0, 0, 0}, {325, 132, 149, 149, 0, 0, 0}, {326, 120, 147, 147, 3, 0, 1}, {327, 129, 146, 146, 0, 0, 0}, {330, 23, 158, 167, 0, 0, 0}, {331, 91, 230, 232, 0, 0, 0}, {332, 236, 239, 239, 0, 0, 0}, {333, 231, 109, 109, 0, 0, 0}, {334, 72, 10, 10, 0, 0, 0}, {335, 225, 24, 24, 0, 0, 0}, {336, 245, 84, 84, 0, 0, 0}, {339, 199, 5, 5, 0, 0, 0}, {340, 99, 70, 70, 0, 0, 0}, {350, 232, 20, 252, 0, 0, 0}, {360, 11, 25, 25, 0, 0, 0}, {370, 124, 75, 75, 0, 0, 0}, {373, 117, 42, 42, 0, 0, 0}, {375, 251, 140, 140, 0, 0, 0}, {380, 232, 20, 20, 0, 0, 0}, {385, 147, 133, 133, 3, 2, 3}, {390, 156, 238, 238, 0, 0, 0}, {395, 163, 156, 156, 0, 0, 0}, {400, 110, 254, 254, 3, 4, 5}, {401, 183, 6, 6, 3, 4, 5}, {9000, 113, 137, 137, 0, 0, 0}, {9005, 117, 34, 34, 0, 0, 0}, {12900, 114, 44, 44, 3, 0, 1}, {12901, 254, 59, 59, 3, 30, 31}, {12902, 49, 53, 53, 3, 4, 5}, {12903, 249, 46, 46, 3, 0, 1}, {12904, 203, 46, 46, 3, 20, 21}, {12905, 49, 43, 43, 3, 0, 1}, {12915, 62, 254, 254, 3, 0, 1} }};
 
 //! MAVLINK VERSION
 constexpr auto MAVLINK_VERSION = 3;
@@ -29,77 +29,6 @@ constexpr auto MAVLINK_VERSION = 3;
 
 // ENUM DEFINITIONS
 
-
-/** @brief Micro air vehicle / autopilot classes. This identifies the individual model. */
-enum class MAV_AUTOPILOT : uint8_t
-{
-    GENERIC=0, /* Generic autopilot, full support for everything | */
-    RESERVED=1, /* Reserved for future use. | */
-    SLUGS=2, /* SLUGS autopilot, http://slugsuav.soe.ucsc.edu | */
-    ARDUPILOTMEGA=3, /* ArduPilot - Plane/Copter/Rover/Sub/Tracker, https://ardupilot.org | */
-    OPENPILOT=4, /* OpenPilot, http://openpilot.org | */
-    GENERIC_WAYPOINTS_ONLY=5, /* Generic autopilot only supporting simple waypoints | */
-    GENERIC_WAYPOINTS_AND_SIMPLE_NAVIGATION_ONLY=6, /* Generic autopilot supporting waypoints and other simple navigation commands | */
-    GENERIC_MISSION_FULL=7, /* Generic autopilot supporting the full mission command set | */
-    INVALID=8, /* No valid autopilot, e.g. a GCS or other MAVLink component | */
-    PPZ=9, /* PPZ UAV - http://nongnu.org/paparazzi | */
-    UDB=10, /* UAV Dev Board | */
-    FP=11, /* FlexiPilot | */
-    PX4=12, /* PX4 Autopilot - http://px4.io/ | */
-    SMACCMPILOT=13, /* SMACCMPilot - http://smaccmpilot.org | */
-    AUTOQUAD=14, /* AutoQuad -- http://autoquad.org | */
-    ARMAZILA=15, /* Armazila -- http://armazila.com | */
-    AEROB=16, /* Aerob -- http://aerob.ru | */
-    ASLUAV=17, /* ASLUAV autopilot -- http://www.asl.ethz.ch | */
-    SMARTAP=18, /* SmartAP Autopilot - http://sky-drones.com | */
-    AIRRAILS=19, /* AirRails - http://uaventure.com | */
-};
-
-//! MAV_AUTOPILOT ENUM_END
-constexpr auto MAV_AUTOPILOT_ENUM_END = 20;
-
-/** @brief MAVLINK component type reported in HEARTBEAT message. Flight controllers must report the type of the vehicle on which they are mounted (e.g. MAV_TYPE_OCTOROTOR). All other components must report a value appropriate for their type (e.g. a camera must use MAV_TYPE_CAMERA). */
-enum class MAV_TYPE : uint8_t
-{
-    GENERIC=0, /* Generic micro air vehicle | */
-    FIXED_WING=1, /* Fixed wing aircraft. | */
-    QUADROTOR=2, /* Quadrotor | */
-    COAXIAL=3, /* Coaxial helicopter | */
-    HELICOPTER=4, /* Normal helicopter with tail rotor. | */
-    ANTENNA_TRACKER=5, /* Ground installation | */
-    GCS=6, /* Operator control unit / ground control station | */
-    AIRSHIP=7, /* Airship, controlled | */
-    FREE_BALLOON=8, /* Free balloon, uncontrolled | */
-    ROCKET=9, /* Rocket | */
-    GROUND_ROVER=10, /* Ground rover | */
-    SURFACE_BOAT=11, /* Surface vessel, boat, ship | */
-    SUBMARINE=12, /* Submarine | */
-    HEXAROTOR=13, /* Hexarotor | */
-    OCTOROTOR=14, /* Octorotor | */
-    TRICOPTER=15, /* Tricopter | */
-    FLAPPING_WING=16, /* Flapping wing | */
-    KITE=17, /* Kite | */
-    ONBOARD_CONTROLLER=18, /* Onboard companion controller | */
-    VTOL_DUOROTOR=19, /* Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter. | */
-    VTOL_QUADROTOR=20, /* Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter. | */
-    VTOL_TILTROTOR=21, /* Tiltrotor VTOL | */
-    VTOL_RESERVED2=22, /* VTOL reserved 2 | */
-    VTOL_RESERVED3=23, /* VTOL reserved 3 | */
-    VTOL_RESERVED4=24, /* VTOL reserved 4 | */
-    VTOL_RESERVED5=25, /* VTOL reserved 5 | */
-    GIMBAL=26, /* Gimbal | */
-    ADSB=27, /* ADSB system | */
-    PARAFOIL=28, /* Steerable, nonrigid airfoil | */
-    DODECAROTOR=29, /* Dodecarotor | */
-    CAMERA=30, /* Camera | */
-    CHARGING_STATION=31, /* Charging station | */
-    FLARM=32, /* FLARM collision avoidance system | */
-    SERVO=33, /* Servo | */
-    ODID=34, /* Open Drone ID. See https://mavlink.io/en/services/opendroneid.html. | */
-};
-
-//! MAV_TYPE ENUM_END
-constexpr auto MAV_TYPE_ENUM_END = 35;
 
 /** @brief These values define the type of firmware release.  These values indicate the first version or release of this type.  For example the first alpha release would be 64, the second would be 65. */
 enum class FIRMWARE_VERSION_TYPE
@@ -136,38 +65,6 @@ enum class HL_FAILURE_FLAG : uint16_t
 //! HL_FAILURE_FLAG ENUM_END
 constexpr auto HL_FAILURE_FLAG_ENUM_END = 8193;
 
-/** @brief These flags encode the MAV mode. */
-enum class MAV_MODE_FLAG : uint8_t
-{
-    CUSTOM_MODE_ENABLED=1, /* 0b00000001 Reserved for future use. | */
-    TEST_ENABLED=2, /* 0b00000010 system has a test mode enabled. This flag is intended for temporary system tests and should not be used for stable implementations. | */
-    AUTO_ENABLED=4, /* 0b00000100 autonomous mode enabled, system finds its own goal positions. Guided flag can be set or not, depends on the actual implementation. | */
-    GUIDED_ENABLED=8, /* 0b00001000 guided mode enabled, system flies waypoints / mission items. | */
-    STABILIZE_ENABLED=16, /* 0b00010000 system stabilizes electronically its attitude (and optionally position). It needs however further control inputs to move around. | */
-    HIL_ENABLED=32, /* 0b00100000 hardware in the loop simulation. All motors / actuators are blocked, but internal software is full operational. | */
-    MANUAL_INPUT_ENABLED=64, /* 0b01000000 remote control input is enabled. | */
-    SAFETY_ARMED=128, /* 0b10000000 MAV safety set to armed. Motors are enabled / running / can start. Ready to fly. Additional note: this flag is to be ignore when sent in the command MAV_CMD_DO_SET_MODE and MAV_CMD_COMPONENT_ARM_DISARM shall be used instead. The flag can still be used to report the armed state. | */
-};
-
-//! MAV_MODE_FLAG ENUM_END
-constexpr auto MAV_MODE_FLAG_ENUM_END = 129;
-
-/** @brief These values encode the bit positions of the decode position. These values can be used to read the value of a flag bit by combining the base_mode variable with AND with the flag position value. The result will be either 0 or 1, depending on if the flag is set or not. */
-enum class MAV_MODE_FLAG_DECODE_POSITION
-{
-    CUSTOM_MODE=1, /* Eighth bit: 00000001 | */
-    TEST=2, /* Seventh bit: 00000010 | */
-    AUTO=4, /* Sixth bit:   00000100 | */
-    GUIDED=8, /* Fifth bit:  00001000 | */
-    STABILIZE=16, /* Fourth bit: 00010000 | */
-    HIL=32, /* Third bit:  00100000 | */
-    MANUAL=64, /* Second bit: 01000000 | */
-    SAFETY=128, /* First bit:  10000000 | */
-};
-
-//! MAV_MODE_FLAG_DECODE_POSITION ENUM_END
-constexpr auto MAV_MODE_FLAG_DECODE_POSITION_ENUM_END = 129;
-
 /** @brief Actions that may be specified in MAV_CMD_OVERRIDE_GOTO to override mission execution. */
 enum class MAV_GOTO
 {
@@ -199,159 +96,6 @@ enum class MAV_MODE : uint8_t
 
 //! MAV_MODE ENUM_END
 constexpr auto MAV_MODE_ENUM_END = 221;
-
-/** @brief  */
-enum class MAV_STATE : uint8_t
-{
-    UNINIT=0, /* Uninitialized system, state is unknown. | */
-    BOOT=1, /* System is booting up. | */
-    CALIBRATING=2, /* System is calibrating and not flight-ready. | */
-    STANDBY=3, /* System is grounded and on standby. It can be launched any time. | */
-    ACTIVE=4, /* System is active and might be already airborne. Motors are engaged. | */
-    CRITICAL=5, /* System is in a non-normal flight mode. It can however still navigate. | */
-    EMERGENCY=6, /* System is in a non-normal flight mode. It lost control over parts or over the whole airframe. It is in mayday and going down. | */
-    POWEROFF=7, /* System just initialized its power-down sequence, will shut down now. | */
-    FLIGHT_TERMINATION=8, /* System is terminating itself. | */
-};
-
-//! MAV_STATE ENUM_END
-constexpr auto MAV_STATE_ENUM_END = 9;
-
-/** @brief Component ids (values) for the different types and instances of onboard hardware/software that might make up a MAVLink system (autopilot, cameras, servos, GPS systems, avoidance systems etc.).
-      Components must use the appropriate ID in their source address when sending messages. Components can also use IDs to determine if they are the intended recipient of an incoming message. The MAV_COMP_ID_ALL value is used to indicate messages that must be processed by all components.
-      When creating new entries, components that can have multiple instances (e.g. cameras, servos etc.) should be allocated sequential values. An appropriate number of values should be left free after these components to allow the number of instances to be expanded. */
-enum class MAV_COMPONENT : uint8_t
-{
-    COMP_ID_ALL=0, /* Target id (target_component) used to broadcast messages to all components of the receiving system. Components should attempt to process messages with this component ID and forward to components on any other interfaces. Note: This is not a valid *source* component id for a message. | */
-    COMP_ID_AUTOPILOT1=1, /* System flight controller component ("autopilot"). Only one autopilot is expected in a particular system. | */
-    COMP_ID_USER1=25, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER2=26, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER3=27, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER4=28, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER5=29, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER6=30, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER7=31, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER8=32, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER9=33, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER10=34, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER11=35, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER12=36, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER13=37, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER14=38, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER15=39, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER16=40, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER17=41, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER18=42, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER19=43, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER20=44, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER21=45, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER22=46, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER23=47, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER24=48, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER25=49, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER26=50, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER27=51, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER28=52, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER29=53, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER30=54, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER31=55, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER32=56, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER33=57, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER34=58, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER35=59, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER36=60, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER37=61, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER38=62, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER39=63, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER40=64, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER41=65, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER42=66, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER43=67, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_TELEMETRY_RADIO=68, /* Telemetry radio (e.g. SiK radio, or other component that emits RADIO_STATUS messages). | */
-    COMP_ID_USER45=69, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER46=70, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER47=71, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER48=72, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER49=73, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER50=74, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER51=75, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER52=76, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER53=77, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER54=78, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER55=79, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER56=80, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER57=81, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER58=82, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER59=83, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER60=84, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER61=85, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER62=86, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER63=87, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER64=88, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER65=89, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER66=90, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER67=91, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER68=92, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER69=93, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER70=94, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER71=95, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER72=96, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER73=97, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER74=98, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_USER75=99, /* Id for a component on privately managed MAVLink network. Can be used for any purpose but may not be published by components outside of the private network. | */
-    COMP_ID_CAMERA=100, /* Camera #1. | */
-    COMP_ID_CAMERA2=101, /* Camera #2. | */
-    COMP_ID_CAMERA3=102, /* Camera #3. | */
-    COMP_ID_CAMERA4=103, /* Camera #4. | */
-    COMP_ID_CAMERA5=104, /* Camera #5. | */
-    COMP_ID_CAMERA6=105, /* Camera #6. | */
-    COMP_ID_SERVO1=140, /* Servo #1. | */
-    COMP_ID_SERVO2=141, /* Servo #2. | */
-    COMP_ID_SERVO3=142, /* Servo #3. | */
-    COMP_ID_SERVO4=143, /* Servo #4. | */
-    COMP_ID_SERVO5=144, /* Servo #5. | */
-    COMP_ID_SERVO6=145, /* Servo #6. | */
-    COMP_ID_SERVO7=146, /* Servo #7. | */
-    COMP_ID_SERVO8=147, /* Servo #8. | */
-    COMP_ID_SERVO9=148, /* Servo #9. | */
-    COMP_ID_SERVO10=149, /* Servo #10. | */
-    COMP_ID_SERVO11=150, /* Servo #11. | */
-    COMP_ID_SERVO12=151, /* Servo #12. | */
-    COMP_ID_SERVO13=152, /* Servo #13. | */
-    COMP_ID_SERVO14=153, /* Servo #14. | */
-    COMP_ID_GIMBAL=154, /* Gimbal #1. | */
-    COMP_ID_LOG=155, /* Logging component. | */
-    COMP_ID_ADSB=156, /* Automatic Dependent Surveillance-Broadcast (ADS-B) component. | */
-    COMP_ID_OSD=157, /* On Screen Display (OSD) devices for video links. | */
-    COMP_ID_PERIPHERAL=158, /* Generic autopilot peripheral component ID. Meant for devices that do not implement the parameter microservice. | */
-    COMP_ID_QX1_GIMBAL=159, /* Gimbal ID for QX1. | */
-    COMP_ID_FLARM=160, /* FLARM collision alert component. | */
-    COMP_ID_GIMBAL2=171, /* Gimbal #2. | */
-    COMP_ID_GIMBAL3=172, /* Gimbal #3. | */
-    COMP_ID_GIMBAL4=173, /* Gimbal #4 | */
-    COMP_ID_GIMBAL5=174, /* Gimbal #5. | */
-    COMP_ID_GIMBAL6=175, /* Gimbal #6. | */
-    COMP_ID_MISSIONPLANNER=190, /* Component that can generate/supply a mission flight plan (e.g. GCS or developer API). | */
-    COMP_ID_PATHPLANNER=195, /* Component that finds an optimal path between points based on a certain constraint (e.g. minimum snap, shortest path, cost, etc.). | */
-    COMP_ID_OBSTACLE_AVOIDANCE=196, /* Component that plans a collision free path between two points. | */
-    COMP_ID_VISUAL_INERTIAL_ODOMETRY=197, /* Component that provides position estimates using VIO techniques. | */
-    COMP_ID_PAIRING_MANAGER=198, /* Component that manages pairing of vehicle and GCS. | */
-    COMP_ID_IMU=200, /* Inertial Measurement Unit (IMU) #1. | */
-    COMP_ID_IMU_2=201, /* Inertial Measurement Unit (IMU) #2. | */
-    COMP_ID_IMU_3=202, /* Inertial Measurement Unit (IMU) #3. | */
-    COMP_ID_GPS=220, /* GPS #1. | */
-    COMP_ID_GPS2=221, /* GPS #2. | */
-    COMP_ID_ODID_TXRX_1=236, /* Open Drone ID transmitter/receiver (Bluetooth/WiFi/Internet). | */
-    COMP_ID_ODID_TXRX_2=237, /* Open Drone ID transmitter/receiver (Bluetooth/WiFi/Internet). | */
-    COMP_ID_ODID_TXRX_3=238, /* Open Drone ID transmitter/receiver (Bluetooth/WiFi/Internet). | */
-    COMP_ID_UDP_BRIDGE=240, /* Component to bridge MAVLink to UDP (i.e. from a UART). | */
-    COMP_ID_UART_BRIDGE=241, /* Component to bridge to UART (i.e. from UDP). | */
-    COMP_ID_TUNNEL_NODE=242, /* Component handling TUNNEL messages (e.g. vendor specific GUI of a component). | */
-    COMP_ID_SYSTEM_CONTROL=250, /* Component for handling system messages (e.g. to ARM, takeoff, etc.). | */
-};
-
-//! MAV_COMPONENT ENUM_END
-constexpr auto MAV_COMPONENT_ENUM_END = 251;
 
 /** @brief These encode the sensors whose status is sent as part of the SYS_STATUS message. */
 enum class MAV_SYS_STATUS_SENSOR : uint32_t
@@ -522,15 +266,10 @@ enum class GIMBAL_MANAGER_CAP_FLAGS : uint32_t
     SUPPORTS_INFINITE_YAW=2048, /* Based on GIMBAL_DEVICE_CAP_FLAGS_SUPPORTS_INFINITE_YAW. | */
     CAN_POINT_LOCATION_LOCAL=65536, /* Gimbal manager supports to point to a local position. | */
     CAN_POINT_LOCATION_GLOBAL=131072, /* Gimbal manager supports to point to a global latitude, longitude, altitude position. | */
-    HAS_TRACKING_POINT=262144, /* Gimbal manager supports tracking of a point on the camera. | */
-    HAS_TRACKING_RECTANGLE=524288, /* Gimbal manager supports tracking of a point on the camera. | */
-    SUPPORTS_FOCAL_LENGTH_SCALE=1048576, /* Gimbal manager supports pitching and yawing at an angular velocity scaled by focal length (the more zoomed in, the slower the movement). | */
-    SUPPORTS_NUDGING=2097152, /* Gimbal manager supports nudging when pointing to a location or tracking. | */
-    SUPPORTS_OVERRIDE=4194304, /* Gimbal manager supports overriding when pointing to a location or tracking. | */
 };
 
 //! GIMBAL_MANAGER_CAP_FLAGS ENUM_END
-constexpr auto GIMBAL_MANAGER_CAP_FLAGS_ENUM_END = 4194305;
+constexpr auto GIMBAL_MANAGER_CAP_FLAGS_ENUM_END = 131073;
 
 /** @brief Flags for gimbal device (lower level) operation. */
 enum class GIMBAL_DEVICE_FLAGS : uint16_t
@@ -553,14 +292,11 @@ enum class GIMBAL_MANAGER_FLAGS : uint32_t
     ROLL_LOCK=4, /* Based on GIMBAL_DEVICE_FLAGS_ROLL_LOCK | */
     PITCH_LOCK=8, /* Based on GIMBAL_DEVICE_FLAGS_PITCH_LOCK | */
     YAW_LOCK=16, /* Based on GIMBAL_DEVICE_FLAGS_YAW_LOCK | */
-    ANGULAR_VELOCITY_RELATIVE_TO_FOCAL_LENGTH=1048576, /* Scale angular velocity relative to focal length. This means the gimbal moves slower if it is zoomed in. | */
-    NUDGE=2097152, /* Interpret attitude control on top of pointing to a location or tracking. If this flag is set, the quaternion is relative to the existing tracking angle. | */
-    OVERRIDE=4194304, /* Completely override pointing to a location or tracking. If this flag is set, the quaternion is (as usual) according to GIMBAL_MANAGER_FLAGS_YAW_LOCK. | */
-    NONE=8388608, /* This flag can be set to give up control previously set using MAV_CMD_DO_GIMBAL_MANAGER_ATTITUDE. This flag must not be combined with other flags. | */
+    NONE=1048576, /* This flag can be set to give up control previously set using MAV_CMD_DO_GIMBAL_MANAGER_ATTITUDE. This flag must not be combined with other flags. | */
 };
 
 //! GIMBAL_MANAGER_FLAGS ENUM_END
-constexpr auto GIMBAL_MANAGER_FLAGS_ENUM_END = 8388609;
+constexpr auto GIMBAL_MANAGER_FLAGS_ENUM_END = 1048577;
 
 /** @brief Gimbal device (low level) error flags (bitmap, 0 means no error) */
 enum class GIMBAL_DEVICE_ERROR_FLAGS : uint32_t
@@ -573,10 +309,32 @@ enum class GIMBAL_DEVICE_ERROR_FLAGS : uint32_t
     MOTOR_ERROR=32, /* There is an error with the gimbal motor's. | */
     SOFTWARE_ERROR=64, /* There is an error with the gimbal's software. | */
     COMMS_ERROR=128, /* There is an error with the gimbal's communication. | */
+    CALIBRATION_RUNNING=256, /* Gimbal is currently calibrating. | */
 };
 
 //! GIMBAL_DEVICE_ERROR_FLAGS ENUM_END
-constexpr auto GIMBAL_DEVICE_ERROR_FLAGS_ENUM_END = 129;
+constexpr auto GIMBAL_DEVICE_ERROR_FLAGS_ENUM_END = 257;
+
+/** @brief Gripper actions. */
+enum class GRIPPER_ACTIONS
+{
+    ACTION_RELEASE=0, /* Gripper release cargo. | */
+    ACTION_GRAB=1, /* Gripper grab onto cargo. | */
+};
+
+//! GRIPPER_ACTIONS ENUM_END
+constexpr auto GRIPPER_ACTIONS_ENUM_END = 2;
+
+/** @brief Winch actions. */
+enum class WINCH_ACTIONS
+{
+    RELAXED=0, /* Relax winch. | */
+    RELATIVE_LENGTH_CONTROL=1, /* Wind or unwind specified length of cable, optionally using specified rate. | */
+    RATE_CONTROL=2, /* Wind or unwind cable at specified rate. | */
+};
+
+//! WINCH_ACTIONS ENUM_END
+constexpr auto WINCH_ACTIONS_ENUM_END = 3;
 
 /** @brief Generalized UAVCAN node health */
 enum class UAVCAN_NODE_HEALTH : uint8_t
@@ -602,6 +360,36 @@ enum class UAVCAN_NODE_MODE : uint8_t
 
 //! UAVCAN_NODE_MODE ENUM_END
 constexpr auto UAVCAN_NODE_MODE_ENUM_END = 8;
+
+/** @brief Indicates the ESC connection type. */
+enum class ESC_CONNECTION_TYPE : uint8_t
+{
+    PPM=0, /* Traditional PPM ESC. | */
+    SERIAL=1, /* Serial Bus connected ESC. | */
+    ONESHOT=2, /* One Shot PPM ESC. | */
+    I2C=3, /* I2C ESC. | */
+    CAN=4, /* CAN-Bus ESC. | */
+    DSHOT=5, /* DShot ESC. | */
+};
+
+//! ESC_CONNECTION_TYPE ENUM_END
+constexpr auto ESC_CONNECTION_TYPE_ENUM_END = 6;
+
+/** @brief Flags to report ESC failures. */
+enum class ESC_FAILURE_FLAGS : uint16_t
+{
+    NONE=0, /* No ESC failure. | */
+    OVER_CURRENT=1, /* Over current failure. | */
+    OVER_VOLTAGE=2, /* Over voltage failure. | */
+    OVER_TEMPERATURE=4, /* Over temperature failure. | */
+    OVER_RPM=8, /* Over RPM failure. | */
+    INCONSISTENT_CMD=16, /* Inconsistent command failure i.e. out of bounds. | */
+    MOTOR_STUCK=32, /* Motor stuck failure. | */
+    GENERIC=64, /* Generic ESC failure. | */
+};
+
+//! ESC_FAILURE_FLAGS ENUM_END
+constexpr auto ESC_FAILURE_FLAGS_ENUM_END = 65;
 
 /** @brief Flags to indicate the status of camera storage. */
 enum class STORAGE_STATUS : uint8_t
@@ -642,6 +430,19 @@ enum class WIFI_CONFIG_AP_RESPONSE : int8_t
 //! WIFI_CONFIG_AP_RESPONSE ENUM_END
 constexpr auto WIFI_CONFIG_AP_RESPONSE_ENUM_END = 6;
 
+/** @brief Possible responses from a CELLULAR_CONFIG message. */
+enum class CELLULAR_CONFIG_RESPONSE : uint8_t
+{
+    ACCEPTED=0, /* Changes accepted. | */
+    APN_ERROR=1, /* Invalid APN. | */
+    PIN_ERROR=2, /* Invalid PIN. | */
+    REJECTED=3, /* Changes rejected. | */
+    BLOCKED_PUK_REQUIRED=4, /* PUK is required to unblock SIM card. | */
+};
+
+//! CELLULAR_CONFIG_RESPONSE ENUM_END
+constexpr auto CELLULAR_CONFIG_RESPONSE_ENUM_END = 5;
+
 /** @brief WiFi Mode. */
 enum class WIFI_CONFIG_AP_MODE : int8_t
 {
@@ -659,10 +460,32 @@ enum class COMP_METADATA_TYPE : uint32_t
 {
     VERSION=0, /* Version information which also includes information on other optional supported COMP_METADATA_TYPE's. Must be supported. Only downloadable from vehicle. | */
     PARAMETER=1, /* Parameter meta data. | */
+    COMMANDS=2, /* Meta data which specifies the commands the vehicle supports. (WIP) | */
 };
 
 //! COMP_METADATA_TYPE ENUM_END
-constexpr auto COMP_METADATA_TYPE_ENUM_END = 2;
+constexpr auto COMP_METADATA_TYPE_ENUM_END = 3;
+
+/** @brief Possible transport layers to set and get parameters via mavlink during a parameter transaction. */
+enum class PARAM_TRANSACTION_TRANSPORT
+{
+    PARAM=0, /* Transaction over param transport. | */
+    PARAM_EXT=1, /* Transaction over param_ext transport. | */
+};
+
+//! PARAM_TRANSACTION_TRANSPORT ENUM_END
+constexpr auto PARAM_TRANSACTION_TRANSPORT_ENUM_END = 2;
+
+/** @brief Possible parameter transaction actions. */
+enum class PARAM_TRANSACTION_ACTION
+{
+    START=0, /* Commit the current parameter transaction. | */
+    COMMIT=1, /* Commit the current parameter transaction. | */
+    CANCEL=2, /* Cancel the current parameter transaction. | */
+};
+
+//! PARAM_TRANSACTION_ACTION ENUM_END
+constexpr auto PARAM_TRANSACTION_ACTION_ENUM_END = 3;
 
 /** @brief Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries */
 enum class MAV_CMD : uint16_t
@@ -688,7 +511,7 @@ enum class MAV_CMD : uint16_t
     NAV_VTOL_TAKEOFF=84, /* Takeoff from ground using VTOL mode, and transition to forward flight with specified heading. The command should be ignored by vehicles that dont support both VTOL and fixed-wing flight (multicopters, boats,etc.). |Empty| Front transition heading.| Empty| Yaw angle. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw to home, etc.).| Latitude| Longitude| Altitude|  */
     NAV_VTOL_LAND=85, /* Land using VTOL mode |Empty| Empty| Approach altitude (with the same reference as the Altitude field). NaN if unspecified.| Yaw angle. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw to home, etc.).| Latitude| Longitude| Altitude (ground level)|  */
     NAV_GUIDED_ENABLE=92, /* hand control over to an external controller |On / Off (> 0.5f on)| Empty| Empty| Empty| Empty| Empty| Empty|  */
-    NAV_DELAY=93, /* Delay the next navigation command a number of seconds or until a specified time |Delay (-1 to enable time-of-day fields)| hour (24h format, UTC, -1 to ignore)| minute (24h format, UTC, -1 to ignore)| second (24h format, UTC)| Empty| Empty| Empty|  */
+    NAV_DELAY=93, /* Delay the next navigation command a number of seconds or until a specified time |Delay (-1 to enable time-of-day fields)| hour (24h format, UTC, -1 to ignore)| minute (24h format, UTC, -1 to ignore)| second (24h format, UTC, -1 to ignore)| Empty| Empty| Empty|  */
     NAV_PAYLOAD_PLACE=94, /* Descend and place payload. Vehicle moves to specified location, descends until it detects a hanging payload has reached the ground, and then releases the payload. If ground is not detected before the reaching the maximum descent value (param1), the command will complete without releasing the payload. |Maximum distance to descend.| Empty| Empty| Empty| Latitude| Longitude| Altitude|  */
     NAV_LAST=95, /* NOP - This command is only used to mark the upper limit of the NAV/ACTION commands in the enumeration |Empty| Empty| Empty| Empty| Empty| Empty| Empty|  */
     CONDITION_DELAY=112, /* Delay mission state machine. |Delay| Empty| Empty| Empty| Empty| Empty| Empty|  */
@@ -707,16 +530,17 @@ enum class MAV_CMD : uint16_t
     DO_REPEAT_SERVO=184, /* Cycle a between its nominal setting and a desired PWM for a desired number of cycles with a desired period. |Servo instance number.| Pulse Width Modulation.| Cycle count.| Cycle time.| Empty| Empty| Empty|  */
     DO_FLIGHTTERMINATION=185, /* Terminate flight immediately |Flight termination activated if > 0.5| Empty| Empty| Empty| Empty| Empty| Empty|  */
     DO_CHANGE_ALTITUDE=186, /* Change altitude set point. |Altitude| Frame of new altitude.| Empty| Empty| Empty| Empty| Empty|  */
+    DO_SET_ACTUATOR=187, /* Sets actuators (e.g. servos) to a desired value. The actuator numbers are mapped to specific outputs (e.g. on any MAIN or AUX PWM or UAVCAN) using a flight-stack specific mechanism (i.e. a parameter). |Actuator 1 value, scaled from [-1 to 1]. NaN to ignore.| Actuator 2 value, scaled from [-1 to 1]. NaN to ignore.| Actuator 3 value, scaled from [-1 to 1]. NaN to ignore.| Actuator 4 value, scaled from [-1 to 1]. NaN to ignore.| Actuator 5 value, scaled from [-1 to 1]. NaN to ignore.| Actuator 6 value, scaled from [-1 to 1]. NaN to ignore.| Index of actuator set (i.e if set to 1, Actuator 1 becomes Actuator 7)|  */
     DO_LAND_START=189, /* Mission command to perform a landing. This is used as a marker in a mission to tell the autopilot where a sequence of mission items that represents a landing starts. It may also be sent via a COMMAND_LONG to trigger a landing, in which case the nearest (geographically) landing sequence in the mission will be used. The Latitude/Longitude is optional, and may be set to 0 if not needed. If specified then it will be used to help find the closest landing sequence. |Empty| Empty| Empty| Empty| Latitude| Longitude| Empty|  */
     DO_RALLY_LAND=190, /* Mission command to perform a landing from a rally point. |Break altitude| Landing speed| Empty| Empty| Empty| Empty| Empty|  */
     DO_GO_AROUND=191, /* Mission command to safely abort an autonomous landing. |Altitude| Empty| Empty| Empty| Empty| Empty| Empty|  */
     DO_REPOSITION=192, /* Reposition the vehicle to a specific WGS84 global position. |Ground speed, less than 0 (-1) for default| Bitmask of option flags.| Reserved| Yaw heading. NaN to use the current system yaw heading mode (e.g. yaw towards next waypoint, yaw to home, etc.). For planes indicates loiter direction (0: clockwise, 1: counter clockwise)| Latitude| Longitude| Altitude|  */
     DO_PAUSE_CONTINUE=193, /* If in a GPS controlled position mode, hold the current position or continue. |0: Pause current mission or reposition command, hold current position. 1: Continue mission. A VTOL capable vehicle should enter hover mode (multicopter and VTOL planes). A plane should loiter with the default loiter radius.| Reserved| Reserved| Reserved| Reserved| Reserved| Reserved|  */
     DO_SET_REVERSE=194, /* Set moving direction to forward or reverse. |Direction (0=Forward, 1=Reverse)| Empty| Empty| Empty| Empty| Empty| Empty|  */
-    DO_SET_ROI_LOCATION=195, /* Sets the region of interest (ROI) to a location. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal is not to react to this message. |Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)| Empty| Empty| Empty| Latitude of ROI location| Longitude of ROI location| Altitude of ROI location|  */
-    DO_SET_ROI_WPNEXT_OFFSET=196, /* Sets the region of interest (ROI) to be toward next waypoint, with optional pitch/roll/yaw offset. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal device is not to react to this message. |Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)| Empty| Empty| Empty| Pitch offset from next waypoint, positive tilting up| roll offset from next waypoint, positive banking to the right| yaw offset from next waypoint, positive panning to the right|  */
-    DO_SET_ROI_NONE=197, /* Cancels any previous ROI command returning the vehicle/sensors to default flight characteristics. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal device is not to react to this message. After this command the gimbal manager should go back to manual input if available, and otherwise assume a neutral position. |Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)| Empty| Empty| Empty| Empty| Empty| Empty|  */
-    DO_SET_ROI_SYSID=198, /* Mount tracks system with specified system ID. Determination of target vehicle position may be done with GLOBAL_POSITION_INT or any other means. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal device is not to react to this message. |System ID| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+    DO_SET_ROI_LOCATION=195, /* Sets the region of interest (ROI) to a location. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal is not to react to this message. |Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals).| Empty| Empty| Empty| Latitude of ROI location| Longitude of ROI location| Altitude of ROI location|  */
+    DO_SET_ROI_WPNEXT_OFFSET=196, /* Sets the region of interest (ROI) to be toward next waypoint, with optional pitch/roll/yaw offset. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal device is not to react to this message. |Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals).| Empty| Empty| Empty| Pitch offset from next waypoint, positive tilting up| roll offset from next waypoint, positive banking to the right| yaw offset from next waypoint, positive panning to the right|  */
+    DO_SET_ROI_NONE=197, /* Cancels any previous ROI command returning the vehicle/sensors to default flight characteristics. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal device is not to react to this message. After this command the gimbal manager should go back to manual input if available, and otherwise assume a neutral position. |Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals).| Empty| Empty| Empty| Empty| Empty| Empty|  */
+    DO_SET_ROI_SYSID=198, /* Mount tracks system with specified system ID. Determination of target vehicle position may be done with GLOBAL_POSITION_INT or any other means. This command can be sent to a gimbal manager but not to a gimbal device. A gimbal device is not to react to this message. |System ID| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals).| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
     DO_CONTROL_VIDEO=200, /* Control onboard camera system. |Camera ID (-1 for all)| Transmission: 0: disabled, 1: enabled compressed, 2: enabled raw| Transmission mode: 0: video stream, >0: single images every n seconds| Recording: 0: disabled, 1: enabled compressed, 2: enabled raw| Empty| Empty| Empty|  */
     DO_SET_ROI=201, /* Sets the region of interest (ROI) for a sensor set or the vehicle itself. This can then be used by the vehicle's control system to control the vehicle attitude and the attitude of various sensors such as cameras. |Region of interest mode.| Waypoint index/ target ID (depends on param 1).| Region of interest index. (allows a vehicle to manage multiple ROI's)| Empty| MAV_ROI_WPNEXT: pitch offset from next waypoint, MAV_ROI_LOCATION: latitude| MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude| MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude|  */
     DO_DIGICAM_CONFIGURE=202, /* Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ). |Modes: P, TV, AV, M, Etc.| Shutter speed: Divisor number for one second.| Aperture: F stop number.| ISO number e.g. 80, 100, 200, Etc.| Exposure type enumerator.| Command Identity.| Main engine cut-off time before camera trigger. (0 means no cut-off)|  */
@@ -725,9 +549,10 @@ enum class MAV_CMD : uint16_t
     DO_MOUNT_CONTROL=205, /* Mission command to control a camera or antenna mount |pitch depending on mount mode (degrees or degrees/second depending on pitch input).| roll depending on mount mode (degrees or degrees/second depending on roll input).| yaw depending on mount mode (degrees or degrees/second depending on yaw input).| altitude depending on mount mode.| latitude, set if appropriate mount mode.| longitude, set if appropriate mount mode.| Mount mode.|  */
     DO_SET_CAM_TRIGG_DIST=206, /* Mission command to set camera trigger distance for this flight. The camera is triggered each time this distance is exceeded. This command can also be used to set the shutter integration time for the camera. |Camera trigger distance. 0 to stop triggering.| Camera shutter integration time. -1 or 0 to ignore| Trigger camera once immediately. (0 = no trigger, 1 = trigger)| Empty| Empty| Empty| Empty|  */
     DO_FENCE_ENABLE=207, /* Mission command to enable the geofence |enable? (0=disable, 1=enable, 2=disable_floor_only)| Empty| Empty| Empty| Empty| Empty| Empty|  */
-    DO_PARACHUTE=208, /* Mission command to trigger a parachute |Action| Empty| Empty| Empty| Empty| Empty| Empty|  */
+    DO_PARACHUTE=208, /* Mission item/command to release a parachute or enable/disable auto release. |Action| Empty| Empty| Empty| Empty| Empty| Empty|  */
     DO_MOTOR_TEST=209, /* Mission command to perform motor test. |Motor instance number. (from 1 to max number of motors on the vehicle)| Throttle type.| Throttle.| Timeout.| Motor count. (number of motors to test to test in sequence, waiting for the timeout above between them; 0=1 motor, 1=1 motor, 2=2 motors...)| Motor test order.| Empty|  */
     DO_INVERTED_FLIGHT=210, /* Change to/from inverted flight. |Inverted flight. (0=normal, 1=inverted)| Empty| Empty| Empty| Empty| Empty| Empty|  */
+    DO_GRIPPER=211, /* Mission command to operate a gripper. |Gripper instance number.| Gripper action to perform.| Empty| Empty| Empty| Empty| Empty|  */
     NAV_SET_YAW_SPEED=213, /* Sets a desired vehicle turn angle and speed change. |Yaw angle to adjust steering by.| Speed.| Final angle. (0=absolute, 1=relative)| Empty| Empty| Empty| Empty|  */
     DO_SET_CAM_TRIGG_INTERVAL=214, /* Mission command to set camera trigger interval for this flight. If triggering is enabled, the camera is triggered each time this interval expires. This command can also be used to set the shutter integration time for the camera. |Camera trigger cycle time. -1 or 0 to ignore.| Camera shutter integration time. Should be less than trigger cycle time. -1 or 0 to ignore.| Empty| Empty| Empty| Empty| Empty|  */
     DO_MOUNT_CONTROL_QUAT=220, /* Mission command to control a camera or antenna mount, using a quaternion as reference. |quaternion param q1, w (1 in null-rotation)| quaternion param q2, x (0 in null-rotation)| quaternion param q3, y (0 in null-rotation)| quaternion param q4, z (0 in null-rotation)| Empty| Empty| Empty|  */
@@ -738,10 +563,10 @@ enum class MAV_CMD : uint16_t
     DO_LAST=240, /* NOP - This command is only used to mark the upper limit of the DO commands in the enumeration |Empty| Empty| Empty| Empty| Empty| Empty| Empty|  */
     PREFLIGHT_CALIBRATION=241, /* Trigger calibration. This command will be only accepted if in pre-flight mode. Except for Temperature Calibration, only one sensor should be set in a single message and all others should be zero. |1: gyro calibration, 3: gyro temperature calibration| 1: magnetometer calibration| 1: ground pressure calibration| 1: radio RC calibration, 2: RC trim calibration| 1: accelerometer calibration, 2: board level calibration, 3: accelerometer temperature calibration, 4: simple accelerometer calibration| 1: APM: compass/motor interference calibration (PX4: airspeed calibration, deprecated), 2: airspeed calibration| 1: ESC calibration, 3: barometer temperature calibration|  */
     PREFLIGHT_SET_SENSOR_OFFSETS=242, /* Set sensor offsets. This command will be only accepted if in pre-flight mode. |Sensor to adjust the offsets for: 0: gyros, 1: accelerometer, 2: magnetometer, 3: barometer, 4: optical flow, 5: second magnetometer, 6: third magnetometer| X axis offset (or generic dimension 1), in the sensor's raw units| Y axis offset (or generic dimension 2), in the sensor's raw units| Z axis offset (or generic dimension 3), in the sensor's raw units| Generic dimension 4, in the sensor's raw units| Generic dimension 5, in the sensor's raw units| Generic dimension 6, in the sensor's raw units|  */
-    PREFLIGHT_UAVCAN=243, /* Trigger UAVCAN config. This command will be only accepted if in pre-flight mode. |1: Trigger actuator ID assignment and direction mapping.| Reserved| Reserved| Reserved| Reserved| Reserved| Reserved|  */
+    PREFLIGHT_UAVCAN=243, /* Trigger UAVCAN configuration (actuator ID assignment and direction mapping). Note that this maps to the legacy UAVCAN v0 function UAVCAN_ENUMERATE, which is intended to be executed just once during initial vehicle configuration (it is not a normal pre-flight command and has been poorly named). |1: Trigger actuator ID assignment and direction mapping. 0: Cancel command.| Reserved| Reserved| Reserved| Reserved| Reserved| Reserved|  */
     PREFLIGHT_STORAGE=245, /* Request storage of different parameter values and logs. This command will be only accepted if in pre-flight mode. |Parameter storage: 0: READ FROM FLASH/EEPROM, 1: WRITE CURRENT TO FLASH/EEPROM, 2: Reset to defaults| Mission storage: 0: READ FROM FLASH/EEPROM, 1: WRITE CURRENT TO FLASH/EEPROM, 2: Reset to defaults| Onboard logging: 0: Ignore, 1: Start default rate logging, -1: Stop logging, > 1: logging rate (e.g. set to 1000 for 1000 Hz logging)| Reserved| Empty| Empty| Empty|  */
     PREFLIGHT_REBOOT_SHUTDOWN=246, /* Request the reboot or shutdown of system components. |0: Do nothing for autopilot, 1: Reboot autopilot, 2: Shutdown autopilot, 3: Reboot autopilot and keep it in the bootloader until upgraded.| 0: Do nothing for onboard computer, 1: Reboot onboard computer, 2: Shutdown onboard computer, 3: Reboot onboard computer and keep it in the bootloader until upgraded.| WIP: 0: Do nothing for camera, 1: Reboot onboard camera, 2: Shutdown onboard camera, 3: Reboot onboard camera and keep it in the bootloader until upgraded| WIP: 0: Do nothing for mount (e.g. gimbal), 1: Reboot mount, 2: Shutdown mount, 3: Reboot mount and keep it in the bootloader until upgraded| Reserved (set to 0)| Reserved (set to 0)| WIP: ID (e.g. camera ID -1 for all IDs)|  */
-    DO_UPGRADE=247, /* Request a target system to start, cancel, or restart upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence (COMMAND_ACK regularly sent with result=MAV_RESULT_IN_PROGRESS, followed by a final result of MAV_RESULT_ACCEPTED or MAV_RESULT_FAILED). The operation can be cancelled, in which case the updating system would send COMMAND_ACK with MAV_RESULT_ACCEPTED. The operation can be restarted, in which case the updating system should respond with progress updates (as though it had a new message). |Component id of the component to be upgraded. If set to 0, all components should be upgraded.| 0: Start component upgrade, 1: Cancel component upgrade, 2: Restart component upgrade.| 0: Do not reboot component after the action is executed, 1: Reboot component after the action is executed.| Reserved| Reserved| Reserved| WIP: upgrade progress report rate (can be used for more granular control).|  */
+    DO_UPGRADE=247, /* Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: https://mavlink.io/en/services/command.html. |Component id of the component to be upgraded. If set to 0, all components should be upgraded.| 0: Do not reboot component after the action is executed, 1: Reboot component after the action is executed.| Reserved| Reserved| Reserved| Reserved| WIP: upgrade progress report rate (can be used for more granular control).|  */
     OVERRIDE_GOTO=252, /* Override current mission with command to pause mission, pause mission and move to position, continue/resume mission. When param 1 indicates that the mission is paused (MAV_GOTO_DO_HOLD), param 2 defines whether it holds in place or moves to another position. |MAV_GOTO_DO_HOLD: pause mission and either hold or move to specified position (depending on param2), MAV_GOTO_DO_CONTINUE: resume mission.| MAV_GOTO_HOLD_AT_CURRENT_POSITION: hold at current position, MAV_GOTO_HOLD_AT_SPECIFIED_POSITION: hold at specified position.| Coordinate frame of hold point.| Desired yaw angle.| Latitude/X position.| Longitude/Y position.| Altitude/Z position.|  */
     MISSION_START=300, /* start running a mission |first_item: the first mission item to run| last_item:  the last mission item to run (after this item is run, the mission ends)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
     COMPONENT_ARM_DISARM=400, /* Arms / Disarms a component |0: disarm, 1: arm| 0: arm-disarm unless prevented by safety checks (i.e. when landed), 21196: force arming/disarming (e.g. allow arming to override preflight checks and disarming in flight)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
@@ -766,13 +591,16 @@ enum class MAV_CMD : uint16_t
     SET_CAMERA_FOCUS=532, /* Set camera focus. Camera must respond with a CAMERA_SETTINGS message (on success). |Focus type| Focus value| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:0)| Reserved (default:0)| Reserved (default:NaN)|  */
     JUMP_TAG=600, /* Tagged jump target. Can be jumped to with MAV_CMD_DO_JUMP_TAG. |Tag.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
     DO_JUMP_TAG=601, /* Jump to the matching tag in the mission list. Repeat this action for the specified number of times. A mission should contain a single matching tag for each jump. If this is not the case then a jump to a missing tag should complete the mission, and a jump where there are multiple matching tags should always select the one with the lowest mission sequence number. |Target tag to jump to.| Repeat count.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
-    DO_GIMBAL_MANAGER_ATTITUDE=1000, /* High level setpoint to be sent to a gimbal manager to set a gimbal attitude. It is possible to set combinations of the values below. E.g. an angle as well as a desired angular rate can be used to get to this angle at a certain angular rate, or an angular rate only will result in continuous turning. NaN is to be used to signal unset. Note: a gimbal is never to react to this command but only the gimbal manager. |Tilt/pitch angular velocity (positive to point up).| Pan/yaw angular velocity (positive to pan to the right).| Pitch/tilt angle relative to world horizon (negative is to tilt down, positive to tilt up).| Yaw/pan angle (positive is pan to the right, relative to vehicle for PAN mode, absolute to North for HOLD mode) | Gimbal manager flags to use.| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)|  */
-    DO_GIMBAL_MANAGER_TRACK_POINT=1001, /* If the gimbal manager supports visual tracking (GIMBAL_MANAGER_CAP_FLAGS_HAS_TRACKING_POINT is set), this command allows to initiate the tracking. Such a tracking gimbal manager would usually be an integrated camera/gimbal, or alternatively a companion computer connected to a camera. |Point to track x value.| Point to track y value.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)|  */
-    DO_GIMBAL_MANAGER_TRACK_RECTANGLE=1002, /* If the gimbal supports visual tracking (GIMBAL_MANAGER_CAP_FLAGS_HAS_TRACKING_RECTANGLE is set), this command allows to initiate the tracking. Such a tracking gimbal manager would usually be an integrated camera/gimbal, or alternatively a companion computer connected to a camera. |Top left corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Top left corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Bottom right corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Bottom right corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Reserved (default:0)| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.)|  */
-    IMAGE_START_CAPTURE=2000, /* Start image capture sequence. Sends CAMERA_IMAGE_CAPTURED after each capture. Use NaN for reserved values. |Reserved (Set to 0)| Desired elapsed time between two consecutive pictures (in seconds). Minimum values depend on hardware (typically greater than 2 seconds).| Total number of images to capture. 0 to capture forever/until MAV_CMD_IMAGE_STOP_CAPTURE.| Capture sequence number starting from 1. This is only valid for single-capture (param3 == 1). Increment the capture ID for each capture command to prevent double captures when a command is re-transmitted. Use 0 to ignore it.| Reserved (all remaining params)| Reserved (default:0)| Reserved (default:0)|  */
+    PARAM_TRANSACTION=900, /* Request to start or end a parameter transaction. Multiple kinds of transport layers can be used to exchange parameters in the transaction (param, param_ext and mavftp). The command response can either be a success/failure or an in progress in case the receiving side takes some time to apply the parameters. |Action to be performed (start, commit, cancel, etc.)| Possible transport layers to set and get parameters via mavlink during a parameter transaction.| Identifier for a specific transaction.| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+    DO_GIMBAL_MANAGER_TILTPAN=1000, /* High level setpoint to be sent to a gimbal manager to set a gimbal attitude. It is possible to set combinations of the values below. E.g. an angle as well as a desired angular rate can be used to get to this angle at a certain angular rate, or an angular rate only will result in continuous turning. NaN is to be used to signal unset. Note: a gimbal is never to react to this command but only the gimbal manager. |Tilt/pitch rate (positive to tilt up).| Pan/yaw rate (positive to pan to the right).| Tilt/pitch angle (positive to tilt up, relative to vehicle for PAN mode, relative to world horizon for HOLD mode).| Pan/yaw angle (positive to pan to the right, relative to vehicle for PAN mode, absolute to North for HOLD mode).| Gimbal manager flags to use.| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals).|  */
+    DO_GIMBAL_MANAGER_CONFIGURE=1001, /* Gimbal configuration to set which sysid/compid is in primary and secondary control. |Sysid for primary control (0: no one in control).| Compid for primary control (0: no one in control).| Sysid for secondary control (0: no one in control).| Compid for secondary control (0: no one in control).| Reserved (default:0)| Reserved (default:0)| Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals).|  */
+    IMAGE_START_CAPTURE=2000, /* Start image capture sequence. Sends CAMERA_IMAGE_CAPTURED after each capture. Use NaN for reserved values. |Reserved (Set to 0)| Desired elapsed time between two consecutive pictures (in seconds). Minimum values depend on hardware (typically greater than 2 seconds).| Total number of images to capture. 0 to capture forever/until MAV_CMD_IMAGE_STOP_CAPTURE.| Capture sequence number starting from 1. This is only valid for single-capture (param3 == 1), otherwise set to 0. Increment the capture ID for each capture command to prevent double captures when a command is re-transmitted.| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)|  */
     IMAGE_STOP_CAPTURE=2001, /* Stop image capture sequence Use NaN for reserved values. |Reserved (Set to 0)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:0)| Reserved (default:0)| Reserved (default:NaN)|  */
     REQUEST_CAMERA_IMAGE_CAPTURE=2002, /* Re-request a CAMERA_IMAGE_CAPTURED message. |Sequence number for missing CAMERA_IMAGE_CAPTURED message| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:0)| Reserved (default:0)| Reserved (default:NaN)|  */
     DO_TRIGGER_CONTROL=2003, /* Enable or disable on-board camera triggering system. |Trigger enable/disable (0 for disable, 1 for start), -1 to ignore| 1 to reset the trigger sequence, -1 or 0 to ignore| 1 to pause triggering, but without switching the camera off or retracting it. -1 to ignore| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+    CAMERA_TRACK_POINT=2004, /* If the camera supports point visual tracking (CAMERA_CAP_FLAGS_HAS_TRACKING_POINT is set), this command allows to initiate the tracking. |Point to track x value (normalized 0..1, 0 is left, 1 is right).| Point to track y value (normalized 0..1, 0 is top, 1 is bottom).| Point radius (normalized 0..1, 0 is image left, 1 is image right).| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+    CAMERA_TRACK_RECTANGLE=2005, /* If the camera supports rectangle visual tracking (CAMERA_CAP_FLAGS_HAS_TRACKING_RECTANGLE is set), this command allows to initiate the tracking. |Top left corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Top left corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Bottom right corner of rectangle x value (normalized 0..1, 0 is left, 1 is right).| Bottom right corner of rectangle y value (normalized 0..1, 0 is top, 1 is bottom).| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
+    CAMERA_STOP_TRACKING=2010, /* Stops ongoing tracking. |Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
     VIDEO_START_CAPTURE=2500, /* Starts video capture (recording). |Video Stream ID (0 for all streams)| Frequency CAMERA_CAPTURE_STATUS messages should be sent while recording (0 for no messages, otherwise frequency)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)|  */
     VIDEO_STOP_CAPTURE=2501, /* Stop the current video capture (recording). |Video Stream ID (0 for all streams)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)| Reserved (default:NaN)|  */
     VIDEO_START_STREAMING=2502, /* Start video streaming |Video Stream ID (0 for all streams, 1 for first, 2 for second, etc.)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)| Reserved (default:0)|  */
@@ -822,10 +650,12 @@ enum class MAV_CMD : uint16_t
     USER_3=31012, /* User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER item. |User defined| User defined| User defined| User defined| User defined| User defined| User defined|  */
     USER_4=31013, /* User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER item. |User defined| User defined| User defined| User defined| User defined| User defined| User defined|  */
     USER_5=31014, /* User defined command. Ground Station will not show the Vehicle as flying through this item. Example: MAV_CMD_DO_SET_PARAMETER item. |User defined| User defined| User defined| User defined| User defined| User defined| User defined|  */
+    FIXED_MAG_CAL_YAW=42006, /* Magnetometer calibration based on provided known yaw. This allows for fast calibration using WMM field tables in the vehicle, given only the known yaw of the vehicle. If Latitude and longitude are both zero then use the current vehicle location. |Yaw of vehicle in earth frame.| CompassMask, 0 for all.| Latitude.| Longitude.| Empty.| Empty.| Empty.|  */
+    DO_WINCH=42600, /* Command to operate winch. |Winch instance number.| Action to perform.| Length of cable to release (negative to wind).| Release rate (negative to wind).| Empty.| Empty.| Empty.|  */
 };
 
 //! MAV_CMD ENUM_END
-constexpr auto MAV_CMD_ENUM_END = 31015;
+constexpr auto MAV_CMD_ENUM_END = 42601;
 
 /** @brief A data stream is not a fixed set of messages, but rather a
      recommendation to the autopilot software. Individual autopilots may or may not obey
@@ -1172,30 +1002,42 @@ enum class MAV_BATTERY_CHARGE_STATE : uint8_t
     LOW=2, /* Battery state is low, warn and monitor close. | */
     CRITICAL=3, /* Battery state is critical, return or abort immediately. | */
     EMERGENCY=4, /* Battery state is too low for ordinary abort sequence. Perform fastest possible emergency stop to prevent damage. | */
-    FAILED=5, /* Battery failed, damage unavoidable. | */
-    UNHEALTHY=6, /* Battery is diagnosed to be defective or an error occurred, usage is discouraged / prohibited. | */
+    FAILED=5, /* Battery failed, damage unavoidable. Possible causes (faults) are listed in MAV_BATTERY_FAULT. | */
+    UNHEALTHY=6, /* Battery is diagnosed to be defective or an error occurred, usage is discouraged / prohibited. Possible causes (faults) are listed in MAV_BATTERY_FAULT. | */
     CHARGING=7, /* Battery is charging. | */
 };
 
 //! MAV_BATTERY_CHARGE_STATE ENUM_END
 constexpr auto MAV_BATTERY_CHARGE_STATE_ENUM_END = 8;
 
-/** @brief Smart battery supply status/fault flags (bitmask) for health indication. */
-enum class MAV_SMART_BATTERY_FAULT : int32_t
+/** @brief Battery mode. Note, the normal operation mode (i.e. when flying) should be reported as MAV_BATTERY_MODE_UNKNOWN to allow message trimming in normal flight. */
+enum class MAV_BATTERY_MODE : uint8_t
+{
+    UNKNOWN=0, /* Battery mode not supported/unknown battery mode/normal operation. | */
+    AUTO_DISCHARGING=1, /* Battery is auto discharging (towards storage level). | */
+    HOT_SWAP=2, /* Battery in hot-swap mode (current limited to prevent spikes that might damage sensitive electrical circuits). | */
+};
+
+//! MAV_BATTERY_MODE ENUM_END
+constexpr auto MAV_BATTERY_MODE_ENUM_END = 3;
+
+/** @brief Smart battery supply status/fault flags (bitmask) for health indication. The battery must also report either MAV_BATTERY_CHARGE_STATE_FAILED or MAV_BATTERY_CHARGE_STATE_UNHEALTHY if any of these are set. */
+enum class MAV_BATTERY_FAULT : uint32_t
 {
     DEEP_DISCHARGE=1, /* Battery has deep discharged. | */
     SPIKES=2, /* Voltage spikes. | */
-    SINGLE_CELL_FAIL=4, /* Single cell has failed. | */
+    CELL_FAIL=4, /* One or more cells have failed. Battery should also report MAV_BATTERY_CHARGE_STATE_FAILE (and should not be used). | */
     OVER_CURRENT=8, /* Over-current fault. | */
     OVER_TEMPERATURE=16, /* Over-temperature fault. | */
     UNDER_TEMPERATURE=32, /* Under-temperature fault. | */
+    INCOMPATIBLE_VOLTAGE=64, /* Vehicle voltage is not compatible with this battery (batteries on same power rail should have similar voltage). | */
 };
 
-//! MAV_SMART_BATTERY_FAULT ENUM_END
-constexpr auto MAV_SMART_BATTERY_FAULT_ENUM_END = 33;
+//! MAV_BATTERY_FAULT ENUM_END
+constexpr auto MAV_BATTERY_FAULT_ENUM_END = 65;
 
 /** @brief Flags to report status/failure cases for a power generator (used in GENERATOR_STATUS). Note that FAULTS are conditions that cause the generator to fail. Warnings are conditions that require attention before the next use (they indicate the system is not operating properly). */
-enum class GENERATOR_STATUS_FLAG : uint64_t
+enum class MAV_GENERATOR_STATUS_FLAG : uint64_t
 {
     OFF=1, /* Generator is off. | */
     READY=2, /* Generator is ready to start generating power. | */
@@ -1215,10 +1057,15 @@ enum class GENERATOR_STATUS_FLAG : uint64_t
     OVERCURRENT_FAULT=32768, /* Generator controller exceeded the overcurrent threshold and shutdown to prevent damage. | */
     BATTERY_OVERCHARGE_CURRENT_FAULT=65536, /* Generator controller detected a high current going into the batteries and shutdown to prevent battery damage. | */
     OVERVOLTAGE_FAULT=131072, /* Generator controller exceeded it's overvoltage threshold and shutdown to prevent it exceeding the voltage rating. | */
+    BATTERY_UNDERVOLT_FAULT=262144, /* Batteries are under voltage (generator will not start). | */
+    START_INHIBITED=524288, /* Generator start is inhibited by e.g. a safety switch. | */
+    MAINTENANCE_REQUIRED=1048576, /* Generator requires maintenance. | */
+    WARMING_UP=2097152, /* Generator is not ready to generate yet. | */
+    IDLE=4194304, /* Generator is idle. | */
 };
 
-//! GENERATOR_STATUS_FLAG ENUM_END
-constexpr auto GENERATOR_STATUS_FLAG_ENUM_END = 131073;
+//! MAV_GENERATOR_STATUS_FLAG ENUM_END
+constexpr auto MAV_GENERATOR_STATUS_FLAG_ENUM_END = 4194305;
 
 /** @brief Enumeration of VTOL states */
 enum class MAV_VTOL_STATE : uint8_t
@@ -1470,10 +1317,13 @@ enum class CAMERA_CAP_FLAGS : uint32_t
     HAS_BASIC_ZOOM=64, /* Camera has basic zoom control (MAV_CMD_SET_CAMERA_ZOOM) | */
     HAS_BASIC_FOCUS=128, /* Camera has basic focus control (MAV_CMD_SET_CAMERA_FOCUS) | */
     HAS_VIDEO_STREAM=256, /* Camera has video streaming capabilities (request VIDEO_STREAM_INFORMATION with MAV_CMD_REQUEST_MESSAGE for video streaming info) | */
+    HAS_TRACKING_POINT=512, /* Camera supports tracking of a point on the camera view. | */
+    HAS_TRACKING_RECTANGLE=1024, /* Camera supports tracking of a selection rectangle on the camera view. | */
+    HAS_TRACKING_GEO_STATUS=2048, /* Camera supports tracking geo status (CAMERA_TRACKING_GEO_STATUS). | */
 };
 
 //! CAMERA_CAP_FLAGS ENUM_END
-constexpr auto CAMERA_CAP_FLAGS_ENUM_END = 257;
+constexpr auto CAMERA_CAP_FLAGS_ENUM_END = 2049;
 
 /** @brief Stream status flags (Bitmap) */
 enum class VIDEO_STREAM_STATUS_FLAGS : uint16_t
@@ -1496,6 +1346,40 @@ enum class VIDEO_STREAM_TYPE : uint8_t
 
 //! VIDEO_STREAM_TYPE ENUM_END
 constexpr auto VIDEO_STREAM_TYPE_ENUM_END = 4;
+
+/** @brief Camera tracking status flags */
+enum class CAMERA_TRACKING_STATUS_FLAGS : uint8_t
+{
+    IDLE=0, /* Camera is not tracking | */
+    ACTIVE=1, /* Camera is tracking | */
+    ERROR=2, /* Camera tracking in error state | */
+};
+
+//! CAMERA_TRACKING_STATUS_FLAGS ENUM_END
+constexpr auto CAMERA_TRACKING_STATUS_FLAGS_ENUM_END = 3;
+
+/** @brief Camera tracking modes */
+enum class CAMERA_TRACKING_MODE : uint8_t
+{
+    NONE=0, /* Not tracking | */
+    POINT=1, /* Target is a point | */
+    RECTANGLE=2, /* Target is a rectangle | */
+};
+
+//! CAMERA_TRACKING_MODE ENUM_END
+constexpr auto CAMERA_TRACKING_MODE_ENUM_END = 3;
+
+/** @brief Camera tracking target data (shows where tracked target is within image) */
+enum class CAMERA_TRACKING_TARGET_DATA : uint8_t
+{
+    NONE=0, /* No target data | */
+    EMBEDDED=1, /* Target data embedded in image data (proprietary) | */
+    RENDERED=2, /* Target data rendered in image | */
+    IN_STATUS=4, /* Target data within status message (Point or Rectangle) | */
+};
+
+//! CAMERA_TRACKING_TARGET_DATA ENUM_END
+constexpr auto CAMERA_TRACKING_TARGET_DATA_ENUM_END = 5;
 
 /** @brief Zoom types for MAV_CMD_SET_CAMERA_ZOOM */
 enum class CAMERA_ZOOM_TYPE
@@ -1521,13 +1405,13 @@ enum class SET_FOCUS_TYPE
 //! SET_FOCUS_TYPE ENUM_END
 constexpr auto SET_FOCUS_TYPE_ENUM_END = 4;
 
-/** @brief Result from a PARAM_EXT_SET message. */
+/** @brief Result from PARAM_EXT_SET message (or a PARAM_SET within a transaction). */
 enum class PARAM_ACK : uint8_t
 {
     ACCEPTED=0, /* Parameter value ACCEPTED and SET | */
     VALUE_UNSUPPORTED=1, /* Parameter value UNKNOWN/UNSUPPORTED | */
     FAILED=2, /* Parameter failed to set | */
-    IN_PROGRESS=3, /* Parameter value received but not yet validated or set. A subsequent PARAM_EXT_ACK will follow once operation is completed with the actual result. These are for parameters that may take longer to set. Instead of waiting for an ACK and potentially timing out, you will immediately receive this response to let you know it was received. | */
+    IN_PROGRESS=3, /* Parameter value received but not yet set/accepted. A subsequent PARAM_ACK_TRANSACTION or PARAM_EXT_ACK with the final result will follow once operation is completed. This is returned immediately for parameters that take longer to set, indicating taht the the parameter was recieved and does not need to be resent. | */
 };
 
 //! PARAM_ACK ENUM_END
@@ -1631,13 +1515,37 @@ enum class CELLULAR_NETWORK_RADIO_TYPE : uint8_t
 constexpr auto CELLULAR_NETWORK_RADIO_TYPE_ENUM_END = 5;
 
 /** @brief These flags encode the cellular network status */
-enum class CELLULAR_NETWORK_STATUS_FLAG : uint16_t
+enum class CELLULAR_STATUS_FLAG : uint8_t
 {
-    ROAMING=1, /* Roaming is active | */
+    UNKNOWN=0, /* State unknown or not reportable. | */
+    FAILED=1, /* Modem is unusable | */
+    INITIALIZING=2, /* Modem is being initialized | */
+    LOCKED=3, /* Modem is locked | */
+    DISABLED=4, /* Modem is not enabled and is powered down | */
+    DISABLING=5, /* Modem is currently transitioning to the CELLULAR_STATUS_FLAG_DISABLED state | */
+    ENABLING=6, /* Modem is currently transitioning to the CELLULAR_STATUS_FLAG_ENABLED state | */
+    ENABLED=7, /* Modem is enabled and powered on but not registered with a network provider and not available for data connections | */
+    SEARCHING=8, /* Modem is searching for a network provider to register | */
+    REGISTERED=9, /* Modem is registered with a network provider, and data connections and messaging may be available for use | */
+    DISCONNECTING=10, /* Modem is disconnecting and deactivating the last active packet data bearer. This state will not be entered if more than one packet data bearer is active and one of the active bearers is deactivated | */
+    CONNECTING=11, /* Modem is activating and connecting the first packet data bearer. Subsequent bearer activations when another bearer is already active do not cause this state to be entered | */
+    CONNECTED=12, /* One or more packet data bearers is active and connected | */
 };
 
-//! CELLULAR_NETWORK_STATUS_FLAG ENUM_END
-constexpr auto CELLULAR_NETWORK_STATUS_FLAG_ENUM_END = 2;
+//! CELLULAR_STATUS_FLAG ENUM_END
+constexpr auto CELLULAR_STATUS_FLAG_ENUM_END = 13;
+
+/** @brief These flags are used to diagnose the failure state of CELLULAR_STATUS */
+enum class CELLULAR_NETWORK_FAILED_REASON : uint8_t
+{
+    NONE=0, /* No error | */
+    UNKNOWN=1, /* Error state is unknown | */
+    SIM_MISSING=2, /* SIM is required for the modem but missing | */
+    SIM_ERROR=3, /* SIM is available, but not usuable for connection | */
+};
+
+//! CELLULAR_NETWORK_FAILED_REASON ENUM_END
+constexpr auto CELLULAR_NETWORK_FAILED_REASON_ENUM_END = 4;
 
 /** @brief Precision land modes (used in MAV_CMD_NAV_LAND). */
 enum class PRECISION_LAND_MODE
@@ -1650,12 +1558,12 @@ enum class PRECISION_LAND_MODE
 //! PRECISION_LAND_MODE ENUM_END
 constexpr auto PRECISION_LAND_MODE_ENUM_END = 3;
 
-/** @brief  */
+/** @brief Parachute actions. Trigger release and enable/disable auto-release. */
 enum class PARACHUTE_ACTION
 {
-    DISABLE=0, /* Disable parachute release. | */
-    ENABLE=1, /* Enable parachute release. | */
-    RELEASE=2, /* Release parachute. | */
+    DISABLE=0, /* Disable auto-release of parachute (i.e. release triggered by crash detectors). | */
+    ENABLE=1, /* Enable auto-release of parachute. | */
+    RELEASE=2, /* Release parachute and kill motors. | */
 };
 
 //! PARACHUTE_ACTION ENUM_END
@@ -2103,12 +2011,39 @@ enum class FAILURE_TYPE
 //! FAILURE_TYPE ENUM_END
 constexpr auto FAILURE_TYPE_ENUM_END = 8;
 
+/** @brief Winch status flags used in WINCH_STATUS */
+enum class MAV_WINCH_STATUS_FLAG : uint32_t
+{
+    HEALTHY=1, /* Winch is healthy | */
+    FULLY_RETRACTED=2, /* Winch thread is fully retracted | */
+    MOVING=4, /* Winch motor is moving | */
+    CLUTCH_ENGAGED=8, /* Winch clutch is engaged allowing motor to move freely | */
+};
+
+//! MAV_WINCH_STATUS_FLAG ENUM_END
+constexpr auto MAV_WINCH_STATUS_FLAG_ENUM_END = 9;
+
+/** @brief  */
+enum class MAG_CAL_STATUS : uint8_t
+{
+    NOT_STARTED=0, /*  | */
+    WAITING_TO_START=1, /*  | */
+    RUNNING_STEP_ONE=2, /*  | */
+    RUNNING_STEP_TWO=3, /*  | */
+    SUCCESS=4, /*  | */
+    FAILED=5, /*  | */
+    BAD_ORIENTATION=6, /*  | */
+    BAD_RADIUS=7, /*  | */
+};
+
+//! MAG_CAL_STATUS ENUM_END
+constexpr auto MAG_CAL_STATUS_ENUM_END = 8;
+
 
 } // namespace common
 } // namespace mavlink
 
 // MESSAGE DEFINITIONS
-#include "./mavlink_msg_heartbeat.hpp"
 #include "./mavlink_msg_sys_status.hpp"
 #include "./mavlink_msg_system_time.hpp"
 #include "./mavlink_msg_ping.hpp"
@@ -2117,6 +2052,7 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_auth_key.hpp"
 #include "./mavlink_msg_link_node_status.hpp"
 #include "./mavlink_msg_set_mode.hpp"
+#include "./mavlink_msg_param_ack_transaction.hpp"
 #include "./mavlink_msg_param_request_read.hpp"
 #include "./mavlink_msg_param_request_list.hpp"
 #include "./mavlink_msg_param_value.hpp"
@@ -2229,6 +2165,8 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_autopilot_version.hpp"
 #include "./mavlink_msg_landing_target.hpp"
 #include "./mavlink_msg_fence_status.hpp"
+#include "./mavlink_msg_mag_cal_report.hpp"
+#include "./mavlink_msg_efi_status.hpp"
 #include "./mavlink_msg_estimator_status.hpp"
 #include "./mavlink_msg_wind_cov.hpp"
 #include "./mavlink_msg_gps_input.hpp"
@@ -2264,6 +2202,9 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_logging_ack.hpp"
 #include "./mavlink_msg_video_stream_information.hpp"
 #include "./mavlink_msg_video_stream_status.hpp"
+#include "./mavlink_msg_camera_fov_status.hpp"
+#include "./mavlink_msg_camera_tracking_image_status.hpp"
+#include "./mavlink_msg_camera_tracking_geo_status.hpp"
 #include "./mavlink_msg_gimbal_manager_information.hpp"
 #include "./mavlink_msg_gimbal_manager_status.hpp"
 #include "./mavlink_msg_gimbal_manager_set_attitude.hpp"
@@ -2271,8 +2212,11 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_gimbal_device_set_attitude.hpp"
 #include "./mavlink_msg_gimbal_device_attitude_status.hpp"
 #include "./mavlink_msg_autopilot_state_for_gimbal_device.hpp"
+#include "./mavlink_msg_gimbal_manager_set_tiltpan.hpp"
+#include "./mavlink_msg_gimbal_manager_set_manual_control.hpp"
+#include "./mavlink_msg_esc_info.hpp"
+#include "./mavlink_msg_esc_status.hpp"
 #include "./mavlink_msg_wifi_config_ap.hpp"
-#include "./mavlink_msg_protocol_version.hpp"
 #include "./mavlink_msg_ais_vessel.hpp"
 #include "./mavlink_msg_uavcan_node_status.hpp"
 #include "./mavlink_msg_uavcan_node_info.hpp"
@@ -2281,18 +2225,21 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_param_ext_value.hpp"
 #include "./mavlink_msg_param_ext_set.hpp"
 #include "./mavlink_msg_param_ext_ack.hpp"
+#include "./mavlink_msg_param_ext_value_trimmed.hpp"
+#include "./mavlink_msg_param_ext_set_trimmed.hpp"
+#include "./mavlink_msg_param_ext_ack_trimmed.hpp"
 #include "./mavlink_msg_obstacle_distance.hpp"
 #include "./mavlink_msg_odometry.hpp"
 #include "./mavlink_msg_trajectory_representation_waypoints.hpp"
 #include "./mavlink_msg_trajectory_representation_bezier.hpp"
 #include "./mavlink_msg_cellular_status.hpp"
 #include "./mavlink_msg_isbd_link_status.hpp"
+#include "./mavlink_msg_cellular_config.hpp"
 #include "./mavlink_msg_raw_rpm.hpp"
 #include "./mavlink_msg_utm_global_position.hpp"
 #include "./mavlink_msg_debug_float_array.hpp"
 #include "./mavlink_msg_orbit_execution_status.hpp"
 #include "./mavlink_msg_smart_battery_info.hpp"
-#include "./mavlink_msg_smart_battery_status.hpp"
 #include "./mavlink_msg_generator_status.hpp"
 #include "./mavlink_msg_actuator_output_status.hpp"
 #include "./mavlink_msg_time_estimate_to_target.hpp"
@@ -2302,6 +2249,7 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_play_tune_v2.hpp"
 #include "./mavlink_msg_supported_tunes.hpp"
 #include "./mavlink_msg_wheel_distance.hpp"
+#include "./mavlink_msg_winch_status.hpp"
 #include "./mavlink_msg_open_drone_id_basic_id.hpp"
 #include "./mavlink_msg_open_drone_id_location.hpp"
 #include "./mavlink_msg_open_drone_id_authentication.hpp"
@@ -2311,4 +2259,4 @@ constexpr auto FAILURE_TYPE_ENUM_END = 8;
 #include "./mavlink_msg_open_drone_id_message_pack.hpp"
 
 // base include
-
+#include "../minimal/minimal.hpp"

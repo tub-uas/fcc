@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<mavlink>
+    <include>common.xml</include>
+    <dialect>10</dialect>
+    <messages>
+        <message id="10000" name="DataRaiIn">
+            <description>Data from RaiIn</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="senseTime">Time of data creation at sensor</field>
+            <field type="uint16_t[12]" name="chnl">Channels with raw PWM values</field>
+            <field type="float" name="roll">Roll input from pilot (aka. setpoint)</field>
+            <field type="float" name="pitch">Pitch input from pilot (aka. setpoint)</field>
+            <field type="float" name="yaw">Yaw input from pilot (aka. setpoint)</field>
+            <field type="float" name="thr">Thr input from pilot (aka. setpoint)</field>
+            <field type="uint16_t" name="fltMode">Flightmode set by pilot</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="15000" name="DataRaiOut">
+            <description>Data from RaiOut</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="uint16_t[12]" name="chnl">Channels with raw PWM values</field>
+            <field type="float" name="roll">Roll command from fcc</field>
+            <field type="float" name="pitch">Pitch command from fcc</field>
+            <field type="float" name="yaw">Yaw command from fcc</field>
+            <field type="float" name="thr">Thr command from fcc</field>
+            <field type="uint16_t" name="fltMode">Flightmode</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="20000" name="DataAhrs">
+            <description>Data from Ahrs</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="senseTime">Time of data creation at sensor</field>
+            <field type="float" name="gyrX">Gyro X-Axis</field>
+            <field type="float" name="gyrY">Gyro Y-Axis</field>
+            <field type="float" name="gyrZ">Gyro Z-Axis</field>
+            <field type="float" name="accX">Accelerometer X-Axis</field>
+            <field type="float" name="accY">Accelerometer Y-Axis</field>
+            <field type="float" name="accZ">Accelerometer Z-Axis</field>
+            <field type="float" name="magX">Magnetometer X-Axis</field>
+            <field type="float" name="magY">Magnetometer Y-Axis</field>
+            <field type="float" name="magZ">Magnetometer Z-Axis</field>
+            <field type="float" name="temp">Temperature</field>
+            <field type="float" name="press">Barometric pressure</field>
+            <field type="float" name="phi">Phi</field>
+            <field type="float" name="the">Theta</field>
+            <field type="float" name="psi">Psi</field>
+            <field type="float" name="q0">Quaternion 0</field>
+            <field type="float" name="q1">Quaternion 1</field>
+            <field type="float" name="q2">Quaternion 2</field>
+            <field type="float" name="q3">Quaternion 3</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="30000" name="DataAir">
+            <description>Data from Air</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="senseTime">Time of data creation at sensor</field>
+            <field type="float" name="dynamicPress">Dynamic Pressure</field>
+            <field type="float" name="velocity">Velocitiy (TAS)</field>
+            <field type="float" name="baroPress">Barometric pressure</field>
+            <field type="float" name="density">Density</field>
+            <field type="float" name="temp">Temperature</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="40000" name="DataSFusion">
+            <description>Data from SFusion</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="senseTime">Time of data creation at sensor</field>
+            <field type="float" name="gyrX">Gyro X-Axis</field>
+            <field type="float" name="gyrY">Gyro Y-Axis</field>
+            <field type="float" name="gyrZ">Gyro Z-Axis</field>
+            <field type="float" name="accX">Accelerometer X-Axis</field>
+            <field type="float" name="accY">Accelerometer Y-Axis</field>
+            <field type="float" name="accZ">Accelerometer Z-Axis</field>
+            <field type="float" name="magX">Magnetometer X-Axis</field>
+            <field type="float" name="magY">Magnetometer Y-Axis</field>
+            <field type="float" name="magZ">Magnetometer Z-Axis</field>
+            <field type="float" name="temp">Temperature</field>
+            <field type="float" name="press">Barometric pressure</field>
+            <field type="float" name="phi">Phi</field>
+            <field type="float" name="the">Theta</field>
+            <field type="float" name="psi">Psi</field>
+            <field type="float" name="q0">Quaternion 0</field>
+            <field type="float" name="q1">Quaternion 1</field>
+            <field type="float" name="q2">Quaternion 2</field>
+            <field type="float" name="q3">Quaternion 3</field>
+            <field type="float" name="posN">Position north estimation</field>
+            <field type="float" name="posE">Position east estimation</field>
+            <field type="float" name="posD">Position down estimation</field>
+            <field type="float" name="speedN">Speed north estimation</field>
+            <field type="float" name="speedE">Speed east estimation</field>
+            <field type="float" name="speedD">Speed down estimation</field>
+            <field type="float" name="WindN">Wind north estimation</field>
+            <field type="float" name="WindE">Wind east estimation</field>
+            <field type="float" name="WindD">Wind down estimation</field>
+            <field type="float" name="ssa">Sideslip angle estimation</field>
+            <field type="float" name="aoa">Angle of attack estimation</field>
+            <field type="float" name="gamma">Pathangle estimation</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="50000" name="DataCtrl">
+            <description>Data from Ctrl</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="xi">Roll (Aileron)</field>
+            <field type="float" name="eta">Pich (Elevator)</field>
+            <field type="float" name="zeta">Yaw (Rudder)</field>
+            <field type="float" name="etaT">Thrust (Throttle)</field>
+            <field type="float" name="etaF">Flaps</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="60000" name="DataPsu">
+            <description>Data from Psu</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="senseTime">Time of data creation at sensor</field>
+            <field type="float" name="mainVolt">Voltage of battery</field>
+            <field type="float" name="mainCurr">Current drawn from battery</field>
+            <field type="float" name="mainPow">Power drawn from battery</field>
+            <field type="float" name="pwrVolt">Voltage of servo supply (5V)</field>
+            <field type="float" name="pwrCurr">Current drawn from servo supply (5V)</field>
+            <field type="float" name="pwrPow">Power drawn from servo supply (5V)</field>
+            <field type="float" name="sysVolt">Voltage of system supply (5V)</field>
+            <field type="float" name="sysCurr">Current drawn from system supply (5V)</field>
+            <field type="float" name="sysPow">Power drawn from system supply (5V)</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+    </messages>
+</mavlink>

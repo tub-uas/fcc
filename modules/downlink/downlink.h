@@ -31,7 +31,7 @@
 
 #include "../../util/timer/timer.h"
 #include "../../driver/drv_serial/drv_serial.h"
-#include "mavlink/alxSys/mavlink.h"
+#include "mavlink/downlink/mavlink.h"
 
 #define TELEMETRY_COM_PORT  "/dev/ttyUSB0"
 

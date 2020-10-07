@@ -13,9 +13,9 @@ namespace msg {
  */
 struct GENERATOR_STATUS : mavlink::Message {
     static constexpr msgid_t MSG_ID = 373;
-    static constexpr size_t LENGTH = 34;
-    static constexpr size_t MIN_LENGTH = 34;
-    static constexpr uint8_t CRC_EXTRA = 192;
+    static constexpr size_t LENGTH = 42;
+    static constexpr size_t MIN_LENGTH = 42;
+    static constexpr uint8_t CRC_EXTRA = 117;
     static constexpr auto NAME = "GENERATOR_STATUS";
 
 
@@ -28,6 +28,8 @@ struct GENERATOR_STATUS : mavlink::Message {
     int16_t rectifier_temperature; /*< [degC] The temperature of the rectifier or power converter. INT16_MAX: field not provided. */
     float bat_current_setpoint; /*< [A] The target battery current. Positive for out. Negative for in. NaN: field not provided */
     int16_t generator_temperature; /*< [degC] The temperature of the mechanical motor, fuel cell core or generator. INT16_MAX: field not provided. */
+    uint32_t runtime; /*< [s] Seconds this generator has run since it was rebooted. UINT32_MAX: field not provided. */
+    int32_t time_until_maintenance; /*< [s] Seconds until this generator requires maintenance.  A negative value indicates maintenance is past-due. INT32_MAX: field not provided. */
 
 
     inline std::string get_name(void) const override
@@ -54,6 +56,8 @@ struct GENERATOR_STATUS : mavlink::Message {
         ss << "  rectifier_temperature: " << rectifier_temperature << std::endl;
         ss << "  bat_current_setpoint: " << bat_current_setpoint << std::endl;
         ss << "  generator_temperature: " << generator_temperature << std::endl;
+        ss << "  runtime: " << runtime << std::endl;
+        ss << "  time_until_maintenance: " << time_until_maintenance << std::endl;
 
         return ss.str();
     }
@@ -68,9 +72,11 @@ struct GENERATOR_STATUS : mavlink::Message {
         map << power_generated;               // offset: 16
         map << bus_voltage;                   // offset: 20
         map << bat_current_setpoint;          // offset: 24
-        map << generator_speed;               // offset: 28
-        map << rectifier_temperature;         // offset: 30
-        map << generator_temperature;         // offset: 32
+        map << runtime;                       // offset: 28
+        map << time_until_maintenance;        // offset: 32
+        map << generator_speed;               // offset: 36
+        map << rectifier_temperature;         // offset: 38
+        map << generator_temperature;         // offset: 40
     }
 
     inline void deserialize(mavlink::MsgMap &map) override
@@ -81,9 +87,11 @@ struct GENERATOR_STATUS : mavlink::Message {
         map >> power_generated;               // offset: 16
         map >> bus_voltage;                   // offset: 20
         map >> bat_current_setpoint;          // offset: 24
-        map >> generator_speed;               // offset: 28
-        map >> rectifier_temperature;         // offset: 30
-        map >> generator_temperature;         // offset: 32
+        map >> runtime;                       // offset: 28
+        map >> time_until_maintenance;        // offset: 32
+        map >> generator_speed;               // offset: 36
+        map >> rectifier_temperature;         // offset: 38
+        map >> generator_temperature;         // offset: 40
     }
 };
 

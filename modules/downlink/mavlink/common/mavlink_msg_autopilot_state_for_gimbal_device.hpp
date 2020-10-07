@@ -19,10 +19,10 @@ struct AUTOPILOT_STATE_FOR_GIMBAL_DEVICE : mavlink::Message {
     static constexpr auto NAME = "AUTOPILOT_STATE_FOR_GIMBAL_DEVICE";
 
 
-    uint64_t time_boot_us; /*< [us] Timestamp (time since system boot). */
     uint8_t target_system; /*<  System ID */
     uint8_t target_component; /*<  Component ID */
-    std::array<float, 4> q; /*<  Quaternion components of autopilot attitude: w, x, y, z (1 0 0 0 is the null-rotation, Hamiltonian convention). */
+    uint64_t time_boot_us; /*< [us] Timestamp (time since system boot). */
+    std::array<float, 4> q; /*<  Quaternion components of autopilot attitude: w, x, y, z (1 0 0 0 is the null-rotation, Hamilton convention). */
     uint32_t q_estimated_delay_us; /*< [us] Estimated delay of the attitude data. */
     float vx; /*< [m/s] X Speed in NED (North, East, Down). */
     float vy; /*< [m/s] Y Speed in NED (North, East, Down). */
@@ -48,9 +48,9 @@ struct AUTOPILOT_STATE_FOR_GIMBAL_DEVICE : mavlink::Message {
         std::stringstream ss;
 
         ss << NAME << ":" << std::endl;
-        ss << "  time_boot_us: " << time_boot_us << std::endl;
         ss << "  target_system: " << +target_system << std::endl;
         ss << "  target_component: " << +target_component << std::endl;
+        ss << "  time_boot_us: " << time_boot_us << std::endl;
         ss << "  q: [" << to_string(q) << "]" << std::endl;
         ss << "  q_estimated_delay_us: " << q_estimated_delay_us << std::endl;
         ss << "  vx: " << vx << std::endl;

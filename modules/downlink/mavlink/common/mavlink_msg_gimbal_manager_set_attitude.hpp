@@ -22,7 +22,7 @@ struct GIMBAL_MANAGER_SET_ATTITUDE : mavlink::Message {
     uint8_t target_system; /*<  System ID */
     uint8_t target_component; /*<  Component ID */
     uint32_t flags; /*<  High level gimbal manager flags to use. */
-    uint8_t gimbal_device_id; /*<  Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. (Send command multiple times for more than one but not all gimbals.) */
+    uint8_t gimbal_device_id; /*<  Component ID of gimbal device to address (or 1-6 for non-MAVLink gimbal), 0 for all gimbal device components. Send command multiple times for more than one gimbal (but not all gimbals). */
     std::array<float, 4> q; /*<  Quaternion components, w, x, y, z (1 0 0 0 is the null-rotation, the frame is depends on whether the flag GIMBAL_MANAGER_FLAGS_YAW_LOCK is set) */
     float angular_velocity_x; /*< [rad/s] X component of angular velocity, positive is banking to the right, NaN to be ignored. */
     float angular_velocity_y; /*< [rad/s] Y component of angular velocity, positive is tilting up, NaN to be ignored. */

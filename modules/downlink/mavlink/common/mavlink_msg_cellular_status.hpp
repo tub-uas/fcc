@@ -13,19 +13,19 @@ namespace msg {
  */
 struct CELLULAR_STATUS : mavlink::Message {
     static constexpr msgid_t MSG_ID = 334;
-    static constexpr size_t LENGTH = 14;
-    static constexpr size_t MIN_LENGTH = 14;
-    static constexpr uint8_t CRC_EXTRA = 135;
+    static constexpr size_t LENGTH = 10;
+    static constexpr size_t MIN_LENGTH = 10;
+    static constexpr uint8_t CRC_EXTRA = 72;
     static constexpr auto NAME = "CELLULAR_STATUS";
 
 
-    uint16_t status; /*<  Status bitmap */
+    uint8_t status; /*<  Cellular modem status */
+    uint8_t failure_reason; /*<  Failure reason when status in in CELLUAR_STATUS_FAILED */
     uint8_t type; /*<  Cellular network radio type: gsm, cdma, lte... */
-    uint8_t quality; /*<  Cellular network RSSI/RSRP in dBm, absolute value */
-    uint16_t mcc; /*<  Mobile country code. If unknown, set to: UINT16_MAX */
-    uint16_t mnc; /*<  Mobile network code. If unknown, set to: UINT16_MAX */
-    uint16_t lac; /*<  Location area code. If unknown, set to: 0 */
-    uint32_t cid; /*<  Cell ID. If unknown, set to: UINT32_MAX */
+    uint8_t quality; /*<  Signal quality in percent. If unknown, set to UINT8_MAX */
+    uint16_t mcc; /*<  Mobile country code. If unknown, set to UINT16_MAX */
+    uint16_t mnc; /*<  Mobile network code. If unknown, set to UINT16_MAX */
+    uint16_t lac; /*<  Location area code. If unknown, set to 0 */
 
 
     inline std::string get_name(void) const override
@@ -43,13 +43,13 @@ struct CELLULAR_STATUS : mavlink::Message {
         std::stringstream ss;
 
         ss << NAME << ":" << std::endl;
-        ss << "  status: " << status << std::endl;
+        ss << "  status: " << +status << std::endl;
+        ss << "  failure_reason: " << +failure_reason << std::endl;
         ss << "  type: " << +type << std::endl;
         ss << "  quality: " << +quality << std::endl;
         ss << "  mcc: " << mcc << std::endl;
         ss << "  mnc: " << mnc << std::endl;
         ss << "  lac: " << lac << std::endl;
-        ss << "  cid: " << cid << std::endl;
 
         return ss.str();
     }
@@ -58,24 +58,24 @@ struct CELLULAR_STATUS : mavlink::Message {
     {
         map.reset(MSG_ID, LENGTH);
 
-        map << cid;                           // offset: 0
-        map << status;                        // offset: 4
-        map << mcc;                           // offset: 6
-        map << mnc;                           // offset: 8
-        map << lac;                           // offset: 10
-        map << type;                          // offset: 12
-        map << quality;                       // offset: 13
+        map << mcc;                           // offset: 0
+        map << mnc;                           // offset: 2
+        map << lac;                           // offset: 4
+        map << status;                        // offset: 6
+        map << failure_reason;                // offset: 7
+        map << type;                          // offset: 8
+        map << quality;                       // offset: 9
     }
 
     inline void deserialize(mavlink::MsgMap &map) override
     {
-        map >> cid;                           // offset: 0
-        map >> status;                        // offset: 4
-        map >> mcc;                           // offset: 6
-        map >> mnc;                           // offset: 8
-        map >> lac;                           // offset: 10
-        map >> type;                          // offset: 12
-        map >> quality;                       // offset: 13
+        map >> mcc;                           // offset: 0
+        map >> mnc;                           // offset: 2
+        map >> lac;                           // offset: 4
+        map >> status;                        // offset: 6
+        map >> failure_reason;                // offset: 7
+        map >> type;                          // offset: 8
+        map >> quality;                       // offset: 9
     }
 };
 
