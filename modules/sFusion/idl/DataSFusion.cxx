@@ -36,49 +36,67 @@ DataSFusion::DataSFusion()
 {
     // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b0143d3
     m_time = 0;
-    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
-    m_phi = 0.0;
-    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
-    m_the = 0.0;
-    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
-    m_psi = 0.0;
-    // m_p0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
-    m_p0 = 0.0;
-    // m_p1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
-    m_p1 = 0.0;
-    // m_p2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
-    m_p2 = 0.0;
-    // m_p3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
-    m_p3 = 0.0;
-    // m_press com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
-    m_press = 0.0;
-    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_gyrX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
+    m_gyrX = 0.0;
+    // m_gyrY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    m_gyrY = 0.0;
+    // m_gyrZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    m_gyrZ = 0.0;
+    // m_accX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    m_accX = 0.0;
+    // m_accY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    m_accY = 0.0;
+    // m_accZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    m_accZ = 0.0;
+    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    m_magX = 0.0;
+    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    m_magY = 0.0;
+    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    m_magZ = 0.0;
+    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
     m_temp = 0.0;
-    // m_posN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    // m_press com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    m_press = 0.0;
+    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    m_phi = 0.0;
+    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
+    m_the = 0.0;
+    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f970963
+    m_psi = 0.0;
+    // m_q0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
+    m_q0 = 0.0;
+    // m_q1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
+    m_q1 = 0.0;
+    // m_q2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
+    m_q2 = 0.0;
+    // m_q3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
+    m_q3 = 0.0;
+    // m_posN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
     m_posN = 0.0;
-    // m_posE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_posE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
     m_posE = 0.0;
-    // m_posD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    // m_posD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5ae63ade
     m_posD = 0.0;
-    // m_speedX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
-    m_speedX = 0.0;
-    // m_speedY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f970963
-    m_speedY = 0.0;
-    // m_speedZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
-    m_speedZ = 0.0;
-    // m_windX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
-    m_windX = 0.0;
-    // m_windY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
-    m_windY = 0.0;
-    // m_windZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
-    m_windZ = 0.0;
-    // m_ssa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
+    // m_speedN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@610694f1
+    m_speedN = 0.0;
+    // m_speedE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43814d18
+    m_speedE = 0.0;
+    // m_speedD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5c5a1b69
+    m_speedD = 0.0;
+    // m_windN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3701eaf6
+    m_windN = 0.0;
+    // m_windE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@627551fb
+    m_windE = 0.0;
+    // m_windD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b552920
+    m_windD = 0.0;
+    // m_ssa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2758fe70
     m_ssa = 0.0;
-    // m_aoa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
+    // m_aoa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f36e637
     m_aoa = 0.0;
-    // m_gamma com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5ae63ade
+    // m_gamma com.eprosima.idl.parser.typecode.PrimitiveTypeCode@578486a3
     m_gamma = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@610694f1
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@551aa95a
     m_alive = false;
 
 }
@@ -108,29 +126,47 @@ DataSFusion::~DataSFusion()
 
 
 
+
+
+
+
+
+
+
+
+
 }
 
 DataSFusion::DataSFusion(const DataSFusion &x)
 {
     m_time = x.m_time;
+    m_gyrX = x.m_gyrX;
+    m_gyrY = x.m_gyrY;
+    m_gyrZ = x.m_gyrZ;
+    m_accX = x.m_accX;
+    m_accY = x.m_accY;
+    m_accZ = x.m_accZ;
+    m_magX = x.m_magX;
+    m_magY = x.m_magY;
+    m_magZ = x.m_magZ;
+    m_temp = x.m_temp;
+    m_press = x.m_press;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
-    m_press = x.m_press;
-    m_temp = x.m_temp;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
-    m_speedX = x.m_speedX;
-    m_speedY = x.m_speedY;
-    m_speedZ = x.m_speedZ;
-    m_windX = x.m_windX;
-    m_windY = x.m_windY;
-    m_windZ = x.m_windZ;
+    m_speedN = x.m_speedN;
+    m_speedE = x.m_speedE;
+    m_speedD = x.m_speedD;
+    m_windN = x.m_windN;
+    m_windE = x.m_windE;
+    m_windD = x.m_windD;
     m_ssa = x.m_ssa;
     m_aoa = x.m_aoa;
     m_gamma = x.m_gamma;
@@ -140,24 +176,33 @@ DataSFusion::DataSFusion(const DataSFusion &x)
 DataSFusion::DataSFusion(DataSFusion &&x)
 {
     m_time = x.m_time;
+    m_gyrX = x.m_gyrX;
+    m_gyrY = x.m_gyrY;
+    m_gyrZ = x.m_gyrZ;
+    m_accX = x.m_accX;
+    m_accY = x.m_accY;
+    m_accZ = x.m_accZ;
+    m_magX = x.m_magX;
+    m_magY = x.m_magY;
+    m_magZ = x.m_magZ;
+    m_temp = x.m_temp;
+    m_press = x.m_press;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
-    m_press = x.m_press;
-    m_temp = x.m_temp;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
-    m_speedX = x.m_speedX;
-    m_speedY = x.m_speedY;
-    m_speedZ = x.m_speedZ;
-    m_windX = x.m_windX;
-    m_windY = x.m_windY;
-    m_windZ = x.m_windZ;
+    m_speedN = x.m_speedN;
+    m_speedE = x.m_speedE;
+    m_speedD = x.m_speedD;
+    m_windN = x.m_windN;
+    m_windE = x.m_windE;
+    m_windD = x.m_windD;
     m_ssa = x.m_ssa;
     m_aoa = x.m_aoa;
     m_gamma = x.m_gamma;
@@ -168,24 +213,33 @@ DataSFusion& DataSFusion::operator=(const DataSFusion &x)
 {
 
     m_time = x.m_time;
+    m_gyrX = x.m_gyrX;
+    m_gyrY = x.m_gyrY;
+    m_gyrZ = x.m_gyrZ;
+    m_accX = x.m_accX;
+    m_accY = x.m_accY;
+    m_accZ = x.m_accZ;
+    m_magX = x.m_magX;
+    m_magY = x.m_magY;
+    m_magZ = x.m_magZ;
+    m_temp = x.m_temp;
+    m_press = x.m_press;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
-    m_press = x.m_press;
-    m_temp = x.m_temp;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
-    m_speedX = x.m_speedX;
-    m_speedY = x.m_speedY;
-    m_speedZ = x.m_speedZ;
-    m_windX = x.m_windX;
-    m_windY = x.m_windY;
-    m_windZ = x.m_windZ;
+    m_speedN = x.m_speedN;
+    m_speedE = x.m_speedE;
+    m_speedD = x.m_speedD;
+    m_windN = x.m_windN;
+    m_windE = x.m_windE;
+    m_windD = x.m_windD;
     m_ssa = x.m_ssa;
     m_aoa = x.m_aoa;
     m_gamma = x.m_gamma;
@@ -198,24 +252,33 @@ DataSFusion& DataSFusion::operator=(DataSFusion &&x)
 {
 
     m_time = x.m_time;
+    m_gyrX = x.m_gyrX;
+    m_gyrY = x.m_gyrY;
+    m_gyrZ = x.m_gyrZ;
+    m_accX = x.m_accX;
+    m_accY = x.m_accY;
+    m_accZ = x.m_accZ;
+    m_magX = x.m_magX;
+    m_magY = x.m_magY;
+    m_magZ = x.m_magZ;
+    m_temp = x.m_temp;
+    m_press = x.m_press;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
-    m_press = x.m_press;
-    m_temp = x.m_temp;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
-    m_speedX = x.m_speedX;
-    m_speedY = x.m_speedY;
-    m_speedZ = x.m_speedZ;
-    m_windX = x.m_windX;
-    m_windY = x.m_windY;
-    m_windZ = x.m_windZ;
+    m_speedN = x.m_speedN;
+    m_speedE = x.m_speedE;
+    m_speedD = x.m_speedD;
+    m_windN = x.m_windN;
+    m_windE = x.m_windE;
+    m_windD = x.m_windD;
     m_ssa = x.m_ssa;
     m_aoa = x.m_aoa;
     m_gamma = x.m_gamma;
@@ -230,6 +293,33 @@ size_t DataSFusion::getMaxCdrSerializedSize(size_t current_alignment)
 
 
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
@@ -374,6 +464,33 @@ size_t DataSFusion::getCdrSerializedSize(const DataSFusion& data, size_t current
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
 
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
 
 
@@ -385,24 +502,33 @@ void DataSFusion::serialize(eprosima::fastcdr::Cdr &scdr) const
 {
 
     scdr << m_time;
+    scdr << m_gyrX;
+    scdr << m_gyrY;
+    scdr << m_gyrZ;
+    scdr << m_accX;
+    scdr << m_accY;
+    scdr << m_accZ;
+    scdr << m_magX;
+    scdr << m_magY;
+    scdr << m_magZ;
+    scdr << m_temp;
+    scdr << m_press;
     scdr << m_phi;
     scdr << m_the;
     scdr << m_psi;
-    scdr << m_p0;
-    scdr << m_p1;
-    scdr << m_p2;
-    scdr << m_p3;
-    scdr << m_press;
-    scdr << m_temp;
+    scdr << m_q0;
+    scdr << m_q1;
+    scdr << m_q2;
+    scdr << m_q3;
     scdr << m_posN;
     scdr << m_posE;
     scdr << m_posD;
-    scdr << m_speedX;
-    scdr << m_speedY;
-    scdr << m_speedZ;
-    scdr << m_windX;
-    scdr << m_windY;
-    scdr << m_windZ;
+    scdr << m_speedN;
+    scdr << m_speedE;
+    scdr << m_speedD;
+    scdr << m_windN;
+    scdr << m_windE;
+    scdr << m_windD;
     scdr << m_ssa;
     scdr << m_aoa;
     scdr << m_gamma;
@@ -413,24 +539,33 @@ void DataSFusion::deserialize(eprosima::fastcdr::Cdr &dcdr)
 {
 
     dcdr >> m_time;
+    dcdr >> m_gyrX;
+    dcdr >> m_gyrY;
+    dcdr >> m_gyrZ;
+    dcdr >> m_accX;
+    dcdr >> m_accY;
+    dcdr >> m_accZ;
+    dcdr >> m_magX;
+    dcdr >> m_magY;
+    dcdr >> m_magZ;
+    dcdr >> m_temp;
+    dcdr >> m_press;
     dcdr >> m_phi;
     dcdr >> m_the;
     dcdr >> m_psi;
-    dcdr >> m_p0;
-    dcdr >> m_p1;
-    dcdr >> m_p2;
-    dcdr >> m_p3;
-    dcdr >> m_press;
-    dcdr >> m_temp;
+    dcdr >> m_q0;
+    dcdr >> m_q1;
+    dcdr >> m_q2;
+    dcdr >> m_q3;
     dcdr >> m_posN;
     dcdr >> m_posE;
     dcdr >> m_posD;
-    dcdr >> m_speedX;
-    dcdr >> m_speedY;
-    dcdr >> m_speedZ;
-    dcdr >> m_windX;
-    dcdr >> m_windY;
-    dcdr >> m_windZ;
+    dcdr >> m_speedN;
+    dcdr >> m_speedE;
+    dcdr >> m_speedD;
+    dcdr >> m_windN;
+    dcdr >> m_windE;
+    dcdr >> m_windD;
     dcdr >> m_ssa;
     dcdr >> m_aoa;
     dcdr >> m_gamma;
@@ -462,6 +597,303 @@ uint64_t DataSFusion::time() const
 uint64_t& DataSFusion::time()
 {
     return m_time;
+}
+
+/*!
+ * @brief This function sets a value in member gyrX
+ * @param _gyrX New value for member gyrX
+ */
+void DataSFusion::gyrX(float _gyrX)
+{
+m_gyrX = _gyrX;
+}
+
+/*!
+ * @brief This function returns the value of member gyrX
+ * @return Value of member gyrX
+ */
+float DataSFusion::gyrX() const
+{
+    return m_gyrX;
+}
+
+/*!
+ * @brief This function returns a reference to member gyrX
+ * @return Reference to member gyrX
+ */
+float& DataSFusion::gyrX()
+{
+    return m_gyrX;
+}
+
+/*!
+ * @brief This function sets a value in member gyrY
+ * @param _gyrY New value for member gyrY
+ */
+void DataSFusion::gyrY(float _gyrY)
+{
+m_gyrY = _gyrY;
+}
+
+/*!
+ * @brief This function returns the value of member gyrY
+ * @return Value of member gyrY
+ */
+float DataSFusion::gyrY() const
+{
+    return m_gyrY;
+}
+
+/*!
+ * @brief This function returns a reference to member gyrY
+ * @return Reference to member gyrY
+ */
+float& DataSFusion::gyrY()
+{
+    return m_gyrY;
+}
+
+/*!
+ * @brief This function sets a value in member gyrZ
+ * @param _gyrZ New value for member gyrZ
+ */
+void DataSFusion::gyrZ(float _gyrZ)
+{
+m_gyrZ = _gyrZ;
+}
+
+/*!
+ * @brief This function returns the value of member gyrZ
+ * @return Value of member gyrZ
+ */
+float DataSFusion::gyrZ() const
+{
+    return m_gyrZ;
+}
+
+/*!
+ * @brief This function returns a reference to member gyrZ
+ * @return Reference to member gyrZ
+ */
+float& DataSFusion::gyrZ()
+{
+    return m_gyrZ;
+}
+
+/*!
+ * @brief This function sets a value in member accX
+ * @param _accX New value for member accX
+ */
+void DataSFusion::accX(float _accX)
+{
+m_accX = _accX;
+}
+
+/*!
+ * @brief This function returns the value of member accX
+ * @return Value of member accX
+ */
+float DataSFusion::accX() const
+{
+    return m_accX;
+}
+
+/*!
+ * @brief This function returns a reference to member accX
+ * @return Reference to member accX
+ */
+float& DataSFusion::accX()
+{
+    return m_accX;
+}
+
+/*!
+ * @brief This function sets a value in member accY
+ * @param _accY New value for member accY
+ */
+void DataSFusion::accY(float _accY)
+{
+m_accY = _accY;
+}
+
+/*!
+ * @brief This function returns the value of member accY
+ * @return Value of member accY
+ */
+float DataSFusion::accY() const
+{
+    return m_accY;
+}
+
+/*!
+ * @brief This function returns a reference to member accY
+ * @return Reference to member accY
+ */
+float& DataSFusion::accY()
+{
+    return m_accY;
+}
+
+/*!
+ * @brief This function sets a value in member accZ
+ * @param _accZ New value for member accZ
+ */
+void DataSFusion::accZ(float _accZ)
+{
+m_accZ = _accZ;
+}
+
+/*!
+ * @brief This function returns the value of member accZ
+ * @return Value of member accZ
+ */
+float DataSFusion::accZ() const
+{
+    return m_accZ;
+}
+
+/*!
+ * @brief This function returns a reference to member accZ
+ * @return Reference to member accZ
+ */
+float& DataSFusion::accZ()
+{
+    return m_accZ;
+}
+
+/*!
+ * @brief This function sets a value in member magX
+ * @param _magX New value for member magX
+ */
+void DataSFusion::magX(float _magX)
+{
+m_magX = _magX;
+}
+
+/*!
+ * @brief This function returns the value of member magX
+ * @return Value of member magX
+ */
+float DataSFusion::magX() const
+{
+    return m_magX;
+}
+
+/*!
+ * @brief This function returns a reference to member magX
+ * @return Reference to member magX
+ */
+float& DataSFusion::magX()
+{
+    return m_magX;
+}
+
+/*!
+ * @brief This function sets a value in member magY
+ * @param _magY New value for member magY
+ */
+void DataSFusion::magY(float _magY)
+{
+m_magY = _magY;
+}
+
+/*!
+ * @brief This function returns the value of member magY
+ * @return Value of member magY
+ */
+float DataSFusion::magY() const
+{
+    return m_magY;
+}
+
+/*!
+ * @brief This function returns a reference to member magY
+ * @return Reference to member magY
+ */
+float& DataSFusion::magY()
+{
+    return m_magY;
+}
+
+/*!
+ * @brief This function sets a value in member magZ
+ * @param _magZ New value for member magZ
+ */
+void DataSFusion::magZ(float _magZ)
+{
+m_magZ = _magZ;
+}
+
+/*!
+ * @brief This function returns the value of member magZ
+ * @return Value of member magZ
+ */
+float DataSFusion::magZ() const
+{
+    return m_magZ;
+}
+
+/*!
+ * @brief This function returns a reference to member magZ
+ * @return Reference to member magZ
+ */
+float& DataSFusion::magZ()
+{
+    return m_magZ;
+}
+
+/*!
+ * @brief This function sets a value in member temp
+ * @param _temp New value for member temp
+ */
+void DataSFusion::temp(float _temp)
+{
+m_temp = _temp;
+}
+
+/*!
+ * @brief This function returns the value of member temp
+ * @return Value of member temp
+ */
+float DataSFusion::temp() const
+{
+    return m_temp;
+}
+
+/*!
+ * @brief This function returns a reference to member temp
+ * @return Reference to member temp
+ */
+float& DataSFusion::temp()
+{
+    return m_temp;
+}
+
+/*!
+ * @brief This function sets a value in member press
+ * @param _press New value for member press
+ */
+void DataSFusion::press(float _press)
+{
+m_press = _press;
+}
+
+/*!
+ * @brief This function returns the value of member press
+ * @return Value of member press
+ */
+float DataSFusion::press() const
+{
+    return m_press;
+}
+
+/*!
+ * @brief This function returns a reference to member press
+ * @return Reference to member press
+ */
+float& DataSFusion::press()
+{
+    return m_press;
 }
 
 /*!
@@ -546,165 +978,111 @@ float& DataSFusion::psi()
 }
 
 /*!
- * @brief This function sets a value in member p0
- * @param _p0 New value for member p0
+ * @brief This function sets a value in member q0
+ * @param _q0 New value for member q0
  */
-void DataSFusion::p0(float _p0)
+void DataSFusion::q0(float _q0)
 {
-m_p0 = _p0;
+m_q0 = _q0;
 }
 
 /*!
- * @brief This function returns the value of member p0
- * @return Value of member p0
+ * @brief This function returns the value of member q0
+ * @return Value of member q0
  */
-float DataSFusion::p0() const
+float DataSFusion::q0() const
 {
-    return m_p0;
+    return m_q0;
 }
 
 /*!
- * @brief This function returns a reference to member p0
- * @return Reference to member p0
+ * @brief This function returns a reference to member q0
+ * @return Reference to member q0
  */
-float& DataSFusion::p0()
+float& DataSFusion::q0()
 {
-    return m_p0;
+    return m_q0;
 }
 
 /*!
- * @brief This function sets a value in member p1
- * @param _p1 New value for member p1
+ * @brief This function sets a value in member q1
+ * @param _q1 New value for member q1
  */
-void DataSFusion::p1(float _p1)
+void DataSFusion::q1(float _q1)
 {
-m_p1 = _p1;
+m_q1 = _q1;
 }
 
 /*!
- * @brief This function returns the value of member p1
- * @return Value of member p1
+ * @brief This function returns the value of member q1
+ * @return Value of member q1
  */
-float DataSFusion::p1() const
+float DataSFusion::q1() const
 {
-    return m_p1;
+    return m_q1;
 }
 
 /*!
- * @brief This function returns a reference to member p1
- * @return Reference to member p1
+ * @brief This function returns a reference to member q1
+ * @return Reference to member q1
  */
-float& DataSFusion::p1()
+float& DataSFusion::q1()
 {
-    return m_p1;
+    return m_q1;
 }
 
 /*!
- * @brief This function sets a value in member p2
- * @param _p2 New value for member p2
+ * @brief This function sets a value in member q2
+ * @param _q2 New value for member q2
  */
-void DataSFusion::p2(float _p2)
+void DataSFusion::q2(float _q2)
 {
-m_p2 = _p2;
+m_q2 = _q2;
 }
 
 /*!
- * @brief This function returns the value of member p2
- * @return Value of member p2
+ * @brief This function returns the value of member q2
+ * @return Value of member q2
  */
-float DataSFusion::p2() const
+float DataSFusion::q2() const
 {
-    return m_p2;
+    return m_q2;
 }
 
 /*!
- * @brief This function returns a reference to member p2
- * @return Reference to member p2
+ * @brief This function returns a reference to member q2
+ * @return Reference to member q2
  */
-float& DataSFusion::p2()
+float& DataSFusion::q2()
 {
-    return m_p2;
+    return m_q2;
 }
 
 /*!
- * @brief This function sets a value in member p3
- * @param _p3 New value for member p3
+ * @brief This function sets a value in member q3
+ * @param _q3 New value for member q3
  */
-void DataSFusion::p3(float _p3)
+void DataSFusion::q3(float _q3)
 {
-m_p3 = _p3;
+m_q3 = _q3;
 }
 
 /*!
- * @brief This function returns the value of member p3
- * @return Value of member p3
+ * @brief This function returns the value of member q3
+ * @return Value of member q3
  */
-float DataSFusion::p3() const
+float DataSFusion::q3() const
 {
-    return m_p3;
+    return m_q3;
 }
 
 /*!
- * @brief This function returns a reference to member p3
- * @return Reference to member p3
+ * @brief This function returns a reference to member q3
+ * @return Reference to member q3
  */
-float& DataSFusion::p3()
+float& DataSFusion::q3()
 {
-    return m_p3;
-}
-
-/*!
- * @brief This function sets a value in member press
- * @param _press New value for member press
- */
-void DataSFusion::press(float _press)
-{
-m_press = _press;
-}
-
-/*!
- * @brief This function returns the value of member press
- * @return Value of member press
- */
-float DataSFusion::press() const
-{
-    return m_press;
-}
-
-/*!
- * @brief This function returns a reference to member press
- * @return Reference to member press
- */
-float& DataSFusion::press()
-{
-    return m_press;
-}
-
-/*!
- * @brief This function sets a value in member temp
- * @param _temp New value for member temp
- */
-void DataSFusion::temp(float _temp)
-{
-m_temp = _temp;
-}
-
-/*!
- * @brief This function returns the value of member temp
- * @return Value of member temp
- */
-float DataSFusion::temp() const
-{
-    return m_temp;
-}
-
-/*!
- * @brief This function returns a reference to member temp
- * @return Reference to member temp
- */
-float& DataSFusion::temp()
-{
-    return m_temp;
+    return m_q3;
 }
 
 /*!
@@ -789,165 +1167,165 @@ float& DataSFusion::posD()
 }
 
 /*!
- * @brief This function sets a value in member speedX
- * @param _speedX New value for member speedX
+ * @brief This function sets a value in member speedN
+ * @param _speedN New value for member speedN
  */
-void DataSFusion::speedX(float _speedX)
+void DataSFusion::speedN(float _speedN)
 {
-m_speedX = _speedX;
+m_speedN = _speedN;
 }
 
 /*!
- * @brief This function returns the value of member speedX
- * @return Value of member speedX
+ * @brief This function returns the value of member speedN
+ * @return Value of member speedN
  */
-float DataSFusion::speedX() const
+float DataSFusion::speedN() const
 {
-    return m_speedX;
+    return m_speedN;
 }
 
 /*!
- * @brief This function returns a reference to member speedX
- * @return Reference to member speedX
+ * @brief This function returns a reference to member speedN
+ * @return Reference to member speedN
  */
-float& DataSFusion::speedX()
+float& DataSFusion::speedN()
 {
-    return m_speedX;
+    return m_speedN;
 }
 
 /*!
- * @brief This function sets a value in member speedY
- * @param _speedY New value for member speedY
+ * @brief This function sets a value in member speedE
+ * @param _speedE New value for member speedE
  */
-void DataSFusion::speedY(float _speedY)
+void DataSFusion::speedE(float _speedE)
 {
-m_speedY = _speedY;
+m_speedE = _speedE;
 }
 
 /*!
- * @brief This function returns the value of member speedY
- * @return Value of member speedY
+ * @brief This function returns the value of member speedE
+ * @return Value of member speedE
  */
-float DataSFusion::speedY() const
+float DataSFusion::speedE() const
 {
-    return m_speedY;
+    return m_speedE;
 }
 
 /*!
- * @brief This function returns a reference to member speedY
- * @return Reference to member speedY
+ * @brief This function returns a reference to member speedE
+ * @return Reference to member speedE
  */
-float& DataSFusion::speedY()
+float& DataSFusion::speedE()
 {
-    return m_speedY;
+    return m_speedE;
 }
 
 /*!
- * @brief This function sets a value in member speedZ
- * @param _speedZ New value for member speedZ
+ * @brief This function sets a value in member speedD
+ * @param _speedD New value for member speedD
  */
-void DataSFusion::speedZ(float _speedZ)
+void DataSFusion::speedD(float _speedD)
 {
-m_speedZ = _speedZ;
+m_speedD = _speedD;
 }
 
 /*!
- * @brief This function returns the value of member speedZ
- * @return Value of member speedZ
+ * @brief This function returns the value of member speedD
+ * @return Value of member speedD
  */
-float DataSFusion::speedZ() const
+float DataSFusion::speedD() const
 {
-    return m_speedZ;
+    return m_speedD;
 }
 
 /*!
- * @brief This function returns a reference to member speedZ
- * @return Reference to member speedZ
+ * @brief This function returns a reference to member speedD
+ * @return Reference to member speedD
  */
-float& DataSFusion::speedZ()
+float& DataSFusion::speedD()
 {
-    return m_speedZ;
+    return m_speedD;
 }
 
 /*!
- * @brief This function sets a value in member windX
- * @param _windX New value for member windX
+ * @brief This function sets a value in member windN
+ * @param _windN New value for member windN
  */
-void DataSFusion::windX(float _windX)
+void DataSFusion::windN(float _windN)
 {
-m_windX = _windX;
+m_windN = _windN;
 }
 
 /*!
- * @brief This function returns the value of member windX
- * @return Value of member windX
+ * @brief This function returns the value of member windN
+ * @return Value of member windN
  */
-float DataSFusion::windX() const
+float DataSFusion::windN() const
 {
-    return m_windX;
+    return m_windN;
 }
 
 /*!
- * @brief This function returns a reference to member windX
- * @return Reference to member windX
+ * @brief This function returns a reference to member windN
+ * @return Reference to member windN
  */
-float& DataSFusion::windX()
+float& DataSFusion::windN()
 {
-    return m_windX;
+    return m_windN;
 }
 
 /*!
- * @brief This function sets a value in member windY
- * @param _windY New value for member windY
+ * @brief This function sets a value in member windE
+ * @param _windE New value for member windE
  */
-void DataSFusion::windY(float _windY)
+void DataSFusion::windE(float _windE)
 {
-m_windY = _windY;
+m_windE = _windE;
 }
 
 /*!
- * @brief This function returns the value of member windY
- * @return Value of member windY
+ * @brief This function returns the value of member windE
+ * @return Value of member windE
  */
-float DataSFusion::windY() const
+float DataSFusion::windE() const
 {
-    return m_windY;
+    return m_windE;
 }
 
 /*!
- * @brief This function returns a reference to member windY
- * @return Reference to member windY
+ * @brief This function returns a reference to member windE
+ * @return Reference to member windE
  */
-float& DataSFusion::windY()
+float& DataSFusion::windE()
 {
-    return m_windY;
+    return m_windE;
 }
 
 /*!
- * @brief This function sets a value in member windZ
- * @param _windZ New value for member windZ
+ * @brief This function sets a value in member windD
+ * @param _windD New value for member windD
  */
-void DataSFusion::windZ(float _windZ)
+void DataSFusion::windD(float _windD)
 {
-m_windZ = _windZ;
+m_windD = _windD;
 }
 
 /*!
- * @brief This function returns the value of member windZ
- * @return Value of member windZ
+ * @brief This function returns the value of member windD
+ * @return Value of member windD
  */
-float DataSFusion::windZ() const
+float DataSFusion::windD() const
 {
-    return m_windZ;
+    return m_windD;
 }
 
 /*!
- * @brief This function returns a reference to member windZ
- * @return Reference to member windZ
+ * @brief This function returns a reference to member windD
+ * @return Reference to member windD
  */
-float& DataSFusion::windZ()
+float& DataSFusion::windD()
 {
-    return m_windZ;
+    return m_windD;
 }
 
 /*!
@@ -1088,6 +1466,15 @@ size_t DataSFusion::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 
 
+
+
+
+
+
+
+
+
+
     return current_align;
 }
 
@@ -1099,6 +1486,15 @@ bool DataSFusion::isKeyDefined()
 void DataSFusion::serializeKey(eprosima::fastcdr::Cdr &scdr) const
 {
     (void) scdr;
+     
+     
+     
+     
+     
+     
+     
+     
+     
      
      
      
