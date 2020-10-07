@@ -1,5 +1,0 @@
-struct DataUplink {
-	unsigned long long time;
-	float    senseTime;
-	boolean  alive;
-};
