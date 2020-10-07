@@ -66,14 +66,14 @@ DataAhrs::DataAhrs()
     m_the = 0.0;
     // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
     m_psi = 0.0;
-    // m_p0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
-    m_p0 = 0.0;
-    // m_p1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
-    m_p1 = 0.0;
-    // m_p2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
-    m_p2 = 0.0;
-    // m_p3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
-    m_p3 = 0.0;
+    // m_q0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
+    m_q0 = 0.0;
+    // m_q1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
+    m_q1 = 0.0;
+    // m_q2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
+    m_q2 = 0.0;
+    // m_q3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
+    m_q3 = 0.0;
     // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
     m_alive = false;
 
@@ -122,10 +122,10 @@ DataAhrs::DataAhrs(const DataAhrs &x)
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 }
 
@@ -147,10 +147,10 @@ DataAhrs::DataAhrs(DataAhrs &&x)
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 }
 
@@ -173,10 +173,10 @@ DataAhrs& DataAhrs::operator=(const DataAhrs &x)
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 
     return *this;
@@ -201,10 +201,10 @@ DataAhrs& DataAhrs::operator=(DataAhrs &&x)
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_p0 = x.m_p0;
-    m_p1 = x.m_p1;
-    m_p2 = x.m_p2;
-    m_p3 = x.m_p3;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 
     return *this;
@@ -374,10 +374,10 @@ void DataAhrs::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_phi;
     scdr << m_the;
     scdr << m_psi;
-    scdr << m_p0;
-    scdr << m_p1;
-    scdr << m_p2;
-    scdr << m_p3;
+    scdr << m_q0;
+    scdr << m_q1;
+    scdr << m_q2;
+    scdr << m_q3;
     scdr << m_alive;
 }
 
@@ -400,10 +400,10 @@ void DataAhrs::deserialize(eprosima::fastcdr::Cdr &dcdr)
     dcdr >> m_phi;
     dcdr >> m_the;
     dcdr >> m_psi;
-    dcdr >> m_p0;
-    dcdr >> m_p1;
-    dcdr >> m_p2;
-    dcdr >> m_p3;
+    dcdr >> m_q0;
+    dcdr >> m_q1;
+    dcdr >> m_q2;
+    dcdr >> m_q3;
     dcdr >> m_alive;
 }
 
@@ -840,111 +840,111 @@ float& DataAhrs::psi()
 }
 
 /*!
- * @brief This function sets a value in member p0
- * @param _p0 New value for member p0
+ * @brief This function sets a value in member q0
+ * @param _q0 New value for member q0
  */
-void DataAhrs::p0(float _p0)
+void DataAhrs::q0(float _q0)
 {
-m_p0 = _p0;
+m_q0 = _q0;
 }
 
 /*!
- * @brief This function returns the value of member p0
- * @return Value of member p0
+ * @brief This function returns the value of member q0
+ * @return Value of member q0
  */
-float DataAhrs::p0() const
+float DataAhrs::q0() const
 {
-    return m_p0;
+    return m_q0;
 }
 
 /*!
- * @brief This function returns a reference to member p0
- * @return Reference to member p0
+ * @brief This function returns a reference to member q0
+ * @return Reference to member q0
  */
-float& DataAhrs::p0()
+float& DataAhrs::q0()
 {
-    return m_p0;
+    return m_q0;
 }
 
 /*!
- * @brief This function sets a value in member p1
- * @param _p1 New value for member p1
+ * @brief This function sets a value in member q1
+ * @param _q1 New value for member q1
  */
-void DataAhrs::p1(float _p1)
+void DataAhrs::q1(float _q1)
 {
-m_p1 = _p1;
+m_q1 = _q1;
 }
 
 /*!
- * @brief This function returns the value of member p1
- * @return Value of member p1
+ * @brief This function returns the value of member q1
+ * @return Value of member q1
  */
-float DataAhrs::p1() const
+float DataAhrs::q1() const
 {
-    return m_p1;
+    return m_q1;
 }
 
 /*!
- * @brief This function returns a reference to member p1
- * @return Reference to member p1
+ * @brief This function returns a reference to member q1
+ * @return Reference to member q1
  */
-float& DataAhrs::p1()
+float& DataAhrs::q1()
 {
-    return m_p1;
+    return m_q1;
 }
 
 /*!
- * @brief This function sets a value in member p2
- * @param _p2 New value for member p2
+ * @brief This function sets a value in member q2
+ * @param _q2 New value for member q2
  */
-void DataAhrs::p2(float _p2)
+void DataAhrs::q2(float _q2)
 {
-m_p2 = _p2;
+m_q2 = _q2;
 }
 
 /*!
- * @brief This function returns the value of member p2
- * @return Value of member p2
+ * @brief This function returns the value of member q2
+ * @return Value of member q2
  */
-float DataAhrs::p2() const
+float DataAhrs::q2() const
 {
-    return m_p2;
+    return m_q2;
 }
 
 /*!
- * @brief This function returns a reference to member p2
- * @return Reference to member p2
+ * @brief This function returns a reference to member q2
+ * @return Reference to member q2
  */
-float& DataAhrs::p2()
+float& DataAhrs::q2()
 {
-    return m_p2;
+    return m_q2;
 }
 
 /*!
- * @brief This function sets a value in member p3
- * @param _p3 New value for member p3
+ * @brief This function sets a value in member q3
+ * @param _q3 New value for member q3
  */
-void DataAhrs::p3(float _p3)
+void DataAhrs::q3(float _q3)
 {
-m_p3 = _p3;
+m_q3 = _q3;
 }
 
 /*!
- * @brief This function returns the value of member p3
- * @return Value of member p3
+ * @brief This function returns the value of member q3
+ * @return Value of member q3
  */
-float DataAhrs::p3() const
+float DataAhrs::q3() const
 {
-    return m_p3;
+    return m_q3;
 }
 
 /*!
- * @brief This function returns a reference to member p3
- * @return Reference to member p3
+ * @brief This function returns a reference to member q3
+ * @return Reference to member q3
  */
-float& DataAhrs::p3()
+float& DataAhrs::q3()
 {
-    return m_p3;
+    return m_q3;
 }
 
 /*!

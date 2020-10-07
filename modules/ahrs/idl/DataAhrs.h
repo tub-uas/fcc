@@ -395,76 +395,76 @@ public:
     eProsima_user_DllExport float& psi();
 
     /*!
-     * @brief This function sets a value in member p0
-     * @param _p0 New value for member p0
+     * @brief This function sets a value in member q0
+     * @param _q0 New value for member q0
      */
-    eProsima_user_DllExport void p0(float _p0);
+    eProsima_user_DllExport void q0(float _q0);
 
     /*!
-     * @brief This function returns the value of member p0
-     * @return Value of member p0
+     * @brief This function returns the value of member q0
+     * @return Value of member q0
      */
-    eProsima_user_DllExport float p0() const;
+    eProsima_user_DllExport float q0() const;
 
     /*!
-     * @brief This function returns a reference to member p0
-     * @return Reference to member p0
+     * @brief This function returns a reference to member q0
+     * @return Reference to member q0
      */
-    eProsima_user_DllExport float& p0();
+    eProsima_user_DllExport float& q0();
 
     /*!
-     * @brief This function sets a value in member p1
-     * @param _p1 New value for member p1
+     * @brief This function sets a value in member q1
+     * @param _q1 New value for member q1
      */
-    eProsima_user_DllExport void p1(float _p1);
+    eProsima_user_DllExport void q1(float _q1);
 
     /*!
-     * @brief This function returns the value of member p1
-     * @return Value of member p1
+     * @brief This function returns the value of member q1
+     * @return Value of member q1
      */
-    eProsima_user_DllExport float p1() const;
+    eProsima_user_DllExport float q1() const;
 
     /*!
-     * @brief This function returns a reference to member p1
-     * @return Reference to member p1
+     * @brief This function returns a reference to member q1
+     * @return Reference to member q1
      */
-    eProsima_user_DllExport float& p1();
+    eProsima_user_DllExport float& q1();
 
     /*!
-     * @brief This function sets a value in member p2
-     * @param _p2 New value for member p2
+     * @brief This function sets a value in member q2
+     * @param _q2 New value for member q2
      */
-    eProsima_user_DllExport void p2(float _p2);
+    eProsima_user_DllExport void q2(float _q2);
 
     /*!
-     * @brief This function returns the value of member p2
-     * @return Value of member p2
+     * @brief This function returns the value of member q2
+     * @return Value of member q2
      */
-    eProsima_user_DllExport float p2() const;
+    eProsima_user_DllExport float q2() const;
 
     /*!
-     * @brief This function returns a reference to member p2
-     * @return Reference to member p2
+     * @brief This function returns a reference to member q2
+     * @return Reference to member q2
      */
-    eProsima_user_DllExport float& p2();
+    eProsima_user_DllExport float& q2();
 
     /*!
-     * @brief This function sets a value in member p3
-     * @param _p3 New value for member p3
+     * @brief This function sets a value in member q3
+     * @param _q3 New value for member q3
      */
-    eProsima_user_DllExport void p3(float _p3);
+    eProsima_user_DllExport void q3(float _q3);
 
     /*!
-     * @brief This function returns the value of member p3
-     * @return Value of member p3
+     * @brief This function returns the value of member q3
+     * @return Value of member q3
      */
-    eProsima_user_DllExport float p3() const;
+    eProsima_user_DllExport float q3() const;
 
     /*!
-     * @brief This function returns a reference to member p3
-     * @return Reference to member p3
+     * @brief This function returns a reference to member q3
+     * @return Reference to member q3
      */
-    eProsima_user_DllExport float& p3();
+    eProsima_user_DllExport float& q3();
 
     /*!
      * @brief This function sets a value in member alive
@@ -552,10 +552,10 @@ private:
     float m_phi;
     float m_the;
     float m_psi;
-    float m_p0;
-    float m_p1;
-    float m_p2;
-    float m_p3;
+    float m_q0;
+    float m_q1;
+    float m_q2;
+    float m_q3;
     bool m_alive;
 };
 

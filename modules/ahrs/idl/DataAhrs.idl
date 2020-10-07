@@ -15,9 +15,9 @@ struct DataAhrs {
 	float    phi;
 	float    the;
 	float    psi;
-	float    p0;
-	float    p1;
-	float    p2;
-	float    p3;
+	float    q0;
+	float    q1;
+	float    q2;
+	float    q3;
 	boolean  alive;
 };
