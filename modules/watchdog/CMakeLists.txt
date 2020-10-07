@@ -4,14 +4,6 @@ if(NOT CMAKE_VERSION VERSION_LESS 3.0)
 	cmake_policy(SET CMP0048 NEW)
 endif()
 
-if(NOT "${CMAKE_GENERATOR}" MATCHES "(Win64|IA64)")
-	message(STATUS "Running on a desktop like machine")
-	set (RPI FALSE)
-else()
-	message(STATUS "Probably running on ARM like machine (RaspberryPi)")
-	set (RPI TRUE)
-endif()
-
 project(watchdog)
 
 # Find requirements
@@ -23,11 +15,12 @@ if(NOT fastrtps_FOUND)
 	find_package(fastrtps REQUIRED)
 endif()
 
-if(RPI)
-	message(STATUS "Find wiringPi")
-	# find_library(wiringPiLib wiringPi)
-	# find_library(wiringPiLib NAMES wiringPi)
-	# find_path(wiringPiInc NAMES wiringPi.h)
+if(EXISTS "/opt/vc/include/bcm_host.h")
+	message(STATUS "Running on RaspberryPi")
+	set(RPI TRUE)
+else()
+	message(STATUS "Not running on RaspberryPi")
+	set(RPI FALSE)
 endif()
 
 # Set C++11
@@ -62,11 +55,8 @@ add_library(DataCtrl ../ctrl/idl/DataCtrl.cxx ../ctrl/idl/DataCtrlPubSubTypes.cx
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 
 if(RPI)
-	message(STATUS "Linking wiringPi")
-	# include_directories(wiringPiInc)
-	# target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led wiringPiLib)
+	target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led wiringPi)
 else()
-	message(STATUS "Not linking wiringPi")
 	target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led)
 endif()
 
