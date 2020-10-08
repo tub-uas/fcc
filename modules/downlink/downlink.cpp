@@ -282,14 +282,14 @@ void Downlink::run() {
 			mavlink_dataraiin_t msg_raiIn;
 			uint8_t buf[200];
 			uint16_t len;
-			// msg_raiIn.time = listener.dataRaiIn.time();
-			// msg_raiIn.senseTime = listener.dataRaiIn.senseTime();
-			// // TODO chnl
-			// msg_raiIn.roll = listener.dataRaiIn.roll();
-			// msg_raiIn.pitch = listener.dataRaiIn.pitch();
-			// msg_raiIn.yaw = listener.dataRaiIn.yaw();
-			// msg_raiIn.fltmode = listener.dataRaiIn.fltMode();
-			// msg_raiIn.alive = listener.dataRaiIn.alive();
+			msg_raiIn.time = listener.dataRaiIn.time();
+			msg_raiIn.senseTime = listener.dataRaiIn.senseTime();
+			// TODO chnl
+			msg_raiIn.roll = listener.dataRaiIn.roll();
+			msg_raiIn.pitch = listener.dataRaiIn.pitch();
+			msg_raiIn.yaw = listener.dataRaiIn.yaw();
+			msg_raiIn.fltMode = listener.dataRaiIn.fltMode();
+			msg_raiIn.alive = listener.dataRaiIn.alive();
 			mavlink_msg_dataraiin_encode(sysid, compid, &msg, &msg_raiIn);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
 			if (!serial.send(buf,len)) {
@@ -307,13 +307,13 @@ void Downlink::run() {
 			mavlink_dataraiout_t msg_raiOut;
 			uint8_t buf[200];
 			uint16_t len;
-			// msg_raiOut.time = listener.dataRaiOut.time();
-			// // TODO chnl
-			// msg_raiOut.roll = listener.dataRaiOut.roll();
-			// msg_raiOut.pitch = listener.dataRaiOut.pitch();
-			// msg_raiOut.yaw = listener.dataRaiOut.yaw();
-			// msg_raiOut.fltMode = listener.dataRaiOut.fltMode();
-			// msg_raiOut.alive = listener.dataRaiOut.alive();
+			msg_raiOut.time = listener.dataRaiOut.time();
+			// TODO chnl
+			msg_raiOut.roll = listener.dataRaiOut.roll();
+			msg_raiOut.pitch = listener.dataRaiOut.pitch();
+			msg_raiOut.yaw = listener.dataRaiOut.yaw();
+			msg_raiOut.fltMode = listener.dataRaiOut.fltMode();
+			msg_raiOut.alive = listener.dataRaiOut.alive();
 			mavlink_msg_dataraiout_encode(sysid, compid, &msg, &msg_raiOut);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
 			if (!serial.send(buf,len)) {
@@ -340,27 +340,27 @@ void Downlink::run() {
 			mavlink_dataahrs_t msg_ahrs;
 			uint8_t buf[200];
 			uint16_t len;
-			// msg_ahrs.time = listener.dataAhrs.time();
-			// msg_ahrs.senseTime = listener.dataAhrs.senseTime();
-			// msg_ahrs.gX = listener.dataAhrs.gyrX();
-			// msg_ahrs.gY = listener.dataAhrs.gyrY();
-			// msg_ahrs.gZ = listener.dataAhrs.gyrZ();
-			// msg_ahrs.aX = listener.dataAhrs.accX();
-			// msg_ahrs.aY = listener.dataAhrs.accY();
-			// msg_ahrs.aZ = listener.dataAhrs.accZ();
-			// msg_ahrs.mX = listener.dataAhrs.magX();
-			// msg_ahrs.mY = listener.dataAhrs.magY();
-			// msg_ahrs.mZ = listener.dataAhrs.magZ();
-			// msg_ahrs.phi = listener.dataAhrs.phi();
-			// msg_ahrs.the = listener.dataAhrs.the();
-			// msg_ahrs.psi = listener.dataAhrs.psi();
-			// msg_ahrs.temp = listener.dataAhrs.temp();
-			// msg_ahrs.baro_ahrs = listener.dataAhrs.press();
-			// msg_ahrs.q0 = listener.dataAhrs.p0();
-			// msg_ahrs.q1 = listener.dataAhrs.p1();
-			// msg_ahrs.q2 = listener.dataAhrs.p2();
-			// msg_ahrs.q3 = listener.dataAhrs.p3();
-			// msg_ahrs.alive = listener.dataAhrs.alive();
+			msg_ahrs.time = listener.dataAhrs.time();
+			msg_ahrs.senseTime = listener.dataAhrs.senseTime();
+			msg_ahrs.gyrX = listener.dataAhrs.gyrX();
+			msg_ahrs.gyrY = listener.dataAhrs.gyrY();
+			msg_ahrs.gyrZ = listener.dataAhrs.gyrZ();
+			msg_ahrs.accX = listener.dataAhrs.accX();
+			msg_ahrs.accY = listener.dataAhrs.accY();
+			msg_ahrs.accZ = listener.dataAhrs.accZ();
+			msg_ahrs.magX = listener.dataAhrs.magX();
+			msg_ahrs.magY = listener.dataAhrs.magY();
+			msg_ahrs.magZ = listener.dataAhrs.magZ();
+			msg_ahrs.temp = listener.dataAhrs.temp();
+			msg_ahrs.press = listener.dataAhrs.press();
+			msg_ahrs.phi = listener.dataAhrs.phi();
+			msg_ahrs.the = listener.dataAhrs.the();
+			msg_ahrs.psi = listener.dataAhrs.psi();
+			msg_ahrs.q0 = listener.dataAhrs.q0();
+			msg_ahrs.q1 = listener.dataAhrs.q1();
+			msg_ahrs.q2 = listener.dataAhrs.q2();
+			msg_ahrs.q3 = listener.dataAhrs.q3();
+			msg_ahrs.alive = listener.dataAhrs.alive();
 			mavlink_msg_dataahrs_encode(sysid, compid, &msg, &msg_ahrs);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
 			if (!serial.send(buf,len)) {
@@ -378,13 +378,14 @@ void Downlink::run() {
 			mavlink_dataair_t msg_air;
 			uint8_t buf[200];
 			uint16_t len;
-			// msg_air.time = listener.dataAir.time();
-			// msg_air.senseTime = listener.dataAir.senseTime();
-			// msg_air.TAS = listener.dataAir.velocity();
-			// msg_air.baro_air = listener.dataAir.baroPress();
-			// msg_air.density = listener.dataAir.density();
-			// msg_air.temp = listener.dataAir.temp();
-			// msg_air.alive = listener.dataAir.alive();
+			msg_air.time = listener.dataAir.time();
+			msg_air.senseTime = listener.dataAir.senseTime();
+			msg_air.dynamicPress = listener.dataAir.dynamicPress();
+			msg_air.velocity = listener.dataAir.velocity();
+			msg_air.baroPress = listener.dataAir.baroPress();
+			msg_air.density = listener.dataAir.density();
+			msg_air.temp = listener.dataAir.temp();
+			msg_air.alive = listener.dataAir.alive();
 			mavlink_msg_dataair_encode(sysid, compid, &msg, &msg_air);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
 			if (!serial.send(buf,len)) {
@@ -394,15 +395,6 @@ void Downlink::run() {
 			dataAirLock.unlock();
 			listener.newDataAir = false;
 		}
-		// if (listener.newDataPsu) {
-		// 	std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
-		// 	std::cout << "newDataPsu" << std::endl;
-		//
-		// 	// TODO
-		//
-		// 	dataPsuLock.unlock();
-		// 	listener.newDataPsu = false;
-		// }
 		// if (listener.newDataCtrl) {
 		// 	std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
 		// 	std::cout << "newDataCtrl" << std::endl;
@@ -412,6 +404,35 @@ void Downlink::run() {
 		// 	dataCtrlLock.unlock();
 		// 	listener.newDataCtrl = false;
 		// }
+		if (listener.newDataPsu) {
+			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
+			std::cout << "newDataPsu" << std::endl;
+
+			mavlink_message_t msg;
+			mavlink_datapsu_t msg_psu;
+			uint8_t buf[200];
+			uint16_t len;
+			msg_psu.time = listener.dataPsu.time();
+			msg_psu.senseTime = listener.dataPsu.senseTime();
+			msg_psu.mainVolt = listener.dataPsu.mainVolt();
+			msg_psu.mainCurr = listener.dataPsu.mainCurr();
+			msg_psu.mainPow = listener.dataPsu.mainPow();
+			msg_psu.pwrVolt = listener.dataPsu.pwrVolt();
+			msg_psu.pwrCurr = listener.dataPsu.pwrCurr();
+			msg_psu.pwrPow = listener.dataPsu.pwrPow();
+			msg_psu.sysVolt = listener.dataPsu.sysVolt();
+			msg_psu.sysCurr = listener.dataPsu.sysCurr();
+			msg_psu.sysPow = listener.dataPsu.sysPow();
+			msg_psu.alive = listener.dataPsu.alive();
+			mavlink_msg_datapsu_encode(sysid, compid, &msg, &msg_psu);
+			len = mavlink_msg_to_send_buffer(buf, &msg);
+			if (!serial.send(buf,len)) {
+				std::cout << "ERROR: Could not send DataPsu" << std::endl;
+			}
+
+			dataPsuLock.unlock();
+			listener.newDataPsu = false;
+		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(100);
 		std::this_thread::sleep_until(next_wakeup);
