@@ -293,7 +293,7 @@ void Ctrl::run() {
 			}
 
 			dataCtrl.etaT(listener.dataRaiIn.thr());
-			dataCtrl.etaF(5.0);
+			dataCtrl.etaF(69.0);
 			dataCtrl.fltMode(listener.dataRaiIn.fltMode());
 
 			dataSFusionLock.unlock();
