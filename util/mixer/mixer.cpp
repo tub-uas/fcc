@@ -48,6 +48,7 @@ float Mixer::pwm2rad(enum Surface surf, uint16_t pwm, enum Mode mode) {
 					std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
 					break;
 			}
+			break;
 
 		case ATT:
 		case NAV:
@@ -74,6 +75,7 @@ float Mixer::pwm2rad(enum Surface surf, uint16_t pwm, enum Mode mode) {
 					std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
 					break;
 			}
+			break;
 
 		case INV:
 		default:
