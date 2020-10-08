@@ -271,12 +271,34 @@ bool Downlink::init() {
 
 void Downlink::run() {
 
+	// Set the interval time [in seconds], 0.0 is deactivate
+	const double dataRaiInInterval = 0.0;
+	const double dataRaiOutInterval = 1.0;
+	const double dataSFusionInterval = 0.0;
+	const double dataAhrsInterval = 0.5;
+	const double dataAirInterval = 0.0;
+	const double dataPsuInterval = 0.0;
+	const double dataCtrlInterval = 0.0;
+
+	static double dataRaiInTime = timer.getSysTimeS();
+	static double dataRaiOutTime = timer.getSysTimeS();
+	static double dataSFusionTime = timer.getSysTimeS();
+	static double dataAhrsTime = timer.getSysTimeS();
+	static double dataAirTime = timer.getSysTimeS();
+	static double dataPsuTime = timer.getSysTimeS();
+	static double dataCtrlTime = timer.getSysTimeS();
+
 	while (1) {
 		// std::cout << this->name << " run" << std::endl;
 
-		if (listener.newDataRaiIn) {
+		if (listener.newDataRaiIn &&
+		    timer.getSysTimeS()-dataRaiInTime > dataRaiInInterval &&
+		    dataRaiInInterval > 0.0) {
+
+			dataRaiInTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
-			std::cout << "newDataRaiIn" << std::endl;
+			std::cout << "send DataRaiIn" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataraiin_t msg_raiIn;
@@ -301,9 +323,15 @@ void Downlink::run() {
 			dataRaiInLock.unlock();
 			listener.newDataRaiIn = false;
 		}
-		if (listener.newDataRaiOut) {
+
+		if (listener.newDataRaiOut &&
+			timer.getSysTimeS()-dataRaiOutTime > dataRaiOutInterval &&
+			dataRaiOutInterval > 0.0) {
+
+			dataRaiOutTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataRaiOutLock {listener.dataRaiOutMutex};
-			std::cout << "newDataRaiOut" << std::endl;
+			std::cout << "send DataRaiOut" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataraiout_t msg_raiOut;
@@ -327,9 +355,15 @@ void Downlink::run() {
 			dataRaiOutLock.unlock();
 			listener.newDataRaiOut = false;
 		}
-		if (listener.newDataSFusion) {
+
+		if (listener.newDataSFusion &&
+			timer.getSysTimeS()-dataSFusionTime > dataSFusionInterval &&
+			dataSFusionInterval > 0.0) {
+
+			dataSFusionTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
-			std::cout << "newDataSFusion" << std::endl;
+			std::cout << "send DataSFusion" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_datasfusion_t msg_sfusion;
@@ -376,9 +410,15 @@ void Downlink::run() {
 			dataSFusionLock.unlock();
 			listener.newDataSFusion = false;
 		}
-		if (listener.newDataAhrs) {
+
+		if (listener.newDataAhrs &&
+			timer.getSysTimeS()-dataAhrsTime > dataAhrsInterval &&
+			dataAhrsInterval > 0.0) {
+
+			dataAhrsTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-			std::cout << "newDataAhrs" << std::endl;
+			std::cout << "send DataAhrs" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataahrs_t msg_ahrs;
@@ -414,9 +454,15 @@ void Downlink::run() {
 			dataAhrsLock.unlock();
 			listener.newDataAhrs = false;
 		}
-		if (listener.newDataAir) {
+
+		if (listener.newDataAir &&
+			timer.getSysTimeS()-dataAirTime > dataAirInterval &&
+			dataAirInterval > 0.0) {
+
+			dataAirTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
-			std::cout << "newDataAir" << std::endl;
+			std::cout << "send DataAir" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataair_t msg_air;
@@ -439,9 +485,15 @@ void Downlink::run() {
 			dataAirLock.unlock();
 			listener.newDataAir = false;
 		}
-		if (listener.newDataCtrl) {
+
+		if (listener.newDataCtrl &&
+			timer.getSysTimeS()-dataCtrlTime > dataCtrlInterval &&
+			dataCtrlInterval > 0.0) {
+
+			dataCtrlTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
-			std::cout << "newDataCtrl" << std::endl;
+			std::cout << "send DataCtrl" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_datactrl_t msg_ctrl;
@@ -463,9 +515,15 @@ void Downlink::run() {
 			dataCtrlLock.unlock();
 			listener.newDataCtrl = false;
 		}
-		if (listener.newDataPsu) {
+
+		if (listener.newDataPsu &&
+			timer.getSysTimeS()-dataPsuTime > dataPsuInterval &&
+			dataPsuInterval > 0.0) {
+
+			dataPsuTime = timer.getSysTimeS();
+
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
-			std::cout << "newDataPsu" << std::endl;
+			std::cout << "send DataPsu" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_datapsu_t msg_psu;
