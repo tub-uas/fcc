@@ -1,0 +1,4 @@
+struct DataDownlink {
+	unsigned long long time;
+	boolean            alive;
+};
