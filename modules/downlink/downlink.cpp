@@ -272,12 +272,12 @@ bool Downlink::init() {
 void Downlink::run() {
 
 	// Set the interval time [in seconds], 0.0 is deactivate
-	const double dataRaiInInterval = 0.0;
-	const double dataRaiOutInterval = 1.0;
+	const double dataRaiInInterval = 0.5;
+	const double dataRaiOutInterval = 0.5;
 	const double dataSFusionInterval = 0.0;
-	const double dataAhrsInterval = 0.5;
-	const double dataAirInterval = 0.0;
-	const double dataPsuInterval = 0.0;
+	const double dataAhrsInterval = 0.1;
+	const double dataAirInterval = 0.2;
+	const double dataPsuInterval = 1.0;
 	const double dataCtrlInterval = 0.0;
 
 	static double dataRaiInTime = timer.getSysTimeS();
