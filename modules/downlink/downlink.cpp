@@ -323,15 +323,55 @@ void Downlink::run() {
 			dataRaiOutLock.unlock();
 			listener.newDataRaiOut = false;
 		}
-		// if (listener.newDataSFusion) {
-		// 	std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
-		// 	std::cout << "newDataSFusion" << std::endl;
-		//
-		// 	// TODO
-		//
-		// 	dataSFusionLock.unlock();
-		// 	listener.newDataSFusion = false;
-		// }
+		if (listener.newDataSFusion) {
+			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
+			std::cout << "newDataSFusion" << std::endl;
+
+			mavlink_message_t msg;
+			mavlink_datasfusion_t msg_sfusion;
+			uint8_t buf[200];
+			uint16_t len;
+			msg_sfusion.time = listener.dataSFusion.time();
+			msg_sfusion.gyrX = listener.dataSFusion.gyrX();
+			msg_sfusion.gyrY = listener.dataSFusion.gyrY();
+			msg_sfusion.gyrZ = listener.dataSFusion.gyrZ();
+			msg_sfusion.accX = listener.dataSFusion.accX();
+			msg_sfusion.accY = listener.dataSFusion.accY();
+			msg_sfusion.accZ = listener.dataSFusion.accZ();
+			msg_sfusion.magX = listener.dataSFusion.magX();
+			msg_sfusion.magY = listener.dataSFusion.magY();
+			msg_sfusion.magZ = listener.dataSFusion.magZ();
+			msg_sfusion.temp = listener.dataSFusion.temp();
+			msg_sfusion.press = listener.dataSFusion.press();
+			msg_sfusion.phi = listener.dataSFusion.phi();
+			msg_sfusion.the = listener.dataSFusion.the();
+			msg_sfusion.psi = listener.dataSFusion.psi();
+			msg_sfusion.q0 = listener.dataSFusion.q0();
+			msg_sfusion.q1 = listener.dataSFusion.q1();
+			msg_sfusion.q2 = listener.dataSFusion.q2();
+			msg_sfusion.q3 = listener.dataSFusion.q3();
+			msg_sfusion.posN = listener.dataSFusion.posN();
+			msg_sfusion.posE = listener.dataSFusion.posE();
+			msg_sfusion.posD = listener.dataSFusion.posD();
+			msg_sfusion.speedN = listener.dataSFusion.speedN();
+			msg_sfusion.speedE = listener.dataSFusion.speedE();
+			msg_sfusion.speedD = listener.dataSFusion.speedD();
+			msg_sfusion.WindN = listener.dataSFusion.windN();
+			msg_sfusion.WindE = listener.dataSFusion.windE();
+			msg_sfusion.WindD = listener.dataSFusion.windD();
+			msg_sfusion.ssa = listener.dataSFusion.ssa();
+			msg_sfusion.aoa = listener.dataSFusion.aoa();
+			msg_sfusion.gamma = listener.dataSFusion.gamma();
+			msg_sfusion.alive = listener.dataSFusion.alive();
+			mavlink_msg_datasfusion_encode(sysid, compid, &msg, &msg_sfusion);
+			len = mavlink_msg_to_send_buffer(buf, &msg);
+			if (!serial.send(buf,len)) {
+				std::cout << "ERROR: Could not send DataSFusion" << std::endl;
+			}
+
+			dataSFusionLock.unlock();
+			listener.newDataSFusion = false;
+		}
 		if (listener.newDataAhrs) {
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
 			std::cout << "newDataAhrs" << std::endl;
@@ -395,15 +435,30 @@ void Downlink::run() {
 			dataAirLock.unlock();
 			listener.newDataAir = false;
 		}
-		// if (listener.newDataCtrl) {
-		// 	std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
-		// 	std::cout << "newDataCtrl" << std::endl;
-		//
-		// 	// TODO
-		//
-		// 	dataCtrlLock.unlock();
-		// 	listener.newDataCtrl = false;
-		// }
+		if (listener.newDataCtrl) {
+			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
+			std::cout << "newDataCtrl" << std::endl;
+
+			mavlink_message_t msg;
+			mavlink_datactrl_t msg_ctrl;
+			uint8_t buf[200];
+			uint16_t len;
+			msg_ctrl.time = listener.dataCtrl.time();
+			msg_ctrl.xi = listener.dataCtrl.xi();
+			msg_ctrl.eta = listener.dataCtrl.eta();
+			msg_ctrl.zeta = listener.dataCtrl.zeta();
+			msg_ctrl.etaT = listener.dataCtrl.etaT();
+			msg_ctrl.etaF = listener.dataCtrl.etaF();
+			msg_ctrl.alive = listener.dataCtrl.alive();
+			mavlink_msg_datactrl_encode(sysid, compid, &msg, &msg_ctrl);
+			len = mavlink_msg_to_send_buffer(buf, &msg);
+			if (!serial.send(buf,len)) {
+				std::cout << "ERROR: Could not send DataCtrl" << std::endl;
+			}
+
+			dataCtrlLock.unlock();
+			listener.newDataCtrl = false;
+		}
 		if (listener.newDataPsu) {
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
 			std::cout << "newDataPsu" << std::endl;
