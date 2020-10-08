@@ -252,10 +252,10 @@ void Ctrl::run() {
 			float deltaTime = timer.getSysTimeS()-lastTime;
 
 			float outRoll = 0.0;
-			pidRoll.run(deltaTime, 2.0*listener.dataRaiIn.roll(), -listener.dataSFusion.phi(), &outRoll);
+			pidRoll.run(deltaTime, listener.dataRaiIn.roll(), -listener.dataSFusion.phi(), &outRoll);
 
 			float outPitch = 0.0;
-			pidPitch.run(deltaTime, 2.0*listener.dataRaiIn.pitch(), -listener.dataSFusion.the(), &outPitch);
+			pidPitch.run(deltaTime, listener.dataRaiIn.pitch(), -listener.dataSFusion.the(), &outPitch);
 
 			// float outYaw = 0.0;
 			// pidYaw.run(deltaTime, listener.dataRaiIn.yaw(), -listener.dataSFusion.psi(), &outYaw);

@@ -12,6 +12,10 @@ public:
 	static constexpr float ELE_MAX = 0.3141592654;
 	static constexpr float RUD_MAX = 0.3490658504;
 
+	float ail_max_cmd = AIL_MAX * 2.0;
+	float ele_max_cmd = ELE_MAX * 2.0;
+	float rud_max_cmd = RUD_MAX * 2.0;
+
 	enum Surface {
 		THR = 0,
 		AILR,
@@ -30,9 +34,11 @@ public:
 
 	Mixer();
 
+	Mixer(float ail_max_cmd, float ele_max_cmd, float rud_max_cmd);
+
 	~Mixer();
 
-	float pwm2rad(enum Surface surf, uint16_t pwm);
+	float pwm2rad(enum Surface surf, uint16_t pwm, enum Mode mode);
 
 	uint16_t rad2pwm(enum Surface surf, float angle);
 

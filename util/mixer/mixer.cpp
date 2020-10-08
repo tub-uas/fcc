@@ -6,38 +6,78 @@ Mixer::Mixer() {
 
 }
 
+Mixer::Mixer(float ail_max_cmd, float ele_max_cmd, float rud_max_cmd) {
+	this->ail_max_cmd = ail_max_cmd;
+	this->ele_max_cmd = ele_max_cmd;
+	this->rud_max_cmd = rud_max_cmd;
+}
+
 Mixer::~Mixer() {
 
 }
 
-float Mixer::pwm2rad(enum Surface surf, uint16_t pwm) {
+float Mixer::pwm2rad(enum Surface surf, uint16_t pwm, enum Mode mode) {
 
 	if (pwm > 2200 || pwm < 800) {
 		std::cout << "Mixer pwm2rad error, pwm out of bounds " << pwm << std::endl;
 		return -69.0;
 	}
 
-	switch (surf) {
-		case THR:
-			return ((pwm - 1000.0) / 1000.0) * THR_MAX;
+	switch (mode) {
+		case MAN:
+			switch (surf) {
+				case THR:
+					return ((pwm - 1000.0) / 1000.0) * THR_MAX;
 
-		case AILR:
-			return ((pwm - 1500.0) / 500.0) * -AIL_MAX;
+				case AILR:
+					return ((pwm - 1500.0) / 500.0) * -AIL_MAX;
 
-		case AILL:
-			return ((pwm - 1500.0) / 500.0) * AIL_MAX;
+				case AILL:
+					return ((pwm - 1500.0) / 500.0) * AIL_MAX;
 
-		case ELE:
-			return ((pwm - 1500.0) / 500.0) * -ELE_MAX;
+				case ELE:
+					return ((pwm - 1500.0) / 500.0) * -ELE_MAX;
 
-		case RUD:
-			return ((pwm - 1500.0) / 500.0) * RUD_MAX;
+				case RUD:
+					return ((pwm - 1500.0) / 500.0) * RUD_MAX;
 
-		case FLP:
-			// TODO not yet implemented
+				case FLP:
+					// TODO not yet implemented
 
+				default:
+					std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
+					break;
+			}
+
+		case ATT:
+		case NAV:
+			switch (surf) {
+				case THR:
+					return ((pwm - 1000.0) / 1000.0) * THR_MAX;
+
+				case AILR:
+					return ((pwm - 1500.0) / 500.0) * -ail_max_cmd;
+
+				case AILL:
+					return ((pwm - 1500.0) / 500.0) * ail_max_cmd;
+
+				case ELE:
+					return ((pwm - 1500.0) / 500.0) * -ele_max_cmd;
+
+				case RUD:
+					return ((pwm - 1500.0) / 500.0) * rud_max_cmd;
+
+				case FLP:
+					// TODO not yet implemented
+
+				default:
+					std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
+					break;
+			}
+
+		case INV:
 		default:
-			std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
+			std::cout << "Mixer pwm2rad error, unkown mode" << std::endl;
 			break;
 	}
 

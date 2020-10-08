@@ -126,13 +126,15 @@ void RaiIn::run() {
 
 			std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
 
+			enum Mixer::Mode mode = mixer.pwm2mode(raiCom.channel[6]);
+
 			dataRaiIn.senseTime(raiCom.time);
 			dataRaiIn.chnl(raiCom.channel);
-			dataRaiIn.roll(mixer.pwm2rad(Mixer::AILR, raiCom.channel[1])); // we are assuming ail is symmetrical
-			dataRaiIn.pitch(mixer.pwm2rad(Mixer::ELE, raiCom.channel[2]));
-			dataRaiIn.yaw(mixer.pwm2rad(Mixer::RUD, raiCom.channel[3]));
-			dataRaiIn.thr(mixer.pwm2rad(Mixer::THR, raiCom.channel[0]));
-			dataRaiIn.fltMode(mixer.pwm2mode(raiCom.channel[6]));
+			dataRaiIn.roll(mixer.pwm2rad(Mixer::AILR, raiCom.channel[1], mode)); // we are assuming ail is symmetrical
+			dataRaiIn.pitch(mixer.pwm2rad(Mixer::ELE, raiCom.channel[2], mode));
+			dataRaiIn.yaw(mixer.pwm2rad(Mixer::RUD, raiCom.channel[3], mode));
+			dataRaiIn.thr(mixer.pwm2rad(Mixer::THR, raiCom.channel[0], mode));
+			dataRaiIn.fltMode(mode);
 
 			dataRaiInLock.unlock();
 
