@@ -284,7 +284,9 @@ void Downlink::run() {
 			uint16_t len;
 			msg_raiIn.time = listener.dataRaiIn.time();
 			msg_raiIn.senseTime = listener.dataRaiIn.senseTime();
-			// TODO chnl
+			for (int i=0; i<12; i++) {
+				msg_raiIn.chnl[i] = listener.dataRaiIn.chnl().at(i);
+			}
 			msg_raiIn.roll = listener.dataRaiIn.roll();
 			msg_raiIn.pitch = listener.dataRaiIn.pitch();
 			msg_raiIn.yaw = listener.dataRaiIn.yaw();
@@ -308,7 +310,9 @@ void Downlink::run() {
 			uint8_t buf[200];
 			uint16_t len;
 			msg_raiOut.time = listener.dataRaiOut.time();
-			// TODO chnl
+			for (int i=0; i<12; i++) {
+				msg_raiOut.chnl[i] = listener.dataRaiOut.chnl().at(i);
+			}
 			msg_raiOut.roll = listener.dataRaiOut.roll();
 			msg_raiOut.pitch = listener.dataRaiOut.pitch();
 			msg_raiOut.yaw = listener.dataRaiOut.yaw();
