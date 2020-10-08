@@ -373,6 +373,7 @@ void Watchdog::run() {
 	// watchdog is running
 	// yellowLed = true;
 
+	const double timeout = 0.1;
 	static double dataRaiInTime = timer.getSysTimeS();
 	static double dataRaiOutTime = timer.getSysTimeS();
 	static double dataSFusionTime = timer.getSysTimeS();
@@ -380,17 +381,18 @@ void Watchdog::run() {
 	static double dataAirTime = timer.getSysTimeS();
 	static double dataPsuTime = timer.getSysTimeS();
 	static double dataCtrlTime = timer.getSysTimeS();
+	static double okTime = timer.getSysTimeS();
 
 	while (1) {
 		// std::cout << this->name << " run" << std::endl;
 
 		if (listener.newDataRaiIn) {
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
-			std::cout << "newDataRaiIn" << std::endl;
+			// std::cout << "newDataRaiIn" << std::endl;
 
-			if (listener.dataSFusion.alive()) {
-				// std::cout << "Reset dataSFusionTime" << std::endl;
-				dataSFusionTime = timer.getSysTimeS();
+			if (listener.dataRaiIn.alive()) {
+				// std::cout << "Reset dataRaiInTime" << std::endl;
+				dataRaiInTime = timer.getSysTimeS();
 			}
 
 			dataRaiInLock.unlock();
@@ -399,11 +401,11 @@ void Watchdog::run() {
 
 		if (listener.newDataRaiOut) {
 			std::unique_lock<std::mutex> dataRaiOutLock {listener.dataRaiOutMutex};
-			std::cout << "newDataRaiOut" << std::endl;
+			// std::cout << "newDataRaiOut" << std::endl;
 
-			if (listener.dataSFusion.alive()) {
-				// std::cout << "Reset dataSFusionTime" << std::endl;
-				dataSFusionTime = timer.getSysTimeS();
+			if (listener.dataRaiOut.alive()) {
+				// std::cout << "Reset dataRaioutTime" << std::endl;
+				dataRaiOutTime = timer.getSysTimeS();
 			}
 
 			dataRaiOutLock.unlock();
@@ -412,7 +414,7 @@ void Watchdog::run() {
 
 		if (listener.newDataSFusion) {
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
-			std::cout << "newDataSFusion" << std::endl;
+			// std::cout << "newDataSFusion" << std::endl;
 
 			if (listener.dataSFusion.alive()) {
 				// std::cout << "Reset dataSFusionTime" << std::endl;
@@ -438,11 +440,11 @@ void Watchdog::run() {
 
 		if (listener.newDataAir) {
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
-			std::cout << "newDataAir" << std::endl;
+			// std::cout << "newDataAir" << std::endl;
 
-			if (listener.dataSFusion.alive()) {
-				// std::cout << "Reset dataSFusionTime" << std::endl;
-				dataSFusionTime = timer.getSysTimeS();
+			if (listener.dataAir.alive()) {
+				// std::cout << "Reset dataAirTime" << std::endl;
+				dataAirTime = timer.getSysTimeS();
 			}
 
 			dataAirLock.unlock();
@@ -451,7 +453,7 @@ void Watchdog::run() {
 
 		if (listener.newDataPsu) {
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
-			std::cout << "newDataPsu" << std::endl;
+			// std::cout << "newDataPsu" << std::endl;
 
 			if (listener.dataPsu.alive()) {
 				// std::cout << "Reset dataPsuTime" << std::endl;
@@ -464,7 +466,7 @@ void Watchdog::run() {
 
 		if (listener.newDataCtrl) {
 			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
-			std::cout << "newDataCtrl" << std::endl;
+			// std::cout << "newDataCtrl" << std::endl;
 
 			if (listener.dataCtrl.alive()) {
 				// std::cout << "Reset dataCtrlTime" << std::endl;
@@ -476,47 +478,52 @@ void Watchdog::run() {
 		}
 
 		bool allGood = true;
-		if (timer.getSysTimeS() - dataRaiInTime > 0.100) {
+		if (timer.getSysTimeS() - dataRaiInTime > timeout) {
 			std::cout << "RaiIn failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
 		}
-		if (timer.getSysTimeS() - dataRaiOutTime > 0.100) {
+		if (timer.getSysTimeS() - dataRaiOutTime > timeout) {
 			std::cout << "RaiOut failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
 		}
-		if (timer.getSysTimeS() - dataSFusionTime > 0.100) {
+		if (timer.getSysTimeS() - dataSFusionTime > timeout) {
 			std::cout << "SFusion failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
 		}
-		if (timer.getSysTimeS() - dataAhrsTime > 0.100) {
+		if (timer.getSysTimeS() - dataAhrsTime > timeout) {
 			std::cout << "Ahrs failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
 		}
-		if (timer.getSysTimeS() - dataAirTime > 0.100) {
+		if (timer.getSysTimeS() - dataAirTime > timeout) {
 			std::cout << "Air failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
 		}
-		if (timer.getSysTimeS() - dataPsuTime > 0.100) {
+		if (timer.getSysTimeS() - dataPsuTime > timeout) {
 			std::cout << "Psu failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
 		}
-		if (timer.getSysTimeS() - dataCtrlTime > 0.100) {
+		if (timer.getSysTimeS() - dataCtrlTime > timeout) {
 			std::cout << "Ctrl failure" << std::endl;
 			allGood &= false;
 		} else {
 			allGood &= true;
+		}
+
+		if ((timer.getSysTimeS() - okTime > 1.0) && allGood) {
+			okTime = timer.getSysTimeS();
+			std::cout << "ok @ " << timer.getSysTimeS() << "s" << std::endl;
 		}
 
 		greenLed = allGood;
