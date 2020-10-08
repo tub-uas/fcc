@@ -154,6 +154,9 @@ Watchdog::~Watchdog() {
 		participant->delete_subscriber(subscriber);
 	}
 
+	drv_led_set_green(0);
+	drv_led_set_yellow(0);
+
 	eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->delete_participant(participant);
 }
 
@@ -266,18 +269,123 @@ bool Watchdog::init() {
 		return false;
 	}
 
+	greenLed = false;
+	yellowLed = false;
+
 	return true;
+}
+
+void Watchdog::led() {
+
+	while (1) {
+
+		{ // handle green led
+			float period = 0.0;
+			float duty_cycle = 0.0;
+
+			if (greenLed) {
+				period = 1.5;
+				duty_cycle = 0.95;
+			} else {
+				period = 0.15;
+				duty_cycle = 0.5;
+			}
+
+			static int led_mode = 0;
+			if (duty_cycle < 0.01) {
+				drv_led_set_green(0);
+				led_mode = 0;
+
+			} else if (duty_cycle > 0.99) {
+				drv_led_set_green(1);
+				led_mode = 1;
+
+			} else {
+
+				static float last_switch_time = timer.getSysTimeS();
+				if (led_mode == 0) {
+					if (timer.getSysTimeS() > last_switch_time + period*(1.0-duty_cycle)) {
+						drv_led_set_green(1);
+						led_mode = 1;
+						last_switch_time = timer.getSysTimeS();
+					}
+
+				} else {
+					if (timer.getSysTimeS() > last_switch_time + period*duty_cycle) {
+						drv_led_set_green(0);
+						led_mode = 0;
+						last_switch_time = timer.getSysTimeS();
+					}
+				}
+			}
+		}
+
+		{ // handle red led
+			float period = 0.0;
+			float duty_cycle = 0.0;
+
+			if (yellowLed) {
+				period = 0.5;
+				duty_cycle = 0.5;
+			} else {
+				period = 0.0;
+				duty_cycle = 0.0;
+			}
+
+			static int led_mode = 0;
+			if (duty_cycle < 0.01) {
+				drv_led_set_yellow(0);
+				led_mode = 0;
+
+			} else if (duty_cycle > 0.99) {
+				drv_led_set_yellow(1);
+				led_mode = 1;
+
+			} else {
+
+				static float last_switch_time = timer.getSysTimeS();
+				if (led_mode == 0) {
+					if (timer.getSysTimeS() > last_switch_time + period*(1.0-duty_cycle)) {
+						drv_led_set_yellow(1);
+						led_mode = 1;
+						last_switch_time = timer.getSysTimeS();
+					}
+
+				} else {
+					if (timer.getSysTimeS() > last_switch_time + period*duty_cycle) {
+						drv_led_set_yellow(0);
+						led_mode = 0;
+						last_switch_time = timer.getSysTimeS();
+					}
+				}
+			}
+		}
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		std::this_thread::sleep_until(next_wakeup);
+		next_wakeup += std::chrono::milliseconds(1);
+	}
+
 }
 
 void Watchdog::run() {
 
+	// static double dataRaiInTime = timer.getSysTimeS();
+	// static double dataRaiOutTime = timer.getSysTimeS();
+	// static double dataSFusionTime = timer.getSysTimeS();
+	static double dataAhrsTime = timer.getSysTimeS();
+	// static double dataAirTime = timer.getSysTimeS();
+	// static double dataPsuTime = timer.getSysTimeS();
+	// static double dataCtrlTime = timer.getSysTimeS();
+
 	while (1) {
 		// std::cout << this->name << " run" << std::endl;
 
-		static bool toggle = true;
-		drv_led_set_green(toggle);
-		drv_led_set_yellow(!toggle);
-		toggle = !toggle;
+		// greenLed = true;
+		// drv_led_set_green(toggle);
+		// drv_led_set_yellow(!toggle);
+		// greenLed = !greenLed;
+		// yellowLed = !yellowLed;
 
 		if (listener.newDataRaiIn) {
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
@@ -308,8 +416,12 @@ void Watchdog::run() {
 
 		if (listener.newDataAhrs) {
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-			std::cout << "newDataAhrs" << std::endl;
+			// std::cout << "newDataAhrs" << std::endl;
 
+			if (listener.dataAhrs.alive()) {
+				// std::cout << "Reset dataAhrsTime" << std::endl;
+				dataAhrsTime = timer.getSysTimeS();
+			}
 
 			dataAhrsLock.unlock();
 			listener.newDataAhrs = false;
@@ -342,8 +454,18 @@ void Watchdog::run() {
 			listener.newDataCtrl = false;
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1000);
+		bool allGood = true;
+		if (timer.getSysTimeS() - dataAhrsTime > 0.100) {
+			std::cout << "Ahrs failure" << std::endl;
+			allGood &= false;
+		} else {
+			allGood &= true;
+		}
+
+		greenLed = allGood;
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1000);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 }

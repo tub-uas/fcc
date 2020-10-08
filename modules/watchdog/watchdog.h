@@ -81,15 +81,19 @@ public:
 	const std::string name = std::string("Watchdog");
 
 	const uint8_t sysid  = 0;
-    const uint8_t compid = 0;
+	const uint8_t compid = 0;
 
 	Watchdog();
 	virtual ~Watchdog();
 
 	bool init();
 	void run();
+	void led();
 
 private:
+
+	std::atomic_bool greenLed;
+	std::atomic_bool yellowLed;
 
 	eprosima::fastdds::dds::DomainParticipant *participant;
 	eprosima::fastdds::dds::Subscriber        *subscriber;
