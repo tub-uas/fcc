@@ -64,7 +64,6 @@
         <message id="40000" name="DataSFusion">
             <description>Data from SFusion</description>
             <field type="uint64_t" name="time">System time at publication</field>
-            <field type="float" name="senseTime">Time of data creation at sensor</field>
             <field type="float" name="gyrX">Gyro X-Axis</field>
             <field type="float" name="gyrY">Gyro Y-Axis</field>
             <field type="float" name="gyrZ">Gyro Z-Axis</field>
@@ -89,9 +88,9 @@
             <field type="float" name="speedN">Speed north estimation</field>
             <field type="float" name="speedE">Speed east estimation</field>
             <field type="float" name="speedD">Speed down estimation</field>
-            <field type="float" name="WindN">Wind north estimation</field>
-            <field type="float" name="WindE">Wind east estimation</field>
-            <field type="float" name="WindD">Wind down estimation</field>
+            <field type="float" name="windN">Wind north estimation</field>
+            <field type="float" name="windE">Wind east estimation</field>
+            <field type="float" name="windD">Wind down estimation</field>
             <field type="float" name="ssa">Sideslip angle estimation</field>
             <field type="float" name="aoa">Angle of attack estimation</field>
             <field type="float" name="gamma">Pathangle estimation</field>

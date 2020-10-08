@@ -295,12 +295,11 @@ static void mavlink_test_datasfusion(uint8_t system_id, uint8_t component_id, ma
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_datasfusion_t packet_in = {
-        93372036854775807ULL,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0,325.0,353.0,381.0,409.0,437.0,465.0,493.0,521.0,549.0,577.0,605.0,633.0,661.0,689.0,717.0,745.0,773.0,801.0,829.0,857.0,885.0,913.0,145
+        93372036854775807ULL,73.0,101.0,129.0,157.0,185.0,213.0,241.0,269.0,297.0,325.0,353.0,381.0,409.0,437.0,465.0,493.0,521.0,549.0,577.0,605.0,633.0,661.0,689.0,717.0,745.0,773.0,801.0,829.0,857.0,885.0,133
     };
     mavlink_datasfusion_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
         packet1.time = packet_in.time;
-        packet1.senseTime = packet_in.senseTime;
         packet1.gyrX = packet_in.gyrX;
         packet1.gyrY = packet_in.gyrY;
         packet1.gyrZ = packet_in.gyrZ;
@@ -325,9 +324,9 @@ static void mavlink_test_datasfusion(uint8_t system_id, uint8_t component_id, ma
         packet1.speedN = packet_in.speedN;
         packet1.speedE = packet_in.speedE;
         packet1.speedD = packet_in.speedD;
-        packet1.WindN = packet_in.WindN;
-        packet1.WindE = packet_in.WindE;
-        packet1.WindD = packet_in.WindD;
+        packet1.windN = packet_in.windN;
+        packet1.windE = packet_in.windE;
+        packet1.windD = packet_in.windD;
         packet1.ssa = packet_in.ssa;
         packet1.aoa = packet_in.aoa;
         packet1.gamma = packet_in.gamma;
@@ -346,12 +345,12 @@ static void mavlink_test_datasfusion(uint8_t system_id, uint8_t component_id, ma
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_datasfusion_pack(system_id, component_id, &msg , packet1.time , packet1.senseTime , packet1.gyrX , packet1.gyrY , packet1.gyrZ , packet1.accX , packet1.accY , packet1.accZ , packet1.magX , packet1.magY , packet1.magZ , packet1.temp , packet1.press , packet1.phi , packet1.the , packet1.psi , packet1.q0 , packet1.q1 , packet1.q2 , packet1.q3 , packet1.posN , packet1.posE , packet1.posD , packet1.speedN , packet1.speedE , packet1.speedD , packet1.WindN , packet1.WindE , packet1.WindD , packet1.ssa , packet1.aoa , packet1.gamma , packet1.alive );
+    mavlink_msg_datasfusion_pack(system_id, component_id, &msg , packet1.time , packet1.gyrX , packet1.gyrY , packet1.gyrZ , packet1.accX , packet1.accY , packet1.accZ , packet1.magX , packet1.magY , packet1.magZ , packet1.temp , packet1.press , packet1.phi , packet1.the , packet1.psi , packet1.q0 , packet1.q1 , packet1.q2 , packet1.q3 , packet1.posN , packet1.posE , packet1.posD , packet1.speedN , packet1.speedE , packet1.speedD , packet1.windN , packet1.windE , packet1.windD , packet1.ssa , packet1.aoa , packet1.gamma , packet1.alive );
     mavlink_msg_datasfusion_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_datasfusion_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.time , packet1.senseTime , packet1.gyrX , packet1.gyrY , packet1.gyrZ , packet1.accX , packet1.accY , packet1.accZ , packet1.magX , packet1.magY , packet1.magZ , packet1.temp , packet1.press , packet1.phi , packet1.the , packet1.psi , packet1.q0 , packet1.q1 , packet1.q2 , packet1.q3 , packet1.posN , packet1.posE , packet1.posD , packet1.speedN , packet1.speedE , packet1.speedD , packet1.WindN , packet1.WindE , packet1.WindD , packet1.ssa , packet1.aoa , packet1.gamma , packet1.alive );
+    mavlink_msg_datasfusion_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.time , packet1.gyrX , packet1.gyrY , packet1.gyrZ , packet1.accX , packet1.accY , packet1.accZ , packet1.magX , packet1.magY , packet1.magZ , packet1.temp , packet1.press , packet1.phi , packet1.the , packet1.psi , packet1.q0 , packet1.q1 , packet1.q2 , packet1.q3 , packet1.posN , packet1.posE , packet1.posD , packet1.speedN , packet1.speedE , packet1.speedD , packet1.windN , packet1.windE , packet1.windD , packet1.ssa , packet1.aoa , packet1.gamma , packet1.alive );
     mavlink_msg_datasfusion_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -364,7 +363,7 @@ static void mavlink_test_datasfusion(uint8_t system_id, uint8_t component_id, ma
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_datasfusion_send(MAVLINK_COMM_1 , packet1.time , packet1.senseTime , packet1.gyrX , packet1.gyrY , packet1.gyrZ , packet1.accX , packet1.accY , packet1.accZ , packet1.magX , packet1.magY , packet1.magZ , packet1.temp , packet1.press , packet1.phi , packet1.the , packet1.psi , packet1.q0 , packet1.q1 , packet1.q2 , packet1.q3 , packet1.posN , packet1.posE , packet1.posD , packet1.speedN , packet1.speedE , packet1.speedD , packet1.WindN , packet1.WindE , packet1.WindD , packet1.ssa , packet1.aoa , packet1.gamma , packet1.alive );
+    mavlink_msg_datasfusion_send(MAVLINK_COMM_1 , packet1.time , packet1.gyrX , packet1.gyrY , packet1.gyrZ , packet1.accX , packet1.accY , packet1.accZ , packet1.magX , packet1.magY , packet1.magZ , packet1.temp , packet1.press , packet1.phi , packet1.the , packet1.psi , packet1.q0 , packet1.q1 , packet1.q2 , packet1.q3 , packet1.posN , packet1.posE , packet1.posD , packet1.speedN , packet1.speedE , packet1.speedD , packet1.windN , packet1.windE , packet1.windD , packet1.ssa , packet1.aoa , packet1.gamma , packet1.alive );
     mavlink_msg_datasfusion_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }

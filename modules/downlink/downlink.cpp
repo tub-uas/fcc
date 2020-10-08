@@ -360,9 +360,9 @@ void Downlink::run() {
 			msg_sfusion.speedN = listener.dataSFusion.speedN();
 			msg_sfusion.speedE = listener.dataSFusion.speedE();
 			msg_sfusion.speedD = listener.dataSFusion.speedD();
-			msg_sfusion.WindN = listener.dataSFusion.windN();
-			msg_sfusion.WindE = listener.dataSFusion.windE();
-			msg_sfusion.WindD = listener.dataSFusion.windD();
+			msg_sfusion.windN = listener.dataSFusion.windN();
+			msg_sfusion.windE = listener.dataSFusion.windE();
+			msg_sfusion.windD = listener.dataSFusion.windD();
 			msg_sfusion.ssa = listener.dataSFusion.ssa();
 			msg_sfusion.aoa = listener.dataSFusion.aoa();
 			msg_sfusion.gamma = listener.dataSFusion.gamma();
