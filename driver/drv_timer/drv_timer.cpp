@@ -60,7 +60,6 @@ drv_timer *drv_timer::setInterval(const uint64_t &interval) {
 
 double drv_timer::getTime() {
 	hrc::time_point actual = hrc::now();
-
 	std::chrono::nanoseconds usec;
 	usec = std::chrono::duration_cast<std::chrono::nanoseconds>(actual-mp_startTime);
 	return usec.count();
@@ -69,4 +68,8 @@ double drv_timer::getTime() {
 uint64_t drv_timer::getSysTime() {
 	return std::chrono::duration_cast <std::chrono::microseconds>
 	  (std::chrono::steady_clock::now().time_since_epoch()).count();
+}
+
+double drv_timer::getSysTimeS() {
+	return (double) getSysTime() / 1000000.0;
 }

@@ -24,7 +24,9 @@ public:
 	drv_timer *setInterval(const uint64_t &interval);
 
 	double getTime();
+	
 	uint64_t getSysTime();
+	uint64_t getSysTimeS();
 
 private:
 	std::function<void(void)> mp_func;
