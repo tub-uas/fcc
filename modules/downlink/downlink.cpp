@@ -312,6 +312,7 @@ void Downlink::run() {
 			msg_raiIn.roll = listener.dataRaiIn.roll();
 			msg_raiIn.pitch = listener.dataRaiIn.pitch();
 			msg_raiIn.yaw = listener.dataRaiIn.yaw();
+			msg_raiIn.thr = listener.dataRaiIn.thr();
 			msg_raiIn.fltMode = listener.dataRaiIn.fltMode();
 			msg_raiIn.alive = listener.dataRaiIn.alive();
 			mavlink_msg_dataraiin_encode(sysid, compid, &msg, &msg_raiIn);
@@ -344,6 +345,7 @@ void Downlink::run() {
 			msg_raiOut.roll = listener.dataRaiOut.roll();
 			msg_raiOut.pitch = listener.dataRaiOut.pitch();
 			msg_raiOut.yaw = listener.dataRaiOut.yaw();
+			msg_raiOut.thr = listener.dataRaiOut.thr();
 			msg_raiOut.fltMode = listener.dataRaiOut.fltMode();
 			msg_raiOut.alive = listener.dataRaiOut.alive();
 			mavlink_msg_dataraiout_encode(sysid, compid, &msg, &msg_raiOut);
