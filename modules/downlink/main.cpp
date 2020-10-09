@@ -15,7 +15,9 @@ int main(int argc, const char* argv[]) {
 
 	if (downlink->init()) {
 		std::thread run([&] (Downlink *downlink) { downlink->run(); }, downlink);
+		std::thread publish([&] (Downlink *downlink) { downlink->publish(); }, downlink);
 		run.join();
+		publish.join();
 	}
 
 	std::cout << downlink->name << " stop" << std::endl;

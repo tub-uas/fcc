@@ -4,10 +4,26 @@
 #include <iomanip>
 #include <typeinfo>
 
-Listener::Listener() : subscription_matched(0) {
+Listener::Listener() : publication_matched(0),
+                       subscription_matched(0) {
 }
 
 Listener::~Listener() {
+}
+
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
+
+	if (info.current_count_change == 1) {
+		publication_matched = info.total_count;
+		std::cout << "Publisher matched." << std::endl;
+	} else if (info.current_count_change == -1) {
+		publication_matched = info.total_count;
+		std::cout << "Publisher unmatched." << std::endl;
+	} else {
+		std::cout << info.current_count_change
+		          << " is not a valid value for PublicationMatchedStatus current count change." << std::endl;
+	}
 }
 
 void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
@@ -80,7 +96,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 }
 
 Downlink::Downlink() : participant(nullptr),
+                       publisher(nullptr),
                        subscriber(nullptr),
+                       topicDownlink(nullptr),
+                       writerDownlink(nullptr),
+                       typeDownlink(new DataDownlinkPubSubType()),
                        topicRaiIn(nullptr),
                        readerRaiIn(nullptr),
                        typeRaiIn(new DataRaiInPubSubType()),
@@ -107,6 +127,15 @@ Downlink::Downlink() : participant(nullptr),
 
 Downlink::~Downlink() {
 
+	if (writerDownlink != nullptr) {
+		publisher->delete_datawriter(writerDownlink);
+	}
+	if (topicDownlink != nullptr) {
+		participant->delete_topic(topicDownlink);
+	}
+	if (publisher != nullptr) {
+		participant->delete_publisher(publisher);
+	}
 	if (readerRaiIn != nullptr) {
 		subscriber->delete_datareader(readerRaiIn);
 	}
@@ -149,7 +178,6 @@ Downlink::~Downlink() {
 	if (topicCtrl != nullptr) {
 		participant->delete_topic(topicCtrl);
 	}
-
 	if (subscriber != nullptr) {
 		participant->delete_subscriber(subscriber);
 	}
@@ -167,6 +195,24 @@ bool Downlink::init() {
 	participantQos.name("DownlinkParticipant");
 	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
+		return false;
+	}
+
+	// Register the Type
+	typeDownlink.register_type(participant);
+	// Create the publications Topic
+	topicDownlink = participant->create_topic("DataDownlink", "DataDownlink", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicDownlink == nullptr) {
+		return false;
+	}
+	// Create the Publisher
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
+	if (publisher == nullptr) {
+		return false;
+	}
+	// Create the DataWriter
+	writerDownlink = publisher->create_datawriter(topicDownlink, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
+	if (writerDownlink == nullptr) {
 		return false;
 	}
 
@@ -262,11 +308,39 @@ bool Downlink::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (serial.init(TELEMETRY_COM_PORT,B115200) != true) {
-        return false;
-    }
+		return false;
+	}
 
 	return true;
+}
+
+void Downlink::publish() {
+
+	while (1) {
+
+		std::cout << this->name << " publish" << std::endl;
+
+		std::unique_lock<std::mutex> dataDownlinkLock {dataDownlinkMutex};
+		dataDownlink.time(timer.getSysTime());
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataDownlink.alive(true);
+		} else {
+			dataDownlink.alive(false);
+		}
+
+		writerDownlink->write(&dataDownlink);
+		dataDownlinkLock.unlock();
+
+		print();
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		std::this_thread::sleep_until(next_wakeup);
+		next_wakeup += std::chrono::milliseconds(10);
+	}
 }
 
 void Downlink::run() {
@@ -553,8 +627,18 @@ void Downlink::run() {
 			listener.newDataPsu = false;
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(100);
+		aliveTime = timer.getSysTime();
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(100);
+		next_wakeup += std::chrono::milliseconds(10);
 	}
+}
+
+void Downlink::print() {
+
+	std::cout << "--- " << this->name << " " << dataDownlink.time() << " ---" << std::endl;
+
+	std::cout << "alive   " << dataDownlink.alive() << std::endl;
+
 }

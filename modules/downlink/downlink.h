@@ -21,6 +21,7 @@
 #include <fastdds/dds/subscriber/qos/DataReaderQos.hpp>
 #include <fastdds/dds/subscriber/SampleInfo.hpp>
 
+#include "./idl/DataDownlinkPubSubTypes.h"
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 #include "./../raiOut/idl/DataRaiOutPubSubTypes.h"
 #include "./../sFusion/idl/DataSFusionPubSubTypes.h"
@@ -35,13 +36,16 @@
 
 #define TELEMETRY_COM_PORT  "/dev/ttyUSB0"
 
-class Listener : public eprosima::fastdds::dds::DataReaderListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
 public:
 
 	Listener();
 
 	~Listener() override;
+
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
 	void on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 	                             const eprosima::fastdds::dds::SubscriptionMatchedStatus& info) override;
@@ -72,6 +76,7 @@ public:
 	std::atomic_bool newDataCtrl;
 
 private:
+	std::atomic_int publication_matched;
 	std::atomic_int subscription_matched;
 
 };
@@ -84,19 +89,31 @@ public:
 	const std::string name = std::string("Downlink");
 
 	const uint8_t sysid  = 0;
-    const uint8_t compid = 0;
+	const uint8_t compid = 0;
 
 	Downlink();
 	virtual ~Downlink();
 
 	bool init();
 	void run();
+	void publish();
+	void print();
+
+	const unsigned long long aliveReset = 1e5;
+	std::atomic_ullong aliveTime;
 
 private:
 
 	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
 	eprosima::fastdds::dds::Subscriber        *subscriber;
 	Listener                                   listener;
+
+	eprosima::fastdds::dds::Topic        *topicDownlink;
+	eprosima::fastdds::dds::DataWriter   *writerDownlink;
+	eprosima::fastdds::dds::TypeSupport   typeDownlink;
+	DataDownlink  dataDownlink;
+	std::mutex    dataDownlinkMutex;
 
 	eprosima::fastdds::dds::Topic       *topicRaiIn;
 	eprosima::fastdds::dds::DataReader  *readerRaiIn;
