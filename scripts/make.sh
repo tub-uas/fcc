@@ -12,8 +12,8 @@ echo "----- Compiling modules on branch $BRANCH ------"
 
 for mod in "${ACTIVE_MODULES[@]}"
 do
-	echo "make -C $MODULE_DIR/$mod$BUILD_DIR"
-	      make -C $MODULE_DIR/$mod$BUILD_DIR
+	echo "make -C $MODULE_DIR/$mod$BUILD_DIR -j4"
+	      make -C $MODULE_DIR/$mod$BUILD_DIR -j4
 done
 
 echo "----- `basename "$0"` done on branch $BRANCH ------"
