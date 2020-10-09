@@ -232,7 +232,6 @@ void Ctrl::publish() {
 		std::this_thread::sleep_until(next_wakeup);
 		next_wakeup += std::chrono::milliseconds(10);
 	}
-
 }
 
 
