@@ -372,7 +372,7 @@ void Downlink::run() {
 			dataRaiInTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
-			std::cout << "send DataRaiIn" << std::endl;
+			// std::cout << "send DataRaiIn" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataraiin_t msg_raiIn;
@@ -406,7 +406,7 @@ void Downlink::run() {
 			dataRaiOutTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataRaiOutLock {listener.dataRaiOutMutex};
-			std::cout << "send DataRaiOut" << std::endl;
+			// std::cout << "send DataRaiOut" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataraiout_t msg_raiOut;
@@ -439,7 +439,7 @@ void Downlink::run() {
 			dataSFusionTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
-			std::cout << "send DataSFusion" << std::endl;
+			// std::cout << "send DataSFusion" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_datasfusion_t msg_sfusion;
@@ -494,7 +494,7 @@ void Downlink::run() {
 			dataAhrsTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-			std::cout << "send DataAhrs" << std::endl;
+			// std::cout << "send DataAhrs" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataahrs_t msg_ahrs;
@@ -538,7 +538,7 @@ void Downlink::run() {
 			dataAirTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
-			std::cout << "send DataAir" << std::endl;
+			// std::cout << "send DataAir" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_dataair_t msg_air;
@@ -569,7 +569,7 @@ void Downlink::run() {
 			dataCtrlTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
-			std::cout << "send DataCtrl" << std::endl;
+			// std::cout << "send DataCtrl" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_datactrl_t msg_ctrl;
@@ -599,7 +599,7 @@ void Downlink::run() {
 			dataPsuTime = timer.getSysTimeS();
 
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
-			std::cout << "send DataPsu" << std::endl;
+			// std::cout << "send DataPsu" << std::endl;
 
 			mavlink_message_t msg;
 			mavlink_datapsu_t msg_psu;
