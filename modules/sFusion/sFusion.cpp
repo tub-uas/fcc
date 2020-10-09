@@ -204,7 +204,7 @@ void SFusion::publish() {
 
 	while (1) {
 
-		std::cout << this->name << " publish" << std::endl;
+		// std::cout << this->name << " publish" << std::endl;
 
 		std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
 		dataSFusion.time(timer.getSysTime());
@@ -213,7 +213,7 @@ void SFusion::publish() {
 		writerSFusion->write(&dataSFusion);
 		dataSFusionLock.unlock();
 
-		print();
+		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);

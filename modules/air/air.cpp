@@ -97,7 +97,7 @@ void Air::publish() {
 
 	while (1) {
 
-		std::cout << this->name << " publish" << std::endl;
+		// std::cout << this->name << " publish" << std::endl;
 
 		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
 		dataAir.time(timer.getSysTime());
@@ -106,7 +106,7 @@ void Air::publish() {
 		writerAir->write(&dataAir);
 		dataAirLock.unlock();
 
-		print();
+		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);

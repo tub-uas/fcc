@@ -176,7 +176,7 @@ void RaiOut::publish() {
 
 	while (1) {
 
-		std::cout << this->name << " publish" << std::endl;
+		// std::cout << this->name << " publish" << std::endl;
 
 		std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
 		dataRaiOut.time(timer.getSysTime());
@@ -187,7 +187,7 @@ void RaiOut::publish() {
 
 		raiCom.send(); // Send the commands to RAI over CAN
 
-		print();
+		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);

@@ -97,7 +97,7 @@ void Psu::publish() {
 
 	while (1) {
 
-		std::cout << this->name << " publish" << std::endl;
+		// std::cout << this->name << " publish" << std::endl;
 
 		std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 		dataPsu.time(timer.getSysTime());
@@ -106,7 +106,7 @@ void Psu::publish() {
 		writerPsu->write(&dataPsu);
 		dataPsuLock.unlock();
 
-		print();
+		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);

@@ -353,7 +353,7 @@ void Log::run() {
 		/***PYTHON_GEN_WRITE_FILES*/
 		if (listener.newDataRaiIn) {
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
-			std::cout << "newDataRaiIn" << std::endl;
+			// std::cout << "newDataRaiIn" << std::endl;
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.time()), sizeof(listener.dataRaiIn.time()));
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.senseTime()), sizeof(listener.dataRaiIn.senseTime()));
 			for (unsigned int i=0; i<listener.dataRaiIn.chnl().size(); i++) {
@@ -371,7 +371,7 @@ void Log::run() {
 		}
 		if (listener.newDataRaiOut) {
 			std::unique_lock<std::mutex> dataRaiOutLock {listener.dataRaiOutMutex};
-			std::cout << "newDataRaiOut" << std::endl;
+			// std::cout << "newDataRaiOut" << std::endl;
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.time()), sizeof(listener.dataRaiOut.time()));
 			for (unsigned int i=0; i<listener.dataRaiOut.chnl().size(); i++) {
 				raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.chnl().at(i)), sizeof(listener.dataRaiOut.chnl().at(i)));
@@ -388,7 +388,7 @@ void Log::run() {
 		}
 		if (listener.newDataSFusion) {
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
-			std::cout << "newDataSFusion" << std::endl;
+			// std::cout << "newDataSFusion" << std::endl;
 			sFusionFile.write(reinterpret_cast<const char*>(&listener.dataSFusion.time()), sizeof(listener.dataSFusion.time()));
 			sFusionFile.write(reinterpret_cast<const char*>(&listener.dataSFusion.gyrX()), sizeof(listener.dataSFusion.gyrX()));
 			sFusionFile.write(reinterpret_cast<const char*>(&listener.dataSFusion.gyrY()), sizeof(listener.dataSFusion.gyrY()));
@@ -427,7 +427,7 @@ void Log::run() {
 		}
 		if (listener.newDataAhrs) {
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-			std::cout << "newDataAhrs" << std::endl;
+			// std::cout << "newDataAhrs" << std::endl;
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.time()), sizeof(listener.dataAhrs.time()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.senseTime()), sizeof(listener.dataAhrs.senseTime()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrX()), sizeof(listener.dataAhrs.gyrX()));
@@ -455,7 +455,7 @@ void Log::run() {
 		}
 		if (listener.newDataAir) {
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
-			std::cout << "newDataAir" << std::endl;
+			// std::cout << "newDataAir" << std::endl;
 			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.time()), sizeof(listener.dataAir.time()));
 			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.senseTime()), sizeof(listener.dataAir.senseTime()));
 			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.dynamicPress()), sizeof(listener.dataAir.dynamicPress()));
@@ -470,7 +470,7 @@ void Log::run() {
 		}
 		if (listener.newDataPsu) {
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
-			std::cout << "newDataPsu" << std::endl;
+			// std::cout << "newDataPsu" << std::endl;
 			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.time()), sizeof(listener.dataPsu.time()));
 			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.senseTime()), sizeof(listener.dataPsu.senseTime()));
 			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainVolt()), sizeof(listener.dataPsu.mainVolt()));
@@ -489,7 +489,7 @@ void Log::run() {
 		}
 		if (listener.newDataCtrl) {
 			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
-			std::cout << "newDataCtrl" << std::endl;
+			// std::cout << "newDataCtrl" << std::endl;
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.time()), sizeof(listener.dataCtrl.time()));
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.xi()), sizeof(listener.dataCtrl.xi()));
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.eta()), sizeof(listener.dataCtrl.eta()));
@@ -504,7 +504,7 @@ void Log::run() {
 		}
 		if (listener.newDataDownlink) {
 			std::unique_lock<std::mutex> dataDownlinkLock {listener.dataDownlinkMutex};
-			std::cout << "newDataDownlink" << std::endl;
+			// std::cout << "newDataDownlink" << std::endl;
 			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.time()), sizeof(listener.dataDownlink.time()));
 			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.alive()), sizeof(listener.dataDownlink.alive()));
 			downlinkFile.flush();
