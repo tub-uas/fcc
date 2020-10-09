@@ -11,6 +11,8 @@
 **/out-temp
 **/temp
 *.dat
+**/logs
+*.log
 
 *cache*
 
