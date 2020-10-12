@@ -284,7 +284,7 @@ void SFusion::run() {
 }
 
 
-bool SFusion::print() {
+void SFusion::print() {
 
 	std::cout << "--- " << this->name << " " << dataSFusion.time() << " ---" << std::endl;
 
@@ -320,5 +320,4 @@ bool SFusion::print() {
 	std::cout << "gamma  " << dataSFusion.gamma() << std::endl;
 	std::cout << "alive  " << dataSFusion.alive() << std::endl;
 
-	return true;
 }

@@ -159,7 +159,7 @@ void Gps::run() {
 
 }
 
-bool Gps::print() {
+void Gps::print() {
 
 	std::cout << "--- " << this->name << " " << dataGps.time() << " ---" << std::endl;
 
@@ -184,5 +184,4 @@ bool Gps::print() {
 	std::cout << "p3        " << dataGps.p3() << std::endl;
 	std::cout << "alive     " << dataGps.alive() << std::endl;
 
-	return true;
 }

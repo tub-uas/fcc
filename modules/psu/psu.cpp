@@ -150,7 +150,7 @@ void Psu::run() {
 
 }
 
-bool Psu::print() {
+void Psu::print() {
 
 	std::cout << "--- " << this->name << " " << dataPsu.time() << " ---" << std::endl;
 
@@ -166,5 +166,4 @@ bool Psu::print() {
 	std::cout << "sysPow    " << dataPsu.sysPow() << std::endl;
 	std::cout << "alive     " << dataPsu.alive() << std::endl;
 
-	return true;
 }

@@ -248,7 +248,7 @@ void RaiOut::run() {
 
 }
 
-bool RaiOut::print() {
+void RaiOut::print() {
 
 	std::cout << "--- " << this->name << " " << dataRaiOut.time() << " ---" << std::endl;
 
@@ -263,5 +263,4 @@ bool RaiOut::print() {
 	std::cout << "fltMode   " << dataRaiOut.fltMode() << std::endl;
 	std::cout << "alive     " << dataRaiOut.alive() << std::endl;
 
-	return true;
 }

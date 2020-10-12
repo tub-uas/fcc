@@ -146,7 +146,7 @@ void Air::run() {
 
 }
 
-bool Air::print() {
+void Air::print() {
 
 	std::cout << "--- " << this->name << " " << dataAir.time() << " ---" << std::endl;
 
@@ -158,5 +158,4 @@ bool Air::print() {
 	std::cout << "temp         " << dataAir.temp() << std::endl;
 	std::cout << "alive        " << dataAir.alive() << std::endl;
 
-	return true;
 }

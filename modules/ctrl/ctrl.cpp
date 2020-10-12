@@ -311,7 +311,7 @@ void Ctrl::run() {
 
 }
 
-bool Ctrl::print() {
+void Ctrl::print() {
 
 	std::cout << "--- " << this->name << " " << dataCtrl.time() << " ---" << std::endl;
 
@@ -323,5 +323,4 @@ bool Ctrl::print() {
 	std::cout << "fltMode " << dataCtrl.fltMode() << std::endl;
 	std::cout << "alive   " << dataCtrl.alive() << std::endl;
 
-	return true;
 }

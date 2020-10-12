@@ -159,7 +159,7 @@ void Ahrs::run() {
 
 }
 
-bool Ahrs::print() {
+void Ahrs::print() {
 
 	std::cout << "--- " << this->name << " " << dataAhrs.time() << " ---" << std::endl;
 
@@ -184,5 +184,4 @@ bool Ahrs::print() {
 	std::cout << "q3        " << dataAhrs.q3() << std::endl;
 	std::cout << "alive     " << dataAhrs.alive() << std::endl;
 
-	return true;
 }

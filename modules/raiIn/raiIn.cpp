@@ -148,7 +148,7 @@ void RaiIn::run() {
 
 }
 
-bool RaiIn::print() {
+void RaiIn::print() {
 
 	std::cout << "--- " << this->name << " " << dataRaiIn.time() << " ---" << std::endl;
 
@@ -163,5 +163,4 @@ bool RaiIn::print() {
 	std::cout << "fltMode   " << dataRaiIn.fltMode() << std::endl;
 	std::cout << "alive     " << dataRaiIn.alive() << std::endl;
 
-	return true;
 }

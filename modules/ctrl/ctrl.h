@@ -72,7 +72,7 @@ public:
 	bool init();
 	void run();
 	void publish();
-	bool print();
+	void print();
 
 private:
 
