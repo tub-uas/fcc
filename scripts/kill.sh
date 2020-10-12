@@ -12,8 +12,8 @@ echo "----- Killing modules on branch $BRANCH ------"
 
 for mod in "${ACTIVE_MODULES[@]}"
 do
-	echo "pkill -u pi $mod"
-	      pkill -u pi $mod
+	echo "pkill -u $USER $mod"
+	      pkill -u $USER $mod
 done
 
 echo "----- `basename "$0"` done on branch $BRANCH ------"
