@@ -29,9 +29,7 @@
 #include "../../util/mixer/mixer.h"
 #include "../../util/timer/timer.h"
 
-using namespace eprosima::fastdds::dds;
-
-class Listener : public DataWriterListener, public DataReaderListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
 public:
 
@@ -39,13 +37,13 @@ public:
 
 	~Listener() override;
 
-	void on_publication_matched(DataWriter*,
-	                            const PublicationMatchedStatus& info) override;
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
-	void on_subscription_matched(DataReader*,
-	                             const SubscriptionMatchedStatus& info) override;
+	void on_subscription_matched(eprosima::fastdds::dds::DataReader*,
+	                             const eprosima::fastdds::dds::SubscriptionMatchedStatus& info) override;
 
-    void on_data_available(DataReader *reader) override;
+    void on_data_available(eprosima::fastdds::dds::DataReader *reader) override;
 
 	DataCtrl dataCtrl;
 	std::mutex dataCtrlMutex;
@@ -74,20 +72,20 @@ public:
 
 private:
 
-	DomainParticipant *participant;
-	Publisher         *publisher;
-	Subscriber        *subscriber;
-	Listener           listener;
+	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
+	eprosima::fastdds::dds::Subscriber        *subscriber;
+	Listener     listener;
 
-	Topic       *topicRaiOut;
-	DataWriter  *writerRaiOut;
-	TypeSupport  typeRaiOut;
+	eprosima::fastdds::dds::Topic       *topicRaiOut;
+	eprosima::fastdds::dds::DataWriter  *writerRaiOut;
+	eprosima::fastdds::dds::TypeSupport  typeRaiOut;
 	DataRaiOut   dataRaiOut;
 	std::mutex   dataRaiOutMutex;
 
-	Topic       *topicCtrl;
-	DataReader  *readerCtrl;
-	TypeSupport  typeCtrl;
+	eprosima::fastdds::dds::Topic       *topicCtrl;
+	eprosima::fastdds::dds::DataReader  *readerCtrl;
+	eprosima::fastdds::dds::TypeSupport  typeCtrl;
 
 	RaiCom raiCom;
 	Mixer  mixer;

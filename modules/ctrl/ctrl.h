@@ -29,9 +29,7 @@
 #include "../../util/mixer/mixer.h"
 #include "../../util/timer/timer.h"
 
-using namespace eprosima::fastdds::dds;
-
-class Listener : public DataWriterListener, public DataReaderListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
 public:
 
@@ -39,13 +37,13 @@ public:
 
 	~Listener() override;
 
-	void on_publication_matched(DataWriter*,
-	                            const PublicationMatchedStatus& info) override;
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
-	void on_subscription_matched(DataReader*,
-	                             const SubscriptionMatchedStatus& info) override;
+	void on_subscription_matched(eprosima::fastdds::dds::DataReader*,
+	                             const eprosima::fastdds::dds::SubscriptionMatchedStatus& info) override;
 
-    void on_data_available(DataReader *reader) override;
+    void on_data_available(eprosima::fastdds::dds::DataReader *reader) override;
 
 	DataRaiIn dataRaiIn;
 	std::mutex dataRaiInMutex;
@@ -78,24 +76,24 @@ public:
 
 private:
 
-	DomainParticipant *participant;
-	Publisher         *publisher;
-	Subscriber        *subscriber;
-	Listener           listener;
+	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
+	eprosima::fastdds::dds::Subscriber        *subscriber;
+	Listener     listener;
 
-	Topic       *topicCtrl;
-	DataWriter  *writerCtrl;
-	TypeSupport  typeCtrl;
+	eprosima::fastdds::dds::Topic       *topicCtrl;
+	eprosima::fastdds::dds::DataWriter  *writerCtrl;
+	eprosima::fastdds::dds::TypeSupport  typeCtrl;
 	DataCtrl     dataCtrl;
 	std::mutex   dataCtrlMutex;
 
-	Topic       *topicRaiIn;
-	DataReader  *readerRaiIn;
-	TypeSupport  typeRaiIn;
+	eprosima::fastdds::dds::Topic       *topicRaiIn;
+	eprosima::fastdds::dds::DataReader  *readerRaiIn;
+	eprosima::fastdds::dds::TypeSupport  typeRaiIn;
 
-	Topic       *topicSFusion;
-	DataReader  *readerSFusion;
-	TypeSupport  typeSFusion;
+	eprosima::fastdds::dds::Topic       *topicSFusion;
+	eprosima::fastdds::dds::DataReader  *readerSFusion;
+	eprosima::fastdds::dds::TypeSupport  typeSFusion;
 
 	Timer  timer;
 	Pid    pidRoll;

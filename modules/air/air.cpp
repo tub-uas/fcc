@@ -10,8 +10,8 @@ Listener::Listener() : publication_matched(0) {
 Listener::~Listener() {
 }
 
-void Listener::on_publication_matched(DataWriter*,
-                                      const PublicationMatchedStatus& info) {
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
 
 	if (info.current_count_change == 1) {
 		publication_matched = info.total_count;
@@ -46,7 +46,7 @@ Air::~Air() {
 		participant->delete_publisher(publisher);
 	}
 
-	DomainParticipantFactory::get_instance()->delete_participant(participant);
+	eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->delete_participant(participant);
 
 }
 
@@ -57,9 +57,9 @@ bool Air::init() {
 
 	std::cout << std::setprecision(4) << std::fixed;
 
-	DomainParticipantQos participantQos;
+	eprosima::fastdds::dds::DomainParticipantQos participantQos;
 	participantQos.name("AirParticipant");
-	participant = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
+	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
 		return false;
 	}
@@ -68,19 +68,19 @@ bool Air::init() {
 	typeAir.register_type(participant);
 
 	// Create the publications Topic
-	topicAir = participant->create_topic("DataAir", "DataAir", TOPIC_QOS_DEFAULT);
+	topicAir = participant->create_topic("DataAir", "DataAir", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topicAir == nullptr) {
 		return false;
 	}
 
 	// Create the Publisher
-	publisher = participant->create_publisher(PUBLISHER_QOS_DEFAULT, nullptr);
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
 	if (publisher == nullptr) {
 		return false;
 	}
 
 	// Create the DataWriter
-	writerAir = publisher->create_datawriter(topicAir, DATAWRITER_QOS_DEFAULT, &listener);
+	writerAir = publisher->create_datawriter(topicAir, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
 	if (writerAir == nullptr) {
 		return false;
 	}

@@ -11,8 +11,8 @@ Listener::Listener() : publication_matched(0),
 Listener::~Listener() {
 }
 
-void Listener::on_publication_matched(DataWriter*,
-                                      const PublicationMatchedStatus& info) {
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
 
 	if (info.current_count_change == 1) {
 		publication_matched = info.total_count;
@@ -26,8 +26,8 @@ void Listener::on_publication_matched(DataWriter*,
 	}
 }
 
-void Listener::on_subscription_matched(DataReader*,
-                                       const SubscriptionMatchedStatus& info) {
+void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
+                                       const eprosima::fastdds::dds::SubscriptionMatchedStatus& info) {
 
 	if (info.current_count_change == 1) {
 		subscription_matched = info.total_count;
@@ -41,13 +41,13 @@ void Listener::on_subscription_matched(DataReader*,
 	}
 }
 
-void Listener::on_data_available(DataReader* reader) {
+void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
-	SampleInfo info;
+	eprosima::fastdds::dds::SampleInfo info;
 	void* data = reader->type().create_data();
 
 	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == ALIVE && info.valid_data) {
+		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
 			if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
 				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
 				reader->take_next_sample(&dataCtrl, &info);
@@ -104,7 +104,7 @@ RaiOut::~RaiOut() {
 		participant->delete_subscriber(subscriber);
 	}
 
-	DomainParticipantFactory::get_instance()->delete_participant(participant);
+	eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->delete_participant(participant);
 
 }
 
@@ -115,9 +115,9 @@ bool RaiOut::init() {
 
 	std::cout << std::setprecision(4) << std::fixed;
 
-	DomainParticipantQos participantQos;
+	eprosima::fastdds::dds::DomainParticipantQos participantQos;
 	participantQos.name("RaiOutParticipant");
-	participant = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
+	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
 		return false;
 	}
@@ -126,19 +126,19 @@ bool RaiOut::init() {
 	typeRaiOut.register_type(participant);
 
 	// Create the publications Topic
-	topicRaiOut = participant->create_topic("DataRaiOut", "DataRaiOut", TOPIC_QOS_DEFAULT);
+	topicRaiOut = participant->create_topic("DataRaiOut", "DataRaiOut", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topicRaiOut == nullptr) {
 		return false;
 	}
 
 	// Create the Publisher
-	publisher = participant->create_publisher(PUBLISHER_QOS_DEFAULT, nullptr);
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
 	if (publisher == nullptr) {
 		return false;
 	}
 
 	// Create the DataWriter
-	writerRaiOut = publisher->create_datawriter(topicRaiOut, DATAWRITER_QOS_DEFAULT, &listener);
+	writerRaiOut = publisher->create_datawriter(topicRaiOut, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
 	if (writerRaiOut == nullptr) {
 		return false;
 	}
@@ -147,19 +147,19 @@ bool RaiOut::init() {
 	typeCtrl.register_type(participant);
 
 	// Create the subscriptions Topic
-	topicCtrl = participant->create_topic("DataCtrl", "DataCtrl", TOPIC_QOS_DEFAULT);
+	topicCtrl = participant->create_topic("DataCtrl", "DataCtrl", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topicCtrl == nullptr) {
 		return false;
 	}
 
 	// Create the Subscriber
-	subscriber = participant->create_subscriber(SUBSCRIBER_QOS_DEFAULT, nullptr);
+	subscriber = participant->create_subscriber(eprosima::fastdds::dds::SUBSCRIBER_QOS_DEFAULT, nullptr);
 	if (subscriber == nullptr) {
 		return false;
 	}
 
 	// Create the DataReader
-	readerCtrl = subscriber->create_datareader(topicCtrl, DATAREADER_QOS_DEFAULT, &listener);
+	readerCtrl = subscriber->create_datareader(topicCtrl, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerCtrl == nullptr) {
 		return false;
 	}

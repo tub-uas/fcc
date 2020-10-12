@@ -10,8 +10,8 @@ Listener::Listener() : publication_matched(0) {
 Listener::~Listener() {
 }
 
-void Listener::on_publication_matched(DataWriter*,
-                                      const PublicationMatchedStatus& info) {
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
 
 	if (info.current_count_change == 1) {
 		publication_matched = info.total_count;
@@ -46,7 +46,7 @@ Ahrs::~Ahrs() {
 		participant->delete_publisher(publisher);
 	}
 
-	DomainParticipantFactory::get_instance()->delete_participant(participant);
+	eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->delete_participant(participant);
 
 }
 
@@ -57,9 +57,9 @@ bool Ahrs::init() {
 
 	std::cout << std::setprecision(4) << std::fixed;
 
-	DomainParticipantQos participantQos;
+	eprosima::fastdds::dds::DomainParticipantQos participantQos;
 	participantQos.name("AhrsParticipant");
-	participant = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
+	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
 		return false;
 	}
@@ -68,19 +68,19 @@ bool Ahrs::init() {
 	typeAhrs.register_type(participant);
 
 	// Create the publications Topic
-	topicAhrs = participant->create_topic("DataAhrs", "DataAhrs", TOPIC_QOS_DEFAULT);
+	topicAhrs = participant->create_topic("DataAhrs", "DataAhrs", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topicAhrs == nullptr) {
 		return false;
 	}
 
 	// Create the Publisher
-	publisher = participant->create_publisher(PUBLISHER_QOS_DEFAULT, nullptr);
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
 	if (publisher == nullptr) {
 		return false;
 	}
 
 	// Create the DataWriter
-	writerAhrs = publisher->create_datawriter(topicAhrs, DATAWRITER_QOS_DEFAULT, &listener);
+	writerAhrs = publisher->create_datawriter(topicAhrs, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
 	if (writerAhrs == nullptr) {
 		return false;
 	}

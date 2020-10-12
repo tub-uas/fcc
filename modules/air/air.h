@@ -21,9 +21,7 @@
 #include "../../util/airCom/airCom.h"
 #include "../../util/timer/timer.h"
 
-using namespace eprosima::fastdds::dds;
-
-class Listener : public DataWriterListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener
 {
 
 public:
@@ -32,8 +30,8 @@ public:
 
 	~Listener() override;
 
-	void on_publication_matched(DataWriter*,
-	                            const PublicationMatchedStatus& info) override;
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
 private:
 	std::atomic_int publication_matched;
@@ -57,13 +55,13 @@ public:
 
 private:
 
-	DomainParticipant *participant;
-	Publisher         *publisher;
+	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
 	Listener           listener;
 
-	Topic       *topicAir;
-	DataWriter  *writerAir;
-	TypeSupport  typeAir;
+	eprosima::fastdds::dds::Topic       *topicAir;
+	eprosima::fastdds::dds::DataWriter  *writerAir;
+	eprosima::fastdds::dds::TypeSupport  typeAir;
 	DataAir      dataAir;
 	std::mutex   dataAirMutex;
 

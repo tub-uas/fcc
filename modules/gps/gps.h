@@ -21,9 +21,7 @@
 #include "../../util/gpsCom/gpsCom.h"
 #include "../../util/timer/timer.h"
 
-using namespace eprosima::fastdds::dds;
-
-class Listener : public DataWriterListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener
 {
 
 public:
@@ -32,8 +30,8 @@ public:
 
 	~Listener() override;
 
-	void on_publication_matched(DataWriter*,
-	                            const PublicationMatchedStatus& info) override;
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
 private:
 	std::atomic_int publication_matched;
@@ -57,13 +55,13 @@ public:
 
 private:
 
-	DomainParticipant *participant;
-	Publisher         *publisher;
-	Listener           listener;
+	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
+	Listener     listener;
 
-	Topic       *topicGps;
-	DataWriter  *writerGps;
-	TypeSupport  typeGps;
+	eprosima::fastdds::dds::Topic       *topicGps;
+	eprosima::fastdds::dds::DataWriter  *writerGps;
+	eprosima::fastdds::dds::TypeSupport  typeGps;
 	DataGps      dataGps;
 	std::mutex   dataGpsMutex;
 

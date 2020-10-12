@@ -22,9 +22,7 @@
 #include "../../util/mixer/mixer.h"
 #include "../../util/timer/timer.h"
 
-using namespace eprosima::fastdds::dds;
-
-class Listener : public DataWriterListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener
 {
 
 public:
@@ -33,8 +31,8 @@ public:
 
 	~Listener() override;
 
-	void on_publication_matched(DataWriter*,
-	                            const PublicationMatchedStatus& info) override;
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
 private:
 	std::atomic_int publication_matched;
@@ -58,13 +56,13 @@ public:
 
 private:
 
-	DomainParticipant *participant;
-	Publisher         *publisher;
-	Listener           listener;
+	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
+	Listener     listener;
 
-	Topic       *topicRaiIn;
-	DataWriter  *writerRaiIn;
-	TypeSupport  typeRaiIn;
+	eprosima::fastdds::dds::Topic       *topicRaiIn;
+	eprosima::fastdds::dds::DataWriter  *writerRaiIn;
+	eprosima::fastdds::dds::TypeSupport  typeRaiIn;
 	DataRaiIn    dataRaiIn;
 	std::mutex   dataRaiInMutex;
 

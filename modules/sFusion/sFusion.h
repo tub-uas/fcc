@@ -27,9 +27,7 @@
 
 #include "../../util/timer/timer.h"
 
-using namespace eprosima::fastdds::dds;
-
-class Listener : public DataWriterListener, public DataReaderListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
 public:
 
@@ -37,13 +35,13 @@ public:
 
 	~Listener() override;
 
-	void on_publication_matched(DataWriter*,
-	                            const PublicationMatchedStatus& info) override;
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
-	void on_subscription_matched(DataReader*,
-	                             const SubscriptionMatchedStatus& info) override;
+	void on_subscription_matched(eprosima::fastdds::dds::DataReader*,
+	                             const eprosima::fastdds::dds::SubscriptionMatchedStatus& info) override;
 
-	void on_data_available(DataReader *reader) override;
+	void on_data_available(eprosima::fastdds::dds::DataReader *reader) override;
 
 	DataAhrs dataAhrs;
 	std::mutex dataAhrsMutex;
@@ -76,24 +74,24 @@ public:
 
 private:
 
-	DomainParticipant *participant;
-	Publisher         *publisher;
-	Subscriber        *subscriber;
-	Listener           listener;
+	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
+	eprosima::fastdds::dds::Subscriber        *subscriber;
+	Listener     listener;
 
-	Topic       *topicSFusion;
-	DataWriter  *writerSFusion;
-	TypeSupport  typeSFusion;
+	eprosima::fastdds::dds::Topic       *topicSFusion;
+	eprosima::fastdds::dds::DataWriter  *writerSFusion;
+	eprosima::fastdds::dds::TypeSupport  typeSFusion;
 	DataSFusion  dataSFusion;
 	std::mutex   dataSFusionMutex;
 
-	Topic       *topicAhrs;
-	DataReader  *readerAhrs;
-	TypeSupport  typeAhrs;
+	eprosima::fastdds::dds::Topic       *topicAhrs;
+	eprosima::fastdds::dds::DataReader  *readerAhrs;
+	eprosima::fastdds::dds::TypeSupport  typeAhrs;
 
-	Topic       *topicAir;
-	DataReader  *readerAir;
-	TypeSupport  typeAir;
+	eprosima::fastdds::dds::Topic       *topicAir;
+	eprosima::fastdds::dds::DataReader  *readerAir;
+	eprosima::fastdds::dds::TypeSupport  typeAir;
 
 	Timer  timer;
 

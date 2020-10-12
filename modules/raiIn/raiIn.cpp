@@ -10,8 +10,8 @@ Listener::Listener() : publication_matched(0) {
 Listener::~Listener() {
 }
 
-void Listener::on_publication_matched(DataWriter*,
-                                      const PublicationMatchedStatus& info) {
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
 
 	if (info.current_count_change == 1) {
 		publication_matched = info.total_count;
@@ -46,8 +46,7 @@ RaiIn::~RaiIn() {
 		participant->delete_publisher(publisher);
 	}
 
-	DomainParticipantFactory::get_instance()->delete_participant(participant);
-
+	eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->delete_participant(participant);
 }
 
 
@@ -57,9 +56,9 @@ bool RaiIn::init() {
 
 	std::cout << std::setprecision(4) << std::fixed;
 
-	DomainParticipantQos participantQos;
+	eprosima::fastdds::dds::DomainParticipantQos participantQos;
 	participantQos.name("RaiInParticipant");
-	participant = DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
+	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
 		return false;
 	}
@@ -68,19 +67,19 @@ bool RaiIn::init() {
 	typeRaiIn.register_type(participant);
 
 	// Create the publications Topic
-	topicRaiIn = participant->create_topic("DataRaiIn", "DataRaiIn", TOPIC_QOS_DEFAULT);
+	topicRaiIn = participant->create_topic("DataRaiIn", "DataRaiIn", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topicRaiIn == nullptr) {
 		return false;
 	}
 
 	// Create the Publisher
-	publisher = participant->create_publisher(PUBLISHER_QOS_DEFAULT, nullptr);
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
 	if (publisher == nullptr) {
 		return false;
 	}
 
 	// Create the DataWriter
-	writerRaiIn = publisher->create_datawriter(topicRaiIn, DATAWRITER_QOS_DEFAULT, &listener);
+	writerRaiIn = publisher->create_datawriter(topicRaiIn, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
 	if (writerRaiIn == nullptr) {
 		return false;
 	}
