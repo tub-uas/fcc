@@ -277,8 +277,8 @@ void Ctrl::run() {
 
 			} else if (listener.dataRaiIn.fltMode() == Mixer::ATT) {
 				dataCtrl.xi(outRoll);
-				dataCtrl.eta(listener.dataRaiIn.pitch());
-				dataCtrl.zeta(listener.dataRaiIn.yaw());
+				dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
+				dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
 
 				pidPitch.reset();
 				// pidYaw.reset();
@@ -286,7 +286,7 @@ void Ctrl::run() {
 			} else if (listener.dataRaiIn.fltMode() == Mixer::NAV) {
 				dataCtrl.xi(outRoll);
 				dataCtrl.eta(outPitch);
-				dataCtrl.zeta(listener.dataRaiIn.yaw());
+				dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
 
 				// dataCtrl.zeta(outYaw);
 			}
