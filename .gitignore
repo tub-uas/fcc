@@ -12,6 +12,7 @@
 **/temp
 *.dat
 **/logs
+**/decoded
 *.log
 
 *cache*
