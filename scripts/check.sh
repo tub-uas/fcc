@@ -20,4 +20,8 @@ do
 		fi
 done
 
+echo "----- Checking if logs are present on branch $BRANCH ------"
+
+du -csh ../logs/*
+
 echo "----- `basename "$0"` done on branch $BRANCH ------"
