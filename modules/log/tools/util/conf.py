@@ -49,4 +49,4 @@ class Conf():
 
     def readConf(self):
         with open("config.yaml", 'r') as stream:
-            self._modules= yaml.load(stream)['active-modules']
+            self._modules= yaml.safe_load(stream)['active-modules']
