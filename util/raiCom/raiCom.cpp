@@ -36,8 +36,9 @@ bool RaiCom::receive() {
 		drv_can_read(can_sckt, &frame);
 
 		if (frame.can_id != in_ids[i]) {
-			std::cout << "RaiCom decode error, can id should be " << frame.can_id
-			          << " but is " << in_ids[i] << std::endl;
+			std::cout << "RaiCom decode error, can id should be "
+			          << std::hex << in_ids[i] << std::dec << " but is "
+			          << std::hex << frame.can_id << std::dec << std::endl;
 			return false;
 		}
 

@@ -37,8 +37,8 @@ bool PsuCom::receive() {
 
 		if (frame.can_id != in_ids[i]) {
 			std::cout << "PsuCom decode error, can id should be "
-			          << std::hex << frame.can_id << std::dec << " but is "
-			          << std::hex << in_ids[i] << std::dec << std::endl;
+			          << std::hex << in_ids[i] << std::dec << " but is "
+			          << std::hex << frame.can_id << std::dec << std::endl;
 			return false;
 		}
 
