@@ -39,7 +39,7 @@ add_library(drv_can ${DRIVER_PATH}/drv_can/drv_can.cpp)
 add_library(psuCom ${UTIL_PATH}/psuCom/psuCom.cpp)
 target_link_libraries(psuCom drv_can)
 
-add_library(DataPsu ./idl/DataPsu.cxx ./idl/DataPsuPubSubTypes.cxx)
+add_library(DataPsu ./${IDL_PATH}/DataPsu.cxx ./${IDL_PATH}/DataPsuPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataPsu drv_can psuCom timer)

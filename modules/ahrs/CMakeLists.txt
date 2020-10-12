@@ -39,7 +39,7 @@ add_library(drv_can ${DRIVER_PATH}/drv_can/drv_can.cpp)
 add_library(ahrsCom ${UTIL_PATH}/ahrsCom/ahrsCom.cpp)
 target_link_libraries(ahrsCom drv_can)
 
-add_library(DataAhrs ./idl/DataAhrs.cxx ./idl/DataAhrsPubSubTypes.cxx)
+add_library(DataAhrs ./${IDL_PATH}/DataAhrs.cxx ./${IDL_PATH}/DataAhrsPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataAhrs drv_can ahrsCom timer)

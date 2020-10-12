@@ -37,9 +37,9 @@ set(DRIVER_PATH "../../driver")
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 add_library(pid ${UTIL_PATH}/pid/pid.cpp)
 
-add_library(DataCtrl ./idl/DataCtrl.cxx ./idl/DataCtrlPubSubTypes.cxx)
-add_library(DataRaiIn ../raiIn/idl/DataRaiIn.cxx ../raiIn/idl/DataRaiInPubSubTypes.cxx)
-add_library(DataSFusion ../sFusion/idl/DataSFusion.cxx ../sFusion/idl/DataSFusionPubSubTypes.cxx)
+add_library(DataCtrl ./${IDL_PATH}/DataCtrl.cxx ./${IDL_PATH}/DataCtrlPubSubTypes.cxx)
+add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
+add_library(DataSFusion ../sFusion/${IDL_PATH}/DataSFusion.cxx ../sFusion/${IDL_PATH}/DataSFusionPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataCtrl DataRaiIn DataSFusion pid timer)

@@ -39,7 +39,7 @@ add_library(drv_can ${DRIVER_PATH}/drv_can/drv_can.cpp)
 add_library(gpsCom ${UTIL_PATH}/gpsCom/gpsCom.cpp)
 target_link_libraries(gpsCom drv_can)
 
-add_library(DataGps ./idl/DataGps.cxx ./idl/DataGpsPubSubTypes.cxx)
+add_library(DataGps ./${IDL_PATH}/DataGps.cxx ./${IDL_PATH}/DataGpsPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataGps drv_can gpsCom timer)

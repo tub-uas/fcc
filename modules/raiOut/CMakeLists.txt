@@ -40,8 +40,8 @@ add_library(raiCom ${UTIL_PATH}/raiCom/raiCom.cpp)
 add_library(mixer ${UTIL_PATH}/mixer/mixer.cpp)
 target_link_libraries(raiCom drv_can)
 
-add_library(DataRaiOut ./idl/DataRaiOut.cxx ./idl/DataRaiOutPubSubTypes.cxx)
-add_library(DataCtrl ../ctrl/idl/DataCtrl.cxx ../ctrl/idl/DataCtrlPubSubTypes.cxx)
+add_library(DataRaiOut ./${IDL_PATH}/DataRaiOut.cxx ./${IDL_PATH}/DataRaiOutPubSubTypes.cxx)
+add_library(DataCtrl ../ctrl/${IDL_PATH}/DataCtrl.cxx ../ctrl/${IDL_PATH}/DataCtrlPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataRaiOut DataCtrl drv_can raiCom timer mixer)

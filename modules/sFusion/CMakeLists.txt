@@ -36,10 +36,10 @@ set(DRIVER_PATH "../../driver")
 
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 
-add_library(DataSFusion ./idl/DataSFusion.cxx ./idl/DataSFusionPubSubTypes.cxx)
-add_library(DataAhrs ../ahrs/idl/DataAhrs.cxx ../ahrs/idl/DataAhrsPubSubTypes.cxx)
-add_library(DataAir ../air/idl/DataAir.cxx ../air/idl/DataAirPubSubTypes.cxx)
-# add_library(DataGps ../gps/idl/DataGps.cxx ../gps/idl/DataGpsPubSubTypes.cxx)
+add_library(DataSFusion ./${IDL_PATH}/DataSFusion.cxx ./${IDL_PATH}/DataSFusionPubSubTypes.cxx)
+add_library(DataAhrs ../ahrs/${IDL_PATH}/DataAhrs.cxx ../ahrs/${IDL_PATH}/DataAhrsPubSubTypes.cxx)
+add_library(DataAir ../air/${IDL_PATH}/DataAir.cxx ../air/${IDL_PATH}/DataAirPubSubTypes.cxx)
+# add_library(DataGps ../gps/${IDL_PATH}/DataGps.cxx ../gps/${IDL_PATH}/DataGpsPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs DataAir timer)

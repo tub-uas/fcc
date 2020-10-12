@@ -35,20 +35,21 @@ message(STATUS "Configuring ${PROJECT_NAME}")
 
 add_compile_options(-Wall -Wextra -Werror)
 
+set(IDL_PATH "idl")
 set(UTIL_PATH "../../util")
 set(DRIVER_PATH "../../driver")
 
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 
 ###PYTHON_GEN_ADD_LIBRARY
-add_library(DataRaiIn ../raiIn/idl/DataRaiIn.cxx ../raiIn/idl/DataRaiInPubSubTypes.cxx)
-add_library(DataRaiOut ../raiOut/idl/DataRaiOut.cxx ../raiOut/idl/DataRaiOutPubSubTypes.cxx)
-add_library(DataSFusion ../sFusion/idl/DataSFusion.cxx ../sFusion/idl/DataSFusionPubSubTypes.cxx)
-add_library(DataAhrs ../ahrs/idl/DataAhrs.cxx ../ahrs/idl/DataAhrsPubSubTypes.cxx)
-add_library(DataAir ../air/idl/DataAir.cxx ../air/idl/DataAirPubSubTypes.cxx)
-add_library(DataPsu ../psu/idl/DataPsu.cxx ../psu/idl/DataPsuPubSubTypes.cxx)
-add_library(DataCtrl ../ctrl/idl/DataCtrl.cxx ../ctrl/idl/DataCtrlPubSubTypes.cxx)
-add_library(DataDownlink ../downlink/idl/DataDownlink.cxx ../downlink/idl/DataDownlinkPubSubTypes.cxx)
+add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
+add_library(DataRaiOut ../raiOut/${IDL_PATH}/DataRaiOut.cxx ../raiOut/${IDL_PATH}/DataRaiOutPubSubTypes.cxx)
+add_library(DataSFusion ../sFusion/${IDL_PATH}/DataSFusion.cxx ../sFusion/${IDL_PATH}/DataSFusionPubSubTypes.cxx)
+add_library(DataAhrs ../ahrs/${IDL_PATH}/DataAhrs.cxx ../ahrs/${IDL_PATH}/DataAhrsPubSubTypes.cxx)
+add_library(DataAir ../air/${IDL_PATH}/DataAir.cxx ../air/${IDL_PATH}/DataAirPubSubTypes.cxx)
+add_library(DataPsu ../psu/${IDL_PATH}/DataPsu.cxx ../psu/${IDL_PATH}/DataPsuPubSubTypes.cxx)
+add_library(DataCtrl ../ctrl/${IDL_PATH}/DataCtrl.cxx ../ctrl/${IDL_PATH}/DataCtrlPubSubTypes.cxx)
+add_library(DataDownlink ../downlink/${IDL_PATH}/DataDownlink.cxx ../downlink/${IDL_PATH}/DataDownlinkPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 

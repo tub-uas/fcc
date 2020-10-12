@@ -39,7 +39,7 @@ set(DRIVER_PATH "../../driver")
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 add_library(serial ${DRIVER_PATH}/drv_serial/drv_serial.cpp)
 
-add_library(DataDownlink ./idl/DataDownlink.cxx ./idl/DataDownlinkPubSubTypes.cxx)
+add_library(DataDownlink ./${IDL_PATH}/DataDownlink.cxx ./${IDL_PATH}/DataDownlinkPubSubTypes.cxx)
 add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
 add_library(DataRaiOut ../raiOut/${IDL_PATH}/DataRaiOut.cxx ../raiOut/${IDL_PATH}/DataRaiOutPubSubTypes.cxx)
 add_library(DataSFusion ../sFusion/${IDL_PATH}/DataSFusion.cxx ../sFusion/${IDL_PATH}/DataSFusionPubSubTypes.cxx)
