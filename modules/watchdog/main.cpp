@@ -16,7 +16,7 @@ int main(int argc, const char* argv[]) {
 	if (watchdog->init()) {
 		std::thread run([&] (Watchdog *watchdog) { watchdog->run(); }, watchdog);
 		std::thread led([&] (Watchdog *watchdog) { watchdog->led(); }, watchdog);
-		std::thread led([&] (Watchdog *watchdog) { watchdog->publish(); }, watchdog);
+		std::thread publish([&] (Watchdog *watchdog) { watchdog->publish(); }, watchdog);
 		run.join();
 		led.join();
 		publish.join();
