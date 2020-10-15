@@ -99,7 +99,7 @@ public:
 	void publish();
 	void print();
 
-	const unsigned long long aliveReset = 1e5;
+	const unsigned long long aliveReset = 1e5; // in us
 	std::atomic_ullong aliveTime;
 
 private:
