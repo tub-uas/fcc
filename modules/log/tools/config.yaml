@@ -1,10 +1,13 @@
 ---
- active-modules:
-   - raiIn
-   - raiOut
-   - sFusion
-   - ahrs
-   - air
-   - psu
-   - ctrl
-   - downlink
+active-modules:
+    - ahrs
+    - air
+    - ctrl
+    - downlink
+    # - gps
+    - psu
+    - raiIn
+    - raiOut
+    - sFusion
+    # - uplink
+    - watchdog
