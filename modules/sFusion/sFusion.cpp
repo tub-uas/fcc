@@ -281,12 +281,12 @@ void SFusion::run() {
 				aliveTime = timer.getSysTime();
 			}
 
+			listener.newDataAhrs = false;
+			listener.newDataAir = false;
+
 			dataAhrsLock.unlock();
 			dataAirLock.unlock();
 			dataSFusionLock.unlock();
-
-			listener.newDataAhrs = false;
-			listener.newDataAir = false;
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);

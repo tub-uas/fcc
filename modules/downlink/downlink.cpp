@@ -395,8 +395,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataRaiIn" << std::endl;
 			}
 
-			dataRaiInLock.unlock();
 			listener.newDataRaiIn = false;
+			dataRaiInLock.unlock();
 		}
 
 		if (listener.newDataRaiOut &&
@@ -428,8 +428,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataRaiOut" << std::endl;
 			}
 
-			dataRaiOutLock.unlock();
 			listener.newDataRaiOut = false;
+			dataRaiOutLock.unlock();
 		}
 
 		if (listener.newDataSFusion &&
@@ -483,8 +483,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataSFusion" << std::endl;
 			}
 
-			dataSFusionLock.unlock();
 			listener.newDataSFusion = false;
+			dataSFusionLock.unlock();
 		}
 
 		if (listener.newDataAhrs &&
@@ -527,8 +527,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataAhrs" << std::endl;
 			}
 
-			dataAhrsLock.unlock();
 			listener.newDataAhrs = false;
+			dataAhrsLock.unlock();
 		}
 
 		if (listener.newDataAir &&
@@ -558,8 +558,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataAir" << std::endl;
 			}
 
-			dataAirLock.unlock();
 			listener.newDataAir = false;
+			dataAirLock.unlock();
 		}
 
 		if (listener.newDataCtrl &&
@@ -588,8 +588,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataCtrl" << std::endl;
 			}
 
-			dataCtrlLock.unlock();
 			listener.newDataCtrl = false;
+			dataCtrlLock.unlock();
 		}
 
 		if (listener.newDataPsu &&
@@ -623,8 +623,8 @@ void Downlink::run() {
 				std::cout << "ERROR: Could not send DataPsu" << std::endl;
 			}
 
-			dataPsuLock.unlock();
 			listener.newDataPsu = false;
+			dataPsuLock.unlock();
 		}
 
 		// reset the alive timer

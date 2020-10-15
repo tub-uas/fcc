@@ -395,8 +395,8 @@ void Watchdog::run() {
 				dataRaiInTime = timer.getSysTimeS();
 			}
 
-			dataRaiInLock.unlock();
 			listener.newDataRaiIn = false;
+			dataRaiInLock.unlock();
 		}
 
 		if (listener.newDataRaiOut) {
@@ -408,8 +408,8 @@ void Watchdog::run() {
 				dataRaiOutTime = timer.getSysTimeS();
 			}
 
-			dataRaiOutLock.unlock();
 			listener.newDataRaiOut = false;
+			dataRaiOutLock.unlock();
 		}
 
 		if (listener.newDataSFusion) {
@@ -421,8 +421,8 @@ void Watchdog::run() {
 				dataSFusionTime = timer.getSysTimeS();
 			}
 
-			dataSFusionLock.unlock();
 			listener.newDataSFusion = false;
+			dataSFusionLock.unlock();
 		}
 
 		if (listener.newDataAhrs) {
@@ -434,8 +434,8 @@ void Watchdog::run() {
 				dataAhrsTime = timer.getSysTimeS();
 			}
 
-			dataAhrsLock.unlock();
 			listener.newDataAhrs = false;
+			dataAhrsLock.unlock();
 		}
 
 		if (listener.newDataAir) {
@@ -447,8 +447,8 @@ void Watchdog::run() {
 				dataAirTime = timer.getSysTimeS();
 			}
 
-			dataAirLock.unlock();
 			listener.newDataAir = false;
+			dataAirLock.unlock();
 		}
 
 		if (listener.newDataPsu) {
@@ -460,8 +460,8 @@ void Watchdog::run() {
 				dataPsuTime = timer.getSysTimeS();
 			}
 
-			dataPsuLock.unlock();
 			listener.newDataPsu = false;
+			dataPsuLock.unlock();
 		}
 
 		if (listener.newDataCtrl) {
@@ -473,8 +473,8 @@ void Watchdog::run() {
 				dataCtrlTime = timer.getSysTimeS();
 			}
 
-			dataCtrlLock.unlock();
 			listener.newDataCtrl = false;
+			dataCtrlLock.unlock();
 		}
 
 		bool allGood = true;

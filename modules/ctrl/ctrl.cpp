@@ -309,12 +309,13 @@ void Ctrl::run() {
 				aliveTime = timer.getSysTime();
 			}
 
+			listener.newDataRaiIn = false;
+			listener.newDataSFusion = false;
+			
 			dataSFusionLock.unlock();
 			dataRaiInLock.unlock();
 			dataCtrlLock.unlock();
 
-			listener.newDataRaiIn = false;
-			listener.newDataSFusion = false;
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);

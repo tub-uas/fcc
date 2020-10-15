@@ -248,10 +248,10 @@ void RaiOut::run() {
 
 			}
 
+			listener.newDataCtrl = false;
+
 			dataCtrlLock.unlock();
 			dataRaiOutLock.unlock();
-
-			listener.newDataCtrl = false;
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
