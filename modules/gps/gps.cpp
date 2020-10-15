@@ -85,6 +85,8 @@ bool Gps::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (gpsCom.init() == false) {
 		return false;
 	}
@@ -101,7 +103,12 @@ void Gps::publish() {
 
 		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
 		dataGps.time(timer.getSysTime());
-		dataGps.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataGps.alive(true);
+		} else {
+			dataGps.alive(false);
+		}
 
 		writerGps->write(&dataGps);
 		dataGpsLock.unlock();
@@ -145,6 +152,9 @@ void Gps::run() {
 			dataGps.p1(-2.0);
 			dataGps.p2(-3.0);
 			dataGps.p3(-4.0);
+
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			dataGpsLock.unlock();
 

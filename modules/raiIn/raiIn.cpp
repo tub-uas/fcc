@@ -84,6 +84,8 @@ bool RaiIn::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (raiCom.init() == false) {
 		return false;
 	}
@@ -100,7 +102,12 @@ void RaiIn::publish() {
 
 		std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
 		dataRaiIn.time(timer.getSysTime());
-		dataRaiIn.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataRaiIn.alive(true);
+		} else {
+			dataRaiIn.alive(false);
+		}
 
 		writerRaiIn->write(&dataRaiIn);
 		dataRaiInLock.unlock();
@@ -134,6 +141,9 @@ void RaiIn::run() {
 			dataRaiIn.yaw(mixer.pwm2rad(Mixer::RUD, raiCom.channel[3], mode));
 			dataRaiIn.thr(mixer.pwm2rad(Mixer::THR, raiCom.channel[0], mode));
 			dataRaiIn.fltMode(mode);
+
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			dataRaiInLock.unlock();
 

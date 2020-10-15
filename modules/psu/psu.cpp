@@ -85,6 +85,8 @@ bool Psu::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (psuCom.init() == false) {
 		return false;
 	}
@@ -101,7 +103,12 @@ void Psu::publish() {
 
 		std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 		dataPsu.time(timer.getSysTime());
-		dataPsu.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataPsu.alive(true);
+		} else {
+			dataPsu.alive(false);
+		}
 
 		writerPsu->write(&dataPsu);
 		dataPsuLock.unlock();
@@ -136,6 +143,9 @@ void Psu::run() {
 			dataPsu.sysVolt(psuCom.sysVolt);
 			dataPsu.sysCurr(psuCom.sysCurr);
 			dataPsu.sysPow(psuCom.sysPow);
+
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			dataPsuLock.unlock();
 

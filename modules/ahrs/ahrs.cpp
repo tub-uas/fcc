@@ -85,6 +85,8 @@ bool Ahrs::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (ahrsCom.init() == false) {
 		return false;
 	}
@@ -101,7 +103,12 @@ void Ahrs::publish() {
 
 		std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
 		dataAhrs.time(timer.getSysTime());
-		dataAhrs.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataAhrs.alive(true);
+		} else {
+			dataAhrs.alive(false);
+		}
 
 		writerAhrs->write(&dataAhrs);
 		dataAhrsLock.unlock();
@@ -145,6 +152,9 @@ void Ahrs::run() {
 			dataAhrs.q1(-2.0);
 			dataAhrs.q2(-3.0);
 			dataAhrs.q3(-4.0);
+
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			dataAhrsLock.unlock();
 

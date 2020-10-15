@@ -85,6 +85,8 @@ bool Air::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (airCom.init() == false) {
 		return false;
 	}
@@ -101,7 +103,12 @@ void Air::publish() {
 
 		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
 		dataAir.time(timer.getSysTime());
-		dataAir.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataAir.alive(true);
+		} else {
+			dataAir.alive(false);
+		}
 
 		writerAir->write(&dataAir);
 		dataAirLock.unlock();
@@ -132,6 +139,9 @@ void Air::run() {
 			dataAir.baroPress(airCom.baroPress);
 			dataAir.density(airCom.density);
 			dataAir.temp(airCom.temp);
+
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			dataAirLock.unlock();
 
