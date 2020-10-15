@@ -47,6 +47,7 @@ set(DRIVER_PATH "../../driver")
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 add_library(led ${DRIVER_PATH}/drv_led/drv_led.cpp)
 
+add_library(DataWatchdog ./${IDL_PATH}/DataWatchdog.cxx ./${IDL_PATH}/DataWatchdogPubSubTypes.cxx)
 add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
 add_library(DataRaiOut ../raiOut/${IDL_PATH}/DataRaiOut.cxx ../raiOut/${IDL_PATH}/DataRaiOutPubSubTypes.cxx)
 add_library(DataSFusion ../sFusion/${IDL_PATH}/DataSFusion.cxx ../sFusion/${IDL_PATH}/DataSFusionPubSubTypes.cxx)
@@ -54,13 +55,16 @@ add_library(DataAhrs ../ahrs/${IDL_PATH}/DataAhrs.cxx ../ahrs/${IDL_PATH}/DataAh
 add_library(DataAir ../air/${IDL_PATH}/DataAir.cxx ../air/${IDL_PATH}/DataAirPubSubTypes.cxx)
 add_library(DataPsu ../psu/${IDL_PATH}/DataPsu.cxx ../psu/${IDL_PATH}/DataPsuPubSubTypes.cxx)
 add_library(DataCtrl ../ctrl/${IDL_PATH}/DataCtrl.cxx ../ctrl/${IDL_PATH}/DataCtrlPubSubTypes.cxx)
+add_library(DataDownlink ../downlink/${IDL_PATH}/DataDownlink.cxx ../downlink/${IDL_PATH}/DataDownlinkPubSubTypes.cxx)
+add_library(DataLog ../log/${IDL_PATH}/DataLog.cxx ../log/${IDL_PATH}/DataLogPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 
+target_link_libraries(${PROJECT_NAME} DataWatchdog)
+target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led)
+
 if(RPI)
-	target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led wiringPi)
-else()
-	target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led)
+	target_link_libraries(${PROJECT_NAME} wiringPi)
 endif()
 
 target_link_libraries(${PROJECT_NAME} DataRaiIn)
@@ -70,3 +74,5 @@ target_link_libraries(${PROJECT_NAME} DataAhrs)
 target_link_libraries(${PROJECT_NAME} DataAir)
 target_link_libraries(${PROJECT_NAME} DataPsu)
 target_link_libraries(${PROJECT_NAME} DataCtrl)
+target_link_libraries(${PROJECT_NAME} DataDownlink)
+target_link_libraries(${PROJECT_NAME} DataLog)

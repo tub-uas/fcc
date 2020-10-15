@@ -55,7 +55,32 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
 		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
 			/***PYTHON_GEN_ON_DATA_CALLBACK*/
-			if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
+			if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
+				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
+				reader->take_next_sample(&dataAhrs, &info);
+				dataAhrsLock.unlock();
+				newDataAhrs = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
+				std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
+				reader->take_next_sample(&dataAir, &info);
+				dataAirLock.unlock();
+				newDataAir = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
+				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
+				reader->take_next_sample(&dataCtrl, &info);
+				dataCtrlLock.unlock();
+				newDataCtrl = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataDownlink") == 0) {
+				std::unique_lock<std::mutex> dataDownlinkLock {dataDownlinkMutex};
+				reader->take_next_sample(&dataDownlink, &info);
+				dataDownlinkLock.unlock();
+				newDataDownlink = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
+				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
+				reader->take_next_sample(&dataPsu, &info);
+				dataPsuLock.unlock();
+				newDataPsu = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
 				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
 				reader->take_next_sample(&dataRaiIn, &info);
 				dataRaiInLock.unlock();
@@ -70,31 +95,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				reader->take_next_sample(&dataSFusion, &info);
 				dataSFusionLock.unlock();
 				newDataSFusion = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
-				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-				reader->take_next_sample(&dataAhrs, &info);
-				dataAhrsLock.unlock();
-				newDataAhrs = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
-				std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-				reader->take_next_sample(&dataAir, &info);
-				dataAirLock.unlock();
-				newDataAir = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
-				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
-				reader->take_next_sample(&dataPsu, &info);
-				dataPsuLock.unlock();
-				newDataPsu = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
-				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
-				reader->take_next_sample(&dataCtrl, &info);
-				dataCtrlLock.unlock();
-				newDataCtrl = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataDownlink") == 0) {
-				std::unique_lock<std::mutex> dataDownlinkLock {dataDownlinkMutex};
-				reader->take_next_sample(&dataDownlink, &info);
-				dataDownlinkLock.unlock();
-				newDataDownlink = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataWatchdog") == 0) {
+				std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+				reader->take_next_sample(&dataWatchdog, &info);
+				dataWatchdogLock.unlock();
+				newDataWatchdog = true;
 			} else {
 				reader->take_next_sample(&data, &info);
 			}
@@ -114,6 +119,21 @@ Log::Log() : participant(nullptr),
              writerLog(nullptr),
              typeLog(new DataLogPubSubType()),
              /***PYTHON_GEN_CONSTR*/
+             topicAhrs(nullptr),
+             readerAhrs(nullptr),
+             typeAhrs(new DataAhrsPubSubType()),
+             topicAir(nullptr),
+             readerAir(nullptr),
+             typeAir(new DataAirPubSubType()),
+             topicCtrl(nullptr),
+             readerCtrl(nullptr),
+             typeCtrl(new DataCtrlPubSubType()),
+             topicDownlink(nullptr),
+             readerDownlink(nullptr),
+             typeDownlink(new DataDownlinkPubSubType()),
+             topicPsu(nullptr),
+             readerPsu(nullptr),
+             typePsu(new DataPsuPubSubType()),
              topicRaiIn(nullptr),
              readerRaiIn(nullptr),
              typeRaiIn(new DataRaiInPubSubType()),
@@ -123,21 +143,9 @@ Log::Log() : participant(nullptr),
              topicSFusion(nullptr),
              readerSFusion(nullptr),
              typeSFusion(new DataSFusionPubSubType()),
-             topicAhrs(nullptr),
-             readerAhrs(nullptr),
-             typeAhrs(new DataAhrsPubSubType()),
-             topicAir(nullptr),
-             readerAir(nullptr),
-             typeAir(new DataAirPubSubType()),
-             topicPsu(nullptr),
-             readerPsu(nullptr),
-             typePsu(new DataPsuPubSubType()),
-             topicCtrl(nullptr),
-             readerCtrl(nullptr),
-             typeCtrl(new DataCtrlPubSubType()),
-             topicDownlink(nullptr),
-             readerDownlink(nullptr),
-             typeDownlink(new DataDownlinkPubSubType()) {
+             topicWatchdog(nullptr),
+             readerWatchdog(nullptr),
+             typeWatchdog(new DataWatchdogPubSubType()) {
 
 }
 
@@ -154,6 +162,36 @@ Log::~Log() {
 	}
 
 	/***PYTHON_GEN_DELETE*/
+	if (readerAhrs != nullptr) {
+		subscriber->delete_datareader(readerAhrs);
+	}
+	if (topicAhrs != nullptr) {
+		participant->delete_topic(topicAhrs);
+	}
+	if (readerAir != nullptr) {
+		subscriber->delete_datareader(readerAir);
+	}
+	if (topicAir != nullptr) {
+		participant->delete_topic(topicAir);
+	}
+	if (readerCtrl != nullptr) {
+		subscriber->delete_datareader(readerCtrl);
+	}
+	if (topicCtrl != nullptr) {
+		participant->delete_topic(topicCtrl);
+	}
+	if (readerDownlink != nullptr) {
+		subscriber->delete_datareader(readerDownlink);
+	}
+	if (topicDownlink != nullptr) {
+		participant->delete_topic(topicDownlink);
+	}
+	if (readerPsu != nullptr) {
+		subscriber->delete_datareader(readerPsu);
+	}
+	if (topicPsu != nullptr) {
+		participant->delete_topic(topicPsu);
+	}
 	if (readerRaiIn != nullptr) {
 		subscriber->delete_datareader(readerRaiIn);
 	}
@@ -172,35 +210,11 @@ Log::~Log() {
 	if (topicSFusion != nullptr) {
 		participant->delete_topic(topicSFusion);
 	}
-	if (readerAhrs != nullptr) {
-		subscriber->delete_datareader(readerAhrs);
+	if (readerWatchdog != nullptr) {
+		subscriber->delete_datareader(readerWatchdog);
 	}
-	if (topicAhrs != nullptr) {
-		participant->delete_topic(topicAhrs);
-	}
-	if (readerAir != nullptr) {
-		subscriber->delete_datareader(readerAir);
-	}
-	if (topicAir != nullptr) {
-		participant->delete_topic(topicAir);
-	}
-	if (readerPsu != nullptr) {
-		subscriber->delete_datareader(readerPsu);
-	}
-	if (topicPsu != nullptr) {
-		participant->delete_topic(topicPsu);
-	}
-	if (readerCtrl != nullptr) {
-		subscriber->delete_datareader(readerCtrl);
-	}
-	if (topicCtrl != nullptr) {
-		participant->delete_topic(topicCtrl);
-	}
-	if (readerDownlink != nullptr) {
-		subscriber->delete_datareader(readerDownlink);
-	}
-	if (topicDownlink != nullptr) {
-		participant->delete_topic(topicDownlink);
+	if (topicWatchdog != nullptr) {
+		participant->delete_topic(topicWatchdog);
 	}
 
 	if (subscriber != nullptr) {
@@ -210,14 +224,15 @@ Log::~Log() {
 	eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->delete_participant(participant);
 
 	/***PYTHON_GEN_CLOSE_FILES*/
+	ahrsFile.close();
+	airFile.close();
+	ctrlFile.close();
+	downlinkFile.close();
+	psuFile.close();
 	raiInFile.close();
 	raiOutFile.close();
 	sFusionFile.close();
-	ahrsFile.close();
-	airFile.close();
-	psuFile.close();
-	ctrlFile.close();
-	downlinkFile.close();
+	watchdogFile.close();
 }
 
 bool Log::init() {
@@ -253,6 +268,41 @@ bool Log::init() {
 
 	/***PYTHON_GEN_REGISTER_TYPE*/
 	// Register the Type
+	typeAhrs.register_type(participant);
+	// Create the subscriptions Topic
+	topicAhrs = participant->create_topic("DataAhrs", "DataAhrs", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicAhrs == nullptr) {
+		return false;
+	}
+	// Register the Type
+	typeAir.register_type(participant);
+	// Create the subscriptions Topic
+	topicAir = participant->create_topic("DataAir", "DataAir", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicAir == nullptr) {
+		return false;
+	}
+	// Register the Type
+	typeCtrl.register_type(participant);
+	// Create the subscriptions Topic
+	topicCtrl = participant->create_topic("DataCtrl", "DataCtrl", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicCtrl == nullptr) {
+		return false;
+	}
+	// Register the Type
+	typeDownlink.register_type(participant);
+	// Create the subscriptions Topic
+	topicDownlink = participant->create_topic("DataDownlink", "DataDownlink", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicDownlink == nullptr) {
+		return false;
+	}
+	// Register the Type
+	typePsu.register_type(participant);
+	// Create the subscriptions Topic
+	topicPsu = participant->create_topic("DataPsu", "DataPsu", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicPsu == nullptr) {
+		return false;
+	}
+	// Register the Type
 	typeRaiIn.register_type(participant);
 	// Create the subscriptions Topic
 	topicRaiIn = participant->create_topic("DataRaiIn", "DataRaiIn", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
@@ -274,38 +324,10 @@ bool Log::init() {
 		return false;
 	}
 	// Register the Type
-	typeAhrs.register_type(participant);
+	typeWatchdog.register_type(participant);
 	// Create the subscriptions Topic
-	topicAhrs = participant->create_topic("DataAhrs", "DataAhrs", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
-	if (topicAhrs == nullptr) {
-		return false;
-	}
-	// Register the Type
-	typeAir.register_type(participant);
-	// Create the subscriptions Topic
-	topicAir = participant->create_topic("DataAir", "DataAir", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
-	if (topicAir == nullptr) {
-		return false;
-	}
-	// Register the Type
-	typePsu.register_type(participant);
-	// Create the subscriptions Topic
-	topicPsu = participant->create_topic("DataPsu", "DataPsu", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
-	if (topicPsu == nullptr) {
-		return false;
-	}
-	// Register the Type
-	typeCtrl.register_type(participant);
-	// Create the subscriptions Topic
-	topicCtrl = participant->create_topic("DataCtrl", "DataCtrl", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
-	if (topicCtrl == nullptr) {
-		return false;
-	}
-	// Register the Type
-	typeDownlink.register_type(participant);
-	// Create the subscriptions Topic
-	topicDownlink = participant->create_topic("DataDownlink", "DataDownlink", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
-	if (topicDownlink == nullptr) {
+	topicWatchdog = participant->create_topic("DataWatchdog", "DataWatchdog", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicWatchdog == nullptr) {
 		return false;
 	}
 
@@ -316,6 +338,31 @@ bool Log::init() {
 	}
 
 	/***PYTHON_GEN_CREATE_DATAREADER*/
+	// Create the DataReader
+	readerAhrs = subscriber->create_datareader(topicAhrs, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerAhrs == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerAir = subscriber->create_datareader(topicAir, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerAir == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerCtrl = subscriber->create_datareader(topicCtrl, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerCtrl == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerDownlink = subscriber->create_datareader(topicDownlink, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerDownlink == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerPsu = subscriber->create_datareader(topicPsu, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerPsu == nullptr) {
+		return false;
+	}
 	// Create the DataReader
 	readerRaiIn = subscriber->create_datareader(topicRaiIn, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerRaiIn == nullptr) {
@@ -332,28 +379,8 @@ bool Log::init() {
 		return false;
 	}
 	// Create the DataReader
-	readerAhrs = subscriber->create_datareader(topicAhrs, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
-	if (readerAhrs == nullptr) {
-		return false;
-	}
-	// Create the DataReader
-	readerAir = subscriber->create_datareader(topicAir, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
-	if (readerAir == nullptr) {
-		return false;
-	}
-	// Create the DataReader
-	readerPsu = subscriber->create_datareader(topicPsu, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
-	if (readerPsu == nullptr) {
-		return false;
-	}
-	// Create the DataReader
-	readerCtrl = subscriber->create_datareader(topicCtrl, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
-	if (readerCtrl == nullptr) {
-		return false;
-	}
-	// Create the DataReader
-	readerDownlink = subscriber->create_datareader(topicDownlink, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
-	if (readerDownlink == nullptr) {
+	readerWatchdog = subscriber->create_datareader(topicWatchdog, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerWatchdog == nullptr) {
 		return false;
 	}
 
@@ -383,14 +410,15 @@ bool Log::init() {
 	}
 
 	/***PYTHON_GEN_OPEN_FILES*/
+	ahrsFile.open(logdir.str() + "/ahrs.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
+	airFile.open(logdir.str() + "/air.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
+	ctrlFile.open(logdir.str() + "/ctrl.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
+	downlinkFile.open(logdir.str() + "/downlink.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
+	psuFile.open(logdir.str() + "/psu.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	raiInFile.open(logdir.str() + "/raiIn.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	raiOutFile.open(logdir.str() + "/raiOut.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	sFusionFile.open(logdir.str() + "/sFusion.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
-	ahrsFile.open(logdir.str() + "/ahrs.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
-	airFile.open(logdir.str() + "/air.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
-	psuFile.open(logdir.str() + "/psu.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
-	ctrlFile.open(logdir.str() + "/ctrl.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
-	downlinkFile.open(logdir.str() + "/downlink.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
+	watchdogFile.open(logdir.str() + "/watchdog.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 
 	return true;
 }
@@ -427,6 +455,92 @@ void Log::run() {
 		// std::cout << this->name << " run" << std::endl;
 
 		/***PYTHON_GEN_WRITE_FILES*/
+		if (listener.newDataAhrs) {
+			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
+			// std::cout << "newDataAhrs" << std::endl;
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.time()), sizeof(listener.dataAhrs.time()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.senseTime()), sizeof(listener.dataAhrs.senseTime()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrX()), sizeof(listener.dataAhrs.gyrX()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrY()), sizeof(listener.dataAhrs.gyrY()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrZ()), sizeof(listener.dataAhrs.gyrZ()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.accX()), sizeof(listener.dataAhrs.accX()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.accY()), sizeof(listener.dataAhrs.accY()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.accZ()), sizeof(listener.dataAhrs.accZ()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magX()), sizeof(listener.dataAhrs.magX()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magY()), sizeof(listener.dataAhrs.magY()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magZ()), sizeof(listener.dataAhrs.magZ()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.temp()), sizeof(listener.dataAhrs.temp()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.press()), sizeof(listener.dataAhrs.press()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.phi()), sizeof(listener.dataAhrs.phi()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.the()), sizeof(listener.dataAhrs.the()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.psi()), sizeof(listener.dataAhrs.psi()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q0()), sizeof(listener.dataAhrs.q0()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q1()), sizeof(listener.dataAhrs.q1()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q2()), sizeof(listener.dataAhrs.q2()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q3()), sizeof(listener.dataAhrs.q3()));
+			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.alive()), sizeof(listener.dataAhrs.alive()));
+			ahrsFile.flush();
+			listener.newDataAhrs = false;
+			dataAhrsLock.unlock();
+		}
+		if (listener.newDataAir) {
+			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
+			// std::cout << "newDataAir" << std::endl;
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.time()), sizeof(listener.dataAir.time()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.senseTime()), sizeof(listener.dataAir.senseTime()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.dynamicPress()), sizeof(listener.dataAir.dynamicPress()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.velocity()), sizeof(listener.dataAir.velocity()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.baroPress()), sizeof(listener.dataAir.baroPress()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.density()), sizeof(listener.dataAir.density()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.temp()), sizeof(listener.dataAir.temp()));
+			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.alive()), sizeof(listener.dataAir.alive()));
+			airFile.flush();
+			listener.newDataAir = false;
+			dataAirLock.unlock();
+		}
+		if (listener.newDataCtrl) {
+			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
+			// std::cout << "newDataCtrl" << std::endl;
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.time()), sizeof(listener.dataCtrl.time()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.xi()), sizeof(listener.dataCtrl.xi()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.eta()), sizeof(listener.dataCtrl.eta()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.zeta()), sizeof(listener.dataCtrl.zeta()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.etaT()), sizeof(listener.dataCtrl.etaT()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.etaF()), sizeof(listener.dataCtrl.etaF()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.fltMode()), sizeof(listener.dataCtrl.fltMode()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.alive()), sizeof(listener.dataCtrl.alive()));
+			ctrlFile.flush();
+			listener.newDataCtrl = false;
+			dataCtrlLock.unlock();
+		}
+		if (listener.newDataDownlink) {
+			std::unique_lock<std::mutex> dataDownlinkLock {listener.dataDownlinkMutex};
+			// std::cout << "newDataDownlink" << std::endl;
+			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.time()), sizeof(listener.dataDownlink.time()));
+			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.alive()), sizeof(listener.dataDownlink.alive()));
+			downlinkFile.flush();
+			listener.newDataDownlink = false;
+			dataDownlinkLock.unlock();
+		}
+		if (listener.newDataPsu) {
+			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
+			// std::cout << "newDataPsu" << std::endl;
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.time()), sizeof(listener.dataPsu.time()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.senseTime()), sizeof(listener.dataPsu.senseTime()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainVolt()), sizeof(listener.dataPsu.mainVolt()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainCurr()), sizeof(listener.dataPsu.mainCurr()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainPow()), sizeof(listener.dataPsu.mainPow()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.pwrVolt()), sizeof(listener.dataPsu.pwrVolt()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.pwrCurr()), sizeof(listener.dataPsu.pwrCurr()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.pwrPow()), sizeof(listener.dataPsu.pwrPow()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysVolt()), sizeof(listener.dataPsu.sysVolt()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysCurr()), sizeof(listener.dataPsu.sysCurr()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysPow()), sizeof(listener.dataPsu.sysPow()));
+			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.alive()), sizeof(listener.dataPsu.alive()));
+			psuFile.flush();
+			listener.newDataPsu = false;
+			dataPsuLock.unlock();
+		}
 		if (listener.newDataRaiIn) {
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
 			// std::cout << "newDataRaiIn" << std::endl;
@@ -501,91 +615,26 @@ void Log::run() {
 			listener.newDataSFusion = false;
 			dataSFusionLock.unlock();
 		}
-		if (listener.newDataAhrs) {
-			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-			// std::cout << "newDataAhrs" << std::endl;
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.time()), sizeof(listener.dataAhrs.time()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.senseTime()), sizeof(listener.dataAhrs.senseTime()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrX()), sizeof(listener.dataAhrs.gyrX()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrY()), sizeof(listener.dataAhrs.gyrY()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.gyrZ()), sizeof(listener.dataAhrs.gyrZ()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.accX()), sizeof(listener.dataAhrs.accX()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.accY()), sizeof(listener.dataAhrs.accY()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.accZ()), sizeof(listener.dataAhrs.accZ()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magX()), sizeof(listener.dataAhrs.magX()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magY()), sizeof(listener.dataAhrs.magY()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magZ()), sizeof(listener.dataAhrs.magZ()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.temp()), sizeof(listener.dataAhrs.temp()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.press()), sizeof(listener.dataAhrs.press()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.phi()), sizeof(listener.dataAhrs.phi()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.the()), sizeof(listener.dataAhrs.the()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.psi()), sizeof(listener.dataAhrs.psi()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q0()), sizeof(listener.dataAhrs.q0()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q1()), sizeof(listener.dataAhrs.q1()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q2()), sizeof(listener.dataAhrs.q2()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q3()), sizeof(listener.dataAhrs.q3()));
-			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.alive()), sizeof(listener.dataAhrs.alive()));
-			ahrsFile.flush();
-			listener.newDataAhrs = false;
-			dataAhrsLock.unlock();
-		}
-		if (listener.newDataAir) {
-			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
-			// std::cout << "newDataAir" << std::endl;
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.time()), sizeof(listener.dataAir.time()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.senseTime()), sizeof(listener.dataAir.senseTime()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.dynamicPress()), sizeof(listener.dataAir.dynamicPress()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.velocity()), sizeof(listener.dataAir.velocity()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.baroPress()), sizeof(listener.dataAir.baroPress()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.density()), sizeof(listener.dataAir.density()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.temp()), sizeof(listener.dataAir.temp()));
-			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.alive()), sizeof(listener.dataAir.alive()));
-			airFile.flush();
-			listener.newDataAir = false;
-			dataAirLock.unlock();
-		}
-		if (listener.newDataPsu) {
-			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
-			// std::cout << "newDataPsu" << std::endl;
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.time()), sizeof(listener.dataPsu.time()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.senseTime()), sizeof(listener.dataPsu.senseTime()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainVolt()), sizeof(listener.dataPsu.mainVolt()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainCurr()), sizeof(listener.dataPsu.mainCurr()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.mainPow()), sizeof(listener.dataPsu.mainPow()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.pwrVolt()), sizeof(listener.dataPsu.pwrVolt()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.pwrCurr()), sizeof(listener.dataPsu.pwrCurr()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.pwrPow()), sizeof(listener.dataPsu.pwrPow()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysVolt()), sizeof(listener.dataPsu.sysVolt()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysCurr()), sizeof(listener.dataPsu.sysCurr()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysPow()), sizeof(listener.dataPsu.sysPow()));
-			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.alive()), sizeof(listener.dataPsu.alive()));
-			psuFile.flush();
-			listener.newDataPsu = false;
-			dataPsuLock.unlock();
-		}
-		if (listener.newDataCtrl) {
-			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
-			// std::cout << "newDataCtrl" << std::endl;
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.time()), sizeof(listener.dataCtrl.time()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.xi()), sizeof(listener.dataCtrl.xi()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.eta()), sizeof(listener.dataCtrl.eta()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.zeta()), sizeof(listener.dataCtrl.zeta()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.etaT()), sizeof(listener.dataCtrl.etaT()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.etaF()), sizeof(listener.dataCtrl.etaF()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.fltMode()), sizeof(listener.dataCtrl.fltMode()));
-			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.alive()), sizeof(listener.dataCtrl.alive()));
-			ctrlFile.flush();
-			listener.newDataCtrl = false;
-			dataCtrlLock.unlock();
-		}
-		if (listener.newDataDownlink) {
-			std::unique_lock<std::mutex> dataDownlinkLock {listener.dataDownlinkMutex};
-			// std::cout << "newDataDownlink" << std::endl;
-			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.time()), sizeof(listener.dataDownlink.time()));
-			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.alive()), sizeof(listener.dataDownlink.alive()));
-			downlinkFile.flush();
-			listener.newDataDownlink = false;
-			dataDownlinkLock.unlock();
+		if (listener.newDataWatchdog) {
+			std::unique_lock<std::mutex> dataWatchdogLock {listener.dataWatchdogMutex};
+			// std::cout << "newDataWatchdog" << std::endl;
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.time()), sizeof(listener.dataWatchdog.time()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.allAlive()), sizeof(listener.dataWatchdog.allAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.ahrsAlive()), sizeof(listener.dataWatchdog.ahrsAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.airAlive()), sizeof(listener.dataWatchdog.airAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.ctrlAlive()), sizeof(listener.dataWatchdog.ctrlAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.downlinkAlive()), sizeof(listener.dataWatchdog.downlinkAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.gpsAlive()), sizeof(listener.dataWatchdog.gpsAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.logAlive()), sizeof(listener.dataWatchdog.logAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.psuAlive()), sizeof(listener.dataWatchdog.psuAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.raiInAlive()), sizeof(listener.dataWatchdog.raiInAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.raiOutAlive()), sizeof(listener.dataWatchdog.raiOutAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.sFusionAlive()), sizeof(listener.dataWatchdog.sFusionAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.uplinkAlive()), sizeof(listener.dataWatchdog.uplinkAlive()));
+			watchdogFile.write(reinterpret_cast<const char*>(&listener.dataWatchdog.alive()), sizeof(listener.dataWatchdog.alive()));
+			watchdogFile.flush();
+			listener.newDataWatchdog = false;
+			dataWatchdogLock.unlock();
 		}
 
 		// reset the alive timer

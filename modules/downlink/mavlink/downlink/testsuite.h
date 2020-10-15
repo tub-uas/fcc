@@ -493,6 +493,73 @@ static void mavlink_test_datapsu(uint8_t system_id, uint8_t component_id, mavlin
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 }
 
+static void mavlink_test_datawatchdog(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_DataWatchdog >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_datawatchdog_t packet_in = {
+        93372036854775807ULL,29,96,163,230,41,108,175,242,53,120,187,254,65
+    };
+    mavlink_datawatchdog_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.time = packet_in.time;
+        packet1.allAlive = packet_in.allAlive;
+        packet1.ahrsAlive = packet_in.ahrsAlive;
+        packet1.airAlive = packet_in.airAlive;
+        packet1.ctrlAlive = packet_in.ctrlAlive;
+        packet1.downlinkAlive = packet_in.downlinkAlive;
+        packet1.gpsAlive = packet_in.gpsAlive;
+        packet1.logAlive = packet_in.logAlive;
+        packet1.psuAlive = packet_in.psuAlive;
+        packet1.raiInAlive = packet_in.raiInAlive;
+        packet1.raiOutAlive = packet_in.raiOutAlive;
+        packet1.sFusionAlive = packet_in.sFusionAlive;
+        packet1.uplinkAlive = packet_in.uplinkAlive;
+        packet1.alive = packet_in.alive;
+        
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_DataWatchdog_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_DataWatchdog_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_datawatchdog_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_datawatchdog_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_datawatchdog_pack(system_id, component_id, &msg , packet1.time , packet1.allAlive , packet1.ahrsAlive , packet1.airAlive , packet1.ctrlAlive , packet1.downlinkAlive , packet1.gpsAlive , packet1.logAlive , packet1.psuAlive , packet1.raiInAlive , packet1.raiOutAlive , packet1.sFusionAlive , packet1.uplinkAlive , packet1.alive );
+    mavlink_msg_datawatchdog_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_datawatchdog_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.time , packet1.allAlive , packet1.ahrsAlive , packet1.airAlive , packet1.ctrlAlive , packet1.downlinkAlive , packet1.gpsAlive , packet1.logAlive , packet1.psuAlive , packet1.raiInAlive , packet1.raiOutAlive , packet1.sFusionAlive , packet1.uplinkAlive , packet1.alive );
+    mavlink_msg_datawatchdog_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_datawatchdog_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_datawatchdog_send(MAVLINK_COMM_1 , packet1.time , packet1.allAlive , packet1.ahrsAlive , packet1.airAlive , packet1.ctrlAlive , packet1.downlinkAlive , packet1.gpsAlive , packet1.logAlive , packet1.psuAlive , packet1.raiInAlive , packet1.raiOutAlive , packet1.sFusionAlive , packet1.uplinkAlive , packet1.alive );
+    mavlink_msg_datawatchdog_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+}
+
 static void mavlink_test_downlink(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
     mavlink_test_dataraiin(system_id, component_id, last_msg);
@@ -502,6 +569,7 @@ static void mavlink_test_downlink(uint8_t system_id, uint8_t component_id, mavli
     mavlink_test_datasfusion(system_id, component_id, last_msg);
     mavlink_test_datactrl(system_id, component_id, last_msg);
     mavlink_test_datapsu(system_id, component_id, last_msg);
+    mavlink_test_datawatchdog(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus

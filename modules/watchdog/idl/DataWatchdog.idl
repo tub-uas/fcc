@@ -1,0 +1,16 @@
+struct DataWatchdog {
+	unsigned long long time;
+	boolean  allAlive; // Are all modules alive?
+	boolean  ahrsAlive;
+	boolean  airAlive;
+	boolean  ctrlAlive;
+	boolean  downlinkAlive;
+	boolean  gpsAlive;
+	boolean  logAlive;
+	boolean  psuAlive;
+	boolean  raiInAlive;
+	boolean  raiOutAlive;
+	boolean  sFusionAlive;
+	boolean  uplinkAlive;
+	boolean  alive;
+};

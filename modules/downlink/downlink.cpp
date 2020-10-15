@@ -83,6 +83,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				reader->take_next_sample(&dataCtrl, &info);
 				dataCtrlLock.unlock();
 				newDataCtrl = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataWatchdog") == 0) {
+				std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+				reader->take_next_sample(&dataWatchdog, &info);
+				dataWatchdogLock.unlock();
+				newDataWatchdog = true;
 			} else {
 				reader->take_next_sample(&data, &info);
 			}
@@ -121,7 +126,10 @@ Downlink::Downlink() : participant(nullptr),
                        typePsu(new DataPsuPubSubType()),
                        topicCtrl(nullptr),
                        readerCtrl(nullptr),
-                       typeCtrl(new DataCtrlPubSubType()) {
+                       typeCtrl(new DataCtrlPubSubType()),
+                       topicWatchdog(nullptr),
+                       readerWatchdog(nullptr),
+                       typeWatchdog(new DataWatchdogPubSubType()) {
 
 }
 
@@ -177,6 +185,12 @@ Downlink::~Downlink() {
 	}
 	if (topicCtrl != nullptr) {
 		participant->delete_topic(topicCtrl);
+	}
+	if (readerWatchdog != nullptr) {
+		subscriber->delete_datareader(readerWatchdog);
+	}
+	if (topicWatchdog != nullptr) {
+		participant->delete_topic(topicWatchdog);
 	}
 	if (subscriber != nullptr) {
 		participant->delete_subscriber(subscriber);
@@ -265,6 +279,13 @@ bool Downlink::init() {
 	if (topicCtrl == nullptr) {
 		return false;
 	}
+	// Register the Type
+	typeWatchdog.register_type(participant);
+	// Create the subscriptions Topic
+	topicWatchdog = participant->create_topic("DataWatchdog", "DataWatchdog", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicWatchdog == nullptr) {
+		return false;
+	}
 
 	// Create the Subscriber
 	subscriber = participant->create_subscriber(eprosima::fastdds::dds::SUBSCRIBER_QOS_DEFAULT, nullptr);
@@ -305,6 +326,11 @@ bool Downlink::init() {
 	// Create the DataReader
 	readerCtrl = subscriber->create_datareader(topicCtrl, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerCtrl == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerWatchdog = subscriber->create_datareader(topicWatchdog, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerWatchdog == nullptr) {
 		return false;
 	}
 
@@ -353,6 +379,7 @@ void Downlink::run() {
 	const double dataAirInterval = 0.2;
 	const double dataPsuInterval = 1.0;
 	const double dataCtrlInterval = 0.0;
+	const double dataWatchdogInterval = 0.0;
 
 	static double dataRaiInTime = timer.getSysTimeS();
 	static double dataRaiOutTime = timer.getSysTimeS();
@@ -361,6 +388,7 @@ void Downlink::run() {
 	static double dataAirTime = timer.getSysTimeS();
 	static double dataPsuTime = timer.getSysTimeS();
 	static double dataCtrlTime = timer.getSysTimeS();
+	static double dataWatchdogTime = timer.getSysTimeS();
 
 	while (1) {
 		// std::cout << this->name << " run" << std::endl;
@@ -625,6 +653,43 @@ void Downlink::run() {
 
 			listener.newDataPsu = false;
 			dataPsuLock.unlock();
+		}
+
+		if (listener.newDataWatchdog &&
+		    timer.getSysTimeS()-dataWatchdogTime > dataWatchdogInterval &&
+		    dataWatchdogInterval > 0.0) {
+
+			dataWatchdogTime = timer.getSysTimeS();
+
+			std::unique_lock<std::mutex> dataWatchdogLock {listener.dataWatchdogMutex};
+			// std::cout << "send DataWatchdog" << std::endl;
+
+			mavlink_message_t msg;
+			mavlink_datawatchdog_t msg_watchdog;
+			uint8_t buf[200];
+			uint16_t len;
+			msg_watchdog.time = listener.dataWatchdog.time();
+			msg_watchdog.allAlive = listener.dataWatchdog.allAlive();
+			msg_watchdog.ahrsAlive = listener.dataWatchdog.ahrsAlive();
+			msg_watchdog.airAlive = listener.dataWatchdog.airAlive();
+			msg_watchdog.ctrlAlive = listener.dataWatchdog.ctrlAlive();
+			msg_watchdog.downlinkAlive = listener.dataWatchdog.downlinkAlive();
+			msg_watchdog.gpsAlive = listener.dataWatchdog.gpsAlive();
+			msg_watchdog.logAlive = listener.dataWatchdog.logAlive();
+			msg_watchdog.psuAlive = listener.dataWatchdog.psuAlive();
+			msg_watchdog.raiInAlive = listener.dataWatchdog.raiInAlive();
+			msg_watchdog.raiOutAlive = listener.dataWatchdog.raiOutAlive();
+			msg_watchdog.sFusionAlive = listener.dataWatchdog.sFusionAlive();
+			msg_watchdog.uplinkAlive = listener.dataWatchdog.uplinkAlive();
+			msg_watchdog.alive = listener.dataWatchdog.alive();
+			mavlink_msg_datawatchdog_encode(sysid, compid, &msg, &msg_watchdog);
+			len = mavlink_msg_to_send_buffer(buf, &msg);
+			if (!serial.send(buf,len)) {
+				std::cout << "ERROR: Could not send DataWatchdog" << std::endl;
+			}
+
+			listener.newDataWatchdog = false;
+			dataWatchdogLock.unlock();
 		}
 
 		// reset the alive timer

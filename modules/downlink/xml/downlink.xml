@@ -121,5 +121,22 @@
             <field type="float" name="sysPow">Power drawn from system supply (5V)</field>
             <field type="uint8_t" name="alive">Is message valid?</field>
         </message>
+        <message id="70000" name="DataWatchdog">
+            <description>Data from Watchdog</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="uint8_t" name="allAlive">Are all modules alive?</field>
+            <field type="uint8_t" name="ahrsAlive">Is AHRS alive?</field>
+            <field type="uint8_t" name="airAlive">Is AIR alive?</field>
+            <field type="uint8_t" name="ctrlAlive">Is Ctrl alive?</field>
+            <field type="uint8_t" name="downlinkAlive">Is Downlink alive?</field>
+            <field type="uint8_t" name="gpsAlive">Is GPS alive?</field>
+			<field type="uint8_t" name="logAlive">Is Downlink alive?</field>
+            <field type="uint8_t" name="psuAlive">Is PSU alive?</field>
+            <field type="uint8_t" name="raiInAlive">Is RaiIn alive?</field>
+            <field type="uint8_t" name="raiOutAlive">Is RaiOut alive?</field>
+            <field type="uint8_t" name="sFusionAlive">Is SFusion alive?</field>
+            <field type="uint8_t" name="uplinkAlive">Is Uplink alive?</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
     </messages>
 </mavlink>

@@ -25,14 +25,15 @@
 #include "./idl/DataLogPubSubTypes.h"
 
 /***PYTHON_GEN_PUBSUB*/
+#include "./../ahrs/idl/DataAhrsPubSubTypes.h"
+#include "./../air/idl/DataAirPubSubTypes.h"
+#include "./../ctrl/idl/DataCtrlPubSubTypes.h"
+#include "./../downlink/idl/DataDownlinkPubSubTypes.h"
+#include "./../psu/idl/DataPsuPubSubTypes.h"
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 #include "./../raiOut/idl/DataRaiOutPubSubTypes.h"
 #include "./../sFusion/idl/DataSFusionPubSubTypes.h"
-#include "./../ahrs/idl/DataAhrsPubSubTypes.h"
-#include "./../air/idl/DataAirPubSubTypes.h"
-#include "./../psu/idl/DataPsuPubSubTypes.h"
-#include "./../ctrl/idl/DataCtrlPubSubTypes.h"
-#include "./../downlink/idl/DataDownlinkPubSubTypes.h"
+#include "./../watchdog/idl/DataWatchdogPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
 
@@ -53,6 +54,21 @@ public:
 	void on_data_available(eprosima::fastdds::dds::DataReader *reader) override;
 
 	/***PYTHON_GEN_DATA_MUTEX*/
+	DataAhrs dataAhrs;
+	std::mutex dataAhrsMutex;
+	std::atomic_bool newDataAhrs;
+	DataAir dataAir;
+	std::mutex dataAirMutex;
+	std::atomic_bool newDataAir;
+	DataCtrl dataCtrl;
+	std::mutex dataCtrlMutex;
+	std::atomic_bool newDataCtrl;
+	DataDownlink dataDownlink;
+	std::mutex dataDownlinkMutex;
+	std::atomic_bool newDataDownlink;
+	DataPsu dataPsu;
+	std::mutex dataPsuMutex;
+	std::atomic_bool newDataPsu;
 	DataRaiIn dataRaiIn;
 	std::mutex dataRaiInMutex;
 	std::atomic_bool newDataRaiIn;
@@ -62,21 +78,9 @@ public:
 	DataSFusion dataSFusion;
 	std::mutex dataSFusionMutex;
 	std::atomic_bool newDataSFusion;
-	DataAhrs dataAhrs;
-	std::mutex dataAhrsMutex;
-	std::atomic_bool newDataAhrs;
-	DataAir dataAir;
-	std::mutex dataAirMutex;
-	std::atomic_bool newDataAir;
-	DataPsu dataPsu;
-	std::mutex dataPsuMutex;
-	std::atomic_bool newDataPsu;
-	DataCtrl dataCtrl;
-	std::mutex dataCtrlMutex;
-	std::atomic_bool newDataCtrl;
-	DataDownlink dataDownlink;
-	std::mutex dataDownlinkMutex;
-	std::atomic_bool newDataDownlink;
+	DataWatchdog dataWatchdog;
+	std::mutex dataWatchdogMutex;
+	std::atomic_bool newDataWatchdog;
 
 private:
 	std::atomic_int publication_matched;
@@ -116,6 +120,21 @@ private:
 	std::mutex    dataLogMutex;
 
 	/***PYTHON_GEN_TOPIC*/
+	eprosima::fastdds::dds::Topic       *topicAhrs;
+	eprosima::fastdds::dds::DataReader  *readerAhrs;
+	eprosima::fastdds::dds::TypeSupport  typeAhrs;
+	eprosima::fastdds::dds::Topic       *topicAir;
+	eprosima::fastdds::dds::DataReader  *readerAir;
+	eprosima::fastdds::dds::TypeSupport  typeAir;
+	eprosima::fastdds::dds::Topic       *topicCtrl;
+	eprosima::fastdds::dds::DataReader  *readerCtrl;
+	eprosima::fastdds::dds::TypeSupport  typeCtrl;
+	eprosima::fastdds::dds::Topic       *topicDownlink;
+	eprosima::fastdds::dds::DataReader  *readerDownlink;
+	eprosima::fastdds::dds::TypeSupport  typeDownlink;
+	eprosima::fastdds::dds::Topic       *topicPsu;
+	eprosima::fastdds::dds::DataReader  *readerPsu;
+	eprosima::fastdds::dds::TypeSupport  typePsu;
 	eprosima::fastdds::dds::Topic       *topicRaiIn;
 	eprosima::fastdds::dds::DataReader  *readerRaiIn;
 	eprosima::fastdds::dds::TypeSupport  typeRaiIn;
@@ -125,33 +144,22 @@ private:
 	eprosima::fastdds::dds::Topic       *topicSFusion;
 	eprosima::fastdds::dds::DataReader  *readerSFusion;
 	eprosima::fastdds::dds::TypeSupport  typeSFusion;
-	eprosima::fastdds::dds::Topic       *topicAhrs;
-	eprosima::fastdds::dds::DataReader  *readerAhrs;
-	eprosima::fastdds::dds::TypeSupport  typeAhrs;
-	eprosima::fastdds::dds::Topic       *topicAir;
-	eprosima::fastdds::dds::DataReader  *readerAir;
-	eprosima::fastdds::dds::TypeSupport  typeAir;
-	eprosima::fastdds::dds::Topic       *topicPsu;
-	eprosima::fastdds::dds::DataReader  *readerPsu;
-	eprosima::fastdds::dds::TypeSupport  typePsu;
-	eprosima::fastdds::dds::Topic       *topicCtrl;
-	eprosima::fastdds::dds::DataReader  *readerCtrl;
-	eprosima::fastdds::dds::TypeSupport  typeCtrl;
-	eprosima::fastdds::dds::Topic       *topicDownlink;
-	eprosima::fastdds::dds::DataReader  *readerDownlink;
-	eprosima::fastdds::dds::TypeSupport  typeDownlink;
+	eprosima::fastdds::dds::Topic       *topicWatchdog;
+	eprosima::fastdds::dds::DataReader  *readerWatchdog;
+	eprosima::fastdds::dds::TypeSupport  typeWatchdog;
 
 	Timer  timer;
 
 	/***PYTHON_GEN_FILES*/
+	std::fstream ahrsFile;
+	std::fstream airFile;
+	std::fstream ctrlFile;
+	std::fstream downlinkFile;
+	std::fstream psuFile;
 	std::fstream raiInFile;
 	std::fstream raiOutFile;
 	std::fstream sFusionFile;
-	std::fstream ahrsFile;
-	std::fstream airFile;
-	std::fstream psuFile;
-	std::fstream ctrlFile;
-	std::fstream downlinkFile;
+	std::fstream watchdogFile;
 };
 
 #endif // LOG_H

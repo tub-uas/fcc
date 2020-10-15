@@ -787,3 +787,114 @@ TEST(downlink_interop, DataPsu)
 #endif
 }
 #endif
+
+TEST(downlink, DataWatchdog)
+{
+    mavlink::mavlink_message_t msg;
+    mavlink::MsgMap map1(msg);
+    mavlink::MsgMap map2(msg);
+
+    mavlink::downlink::msg::DataWatchdog packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.allAlive = 29;
+    packet_in.ahrsAlive = 96;
+    packet_in.airAlive = 163;
+    packet_in.ctrlAlive = 230;
+    packet_in.downlinkAlive = 41;
+    packet_in.gpsAlive = 108;
+    packet_in.logAlive = 175;
+    packet_in.psuAlive = 242;
+    packet_in.raiInAlive = 53;
+    packet_in.raiOutAlive = 120;
+    packet_in.sFusionAlive = 187;
+    packet_in.uplinkAlive = 254;
+    packet_in.alive = 65;
+
+    mavlink::downlink::msg::DataWatchdog packet1{};
+    mavlink::downlink::msg::DataWatchdog packet2{};
+
+    packet1 = packet_in;
+
+    //std::cout << packet1.to_yaml() << std::endl;
+
+    packet1.serialize(map1);
+
+    mavlink::mavlink_finalize_message(&msg, 1, 1, packet1.MIN_LENGTH, packet1.LENGTH, packet1.CRC_EXTRA);
+
+    packet2.deserialize(map2);
+
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.allAlive, packet2.allAlive);
+    EXPECT_EQ(packet1.ahrsAlive, packet2.ahrsAlive);
+    EXPECT_EQ(packet1.airAlive, packet2.airAlive);
+    EXPECT_EQ(packet1.ctrlAlive, packet2.ctrlAlive);
+    EXPECT_EQ(packet1.downlinkAlive, packet2.downlinkAlive);
+    EXPECT_EQ(packet1.gpsAlive, packet2.gpsAlive);
+    EXPECT_EQ(packet1.logAlive, packet2.logAlive);
+    EXPECT_EQ(packet1.psuAlive, packet2.psuAlive);
+    EXPECT_EQ(packet1.raiInAlive, packet2.raiInAlive);
+    EXPECT_EQ(packet1.raiOutAlive, packet2.raiOutAlive);
+    EXPECT_EQ(packet1.sFusionAlive, packet2.sFusionAlive);
+    EXPECT_EQ(packet1.uplinkAlive, packet2.uplinkAlive);
+    EXPECT_EQ(packet1.alive, packet2.alive);
+}
+
+#ifdef TEST_INTEROP
+TEST(downlink_interop, DataWatchdog)
+{
+    mavlink_message_t msg;
+
+    // to get nice print
+    memset(&msg, 0, sizeof(msg));
+
+    mavlink_datawatchdog_t packet_c {
+         93372036854775807ULL, 29, 96, 163, 230, 41, 108, 175, 242, 53, 120, 187, 254, 65
+    };
+
+    mavlink::downlink::msg::DataWatchdog packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.allAlive = 29;
+    packet_in.ahrsAlive = 96;
+    packet_in.airAlive = 163;
+    packet_in.ctrlAlive = 230;
+    packet_in.downlinkAlive = 41;
+    packet_in.gpsAlive = 108;
+    packet_in.logAlive = 175;
+    packet_in.psuAlive = 242;
+    packet_in.raiInAlive = 53;
+    packet_in.raiOutAlive = 120;
+    packet_in.sFusionAlive = 187;
+    packet_in.uplinkAlive = 254;
+    packet_in.alive = 65;
+
+    mavlink::downlink::msg::DataWatchdog packet2{};
+
+    mavlink_msg_datawatchdog_encode(1, 1, &msg, &packet_c);
+
+    // simulate message-handling callback
+    [&packet2](const mavlink_message_t *cmsg) {
+        MsgMap map2(cmsg);
+
+        packet2.deserialize(map2);
+    } (&msg);
+
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.allAlive, packet2.allAlive);
+    EXPECT_EQ(packet_in.ahrsAlive, packet2.ahrsAlive);
+    EXPECT_EQ(packet_in.airAlive, packet2.airAlive);
+    EXPECT_EQ(packet_in.ctrlAlive, packet2.ctrlAlive);
+    EXPECT_EQ(packet_in.downlinkAlive, packet2.downlinkAlive);
+    EXPECT_EQ(packet_in.gpsAlive, packet2.gpsAlive);
+    EXPECT_EQ(packet_in.logAlive, packet2.logAlive);
+    EXPECT_EQ(packet_in.psuAlive, packet2.psuAlive);
+    EXPECT_EQ(packet_in.raiInAlive, packet2.raiInAlive);
+    EXPECT_EQ(packet_in.raiOutAlive, packet2.raiOutAlive);
+    EXPECT_EQ(packet_in.sFusionAlive, packet2.sFusionAlive);
+    EXPECT_EQ(packet_in.uplinkAlive, packet2.uplinkAlive);
+    EXPECT_EQ(packet_in.alive, packet2.alive);
+
+#ifdef PRINT_MSG
+    PRINT_MSG(msg);
+#endif
+}
+#endif

@@ -21,6 +21,7 @@
 #include <fastdds/dds/subscriber/qos/DataReaderQos.hpp>
 #include <fastdds/dds/subscriber/SampleInfo.hpp>
 
+#include "./idl/DataWatchdogPubSubTypes.h"
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 #include "./../raiOut/idl/DataRaiOutPubSubTypes.h"
 #include "./../sFusion/idl/DataSFusionPubSubTypes.h"
@@ -28,17 +29,22 @@
 #include "./../air/idl/DataAirPubSubTypes.h"
 #include "./../psu/idl/DataPsuPubSubTypes.h"
 #include "./../ctrl/idl/DataCtrlPubSubTypes.h"
+#include "./../downlink/idl/DataDownlinkPubSubTypes.h"
+#include "./../log/idl/DataLogPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
 #include "../../driver/drv_led/drv_led.h"
 
-class Listener : public eprosima::fastdds::dds::DataReaderListener
+class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
 public:
 
 	Listener();
 
 	~Listener() override;
+
+	void on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+	                            const eprosima::fastdds::dds::PublicationMatchedStatus& info) override;
 
 	void on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 	                             const eprosima::fastdds::dds::SubscriptionMatchedStatus& info) override;
@@ -67,8 +73,15 @@ public:
 	DataCtrl dataCtrl;
 	std::mutex dataCtrlMutex;
 	std::atomic_bool newDataCtrl;
+	DataCtrl dataDownlink;
+	std::mutex dataDownlinkMutex;
+	std::atomic_bool newDataDownlink;
+	DataCtrl dataLog;
+	std::mutex dataLogMutex;
+	std::atomic_bool newDataLog;
 
 private:
+	std::atomic_int publication_matched;
 	std::atomic_int subscription_matched;
 
 };
@@ -88,6 +101,8 @@ public:
 
 	bool init();
 	void run();
+	void publish();
+	void print();
 	void led();
 
 	const unsigned long long aliveReset = 1e5;  // in us
@@ -99,8 +114,15 @@ private:
 	std::atomic_bool yellowLed;
 
 	eprosima::fastdds::dds::DomainParticipant *participant;
+	eprosima::fastdds::dds::Publisher         *publisher;
 	eprosima::fastdds::dds::Subscriber        *subscriber;
 	Listener                                   listener;
+
+	eprosima::fastdds::dds::Topic        *topicWatchdog;
+	eprosima::fastdds::dds::DataWriter   *writerWatchdog;
+	eprosima::fastdds::dds::TypeSupport   typeWatchdog;
+	DataWatchdog  dataWatchdog;
+	std::mutex    dataWatchdogMutex;
 
 	eprosima::fastdds::dds::Topic       *topicRaiIn;
 	eprosima::fastdds::dds::DataReader  *readerRaiIn;
@@ -123,6 +145,12 @@ private:
 	eprosima::fastdds::dds::Topic       *topicCtrl;
 	eprosima::fastdds::dds::DataReader  *readerCtrl;
 	eprosima::fastdds::dds::TypeSupport  typeCtrl;
+	eprosima::fastdds::dds::Topic       *topicDownlink;
+	eprosima::fastdds::dds::DataReader  *readerDownlink;
+	eprosima::fastdds::dds::TypeSupport  typeDownlink;
+	eprosima::fastdds::dds::Topic       *topicLog;
+	eprosima::fastdds::dds::DataReader  *readerLog;
+	eprosima::fastdds::dds::TypeSupport  typeLog;
 
 	Timer  timer;
 
