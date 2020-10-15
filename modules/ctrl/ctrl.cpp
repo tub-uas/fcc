@@ -255,7 +255,7 @@ void Ctrl::run() {
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
 			std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
 
-			if (listener.dataRaiIn.valid() && listener.dataSFusion.valid()) {
+			if (listener.dataRaiIn.alive() && listener.dataSFusion.alive()) {
 
 				static float lastTime = timer.getSysTimeS();
 				float deltaTime = timer.getSysTimeS()-lastTime;

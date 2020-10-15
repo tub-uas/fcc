@@ -243,7 +243,7 @@ void SFusion::run() {
 			std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
 
 			// todo: as soon as we are actually using air, remove comment
-			if (listener.dataAhrs.valid() /* && listener.dataAir.valid()*/) {
+			if (listener.dataAhrs.alive() /* && listener.dataAir.alive()*/) {
 
 				dataSFusion.gyrX(listener.dataAhrs.gyrX());
 				dataSFusion.gyrY(listener.dataAhrs.gyrY());
