@@ -34,6 +34,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG OR CMAKE_CXX_COMPILER_ID 
 	endif()
 endif()
 
+set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")
+
 message(STATUS "Configuring ${PROJECT_NAME}")
 
 add_compile_options(-Wall -Wextra -Werror)
