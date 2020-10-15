@@ -90,6 +90,9 @@ public:
 	void run();
 	void led();
 
+	const unsigned long long aliveReset = 1e5;  // in us
+	std::atomic_ullong aliveTime;
+
 private:
 
 	std::atomic_bool greenLed;
