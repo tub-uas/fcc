@@ -370,7 +370,7 @@ void Watchdog::led() {
 
 void Watchdog::run() {
 
-	// watchdog is running
+	// todo: do smth with yellow led
 	// yellowLed = true;
 
 	const double timeout = 0.1;
