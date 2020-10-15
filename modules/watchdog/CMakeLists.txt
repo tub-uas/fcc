@@ -54,6 +54,8 @@ add_library(DataAhrs ../ahrs/${IDL_PATH}/DataAhrs.cxx ../ahrs/${IDL_PATH}/DataAh
 add_library(DataAir ../air/${IDL_PATH}/DataAir.cxx ../air/${IDL_PATH}/DataAirPubSubTypes.cxx)
 add_library(DataPsu ../psu/${IDL_PATH}/DataPsu.cxx ../psu/${IDL_PATH}/DataPsuPubSubTypes.cxx)
 add_library(DataCtrl ../ctrl/${IDL_PATH}/DataCtrl.cxx ../ctrl/${IDL_PATH}/DataCtrlPubSubTypes.cxx)
+add_library(DataDownlink ../downlink/${IDL_PATH}/DataDownlink.cxx ../downlink/${IDL_PATH}/DataDownlinkPubSubTypes.cxx)
+add_library(DataLog ../log/${IDL_PATH}/DataLog.cxx ../log/${IDL_PATH}/DataLogPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 
@@ -70,3 +72,5 @@ target_link_libraries(${PROJECT_NAME} DataAhrs)
 target_link_libraries(${PROJECT_NAME} DataAir)
 target_link_libraries(${PROJECT_NAME} DataPsu)
 target_link_libraries(${PROJECT_NAME} DataCtrl)
+target_link_libraries(${PROJECT_NAME} DataDownlink)
+target_link_libraries(${PROJECT_NAME} DataLog)

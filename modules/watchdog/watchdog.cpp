@@ -67,6 +67,16 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				reader->take_next_sample(&dataCtrl, &info);
 				dataCtrlLock.unlock();
 				newDataCtrl = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataDownlink") == 0) {
+				std::unique_lock<std::mutex> dataDownlinkLock {dataDownlinkMutex};
+				reader->take_next_sample(&dataDownlink, &info);
+				dataDownlinkLock.unlock();
+				newDataDownlink = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataLog") == 0) {
+				std::unique_lock<std::mutex> dataLogLock {dataLogMutex};
+				reader->take_next_sample(&dataLog, &info);
+				dataLogLock.unlock();
+				newDataLog = true;
 			} else {
 				reader->take_next_sample(&data, &info);
 			}
@@ -101,7 +111,13 @@ Watchdog::Watchdog() : participant(nullptr),
                        typePsu(new DataPsuPubSubType()),
                        topicCtrl(nullptr),
                        readerCtrl(nullptr),
-                       typeCtrl(new DataCtrlPubSubType()) {
+                       typeCtrl(new DataCtrlPubSubType()),
+                       topicDownlink(nullptr),
+                       readerDownlink(nullptr),
+                       typeDownlink(new DataDownlinkPubSubType()),
+                       topicLog(nullptr),
+                       readerLog(nullptr),
+                       typeLog(new DataLogPubSubType()) {
 
 }
 
@@ -148,6 +164,18 @@ Watchdog::~Watchdog() {
 	}
 	if (topicCtrl != nullptr) {
 		participant->delete_topic(topicCtrl);
+	}
+	if (readerDownlink != nullptr) {
+		subscriber->delete_datareader(readerDownlink);
+	}
+	if (topicDownlink != nullptr) {
+		participant->delete_topic(topicDownlink);
+	}
+	if (readerLog != nullptr) {
+		subscriber->delete_datareader(readerLog);
+	}
+	if (topicLog != nullptr) {
+		participant->delete_topic(topicLog);
 	}
 
 	if (subscriber != nullptr) {
@@ -222,6 +250,20 @@ bool Watchdog::init() {
 	if (topicCtrl == nullptr) {
 		return false;
 	}
+	// Register the Type
+	typeDownlink.register_type(participant);
+	// Create the subscriptions Topic
+	topicDownlink = participant->create_topic("DataDownlink", "DataDownlink", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicDownlink == nullptr) {
+		return false;
+	}
+	// Register the Type
+	typeLog.register_type(participant);
+	// Create the subscriptions Topic
+	topicLog = participant->create_topic("DataLog", "DataLog", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicLog == nullptr) {
+		return false;
+	}
 
 	// Create the Subscriber
 	subscriber = participant->create_subscriber(eprosima::fastdds::dds::SUBSCRIBER_QOS_DEFAULT, nullptr);
@@ -262,6 +304,16 @@ bool Watchdog::init() {
 	// Create the DataReader
 	readerCtrl = subscriber->create_datareader(topicCtrl, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerCtrl == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerDownlink = subscriber->create_datareader(topicDownlink, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerDownlink == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerLog = subscriber->create_datareader(topicLog, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerLog == nullptr) {
 		return false;
 	}
 
@@ -381,6 +433,8 @@ void Watchdog::run() {
 	static double dataAirTime = timer.getSysTimeS();
 	static double dataPsuTime = timer.getSysTimeS();
 	static double dataCtrlTime = timer.getSysTimeS();
+	static double dataDownlinkTime = timer.getSysTimeS();
+	static double dataLogTime = timer.getSysTimeS();
 	static double okTime = timer.getSysTimeS();
 
 	while (1) {
@@ -477,48 +531,77 @@ void Watchdog::run() {
 			dataCtrlLock.unlock();
 		}
 
+		if (listener.newDataDownlink) {
+			std::unique_lock<std::mutex> dataDownlinkLock {listener.dataDownlinkMutex};
+			// std::cout << "newDataDownlink" << std::endl;
+
+			if (listener.dataDownlink.alive()) {
+				// std::cout << "Reset dataDownlinkTime" << std::endl;
+				dataDownlinkTime = timer.getSysTimeS();
+			}
+
+			listener.newDataDownlink = false;
+			dataDownlinkLock.unlock();
+		}
+
+		if (listener.newDataLog) {
+			std::unique_lock<std::mutex> dataLogLock {listener.dataLogMutex};
+			// std::cout << "newDataLog" << std::endl;
+
+			if (listener.dataLog.alive()) {
+				// std::cout << "Reset dataLogTime" << std::endl;
+				dataLogTime = timer.getSysTimeS();
+			}
+
+			listener.newDataLog = false;
+			dataLogLock.unlock();
+		}
+
 		bool allGood = true;
+
 		if (timer.getSysTimeS() - dataRaiInTime > timeout) {
 			std::cout << "RaiIn failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
 		}
+
 		if (timer.getSysTimeS() - dataRaiOutTime > timeout) {
 			std::cout << "RaiOut failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
 		}
+
 		if (timer.getSysTimeS() - dataSFusionTime > timeout) {
 			std::cout << "SFusion failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
 		}
+
 		if (timer.getSysTimeS() - dataAhrsTime > timeout) {
 			std::cout << "Ahrs failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
 		}
+
 		if (timer.getSysTimeS() - dataAirTime > timeout) {
 			std::cout << "Air failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
 		}
+
 		if (timer.getSysTimeS() - dataPsuTime > timeout) {
 			std::cout << "Psu failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
 		}
+
 		if (timer.getSysTimeS() - dataCtrlTime > timeout) {
 			std::cout << "Ctrl failure" << std::endl;
 			allGood &= false;
-		} else {
-			allGood &= true;
+		}
+
+		if (timer.getSysTimeS() - dataDownlinkTime > timeout) {
+			std::cout << "Downlink failure" << std::endl;
+			allGood &= false;
+		}
+
+		if (timer.getSysTimeS() - dataLogTime > timeout) {
+			std::cout << "Log failure" << std::endl;
+			allGood &= false;
 		}
 
 		if ((timer.getSysTimeS() - okTime > 1.0) && allGood) {

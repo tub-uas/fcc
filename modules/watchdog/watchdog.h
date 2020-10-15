@@ -28,6 +28,8 @@
 #include "./../air/idl/DataAirPubSubTypes.h"
 #include "./../psu/idl/DataPsuPubSubTypes.h"
 #include "./../ctrl/idl/DataCtrlPubSubTypes.h"
+#include "./../downlink/idl/DataDownlinkPubSubTypes.h"
+#include "./../log/idl/DataLogPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
 #include "../../driver/drv_led/drv_led.h"
@@ -67,6 +69,12 @@ public:
 	DataCtrl dataCtrl;
 	std::mutex dataCtrlMutex;
 	std::atomic_bool newDataCtrl;
+	DataCtrl dataDownlink;
+	std::mutex dataDownlinkMutex;
+	std::atomic_bool newDataDownlink;
+	DataCtrl dataLog;
+	std::mutex dataLogMutex;
+	std::atomic_bool newDataLog;
 
 private:
 	std::atomic_int subscription_matched;
@@ -123,6 +131,12 @@ private:
 	eprosima::fastdds::dds::Topic       *topicCtrl;
 	eprosima::fastdds::dds::DataReader  *readerCtrl;
 	eprosima::fastdds::dds::TypeSupport  typeCtrl;
+	eprosima::fastdds::dds::Topic       *topicDownlink;
+	eprosima::fastdds::dds::DataReader  *readerDownlink;
+	eprosima::fastdds::dds::TypeSupport  typeDownlink;
+	eprosima::fastdds::dds::Topic       *topicLog;
+	eprosima::fastdds::dds::DataReader  *readerLog;
+	eprosima::fastdds::dds::TypeSupport  typeLog;
 
 	Timer  timer;
 
