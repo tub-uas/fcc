@@ -10,10 +10,26 @@
 #include <boost/filesystem.hpp>
 
 
-Listener::Listener() : subscription_matched(0) {
+Listener::Listener() : publication_matched(0),
+                       subscription_matched(0) {
 }
 
 Listener::~Listener() {
+}
+
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
+
+	if (info.current_count_change == 1) {
+		publication_matched = info.total_count;
+		std::cout << "Publisher matched." << std::endl;
+	} else if (info.current_count_change == -1) {
+		publication_matched = info.total_count;
+		std::cout << "Publisher unmatched." << std::endl;
+	} else {
+		std::cout << info.current_count_change
+		          << " is not a valid value for PublicationMatchedStatus current count change." << std::endl;
+	}
 }
 
 void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
@@ -92,7 +108,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 }
 
 Log::Log() : participant(nullptr),
+             publisher(nullptr),
              subscriber(nullptr),
+             topicLog(nullptr),
+             writerLog(nullptr),
+             typeLog(new DataLogPubSubType()),
              /***PYTHON_GEN_CONSTR*/
              topicRaiIn(nullptr),
              readerRaiIn(nullptr),
@@ -122,6 +142,16 @@ Log::Log() : participant(nullptr),
 }
 
 Log::~Log() {
+
+	if (writerLog != nullptr) {
+		publisher->delete_datawriter(writerLog);
+	}
+	if (topicLog != nullptr) {
+		participant->delete_topic(topicLog);
+	}
+	if (publisher != nullptr) {
+		participant->delete_publisher(publisher);
+	}
 
 	/***PYTHON_GEN_DELETE*/
 	if (readerRaiIn != nullptr) {
@@ -200,6 +230,24 @@ bool Log::init() {
 	participantQos.name("LogParticipant");
 	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
+		return false;
+	}
+
+	// Register the Type
+	typeLog.register_type(participant);
+	// Create the publications Topic
+	topicLog = participant->create_topic("DataLog", "DataLog", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicLog == nullptr) {
+		return false;
+	}
+	// Create the Publisher
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
+	if (publisher == nullptr) {
+		return false;
+	}
+	// Create the DataWriter
+	writerLog = publisher->create_datawriter(topicLog, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
+	if (writerLog == nullptr) {
 		return false;
 	}
 
@@ -345,6 +393,32 @@ bool Log::init() {
 	downlinkFile.open(logdir.str() + "/downlink.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 
 	return true;
+}
+
+void Log::publish() {
+
+	while (1) {
+
+		// std::cout << this->name << " publish" << std::endl;
+
+		std::unique_lock<std::mutex> dataLogLock {dataLogMutex};
+		dataLog.time(timer.getSysTime());
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataLog.alive(true);
+		} else {
+			dataLog.alive(false);
+		}
+
+		writerLog->write(&dataLog);
+		dataLogLock.unlock();
+
+		// print();
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		std::this_thread::sleep_until(next_wakeup);
+		next_wakeup += std::chrono::milliseconds(10);
+	}
 }
 
 void Log::run() {
@@ -521,4 +595,12 @@ void Log::run() {
 		std::this_thread::sleep_until(next_wakeup);
 		next_wakeup += std::chrono::milliseconds(1);
 	}
+}
+
+void Log::print() {
+
+	std::cout << "--- " << this->name << " " << dataLog.time() << " ---" << std::endl;
+
+	std::cout << "alive   " << dataLog.alive() << std::endl;
+
 }

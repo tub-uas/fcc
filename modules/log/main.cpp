@@ -15,7 +15,9 @@ int main(int argc, const char* argv[]) {
 
 	if (log->init()) {
 		std::thread run([&] (Log *log) { log->run(); }, log);
+		std::thread publish([&] (Log *log) { log->publish(); }, log);
 		run.join();
+		publish.join();
 	}
 
 	std::cout << log->name << " close" << std::endl;

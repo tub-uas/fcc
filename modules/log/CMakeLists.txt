@@ -43,6 +43,8 @@ set(DRIVER_PATH "../../driver")
 
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 
+add_library(DataLog ./${IDL_PATH}/DataLog.cxx ./${IDL_PATH}/DataLogPubSubTypes.cxx)
+
 ###PYTHON_GEN_ADD_LIBRARY
 add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
 add_library(DataRaiOut ../raiOut/${IDL_PATH}/DataRaiOut.cxx ../raiOut/${IDL_PATH}/DataRaiOutPubSubTypes.cxx)
@@ -56,6 +58,7 @@ add_library(DataDownlink ../downlink/${IDL_PATH}/DataDownlink.cxx ../downlink/${
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer)
+target_link_libraries(${PROJECT_NAME} DataLog)
 target_link_libraries(${PROJECT_NAME} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 ###PYTHON_GEN_TARGET_LINK

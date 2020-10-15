@@ -1,0 +1,4 @@
+struct DataLog {
+	unsigned long long time;
+	boolean            alive;
+};

@@ -31,6 +31,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG OR CMAKE_CXX_COMPILER_ID 
 	endif()
 endif()
 
+set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")
+
 message(STATUS "Configuring ${PROJECT_NAME}")
 
 add_compile_options(-Wall -Wextra -Werror)
@@ -41,11 +43,14 @@ set(DRIVER_PATH "../../driver")
 
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 
+add_library(DataLog ./${IDL_PATH}/DataLog.cxx ./${IDL_PATH}/DataLogPubSubTypes.cxx)
+
 ###PYTHON_GEN_ADD_LIBRARY
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer)
+target_link_libraries(${PROJECT_NAME} DataLog)
 target_link_libraries(${PROJECT_NAME} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 ###PYTHON_GEN_TARGET_LINK
