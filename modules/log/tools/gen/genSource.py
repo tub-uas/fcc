@@ -107,7 +107,7 @@ class GenSource():
         for mod, dir in self._paths.items():
             c.extend(["\t\tif (listener.newData%s) {\n" % (Idl.toUp(mod)),
                       "\t\t\tstd::unique_lock<std::mutex> data%sLock {listener.data%sMutex};\n" % (Idl.toUp(mod), Idl.toUp(mod)),
-                      "\t\t\tstd::cout << \"newData%s\" << std::endl;\n" % (Idl.toUp(mod))])
+                      "\t\t\t// std::cout << \"newData%s\" << std::endl;\n" % (Idl.toUp(mod))])
             i = Idl(mod, dir)
             i.decodeIdl()
             for t in i.objs:
@@ -120,8 +120,8 @@ class GenSource():
                     c.extend(["\t\t\t%sFile.write(reinterpret_cast<const char*>(&listener.data%s.%s()), sizeof(listener.data%s.%s()));\n" % (Idl.toLow(mod), Idl.toUp(mod), Idl.toLow(t[0]), Idl.toUp(mod), Idl.toLow(t[0]))])
 
             c.extend(["\t\t\t%sFile.flush();\n" % (Idl.toLow(mod)),
-                      "\t\t\tdata%sLock.unlock();\n" % (Idl.toUp(mod)),
                       "\t\t\tlistener.newData%s = false;\n" % (Idl.toUp(mod)),
+                      "\t\t\tdata%sLock.unlock();\n" % (Idl.toUp(mod)),
                       "\t\t}\n"])
         return c
 

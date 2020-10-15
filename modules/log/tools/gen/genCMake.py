@@ -16,7 +16,7 @@ class GenCMake():
     def addLibrary(self):
         c = list()
         for t in self._types:
-            c.extend(["add_library(Data%s ../%s/idl/Data%s.cxx ../%s/idl/Data%sPubSubTypes.cxx)\n" % (Idl.toUp(t), Idl.toLow(t), Idl.toUp(t), Idl.toLow(t), Idl.toUp(t))])
+            c.extend(["add_library(Data%s ../%s/${IDL_PATH}/Data%s.cxx ../%s/${IDL_PATH}/Data%sPubSubTypes.cxx)\n" % (Idl.toUp(t), Idl.toLow(t), Idl.toUp(t), Idl.toLow(t), Idl.toUp(t))])
         return c
 
     @property

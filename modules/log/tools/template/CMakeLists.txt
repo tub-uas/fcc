@@ -35,6 +35,7 @@ message(STATUS "Configuring ${PROJECT_NAME}")
 
 add_compile_options(-Wall -Wextra -Werror)
 
+set(IDL_PATH "idl")
 set(UTIL_PATH "../../util")
 set(DRIVER_PATH "../../driver")
 

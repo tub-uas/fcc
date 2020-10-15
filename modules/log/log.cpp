@@ -309,6 +309,8 @@ bool Log::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	time_t t_now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	tm local_tm_now = *localtime(&t_now);
 
@@ -366,8 +368,8 @@ void Log::run() {
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.fltMode()), sizeof(listener.dataRaiIn.fltMode()));
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.alive()), sizeof(listener.dataRaiIn.alive()));
 			raiInFile.flush();
-			dataRaiInLock.unlock();
 			listener.newDataRaiIn = false;
+			dataRaiInLock.unlock();
 		}
 		if (listener.newDataRaiOut) {
 			std::unique_lock<std::mutex> dataRaiOutLock {listener.dataRaiOutMutex};
@@ -383,8 +385,8 @@ void Log::run() {
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.fltMode()), sizeof(listener.dataRaiOut.fltMode()));
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.alive()), sizeof(listener.dataRaiOut.alive()));
 			raiOutFile.flush();
-			dataRaiOutLock.unlock();
 			listener.newDataRaiOut = false;
+			dataRaiOutLock.unlock();
 		}
 		if (listener.newDataSFusion) {
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
@@ -422,8 +424,8 @@ void Log::run() {
 			sFusionFile.write(reinterpret_cast<const char*>(&listener.dataSFusion.gamma()), sizeof(listener.dataSFusion.gamma()));
 			sFusionFile.write(reinterpret_cast<const char*>(&listener.dataSFusion.alive()), sizeof(listener.dataSFusion.alive()));
 			sFusionFile.flush();
-			dataSFusionLock.unlock();
 			listener.newDataSFusion = false;
+			dataSFusionLock.unlock();
 		}
 		if (listener.newDataAhrs) {
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
@@ -450,8 +452,8 @@ void Log::run() {
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.q3()), sizeof(listener.dataAhrs.q3()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.alive()), sizeof(listener.dataAhrs.alive()));
 			ahrsFile.flush();
-			dataAhrsLock.unlock();
 			listener.newDataAhrs = false;
+			dataAhrsLock.unlock();
 		}
 		if (listener.newDataAir) {
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
@@ -465,8 +467,8 @@ void Log::run() {
 			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.temp()), sizeof(listener.dataAir.temp()));
 			airFile.write(reinterpret_cast<const char*>(&listener.dataAir.alive()), sizeof(listener.dataAir.alive()));
 			airFile.flush();
-			dataAirLock.unlock();
 			listener.newDataAir = false;
+			dataAirLock.unlock();
 		}
 		if (listener.newDataPsu) {
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};
@@ -484,8 +486,8 @@ void Log::run() {
 			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.sysPow()), sizeof(listener.dataPsu.sysPow()));
 			psuFile.write(reinterpret_cast<const char*>(&listener.dataPsu.alive()), sizeof(listener.dataPsu.alive()));
 			psuFile.flush();
-			dataPsuLock.unlock();
 			listener.newDataPsu = false;
+			dataPsuLock.unlock();
 		}
 		if (listener.newDataCtrl) {
 			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
@@ -499,8 +501,8 @@ void Log::run() {
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.fltMode()), sizeof(listener.dataCtrl.fltMode()));
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.alive()), sizeof(listener.dataCtrl.alive()));
 			ctrlFile.flush();
-			dataCtrlLock.unlock();
 			listener.newDataCtrl = false;
+			dataCtrlLock.unlock();
 		}
 		if (listener.newDataDownlink) {
 			std::unique_lock<std::mutex> dataDownlinkLock {listener.dataDownlinkMutex};
@@ -508,9 +510,12 @@ void Log::run() {
 			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.time()), sizeof(listener.dataDownlink.time()));
 			downlinkFile.write(reinterpret_cast<const char*>(&listener.dataDownlink.alive()), sizeof(listener.dataDownlink.alive()));
 			downlinkFile.flush();
-			dataDownlinkLock.unlock();
 			listener.newDataDownlink = false;
+			dataDownlinkLock.unlock();
 		}
+
+		// reset the alive timer
+		aliveTime = timer.getSysTime();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
