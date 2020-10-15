@@ -90,6 +90,8 @@ bool Log::init() {
 
 	/***PYTHON_GEN_CREATE_DATAREADER*/
 
+	aliveTime = timer.getSysTime();
+
 	time_t t_now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	tm local_tm_now = *localtime(&t_now);
 
@@ -124,6 +126,9 @@ void Log::run() {
 		// std::cout << this->name << " run" << std::endl;
 
 		/***PYTHON_GEN_WRITE_FILES*/
+
+		// reset the alive timer
+		aliveTime = timer.getSysTime();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);

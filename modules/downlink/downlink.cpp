@@ -400,8 +400,8 @@ void Downlink::run() {
 		}
 
 		if (listener.newDataRaiOut &&
-			timer.getSysTimeS()-dataRaiOutTime > dataRaiOutInterval &&
-			dataRaiOutInterval > 0.0) {
+		    timer.getSysTimeS()-dataRaiOutTime > dataRaiOutInterval &&
+		    dataRaiOutInterval > 0.0) {
 
 			dataRaiOutTime = timer.getSysTimeS();
 
@@ -433,8 +433,8 @@ void Downlink::run() {
 		}
 
 		if (listener.newDataSFusion &&
-			timer.getSysTimeS()-dataSFusionTime > dataSFusionInterval &&
-			dataSFusionInterval > 0.0) {
+		    timer.getSysTimeS()-dataSFusionTime > dataSFusionInterval &&
+		    dataSFusionInterval > 0.0) {
 
 			dataSFusionTime = timer.getSysTimeS();
 
@@ -488,8 +488,8 @@ void Downlink::run() {
 		}
 
 		if (listener.newDataAhrs &&
-			timer.getSysTimeS()-dataAhrsTime > dataAhrsInterval &&
-			dataAhrsInterval > 0.0) {
+		    timer.getSysTimeS()-dataAhrsTime > dataAhrsInterval &&
+		    dataAhrsInterval > 0.0) {
 
 			dataAhrsTime = timer.getSysTimeS();
 
@@ -532,8 +532,8 @@ void Downlink::run() {
 		}
 
 		if (listener.newDataAir &&
-			timer.getSysTimeS()-dataAirTime > dataAirInterval &&
-			dataAirInterval > 0.0) {
+		    timer.getSysTimeS()-dataAirTime > dataAirInterval &&
+		    dataAirInterval > 0.0) {
 
 			dataAirTime = timer.getSysTimeS();
 
@@ -563,8 +563,8 @@ void Downlink::run() {
 		}
 
 		if (listener.newDataCtrl &&
-			timer.getSysTimeS()-dataCtrlTime > dataCtrlInterval &&
-			dataCtrlInterval > 0.0) {
+		    timer.getSysTimeS()-dataCtrlTime > dataCtrlInterval &&
+		    dataCtrlInterval > 0.0) {
 
 			dataCtrlTime = timer.getSysTimeS();
 
@@ -593,8 +593,8 @@ void Downlink::run() {
 		}
 
 		if (listener.newDataPsu &&
-			timer.getSysTimeS()-dataPsuTime > dataPsuInterval &&
-			dataPsuInterval > 0.0) {
+		    timer.getSysTimeS()-dataPsuTime > dataPsuInterval &&
+		    dataPsuInterval > 0.0) {
 
 			dataPsuTime = timer.getSysTimeS();
 
@@ -627,6 +627,7 @@ void Downlink::run() {
 			listener.newDataPsu = false;
 		}
 
+		// reset the alive timer
 		aliveTime = timer.getSysTime();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);

@@ -164,6 +164,8 @@ bool RaiOut::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (raiCom.init() == false) {
 		return false;
 	}
@@ -180,7 +182,12 @@ void RaiOut::publish() {
 
 		std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
 		dataRaiOut.time(timer.getSysTime());
-		dataRaiOut.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataRaiOut.alive(true);
+		} else {
+			dataRaiOut.alive(false);
+		}
 
 		writerRaiOut->write(&dataRaiOut);
 		dataRaiOutLock.unlock();
@@ -211,31 +218,38 @@ void RaiOut::run() {
 			// std::array<uint16_t, CAN_META_RAI_CHNL_NUM> fix =  {900, 1000, 1100, 1200, 1300, 1400,
 			//                                                    1500, 1600, 1700, 1800, 1900, 2000};
 
-			dataRaiOut.chnl(raiCom.channel);
-			dataRaiOut.roll(listener.dataCtrl.xi());
-			dataRaiOut.pitch(listener.dataCtrl.eta());
-			dataRaiOut.yaw(listener.dataCtrl.zeta());
-			dataRaiOut.thr(listener.dataCtrl.etaT());
-			dataRaiOut.fltMode(listener.dataCtrl.fltMode());
+			if (listener.dataCtrl.valid()) {
 
-			raiCom.time = timer.getSysTimeS();
-			raiCom.channel[0] = mixer.rad2pwm(Mixer::THR, listener.dataCtrl.etaT());
-			raiCom.channel[1] = mixer.rad2pwm(Mixer::AILR, listener.dataCtrl.xi());
-			raiCom.channel[2] = mixer.rad2pwm(Mixer::ELE, listener.dataCtrl.eta());
-			raiCom.channel[3] = mixer.rad2pwm(Mixer::RUD, listener.dataCtrl.zeta());
-			raiCom.channel[4] = mixer.rad2pwm(Mixer::AILL, -listener.dataCtrl.xi());
-			raiCom.channel[5] = 1500;
-			raiCom.channel[6] = mixer.mode2pwm(Mixer::MAN);
-			raiCom.channel[7] = 1500;
-			raiCom.channel[8] = 1500;
-			raiCom.channel[9] = 1500;
-			raiCom.channel[10] = 1500;
-			raiCom.channel[11] = 1500;
+				dataRaiOut.chnl(raiCom.channel);
+				dataRaiOut.roll(listener.dataCtrl.xi());
+				dataRaiOut.pitch(listener.dataCtrl.eta());
+				dataRaiOut.yaw(listener.dataCtrl.zeta());
+				dataRaiOut.thr(listener.dataCtrl.etaT());
+				dataRaiOut.fltMode(listener.dataCtrl.fltMode());
+
+				raiCom.time = timer.getSysTimeS();
+				raiCom.channel[0] = mixer.rad2pwm(Mixer::THR, listener.dataCtrl.etaT());
+				raiCom.channel[1] = mixer.rad2pwm(Mixer::AILR, listener.dataCtrl.xi());
+				raiCom.channel[2] = mixer.rad2pwm(Mixer::ELE, listener.dataCtrl.eta());
+				raiCom.channel[3] = mixer.rad2pwm(Mixer::RUD, listener.dataCtrl.zeta());
+				raiCom.channel[4] = mixer.rad2pwm(Mixer::AILL, -listener.dataCtrl.xi());
+				raiCom.channel[5] = 1500;
+				raiCom.channel[6] = mixer.mode2pwm(Mixer::MAN);
+				raiCom.channel[7] = 1500;
+				raiCom.channel[8] = 1500;
+				raiCom.channel[9] = 1500;
+				raiCom.channel[10] = 1500;
+				raiCom.channel[11] = 1500;
+
+				// reset the alive timer
+				aliveTime = timer.getSysTime();
+
+				// raiCom.print();
+
+			}
 
 			dataCtrlLock.unlock();
 			dataRaiOutLock.unlock();
-
-			// raiCom.print();
 
 			listener.newDataCtrl = false;
 		}

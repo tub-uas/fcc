@@ -196,6 +196,8 @@ bool SFusion::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	return true;
 }
 
@@ -208,7 +210,12 @@ void SFusion::publish() {
 
 		std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
 		dataSFusion.time(timer.getSysTime());
-		dataSFusion.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataSFusion.alive(true);
+		} else {
+			dataSFusion.alive(false);
+		}
 
 		writerSFusion->write(&dataSFusion);
 		dataSFusionLock.unlock();
@@ -235,37 +242,44 @@ void SFusion::run() {
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
 			std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
 
-			dataSFusion.gyrX(listener.dataAhrs.gyrX());
-			dataSFusion.gyrY(listener.dataAhrs.gyrY());
-			dataSFusion.gyrZ(listener.dataAhrs.gyrZ());
-			dataSFusion.accX(listener.dataAhrs.accX());
-			dataSFusion.accY(listener.dataAhrs.accY());
-			dataSFusion.accZ(listener.dataAhrs.accZ());
-			dataSFusion.magX(listener.dataAhrs.magX());
-			dataSFusion.magY(listener.dataAhrs.magY());
-			dataSFusion.magZ(listener.dataAhrs.magZ());
-			dataSFusion.temp(listener.dataAhrs.temp());
-			dataSFusion.press(listener.dataAhrs.press());
-			dataSFusion.phi(listener.dataAhrs.phi());
-			dataSFusion.the(listener.dataAhrs.the());
-			dataSFusion.psi(listener.dataAhrs.psi());
-			dataSFusion.q0(listener.dataAhrs.q0());
-			dataSFusion.q1(listener.dataAhrs.q1());
-			dataSFusion.q2(listener.dataAhrs.q2());
-			dataSFusion.q3(listener.dataAhrs.q3());
+			// todo: as soon as we are actually using air, remove comment
+			if (listener.dataAhrs.valid() /* && listener.dataAir.valid()*/) {
 
-			dataSFusion.posN(-1.0);
-			dataSFusion.posE(-1.0);
-			dataSFusion.posD(-1.0);
-			dataSFusion.speedN(-1.0);
-			dataSFusion.speedE(-1.0);
-			dataSFusion.speedD(-1.0);
-			dataSFusion.windN(-1.0);
-			dataSFusion.windE(-1.0);
-			dataSFusion.windD(-1.0);
-			dataSFusion.ssa(-1.0);
-			dataSFusion.aoa(-1.0);
-			dataSFusion.gamma(-1.0);
+				dataSFusion.gyrX(listener.dataAhrs.gyrX());
+				dataSFusion.gyrY(listener.dataAhrs.gyrY());
+				dataSFusion.gyrZ(listener.dataAhrs.gyrZ());
+				dataSFusion.accX(listener.dataAhrs.accX());
+				dataSFusion.accY(listener.dataAhrs.accY());
+				dataSFusion.accZ(listener.dataAhrs.accZ());
+				dataSFusion.magX(listener.dataAhrs.magX());
+				dataSFusion.magY(listener.dataAhrs.magY());
+				dataSFusion.magZ(listener.dataAhrs.magZ());
+				dataSFusion.temp(listener.dataAhrs.temp());
+				dataSFusion.press(listener.dataAhrs.press());
+				dataSFusion.phi(listener.dataAhrs.phi());
+				dataSFusion.the(listener.dataAhrs.the());
+				dataSFusion.psi(listener.dataAhrs.psi());
+				dataSFusion.q0(listener.dataAhrs.q0());
+				dataSFusion.q1(listener.dataAhrs.q1());
+				dataSFusion.q2(listener.dataAhrs.q2());
+				dataSFusion.q3(listener.dataAhrs.q3());
+
+				dataSFusion.posN(-1.0);
+				dataSFusion.posE(-1.0);
+				dataSFusion.posD(-1.0);
+				dataSFusion.speedN(-1.0);
+				dataSFusion.speedE(-1.0);
+				dataSFusion.speedD(-1.0);
+				dataSFusion.windN(-1.0);
+				dataSFusion.windE(-1.0);
+				dataSFusion.windD(-1.0);
+				dataSFusion.ssa(-1.0);
+				dataSFusion.aoa(-1.0);
+				dataSFusion.gamma(-1.0);
+
+				// reset the alive timer
+				aliveTime = timer.getSysTime();
+			}
 
 			dataAhrsLock.unlock();
 			dataAirLock.unlock();

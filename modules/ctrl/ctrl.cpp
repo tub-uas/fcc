@@ -197,6 +197,8 @@ bool Ctrl::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (pidRoll.set(0.5, 0.0/*0.5*/, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
 		return false;
 	}
@@ -221,7 +223,12 @@ void Ctrl::publish() {
 
 		std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
 		dataCtrl.time(timer.getSysTime());
-		dataCtrl.alive(true);
+
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataCtrl.alive(true);
+		} else {
+			dataCtrl.alive(false);
+		}
 
 		writerCtrl->write(&dataCtrl);
 		dataCtrlLock.unlock();
@@ -241,59 +248,66 @@ void Ctrl::run() {
 
 		// std::cout << this->name << " run" << std::endl;
 
-		if (listener.newDataRaiIn /*|| listener.newDataSFusion*/) { // Chris will dass wir nur auf raiIn triggern
+		// Chris will dass wir nur auf raiIn triggern
+		if (listener.newDataRaiIn /*|| listener.newDataSFusion*/) {
 
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
 			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
 			std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
 
-			static float lastTime = timer.getSysTimeS();
-			float deltaTime = timer.getSysTimeS()-lastTime;
+			if (listener.dataRaiIn.valid() && listener.dataSFusion.valid()) {
 
-			float outRoll = 0.0;
-			pidRoll.run(deltaTime, listener.dataRaiIn.roll(), -listener.dataSFusion.phi(), &outRoll);
+				static float lastTime = timer.getSysTimeS();
+				float deltaTime = timer.getSysTimeS()-lastTime;
 
-			float outPitch = 0.0;
-			pidPitch.run(deltaTime, listener.dataRaiIn.pitch(), -listener.dataSFusion.the(), &outPitch);
+				float outRoll = 0.0;
+				pidRoll.run(deltaTime, listener.dataRaiIn.roll(), -listener.dataSFusion.phi(), &outRoll);
 
-			// float outYaw = 0.0;
-			// pidYaw.run(deltaTime, listener.dataRaiIn.yaw(), -listener.dataSFusion.psi(), &outYaw);
+				float outPitch = 0.0;
+				pidPitch.run(deltaTime, listener.dataRaiIn.pitch(), -listener.dataSFusion.the(), &outPitch);
 
-			lastTime = timer.getSysTimeS();
+				// float outYaw = 0.0;
+				// pidYaw.run(deltaTime, listener.dataRaiIn.yaw(), -listener.dataSFusion.psi(), &outYaw);
 
-			// std::cout << "soll:      " << listener.dataRaiIn.yaw() << std::endl
-			//           << "ist:       " << listener.dataSFusion.psi() << std::endl
-			//           << "stell:     " << outYaw << std::endl
-			//           << "deltaTime: " << deltaTime << std::endl;
+				lastTime = timer.getSysTimeS();
 
-			if (listener.dataRaiIn.fltMode() == Mixer::MAN) {
-				dataCtrl.xi(listener.dataRaiIn.roll());
-				dataCtrl.eta(listener.dataRaiIn.pitch());
-				dataCtrl.zeta(listener.dataRaiIn.yaw());
+				// std::cout << "soll:      " << listener.dataRaiIn.yaw() << std::endl
+				//           << "ist:       " << listener.dataSFusion.psi() << std::endl
+				//           << "stell:     " << outYaw << std::endl
+				//           << "deltaTime: " << deltaTime << std::endl;
 
-				pidRoll.reset();
-				pidPitch.reset();
-				// pidYaw.reset();
+				if (listener.dataRaiIn.fltMode() == Mixer::MAN) {
+					dataCtrl.xi(listener.dataRaiIn.roll());
+					dataCtrl.eta(listener.dataRaiIn.pitch());
+					dataCtrl.zeta(listener.dataRaiIn.yaw());
 
-			} else if (listener.dataRaiIn.fltMode() == Mixer::ATT) {
-				dataCtrl.xi(outRoll);
-				dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
-				dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+					pidRoll.reset();
+					pidPitch.reset();
+					// pidYaw.reset();
 
-				pidPitch.reset();
-				// pidYaw.reset();
+				} else if (listener.dataRaiIn.fltMode() == Mixer::ATT) {
+					dataCtrl.xi(outRoll);
+					dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
+					dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
 
-			} else if (listener.dataRaiIn.fltMode() == Mixer::NAV) {
-				dataCtrl.xi(outRoll);
-				dataCtrl.eta(outPitch);
-				dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+					pidPitch.reset();
+					// pidYaw.reset();
 
-				// dataCtrl.zeta(outYaw);
+				} else if (listener.dataRaiIn.fltMode() == Mixer::NAV) {
+					dataCtrl.xi(outRoll);
+					dataCtrl.eta(outPitch);
+					dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+
+					// dataCtrl.zeta(outYaw);
+				}
+
+				dataCtrl.etaT(listener.dataRaiIn.thr());
+				dataCtrl.etaF(69.0);
+				dataCtrl.fltMode(listener.dataRaiIn.fltMode());
+
+				// reset the alive timer
+				aliveTime = timer.getSysTime();
 			}
-
-			dataCtrl.etaT(listener.dataRaiIn.thr());
-			dataCtrl.etaF(69.0);
-			dataCtrl.fltMode(listener.dataRaiIn.fltMode());
 
 			dataSFusionLock.unlock();
 			dataRaiInLock.unlock();
@@ -322,5 +336,4 @@ void Ctrl::print() {
 	std::cout << "etaF    " << dataCtrl.etaF() << std::endl;
 	std::cout << "fltMode " << dataCtrl.fltMode() << std::endl;
 	std::cout << "alive   " << dataCtrl.alive() << std::endl;
-
 }
