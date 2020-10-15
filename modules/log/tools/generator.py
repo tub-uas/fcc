@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from util import conf
 from gen import genCMake
 from gen import genHeader

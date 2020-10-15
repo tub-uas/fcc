@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from util.idl import Idl
 from util import conf
 from util import idl
