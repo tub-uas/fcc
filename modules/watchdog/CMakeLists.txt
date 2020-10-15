@@ -47,6 +47,7 @@ set(DRIVER_PATH "../../driver")
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 add_library(led ${DRIVER_PATH}/drv_led/drv_led.cpp)
 
+add_library(DataWatchdog ./${IDL_PATH}/DataWatchdog.cxx ./${IDL_PATH}/DataWatchdogPubSubTypes.cxx)
 add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
 add_library(DataRaiOut ../raiOut/${IDL_PATH}/DataRaiOut.cxx ../raiOut/${IDL_PATH}/DataRaiOutPubSubTypes.cxx)
 add_library(DataSFusion ../sFusion/${IDL_PATH}/DataSFusion.cxx ../sFusion/${IDL_PATH}/DataSFusionPubSubTypes.cxx)
@@ -59,10 +60,11 @@ add_library(DataLog ../log/${IDL_PATH}/DataLog.cxx ../log/${IDL_PATH}/DataLogPub
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 
+target_link_libraries(${PROJECT_NAME} DataWatchdog)
+target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led)
+
 if(RPI)
-	target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led wiringPi)
-else()
-	target_link_libraries(${PROJECT_NAME} fastcdr fastrtps timer led)
+	target_link_libraries(${PROJECT_NAME} wiringPi)
 endif()
 
 target_link_libraries(${PROJECT_NAME} DataRaiIn)

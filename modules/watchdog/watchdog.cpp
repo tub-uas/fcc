@@ -4,10 +4,26 @@
 #include <iomanip>
 #include <typeinfo>
 
-Listener::Listener() : subscription_matched(0) {
+Listener::Listener() : publication_matched(0),
+                       subscription_matched(0) {
 }
 
 Listener::~Listener() {
+}
+
+void Listener::on_publication_matched(eprosima::fastdds::dds::DataWriter*,
+                                      const eprosima::fastdds::dds::PublicationMatchedStatus& info) {
+
+	if (info.current_count_change == 1) {
+		publication_matched = info.total_count;
+		std::cout << "Publisher matched." << std::endl;
+	} else if (info.current_count_change == -1) {
+		publication_matched = info.total_count;
+		std::cout << "Publisher unmatched." << std::endl;
+	} else {
+		std::cout << info.current_count_change
+		          << " is not a valid value for PublicationMatchedStatus current count change." << std::endl;
+	}
 }
 
 void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
@@ -90,7 +106,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 }
 
 Watchdog::Watchdog() : participant(nullptr),
+                       publisher(nullptr),
                        subscriber(nullptr),
+                       topicWatchdog(nullptr),
+                       writerWatchdog(nullptr),
+                       typeWatchdog(new DataWatchdogPubSubType()),
                        topicRaiIn(nullptr),
                        readerRaiIn(nullptr),
                        typeRaiIn(new DataRaiInPubSubType()),
@@ -123,6 +143,15 @@ Watchdog::Watchdog() : participant(nullptr),
 
 Watchdog::~Watchdog() {
 
+	if (writerWatchdog != nullptr) {
+		publisher->delete_datawriter(writerWatchdog);
+	}
+	if (topicWatchdog != nullptr) {
+		participant->delete_topic(topicWatchdog);
+	}
+	if (publisher != nullptr) {
+		participant->delete_publisher(publisher);
+	}
 	if (readerRaiIn != nullptr) {
 		subscriber->delete_datareader(readerRaiIn);
 	}
@@ -198,6 +227,24 @@ bool Watchdog::init() {
 	participantQos.name("WatchdogParticipant");
 	participant = eprosima::fastdds::dds::DomainParticipantFactory::get_instance()->create_participant(0, participantQos);
 	if (participant == nullptr) {
+		return false;
+	}
+
+	// Register the Type
+	typeWatchdog.register_type(participant);
+	// Create the publications Topic
+	topicWatchdog = participant->create_topic("DataWatchdog", "DataWatchdog", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicWatchdog == nullptr) {
+		return false;
+	}
+	// Create the Publisher
+	publisher = participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT, nullptr);
+	if (publisher == nullptr) {
+		return false;
+	}
+	// Create the DataWriter
+	writerWatchdog = publisher->create_datawriter(topicWatchdog, eprosima::fastdds::dds::DATAWRITER_QOS_DEFAULT, &listener);
+	if (writerWatchdog == nullptr) {
 		return false;
 	}
 
@@ -317,6 +364,8 @@ bool Watchdog::init() {
 		return false;
 	}
 
+	aliveTime = timer.getSysTime();
+
 	if (drv_led_init() != 0) {
 		return false;
 	}
@@ -327,97 +376,30 @@ bool Watchdog::init() {
 	return true;
 }
 
-void Watchdog::led() {
+void Watchdog::publish() {
 
 	while (1) {
 
-		{ // handle green led
-			float period = 0.0;
-			float duty_cycle = 0.0;
+		// std::cout << this->name << " publish" << std::endl;
 
-			if (greenLed) {
-				period = 1.5;
-				duty_cycle = 0.95;
-			} else {
-				period = 0.15;
-				duty_cycle = 0.5;
-			}
+		std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+		dataWatchdog.time(timer.getSysTime());
 
-			static int led_mode = 0;
-			if (duty_cycle < 0.01) {
-				drv_led_set_green(0);
-				led_mode = 0;
-
-			} else if (duty_cycle > 0.99) {
-				drv_led_set_green(1);
-				led_mode = 1;
-
-			} else {
-
-				static float last_switch_time = timer.getSysTimeS();
-				if (led_mode == 0) {
-					if (timer.getSysTimeS() > last_switch_time + period*(1.0-duty_cycle)) {
-						drv_led_set_green(1);
-						led_mode = 1;
-						last_switch_time = timer.getSysTimeS();
-					}
-
-				} else {
-					if (timer.getSysTimeS() > last_switch_time + period*duty_cycle) {
-						drv_led_set_green(0);
-						led_mode = 0;
-						last_switch_time = timer.getSysTimeS();
-					}
-				}
-			}
+		if (timer.getSysTime() < aliveTime + aliveReset) {
+			dataWatchdog.alive(true);
+		} else {
+			dataWatchdog.alive(false);
 		}
 
-		{ // handle red led
-			float period = 0.0;
-			float duty_cycle = 0.0;
+		writerWatchdog->write(&dataWatchdog);
+		dataWatchdogLock.unlock();
 
-			if (yellowLed) {
-				period = 0.5;
-				duty_cycle = 0.5;
-			} else {
-				period = 0.0;
-				duty_cycle = 0.0;
-			}
+		// print();
 
-			static int led_mode = 0;
-			if (duty_cycle < 0.01) {
-				drv_led_set_yellow(0);
-				led_mode = 0;
-
-			} else if (duty_cycle > 0.99) {
-				drv_led_set_yellow(1);
-				led_mode = 1;
-
-			} else {
-
-				static float last_switch_time = timer.getSysTimeS();
-				if (led_mode == 0) {
-					if (timer.getSysTimeS() > last_switch_time + period*(1.0-duty_cycle)) {
-						drv_led_set_yellow(1);
-						led_mode = 1;
-						last_switch_time = timer.getSysTimeS();
-					}
-
-				} else {
-					if (timer.getSysTimeS() > last_switch_time + period*duty_cycle) {
-						drv_led_set_yellow(0);
-						led_mode = 0;
-						last_switch_time = timer.getSysTimeS();
-					}
-				}
-			}
-		}
-
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(10);
 	}
-
 }
 
 void Watchdog::run() {
@@ -431,11 +413,12 @@ void Watchdog::run() {
 	static double dataSFusionTime = timer.getSysTimeS();
 	static double dataAhrsTime = timer.getSysTimeS();
 	static double dataAirTime = timer.getSysTimeS();
+	// static double dataGpsTime = timer.getSysTimeS();
 	static double dataPsuTime = timer.getSysTimeS();
 	static double dataCtrlTime = timer.getSysTimeS();
 	static double dataDownlinkTime = timer.getSysTimeS();
 	static double dataLogTime = timer.getSysTimeS();
-	static double okTime = timer.getSysTimeS();
+	static double okPrintTime = timer.getSysTimeS();
 
 	while (1) {
 		// std::cout << this->name << " run" << std::endl;
@@ -561,58 +544,261 @@ void Watchdog::run() {
 
 		if (timer.getSysTimeS() - dataRaiInTime > timeout) {
 			std::cout << "RaiIn failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.raiInAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.raiInAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataRaiOutTime > timeout) {
 			std::cout << "RaiOut failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.raiOutAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.raiOutAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataSFusionTime > timeout) {
 			std::cout << "SFusion failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.sFusionAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.sFusionAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataAhrsTime > timeout) {
 			std::cout << "Ahrs failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.ahrsAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.ahrsAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataAirTime > timeout) {
 			std::cout << "Air failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.airAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.airAlive(true);
+			dataWatchdogLock.unlock();
 		}
+
+		// if (timer.getSysTimeS() - dataGpsTime > timeout) {
+		// 	std::cout << "Gps failure" << std::endl;
+		// 	std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+		// 	allGood &= false;
+		// 	dataWatchdog.gpsAlive(false);
+		// 	dataWatchdogLock.unlock();
+		// } else {
+		// 	std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+		// 	allGood &= true;
+		// 	dataWatchdog.gpsAlive(true);
+		// 	dataWatchdogLock.unlock();
+		// }
 
 		if (timer.getSysTimeS() - dataPsuTime > timeout) {
 			std::cout << "Psu failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.psuAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.psuAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataCtrlTime > timeout) {
 			std::cout << "Ctrl failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.ctrlAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.ctrlAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataDownlinkTime > timeout) {
 			std::cout << "Downlink failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.downlinkAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.downlinkAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
 		if (timer.getSysTimeS() - dataLogTime > timeout) {
 			std::cout << "Log failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;
+			dataWatchdog.logAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.logAlive(true);
+			dataWatchdogLock.unlock();
 		}
 
-		if ((timer.getSysTimeS() - okTime > 1.0) && allGood) {
-			okTime = timer.getSysTimeS();
+		std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+		dataWatchdog.allAlive() = allGood;
+		dataWatchdogLock.unlock();
+
+		if ((timer.getSysTimeS() - okPrintTime > 1.0) && allGood) {
+			okPrintTime = timer.getSysTimeS();
 			std::cout << "ok @ " << timer.getSysTimeS() << "s" << std::endl;
 		}
 
 		greenLed = allGood;
 
+		// reset the alive timer
+		aliveTime = timer.getSysTime();
+
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
 		next_wakeup += std::chrono::milliseconds(10);
 	}
+}
+
+void Watchdog::print() {
+
+	std::cout << "--- " << this->name << " " << dataWatchdog.time() << " ---" << std::endl;
+	std::cout << "allAlive      " << dataWatchdog.allAlive() << std::endl;
+	std::cout << "ahrsAlive     " << dataWatchdog.ahrsAlive() << std::endl;
+	std::cout << "airAlive      " << dataWatchdog.airAlive() << std::endl;
+	std::cout << "ctrlAlive     " << dataWatchdog.ctrlAlive() << std::endl;
+	std::cout << "downlinkAlive " << dataWatchdog.downlinkAlive() << std::endl;
+	std::cout << "gpsAlive      " << dataWatchdog.gpsAlive() << std::endl;
+	std::cout << "psuAlive      " << dataWatchdog.psuAlive() << std::endl;
+	std::cout << "raiInAlive    " << dataWatchdog.raiInAlive() << std::endl;
+	std::cout << "raiOutAlive   " << dataWatchdog.raiOutAlive() << std::endl;
+	std::cout << "sFusionAlive  " << dataWatchdog.sFusionAlive() << std::endl;
+	std::cout << "uplinkAlive   " << dataWatchdog.uplinkAlive() << std::endl;
+	std::cout << "alive         " << dataWatchdog.alive() << std::endl;
+
+}
+
+void Watchdog::led() {
+
+	while (1) {
+
+		{ // handle green led
+			float period = 0.0;
+			float duty_cycle = 0.0;
+
+			if (greenLed) {
+				period = 1.5;
+				duty_cycle = 0.95;
+			} else {
+				period = 0.15;
+				duty_cycle = 0.5;
+			}
+
+			static int led_mode = 0;
+			if (duty_cycle < 0.01) {
+				drv_led_set_green(0);
+				led_mode = 0;
+
+			} else if (duty_cycle > 0.99) {
+				drv_led_set_green(1);
+				led_mode = 1;
+
+			} else {
+
+				static float last_switch_time = timer.getSysTimeS();
+				if (led_mode == 0) {
+					if (timer.getSysTimeS() > last_switch_time + period*(1.0-duty_cycle)) {
+						drv_led_set_green(1);
+						led_mode = 1;
+						last_switch_time = timer.getSysTimeS();
+					}
+
+				} else {
+					if (timer.getSysTimeS() > last_switch_time + period*duty_cycle) {
+						drv_led_set_green(0);
+						led_mode = 0;
+						last_switch_time = timer.getSysTimeS();
+					}
+				}
+			}
+		}
+
+		{ // handle red led
+			float period = 0.0;
+			float duty_cycle = 0.0;
+
+			if (yellowLed) {
+				period = 0.5;
+				duty_cycle = 0.5;
+			} else {
+				period = 0.0;
+				duty_cycle = 0.0;
+			}
+
+			static int led_mode = 0;
+			if (duty_cycle < 0.01) {
+				drv_led_set_yellow(0);
+				led_mode = 0;
+
+			} else if (duty_cycle > 0.99) {
+				drv_led_set_yellow(1);
+				led_mode = 1;
+
+			} else {
+
+				static float last_switch_time = timer.getSysTimeS();
+				if (led_mode == 0) {
+					if (timer.getSysTimeS() > last_switch_time + period*(1.0-duty_cycle)) {
+						drv_led_set_yellow(1);
+						led_mode = 1;
+						last_switch_time = timer.getSysTimeS();
+					}
+
+				} else {
+					if (timer.getSysTimeS() > last_switch_time + period*duty_cycle) {
+						drv_led_set_yellow(0);
+						led_mode = 0;
+						last_switch_time = timer.getSysTimeS();
+					}
+				}
+			}
+		}
+
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		std::this_thread::sleep_until(next_wakeup);
+		next_wakeup += std::chrono::milliseconds(1);
+	}
+
 }
