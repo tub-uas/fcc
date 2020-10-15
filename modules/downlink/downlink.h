@@ -29,6 +29,7 @@
 #include "./../air/idl/DataAirPubSubTypes.h"
 #include "./../psu/idl/DataPsuPubSubTypes.h"
 #include "./../ctrl/idl/DataCtrlPubSubTypes.h"
+#include "./../watchdog/idl/DataWatchdogPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
 #include "../../driver/drv_serial/drv_serial.h"
@@ -74,6 +75,9 @@ public:
 	DataCtrl dataCtrl;
 	std::mutex dataCtrlMutex;
 	std::atomic_bool newDataCtrl;
+	DataWatchdog dataWatchdog;
+	std::mutex dataWatchdogMutex;
+	std::atomic_bool newDataWatchdog;
 
 private:
 	std::atomic_int publication_matched;
@@ -136,6 +140,9 @@ private:
 	eprosima::fastdds::dds::Topic       *topicCtrl;
 	eprosima::fastdds::dds::DataReader  *readerCtrl;
 	eprosima::fastdds::dds::TypeSupport  typeCtrl;
+	eprosima::fastdds::dds::Topic       *topicWatchdog;
+	eprosima::fastdds::dds::DataReader  *readerWatchdog;
+	eprosima::fastdds::dds::TypeSupport  typeWatchdog;
 
 	Timer  timer;
 	drv_serial serial;
