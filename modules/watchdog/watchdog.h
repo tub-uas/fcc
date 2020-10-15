@@ -73,10 +73,10 @@ public:
 	DataCtrl dataCtrl;
 	std::mutex dataCtrlMutex;
 	std::atomic_bool newDataCtrl;
-	DataCtrl dataDownlink;
+	DataDownlink dataDownlink;
 	std::mutex dataDownlinkMutex;
 	std::atomic_bool newDataDownlink;
-	DataCtrl dataLog;
+	DataLog dataLog;
 	std::mutex dataLogMutex;
 	std::atomic_bool newDataLog;
 
