@@ -211,7 +211,7 @@ bool Ctrl::init() {
 		return false;
 	}
 
-	if (sigGen.set(0.5, 0.0, 10.0, 0.0) != true) {
+	if (sigGen.set(0.5, 0.0, (10.0/180.0)*M_PI, 1.0) != true) {
 		return false;
 	}
 
@@ -342,7 +342,21 @@ void Ctrl::run() {
 						break;
 					}
 
-					case Mixer::ATT:
+					case Mixer::ATT: {
+
+						if (idStart) {
+							sigGen.setOffset(listener.dataRaiIn.pitch());
+							idStartTime = timer.getSysTimeS();
+						}
+
+						dataCtrl.xi(listener.dataRaiIn.roll());
+						dataCtrl.eta(-sigGen.three211(timer.getSysTimeS()-idStartTime));
+						dataCtrl.zeta(listener.dataRaiIn.yaw());
+
+						idStart = false;
+
+						break;
+					}
 					case Mixer::NAV: {
 
 						if (idStart) {
@@ -351,8 +365,8 @@ void Ctrl::run() {
 						}
 
 						dataCtrl.xi(listener.dataRaiIn.roll());
-						dataCtrl.eta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
-						dataCtrl.zeta(listener.dataRaiIn.yaw());
+						dataCtrl.eta(listener.dataRaiIn.pitch());
+						dataCtrl.zeta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
 
 						idStart = false;
 
