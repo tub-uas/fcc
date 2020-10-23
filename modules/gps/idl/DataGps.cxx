@@ -44,49 +44,52 @@ DataGps::DataGps()
     m_lon = 0.0;
     // m_alt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
     m_alt = 0.0;
-    // m_cog com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_speed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    m_speed = 0.0;
+    // m_cog com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
     m_cog = 0.0;
-    // m_dopP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    // m_dopP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
     m_dopP = 0.0;
-    // m_dopH com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_dopH com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
     m_dopH = 0.0;
-    // m_dopV com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    // m_dopV com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
     m_dopV = 0.0;
-    // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
     m_sats = 0;
-    // m_satsInView com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    // m_satsInView com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
     m_satsInView = 0;
-    // m_fix com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_fix com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
     m_fix = 0;
-    // m_fixMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    // m_fixMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
     m_fixMode = 0;
-    // m_second com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
+    // m_second com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f970963
     m_second = 0;
-    // m_minute com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f970963
+    // m_minute com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
     m_minute = 0;
-    // m_hour com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
+    // m_hour com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
     m_hour = 0;
-    // m_day com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
+    // m_day com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
     m_day = 0;
-    // m_month com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
+    // m_month com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
     m_month = 0;
-    // m_year com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
+    // m_year com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
     m_year = 0;
-    // m_variation com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
+    // m_variation com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
     m_variation = 0.0;
-    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
+    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5ae63ade
     m_magX = 0.0;
-    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5ae63ade
+    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@610694f1
     m_magY = 0.0;
-    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@610694f1
+    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43814d18
     m_magZ = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43814d18
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5c5a1b69
     m_alive = false;
 
 }
 
 DataGps::~DataGps()
 {
+
 
 
 
@@ -120,6 +123,7 @@ DataGps::DataGps(const DataGps &x)
     m_lat = x.m_lat;
     m_lon = x.m_lon;
     m_alt = x.m_alt;
+    m_speed = x.m_speed;
     m_cog = x.m_cog;
     m_dopP = x.m_dopP;
     m_dopH = x.m_dopH;
@@ -148,6 +152,7 @@ DataGps::DataGps(DataGps &&x)
     m_lat = x.m_lat;
     m_lon = x.m_lon;
     m_alt = x.m_alt;
+    m_speed = x.m_speed;
     m_cog = x.m_cog;
     m_dopP = x.m_dopP;
     m_dopH = x.m_dopH;
@@ -177,6 +182,7 @@ DataGps& DataGps::operator=(const DataGps &x)
     m_lat = x.m_lat;
     m_lon = x.m_lon;
     m_alt = x.m_alt;
+    m_speed = x.m_speed;
     m_cog = x.m_cog;
     m_dopP = x.m_dopP;
     m_dopH = x.m_dopH;
@@ -208,6 +214,7 @@ DataGps& DataGps::operator=(DataGps &&x)
     m_lat = x.m_lat;
     m_lon = x.m_lon;
     m_alt = x.m_alt;
+    m_speed = x.m_speed;
     m_cog = x.m_cog;
     m_dopP = x.m_dopP;
     m_dopH = x.m_dopH;
@@ -237,6 +244,9 @@ size_t DataGps::getMaxCdrSerializedSize(size_t current_alignment)
 
 
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
@@ -345,6 +355,9 @@ size_t DataGps::getCdrSerializedSize(const DataGps& data, size_t current_alignme
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
 
 
+    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
@@ -402,6 +415,7 @@ void DataGps::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_lat;
     scdr << m_lon;
     scdr << m_alt;
+    scdr << m_speed;
     scdr << m_cog;
     scdr << m_dopP;
     scdr << m_dopH;
@@ -431,6 +445,7 @@ void DataGps::deserialize(eprosima::fastcdr::Cdr &dcdr)
     dcdr >> m_lat;
     dcdr >> m_lon;
     dcdr >> m_alt;
+    dcdr >> m_speed;
     dcdr >> m_cog;
     dcdr >> m_dopP;
     dcdr >> m_dopH;
@@ -585,6 +600,33 @@ float DataGps::alt() const
 float& DataGps::alt()
 {
     return m_alt;
+}
+
+/*!
+ * @brief This function sets a value in member speed
+ * @param _speed New value for member speed
+ */
+void DataGps::speed(float _speed)
+{
+m_speed = _speed;
+}
+
+/*!
+ * @brief This function returns the value of member speed
+ * @return Value of member speed
+ */
+float DataGps::speed() const
+{
+    return m_speed;
+}
+
+/*!
+ * @brief This function returns a reference to member speed
+ * @return Reference to member speed
+ */
+float& DataGps::speed()
+{
+    return m_speed;
 }
 
 /*!
@@ -1131,6 +1173,7 @@ size_t DataGps::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 
 
+
     return current_align;
 }
 
@@ -1142,6 +1185,7 @@ bool DataGps::isKeyDefined()
 void DataGps::serializeKey(eprosima::fastcdr::Cdr &scdr) const
 {
     (void) scdr;
+     
      
      
      

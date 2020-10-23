@@ -4,6 +4,7 @@ struct DataGps {
 	float              lat;
 	float              lon;
 	float              alt;
+	float              speed;
 	float              cog;
 	float              dopP;
 	float              dopH;
