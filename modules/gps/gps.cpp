@@ -114,7 +114,7 @@ void Gps::publish() {
 		writerGps->write(&dataGps);
 		dataGpsLock.unlock();
 
-		print();
+		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(100);
 		std::this_thread::sleep_until(next_wakeup);
