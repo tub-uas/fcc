@@ -197,6 +197,24 @@ public:
     eProsima_user_DllExport float& alt();
 
     /*!
+     * @brief This function sets a value in member speed
+     * @param _speed New value for member speed
+     */
+    eProsima_user_DllExport void speed(float _speed);
+
+    /*!
+     * @brief This function returns the value of member speed
+     * @return Value of member speed
+     */
+    eProsima_user_DllExport float speed() const;
+
+    /*!
+     * @brief This function returns a reference to member speed
+     * @return Reference to member speed
+     */
+    eProsima_user_DllExport float& speed();
+
+    /*!
      * @brief This function sets a value in member cog
      * @param _cog New value for member cog
      */
@@ -595,6 +613,7 @@ private:
     float m_lat;
     float m_lon;
     float m_alt;
+    float m_speed;
     float m_cog;
     float m_dopP;
     float m_dopH;

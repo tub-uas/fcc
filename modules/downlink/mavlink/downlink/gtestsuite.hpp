@@ -898,3 +898,114 @@ TEST(downlink_interop, DataWatchdog)
 #endif
 }
 #endif
+
+TEST(downlink, DataGps)
+{
+    mavlink::mavlink_message_t msg;
+    mavlink::MsgMap map1(msg);
+    mavlink::MsgMap map2(msg);
+
+    mavlink::downlink::msg::DataGps packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.lat = 101.0;
+    packet_in.lon = 129.0;
+    packet_in.alt = 157.0;
+    packet_in.speed = 185.0;
+    packet_in.cog = 213.0;
+    packet_in.sats = 241.0;
+    packet_in.fix = 269.0;
+    packet_in.fixMode = 297.0;
+    packet_in.dopP = 325.0;
+    packet_in.dopH = 353.0;
+    packet_in.dopV = 381.0;
+    packet_in.alive = 173;
+
+    mavlink::downlink::msg::DataGps packet1{};
+    mavlink::downlink::msg::DataGps packet2{};
+
+    packet1 = packet_in;
+
+    //std::cout << packet1.to_yaml() << std::endl;
+
+    packet1.serialize(map1);
+
+    mavlink::mavlink_finalize_message(&msg, 1, 1, packet1.MIN_LENGTH, packet1.LENGTH, packet1.CRC_EXTRA);
+
+    packet2.deserialize(map2);
+
+    EXPECT_EQ(packet1.time, packet2.time);
+    EXPECT_EQ(packet1.senseTime, packet2.senseTime);
+    EXPECT_EQ(packet1.lat, packet2.lat);
+    EXPECT_EQ(packet1.lon, packet2.lon);
+    EXPECT_EQ(packet1.alt, packet2.alt);
+    EXPECT_EQ(packet1.speed, packet2.speed);
+    EXPECT_EQ(packet1.cog, packet2.cog);
+    EXPECT_EQ(packet1.sats, packet2.sats);
+    EXPECT_EQ(packet1.fix, packet2.fix);
+    EXPECT_EQ(packet1.fixMode, packet2.fixMode);
+    EXPECT_EQ(packet1.dopP, packet2.dopP);
+    EXPECT_EQ(packet1.dopH, packet2.dopH);
+    EXPECT_EQ(packet1.dopV, packet2.dopV);
+    EXPECT_EQ(packet1.alive, packet2.alive);
+}
+
+#ifdef TEST_INTEROP
+TEST(downlink_interop, DataGps)
+{
+    mavlink_message_t msg;
+
+    // to get nice print
+    memset(&msg, 0, sizeof(msg));
+
+    mavlink_datagps_t packet_c {
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 173
+    };
+
+    mavlink::downlink::msg::DataGps packet_in{};
+    packet_in.time = 93372036854775807ULL;
+    packet_in.senseTime = 73.0;
+    packet_in.lat = 101.0;
+    packet_in.lon = 129.0;
+    packet_in.alt = 157.0;
+    packet_in.speed = 185.0;
+    packet_in.cog = 213.0;
+    packet_in.sats = 241.0;
+    packet_in.fix = 269.0;
+    packet_in.fixMode = 297.0;
+    packet_in.dopP = 325.0;
+    packet_in.dopH = 353.0;
+    packet_in.dopV = 381.0;
+    packet_in.alive = 173;
+
+    mavlink::downlink::msg::DataGps packet2{};
+
+    mavlink_msg_datagps_encode(1, 1, &msg, &packet_c);
+
+    // simulate message-handling callback
+    [&packet2](const mavlink_message_t *cmsg) {
+        MsgMap map2(cmsg);
+
+        packet2.deserialize(map2);
+    } (&msg);
+
+    EXPECT_EQ(packet_in.time, packet2.time);
+    EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
+    EXPECT_EQ(packet_in.lat, packet2.lat);
+    EXPECT_EQ(packet_in.lon, packet2.lon);
+    EXPECT_EQ(packet_in.alt, packet2.alt);
+    EXPECT_EQ(packet_in.speed, packet2.speed);
+    EXPECT_EQ(packet_in.cog, packet2.cog);
+    EXPECT_EQ(packet_in.sats, packet2.sats);
+    EXPECT_EQ(packet_in.fix, packet2.fix);
+    EXPECT_EQ(packet_in.fixMode, packet2.fixMode);
+    EXPECT_EQ(packet_in.dopP, packet2.dopP);
+    EXPECT_EQ(packet_in.dopH, packet2.dopH);
+    EXPECT_EQ(packet_in.dopV, packet2.dopV);
+    EXPECT_EQ(packet_in.alive, packet2.alive);
+
+#ifdef PRINT_MSG
+    PRINT_MSG(msg);
+#endif
+}
+#endif

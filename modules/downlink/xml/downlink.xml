@@ -130,12 +130,29 @@
             <field type="uint8_t" name="ctrlAlive">Is Ctrl alive?</field>
             <field type="uint8_t" name="downlinkAlive">Is Downlink alive?</field>
             <field type="uint8_t" name="gpsAlive">Is GPS alive?</field>
-			<field type="uint8_t" name="logAlive">Is Downlink alive?</field>
+            <field type="uint8_t" name="logAlive">Is Downlink alive?</field>
             <field type="uint8_t" name="psuAlive">Is PSU alive?</field>
             <field type="uint8_t" name="raiInAlive">Is RaiIn alive?</field>
             <field type="uint8_t" name="raiOutAlive">Is RaiOut alive?</field>
             <field type="uint8_t" name="sFusionAlive">Is SFusion alive?</field>
             <field type="uint8_t" name="uplinkAlive">Is Uplink alive?</field>
+            <field type="uint8_t" name="alive">Is message valid?</field>
+        </message>
+        <message id="80000" name="DataGps">
+            <description>Data fromGps</description>
+            <field type="uint64_t" name="time">System time at publication</field>
+            <field type="float" name="senseTime">Time of data creation at sensor</field>
+            <field type="float" name="lat">Latitude in deg</field>
+            <field type="float" name="lon">Longitude in deg</field>
+            <field type="float" name="alt">Altitude in m</field>
+            <field type="float" name="speed">Speed in m/s</field>
+            <field type="float" name="cog">Course over ground in deg</field>
+            <field type="float" name="sats">Number of satellites currently using</field>
+            <field type="float" name="fix">0=No fix, 1=Fix, 2=Differential fix</field>
+            <field type="float" name="fixMode">1=No fix, 2=2D fix, 3=3D fix</field>
+            <field type="float" name="dopP">Positional dilution of precision</field>
+            <field type="float" name="dopH">Horizontal dilution of precision</field>
+            <field type="float" name="dopV">Vertical dilution of precision</field>
             <field type="uint8_t" name="alive">Is message valid?</field>
         </message>
     </messages>
