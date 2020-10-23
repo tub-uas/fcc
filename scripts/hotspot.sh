@@ -1,12 +1,14 @@
 #!/bin/bash
+set -e
 
-# Shows MAC, IP address and any hostname info for all connected wifi devices
+BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
 
-echo    "# All connected wifi devices, with IP address,"
-echo    "# hostname (if available), and MAC address."
-printf  "# %-20s %-30s %-20s\n" "IP address" "lease name" "MAC address"
+echo "----- Checking Wifi devices on branch $BRANCH ------"
+
+printf  "%-20s %-30s %-20s\n" "--IP address--" "--lease name--" "--MAC address--"
+
 leasefile=/var/lib/misc/dnsmasq.leases
-# list all wireless network interfaces
+
 for interface in `iw dev | grep Interface | cut -f 2 -s -d" "`
 do
 	# for each interface, get mac addresses of connected stations/clients
@@ -23,3 +25,5 @@ do
 		printf "  %-20s %-30s %-20s\n" "$ip" "$host" "$mac"
 	done
 done
+
+echo "----- `basename "$0"` done on branch $BRANCH ------"
