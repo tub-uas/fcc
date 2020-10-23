@@ -53,7 +53,7 @@ public:
 	void publish();
 	void print();
 
-	const unsigned long long aliveReset = 1e5;  // in us
+	const unsigned long long aliveReset = 2e6;  // in us
 	std::atomic_ullong aliveTime;
 
 private:
@@ -68,7 +68,7 @@ private:
 	DataGps      dataGps;
 	std::mutex   dataGpsMutex;
 
-	GpsCom gpsCom;
+	GpsCom  gpsCom;
 	Timer   timer;
 
 };

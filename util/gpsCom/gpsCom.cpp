@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <cstring>
+#include <iomanip>
+#include <typeinfo>
 
 #include "../../driver/drv_can/drv_can.h"
 
@@ -64,11 +66,11 @@ bool GpsCom::receive() {
 				break;
 
 			case CAN_ID_GPS_DATA2:
-				memcpy(&fix, &frame.data[0], sizeof(float));
-				memcpy(&fix_mode, &frame.data[1], sizeof(float));
-				memcpy(&sats_in_use, &frame.data[2], sizeof(float));
-				memcpy(&sats_in_view, &frame.data[3], sizeof(float));
-				memcpy(&valid, &frame.data[4], sizeof(float));
+				memcpy(&fix, &frame.data[0], sizeof(uint8_t));
+				memcpy(&fix_mode, &frame.data[1], sizeof(uint8_t));
+				memcpy(&sats_in_view, &frame.data[2], sizeof(uint8_t));
+				memcpy(&sats_in_use, &frame.data[3], sizeof(uint8_t));
+				memcpy(&valid, &frame.data[4], sizeof(uint8_t));
 				break;
 
 			case CAN_ID_GPS_DATA3:
@@ -115,18 +117,20 @@ bool GpsCom::print() {
 
 	std::cout << "--- " << time << " ---" << std::endl;
 
-	std::cout << "second        " << second << std::endl;
-	std::cout << "minute        " << minute << std::endl;
-	std::cout << "hour          " << hour << std::endl;
-	std::cout << "day           " << day << std::endl;
-	std::cout << "month         " << month << std::endl;
-	std::cout << "year          " << year << std::endl;
-	std::cout << "fix           " << fix << std::endl;
-	std::cout << "fix_mode      " << fix_mode << std::endl;
-	std::cout << "sats_in_view  " << sats_in_view << std::endl;
-	std::cout << "sats_in_use   " << sats_in_use << std::endl;
+	std::cout << "second        " << (unsigned int) second << std::endl;
+	std::cout << "minute        " << (unsigned int) minute << std::endl;
+	std::cout << "hour          " << (unsigned int) hour << std::endl;
+	std::cout << "day           " << (unsigned int) day << std::endl;
+	std::cout << "month         " << (unsigned int) month << std::endl;
+	std::cout << "year          " << (unsigned int) year << std::endl;
+	std::cout << "fix           " << (unsigned int) fix << std::endl;
+	std::cout << "fix_mode      " << (unsigned int) fix_mode << std::endl;
+	std::cout << "sats_in_view  " << (unsigned int) sats_in_view << std::endl;
+	std::cout << "sats_in_use   " << (unsigned int) sats_in_use << std::endl;
+	std::cout << std::setprecision(8) << std::fixed;
 	std::cout << "latitude      " << latitude << std::endl;
 	std::cout << "longitude     " << longitude << std::endl;
+	std::cout << std::setprecision(4) << std::fixed;
 	std::cout << "altitude      " << altitude << std::endl;
 	std::cout << "speed         " << speed << std::endl;
 	std::cout << "cog           " << cog << std::endl;
@@ -134,10 +138,10 @@ bool GpsCom::print() {
 	std::cout << "dop_p         " << dop_p << std::endl;
 	std::cout << "dop_v         " << dop_v << std::endl;
 	std::cout << "variation     " << variation << std::endl;
-	std::cout << "valid         " << valid << std::endl;
+	std::cout << "valid         " << (unsigned int) valid << std::endl;
 
 	for (int i=0; i<3; i++) {
-		std::cout << "mag[" << i << "] " << mag[i] << std::endl;
+		std::cout << "mag[" << i << "]        " << mag[i] << std::endl;
 	}
 
 	return true;

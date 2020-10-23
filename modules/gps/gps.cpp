@@ -99,7 +99,7 @@ void Gps::publish() {
 
 	while (1) {
 
-		std::cout << this->name << " publish" << std::endl;
+		// std::cout << this->name << " publish" << std::endl;
 
 		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
 		dataGps.time(timer.getSysTime());
@@ -116,9 +116,9 @@ void Gps::publish() {
 
 		print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(100);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(100);
 	}
 
 }
@@ -175,8 +175,10 @@ void Gps::print() {
 	std::cout << "--- " << this->name << " " << dataGps.time() << " ---" << std::endl;
 
 	std::cout << "senseTime  " << dataGps.senseTime() << std::endl;
+	std::cout << std::setprecision(10) << std::fixed;
 	std::cout << "lat        " << dataGps.lat() << std::endl;
 	std::cout << "lon        " << dataGps.lon() << std::endl;
+	std::cout << std::setprecision(4) << std::fixed;
 	std::cout << "alt        " << dataGps.alt() << std::endl;
 	std::cout << "cog        " << dataGps.cog() << std::endl;
 	std::cout << "dopP       " << dataGps.dopP() << std::endl;
