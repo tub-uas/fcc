@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-declare -a ACTIVE_MODULES=("raiIn" "ahrs" "air" "psu")
+declare -a ACTIVE_MODULES=("raiIn" "ahrs" "air" "gps" "psu")
 
 BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
 
