@@ -27,6 +27,7 @@
 #include "./../sFusion/idl/DataSFusionPubSubTypes.h"
 #include "./../ahrs/idl/DataAhrsPubSubTypes.h"
 #include "./../air/idl/DataAirPubSubTypes.h"
+#include "./../gps/idl/DataGpsPubSubTypes.h"
 #include "./../psu/idl/DataPsuPubSubTypes.h"
 #include "./../ctrl/idl/DataCtrlPubSubTypes.h"
 #include "./../downlink/idl/DataDownlinkPubSubTypes.h"
@@ -67,6 +68,9 @@ public:
 	DataAir dataAir;
 	std::mutex dataAirMutex;
 	std::atomic_bool newDataAir;
+	DataAir dataGps;
+	std::mutex dataGpsMutex;
+	std::atomic_bool newDataGps;
 	DataPsu dataPsu;
 	std::mutex dataPsuMutex;
 	std::atomic_bool newDataPsu;
@@ -139,6 +143,9 @@ private:
 	eprosima::fastdds::dds::Topic       *topicAir;
 	eprosima::fastdds::dds::DataReader  *readerAir;
 	eprosima::fastdds::dds::TypeSupport  typeAir;
+	eprosima::fastdds::dds::Topic       *topicGps;
+	eprosima::fastdds::dds::DataReader  *readerGps;
+	eprosima::fastdds::dds::TypeSupport  typeGps;
 	eprosima::fastdds::dds::Topic       *topicPsu;
 	eprosima::fastdds::dds::DataReader  *readerPsu;
 	eprosima::fastdds::dds::TypeSupport  typePsu;

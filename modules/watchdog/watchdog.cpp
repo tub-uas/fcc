@@ -73,6 +73,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				reader->take_next_sample(&dataAir, &info);
 				dataAirLock.unlock();
 				newDataAir = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
+				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+				reader->take_next_sample(&dataGps, &info);
+				dataGpsLock.unlock();
+				newDataGps = true;
 			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
 				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 				reader->take_next_sample(&dataPsu, &info);
@@ -126,6 +131,9 @@ Watchdog::Watchdog() : participant(nullptr),
                        topicAir(nullptr),
                        readerAir(nullptr),
                        typeAir(new DataAirPubSubType()),
+                       topicGps(nullptr),
+                       readerGps(nullptr),
+                       typeGps(new DataGpsPubSubType()),
                        topicPsu(nullptr),
                        readerPsu(nullptr),
                        typePsu(new DataPsuPubSubType()),
@@ -181,6 +189,12 @@ Watchdog::~Watchdog() {
 	}
 	if (topicAir != nullptr) {
 		participant->delete_topic(topicAir);
+	}
+	if (readerGps != nullptr) {
+		subscriber->delete_datareader(readerGps);
+	}
+	if (topicGps != nullptr) {
+		participant->delete_topic(topicGps);
 	}
 	if (readerPsu != nullptr) {
 		subscriber->delete_datareader(readerPsu);
@@ -284,6 +298,13 @@ bool Watchdog::init() {
 		return false;
 	}
 	// Register the Type
+	typeGps.register_type(participant);
+	// Create the subscriptions Topic
+	topicGps = participant->create_topic("DataGps", "DataGps", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicGps == nullptr) {
+		return false;
+	}
+	// Register the Type
 	typePsu.register_type(participant);
 	// Create the subscriptions Topic
 	topicPsu = participant->create_topic("DataPsu", "DataPsu", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
@@ -341,6 +362,11 @@ bool Watchdog::init() {
 	// Create the DataReader
 	readerAir = subscriber->create_datareader(topicAir, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerAir == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerGps = subscriber->create_datareader(topicGps, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerGps == nullptr) {
 		return false;
 	}
 	// Create the DataReader
@@ -413,7 +439,7 @@ void Watchdog::run() {
 	static double dataSFusionTime = timer.getSysTimeS();
 	static double dataAhrsTime = timer.getSysTimeS();
 	static double dataAirTime = timer.getSysTimeS();
-	// static double dataGpsTime = timer.getSysTimeS();
+	static double dataGpsTime = timer.getSysTimeS();
 	static double dataPsuTime = timer.getSysTimeS();
 	static double dataCtrlTime = timer.getSysTimeS();
 	static double dataDownlinkTime = timer.getSysTimeS();
@@ -486,6 +512,19 @@ void Watchdog::run() {
 
 			listener.newDataAir = false;
 			dataAirLock.unlock();
+		}
+
+		if (listener.newDataGps) {
+			std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
+			// std::cout << "newDataGps" << std::endl;
+
+			if (listener.dataGps.alive()) {
+				// std::cout << "Reset dataGpsTime" << std::endl;
+				dataGpsTime = timer.getSysTimeS();
+			}
+
+			listener.newDataGps = false;
+			dataGpsLock.unlock();
 		}
 
 		if (listener.newDataPsu) {
@@ -607,18 +646,18 @@ void Watchdog::run() {
 			dataWatchdogLock.unlock();
 		}
 
-		// if (timer.getSysTimeS() - dataGpsTime > timeout) {
-		// 	std::cout << "Gps failure" << std::endl;
-		// 	std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
-		// 	allGood &= false;
-		// 	dataWatchdog.gpsAlive(false);
-		// 	dataWatchdogLock.unlock();
-		// } else {
-		// 	std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
-		// 	allGood &= true;
-		// 	dataWatchdog.gpsAlive(true);
-		// 	dataWatchdogLock.unlock();
-		// }
+		if (timer.getSysTimeS() - dataGpsTime > timeout) {
+			std::cout << "Gps failure" << std::endl;
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= false;
+			dataWatchdog.gpsAlive(false);
+			dataWatchdogLock.unlock();
+		} else {
+			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+			allGood &= true;
+			dataWatchdog.gpsAlive(true);
+			dataWatchdogLock.unlock();
+		}
 
 		if (timer.getSysTimeS() - dataPsuTime > timeout) {
 			std::cout << "Psu failure" << std::endl;
