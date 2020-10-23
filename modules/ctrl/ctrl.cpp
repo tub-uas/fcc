@@ -211,6 +211,10 @@ bool Ctrl::init() {
 		return false;
 	}
 
+	if (sigGen.set(0.5, 0.0, 10.0, 0.0) != true) {
+		return false;
+	}
+
 	return true;
 }
 
@@ -276,29 +280,85 @@ void Ctrl::run() {
 				//           << "stell:     " << outYaw << std::endl
 				//           << "deltaTime: " << deltaTime << std::endl;
 
-				if (listener.dataRaiIn.fltMode() == Mixer::MAN) {
-					dataCtrl.xi(listener.dataRaiIn.roll());
-					dataCtrl.eta(listener.dataRaiIn.pitch());
-					dataCtrl.zeta(listener.dataRaiIn.yaw());
+				// switch (listener.dataRaiIn.fltMode()) {
+				//
+				// 	/* in default case give pilot control */
+				// 	default:
+				//
+				// 	case Mixer::MAN: {
+				//
+				// 		dataCtrl.xi(listener.dataRaiIn.roll());
+				// 		dataCtrl.eta(listener.dataRaiIn.pitch());
+				// 		dataCtrl.zeta(listener.dataRaiIn.yaw());
+				//
+				// 		pidRoll.reset();
+				// 		pidPitch.reset();
+				// 		// pidYaw.reset();
+				//
+				// 		break;
+				// 	}
+				//
+				// 	case Mixer::ATT: {
+				//
+				// 		dataCtrl.xi(outRoll);
+				// 		dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
+				// 		dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+				//
+				// 		pidPitch.reset();
+				// 		// pidYaw.reset();
+				//
+				// 		break;
+				// 	}
+				//
+				// 	case Mixer::NAV: {
+				//
+				// 		dataCtrl.xi(outRoll);
+				// 		dataCtrl.eta(outPitch);
+				// 		dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+				//
+				// 		// dataCtrl.zeta(outYaw);
+				//
+				// 		break;
+				// 	}
+				//
+				// }
 
-					pidRoll.reset();
-					pidPitch.reset();
-					// pidYaw.reset();
+				static double idStartTime = timer.getSysTimeS();
+				static bool idStart = true;
 
-				} else if (listener.dataRaiIn.fltMode() == Mixer::ATT) {
-					dataCtrl.xi(outRoll);
-					dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
-					dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+				switch (listener.dataRaiIn.fltMode()) {
 
-					pidPitch.reset();
-					// pidYaw.reset();
+					/* in default case give pilot control */
+					default:
 
-				} else if (listener.dataRaiIn.fltMode() == Mixer::NAV) {
-					dataCtrl.xi(outRoll);
-					dataCtrl.eta(outPitch);
-					dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+					case Mixer::MAN: {
 
-					// dataCtrl.zeta(outYaw);
+						dataCtrl.xi(listener.dataRaiIn.roll());
+						dataCtrl.eta(listener.dataRaiIn.pitch());
+						dataCtrl.zeta(listener.dataRaiIn.yaw());
+
+						idStart = true;
+
+						break;
+					}
+
+					case Mixer::ATT:
+					case Mixer::NAV: {
+
+						if (idStart) {
+							sigGen.setOffset(listener.dataRaiIn.pitch());
+							idStartTime = timer.getSysTimeS();
+						}
+
+						dataCtrl.xi(listener.dataRaiIn.roll());
+						dataCtrl.eta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
+						dataCtrl.zeta(listener.dataRaiIn.yaw());
+
+						idStart = false;
+
+						break;
+					}
+
 				}
 
 				dataCtrl.etaT(listener.dataRaiIn.thr());
@@ -311,7 +371,7 @@ void Ctrl::run() {
 
 			listener.newDataRaiIn = false;
 			listener.newDataSFusion = false;
-			
+
 			dataSFusionLock.unlock();
 			dataRaiInLock.unlock();
 			dataCtrlLock.unlock();

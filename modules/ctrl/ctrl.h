@@ -27,6 +27,7 @@
 
 #include "../../util/pid/pid.h"
 #include "../../util/mixer/mixer.h"
+#include "../../util/sigGen/sigGen.h"
 #include "../../util/timer/timer.h"
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
@@ -102,6 +103,7 @@ private:
 	Pid    pidRoll;
 	Pid    pidPitch;
 	Pid    pidYaw;
+	SigGen sigGen;
 
 };
 
