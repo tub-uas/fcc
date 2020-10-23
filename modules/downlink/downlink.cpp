@@ -73,6 +73,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				reader->take_next_sample(&dataAir, &info);
 				dataAirLock.unlock();
 				newDataAir = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
+				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+				reader->take_next_sample(&dataGps, &info);
+				dataGpsLock.unlock();
+				newDataGps = true;
 			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
 				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 				reader->take_next_sample(&dataPsu, &info);
@@ -121,6 +126,9 @@ Downlink::Downlink() : participant(nullptr),
                        topicAir(nullptr),
                        readerAir(nullptr),
                        typeAir(new DataAirPubSubType()),
+                       topicGps(nullptr),
+                       readerGps(nullptr),
+                       typeGps(new DataGpsPubSubType()),
                        topicPsu(nullptr),
                        readerPsu(nullptr),
                        typePsu(new DataPsuPubSubType()),
@@ -173,6 +181,12 @@ Downlink::~Downlink() {
 	}
 	if (topicAir != nullptr) {
 		participant->delete_topic(topicAir);
+	}
+	if (readerGps != nullptr) {
+		subscriber->delete_datareader(readerGps);
+	}
+	if (topicGps != nullptr) {
+		participant->delete_topic(topicGps);
 	}
 	if (readerPsu != nullptr) {
 		subscriber->delete_datareader(readerPsu);
@@ -266,6 +280,13 @@ bool Downlink::init() {
 		return false;
 	}
 	// Register the Type
+	typeGps.register_type(participant);
+	// Create the subscriptions Topic
+	topicGps = participant->create_topic("DataGps", "DataGps", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicGps == nullptr) {
+		return false;
+	}
+	// Register the Type
 	typePsu.register_type(participant);
 	// Create the subscriptions Topic
 	topicPsu = participant->create_topic("DataPsu", "DataPsu", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
@@ -316,6 +337,11 @@ bool Downlink::init() {
 	// Create the DataReader
 	readerAir = subscriber->create_datareader(topicAir, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerAir == nullptr) {
+		return false;
+	}
+	// Create the DataReader
+	readerGps = subscriber->create_datareader(topicGps, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerGps == nullptr) {
 		return false;
 	}
 	// Create the DataReader
@@ -377,6 +403,7 @@ void Downlink::run() {
 	const double dataSFusionInterval = 0.0;
 	const double dataAhrsInterval = 0.1;
 	const double dataAirInterval = 0.2;
+	const double dataGpsInterval = 1.0;
 	const double dataPsuInterval = 1.0;
 	const double dataCtrlInterval = 0.0;
 	const double dataWatchdogInterval = 0.0;
@@ -386,6 +413,7 @@ void Downlink::run() {
 	static double dataSFusionTime = timer.getSysTimeS();
 	static double dataAhrsTime = timer.getSysTimeS();
 	static double dataAirTime = timer.getSysTimeS();
+	static double dataGpsTime = timer.getSysTimeS();
 	static double dataPsuTime = timer.getSysTimeS();
 	static double dataCtrlTime = timer.getSysTimeS();
 	static double dataWatchdogTime = timer.getSysTimeS();
@@ -588,6 +616,43 @@ void Downlink::run() {
 
 			listener.newDataAir = false;
 			dataAirLock.unlock();
+		}
+
+		if (listener.newDataGps &&
+		    timer.getSysTimeS()-dataGpsTime > dataGpsInterval &&
+		    dataGpsInterval > 0.0) {
+
+			dataGpsTime = timer.getSysTimeS();
+
+			std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
+			// std::cout << "send DataGps" << std::endl;
+
+			mavlink_message_t msg;
+			mavlink_datagps_t msg_gps;
+			uint8_t buf[200];
+			uint16_t len;
+			msg_gps.time = listener.dataGps.time();
+			msg_gps.senseTime = listener.dataGps.senseTime();
+			msg_gps.lat = listener.dataGps.lat();
+			msg_gps.lon = listener.dataGps.lon();
+			msg_gps.alt = listener.dataGps.alt();
+			msg_gps.speed = listener.dataGps.speed();
+			msg_gps.cog = listener.dataGps.cog();
+			msg_gps.sats = listener.dataGps.sats();
+			msg_gps.fix = listener.dataGps.fix();
+			msg_gps.fixMode = listener.dataGps.fixMode();
+			msg_gps.dopP = listener.dataGps.dopP();
+			msg_gps.dopH = listener.dataGps.dopH();
+			msg_gps.dopV = listener.dataGps.dopV();
+			msg_gps.alive = listener.dataGps.alive();
+			mavlink_msg_datagps_encode(sysid, compid, &msg, &msg_gps);
+			len = mavlink_msg_to_send_buffer(buf, &msg);
+			if (!serial.send(buf,len)) {
+				std::cout << "ERROR: Could not send DataGps" << std::endl;
+			}
+
+			listener.newDataGps = false;
+			dataGpsLock.unlock();
 		}
 
 		if (listener.newDataCtrl &&
