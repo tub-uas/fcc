@@ -68,7 +68,7 @@ public:
 	DataAir dataAir;
 	std::mutex dataAirMutex;
 	std::atomic_bool newDataAir;
-	DataAir dataGps;
+	DataGps dataGps;
 	std::mutex dataGpsMutex;
 	std::atomic_bool newDataGps;
 	DataPsu dataPsu;
