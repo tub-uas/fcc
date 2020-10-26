@@ -192,7 +192,9 @@ void RaiOut::publish() {
 		writerRaiOut->write(&dataRaiOut);
 		dataRaiOutLock.unlock();
 
-		raiCom.send(); // Send the commands to RAI over CAN
+		if (listener.dataCtrl.alive()) {
+			raiCom.send(); // Send the commands to RAI over CAN
+		}
 
 		// print();
 
