@@ -75,6 +75,11 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				reader->take_next_sample(&dataDownlink, &info);
 				dataDownlinkLock.unlock();
 				newDataDownlink = true;
+			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
+				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+				reader->take_next_sample(&dataGps, &info);
+				dataGpsLock.unlock();
+				newDataGps = true;
 			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
 				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 				reader->take_next_sample(&dataPsu, &info);
@@ -131,6 +136,9 @@ Log::Log() : participant(nullptr),
              topicDownlink(nullptr),
              readerDownlink(nullptr),
              typeDownlink(new DataDownlinkPubSubType()),
+             topicGps(nullptr),
+             readerGps(nullptr),
+             typeGps(new DataGpsPubSubType()),
              topicPsu(nullptr),
              readerPsu(nullptr),
              typePsu(new DataPsuPubSubType()),
@@ -186,6 +194,12 @@ Log::~Log() {
 	if (topicDownlink != nullptr) {
 		participant->delete_topic(topicDownlink);
 	}
+	if (readerGps != nullptr) {
+		subscriber->delete_datareader(readerGps);
+	}
+	if (topicGps != nullptr) {
+		participant->delete_topic(topicGps);
+	}
 	if (readerPsu != nullptr) {
 		subscriber->delete_datareader(readerPsu);
 	}
@@ -228,6 +242,7 @@ Log::~Log() {
 	airFile.close();
 	ctrlFile.close();
 	downlinkFile.close();
+	gpsFile.close();
 	psuFile.close();
 	raiInFile.close();
 	raiOutFile.close();
@@ -296,6 +311,13 @@ bool Log::init() {
 		return false;
 	}
 	// Register the Type
+	typeGps.register_type(participant);
+	// Create the subscriptions Topic
+	topicGps = participant->create_topic("DataGps", "DataGps", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicGps == nullptr) {
+		return false;
+	}
+	// Register the Type
 	typePsu.register_type(participant);
 	// Create the subscriptions Topic
 	topicPsu = participant->create_topic("DataPsu", "DataPsu", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
@@ -359,6 +381,11 @@ bool Log::init() {
 		return false;
 	}
 	// Create the DataReader
+	readerGps = subscriber->create_datareader(topicGps, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
+	if (readerGps == nullptr) {
+		return false;
+	}
+	// Create the DataReader
 	readerPsu = subscriber->create_datareader(topicPsu, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
 	if (readerPsu == nullptr) {
 		return false;
@@ -414,6 +441,7 @@ bool Log::init() {
 	airFile.open(logdir.str() + "/air.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	ctrlFile.open(logdir.str() + "/ctrl.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	downlinkFile.open(logdir.str() + "/downlink.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
+	gpsFile.open(logdir.str() + "/gps.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	psuFile.open(logdir.str() + "/psu.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	raiInFile.open(logdir.str() + "/raiIn.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
 	raiOutFile.open(logdir.str() + "/raiOut.log", std::ios::app | std::fstream::in | std::fstream::out | std::ios::binary);
@@ -521,6 +549,38 @@ void Log::run() {
 			downlinkFile.flush();
 			listener.newDataDownlink = false;
 			dataDownlinkLock.unlock();
+		}
+		if (listener.newDataGps) {
+			std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
+			// std::cout << "newDataGps" << std::endl;
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.time()), sizeof(listener.dataGps.time()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.senseTime()), sizeof(listener.dataGps.senseTime()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.lat()), sizeof(listener.dataGps.lat()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.lon()), sizeof(listener.dataGps.lon()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.alt()), sizeof(listener.dataGps.alt()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.speed()), sizeof(listener.dataGps.speed()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.cog()), sizeof(listener.dataGps.cog()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dopP()), sizeof(listener.dataGps.dopP()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dopH()), sizeof(listener.dataGps.dopH()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dopV()), sizeof(listener.dataGps.dopV()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.sats()), sizeof(listener.dataGps.sats()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.satsInView()), sizeof(listener.dataGps.satsInView()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.fix()), sizeof(listener.dataGps.fix()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.fixMode()), sizeof(listener.dataGps.fixMode()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.second()), sizeof(listener.dataGps.second()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.minute()), sizeof(listener.dataGps.minute()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.hour()), sizeof(listener.dataGps.hour()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.day()), sizeof(listener.dataGps.day()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.month()), sizeof(listener.dataGps.month()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.year()), sizeof(listener.dataGps.year()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.variation()), sizeof(listener.dataGps.variation()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.magX()), sizeof(listener.dataGps.magX()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.magY()), sizeof(listener.dataGps.magY()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.magZ()), sizeof(listener.dataGps.magZ()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.alive()), sizeof(listener.dataGps.alive()));
+			gpsFile.flush();
+			listener.newDataGps = false;
+			dataGpsLock.unlock();
 		}
 		if (listener.newDataPsu) {
 			std::unique_lock<std::mutex> dataPsuLock {listener.dataPsuMutex};

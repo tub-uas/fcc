@@ -29,6 +29,7 @@
 #include "./../air/idl/DataAirPubSubTypes.h"
 #include "./../ctrl/idl/DataCtrlPubSubTypes.h"
 #include "./../downlink/idl/DataDownlinkPubSubTypes.h"
+#include "./../gps/idl/DataGpsPubSubTypes.h"
 #include "./../psu/idl/DataPsuPubSubTypes.h"
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 #include "./../raiOut/idl/DataRaiOutPubSubTypes.h"
@@ -66,6 +67,9 @@ public:
 	DataDownlink dataDownlink;
 	std::mutex dataDownlinkMutex;
 	std::atomic_bool newDataDownlink;
+	DataGps dataGps;
+	std::mutex dataGpsMutex;
+	std::atomic_bool newDataGps;
 	DataPsu dataPsu;
 	std::mutex dataPsuMutex;
 	std::atomic_bool newDataPsu;
@@ -132,6 +136,9 @@ private:
 	eprosima::fastdds::dds::Topic       *topicDownlink;
 	eprosima::fastdds::dds::DataReader  *readerDownlink;
 	eprosima::fastdds::dds::TypeSupport  typeDownlink;
+	eprosima::fastdds::dds::Topic       *topicGps;
+	eprosima::fastdds::dds::DataReader  *readerGps;
+	eprosima::fastdds::dds::TypeSupport  typeGps;
 	eprosima::fastdds::dds::Topic       *topicPsu;
 	eprosima::fastdds::dds::DataReader  *readerPsu;
 	eprosima::fastdds::dds::TypeSupport  typePsu;
@@ -155,6 +162,7 @@ private:
 	std::fstream airFile;
 	std::fstream ctrlFile;
 	std::fstream downlinkFile;
+	std::fstream gpsFile;
 	std::fstream psuFile;
 	std::fstream raiInFile;
 	std::fstream raiOutFile;

@@ -4,7 +4,7 @@ active-modules:
     - air
     - ctrl
     - downlink
-    # - gps
+    - gps
     - psu
     - raiIn
     - raiOut
