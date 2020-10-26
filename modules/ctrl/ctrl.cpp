@@ -211,7 +211,10 @@ bool Ctrl::init() {
 		return false;
 	}
 
-	if (sigGen.set(0.5, 0.0, 10.0, 0.0) != true) {
+	const static float max_deflection_degree = 10.0;
+	const static float time_constant_seconds = 0.3;
+	const static float time_delay_seconds = 0.1;
+	if (sigGen.set(time_constant_seconds, 0.0, (max_deflection_degree/180.0)*M_PI, time_delay_seconds) != true) {
 		return false;
 	}
 
@@ -323,8 +326,9 @@ void Ctrl::run() {
 				//
 				// }
 
+				static double idReadyTime = timer.getSysTimeS();
 				static double idStartTime = timer.getSysTimeS();
-				static bool idStart = true;
+				static int mode = 0;
 
 				switch (listener.dataRaiIn.fltMode()) {
 
@@ -337,24 +341,49 @@ void Ctrl::run() {
 						dataCtrl.eta(listener.dataRaiIn.pitch());
 						dataCtrl.zeta(listener.dataRaiIn.yaw());
 
-						idStart = true;
+						idReadyTime = timer.getSysTimeS();
+						mode = 0;
 
 						break;
 					}
 
-					case Mixer::ATT:
-					case Mixer::NAV: {
+					case Mixer::ATT: {
 
-						if (idStart) {
-							sigGen.setOffset(listener.dataRaiIn.pitch());
+						if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
+							sigGen.setOffset(-listener.dataRaiIn.pitch()/2.0);
 							idStartTime = timer.getSysTimeS();
+							mode = 1;
 						}
 
-						dataCtrl.xi(listener.dataRaiIn.roll());
-						dataCtrl.eta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
-						dataCtrl.zeta(listener.dataRaiIn.yaw());
+						if (mode == 1) {
+							dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
+							dataCtrl.eta(-sigGen.three211(timer.getSysTimeS()-idStartTime));
+							dataCtrl.zeta(listener.dataRaiIn.yaw()/2.0);
+						} else {
+							dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
+							dataCtrl.eta(listener.dataRaiIn.pitch()/2.0);
+							dataCtrl.zeta(listener.dataRaiIn.yaw()/2.0);
+						}
 
-						idStart = false;
+						break;
+					}
+					case Mixer::NAV: {
+
+						if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
+							sigGen.setOffset(listener.dataRaiIn.yaw()/2.0);
+							idStartTime = timer.getSysTimeS();
+							mode = 2;
+						}
+
+						if (mode == 2) {
+							dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
+							dataCtrl.eta(listener.dataRaiIn.pitch()/2.0);
+							dataCtrl.zeta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
+						} else {
+							dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
+							dataCtrl.eta(listener.dataRaiIn.pitch()/2.0);
+							dataCtrl.zeta(listener.dataRaiIn.yaw()/2.0);
+						}
 
 						break;
 					}

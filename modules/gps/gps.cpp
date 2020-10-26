@@ -136,7 +136,7 @@ void Gps::run() {
 			dataGps.lon(gpsCom.longitude);
 			dataGps.alt(gpsCom.altitude);
 			dataGps.cog(gpsCom.cog);
-			dataGps.Speed(gpsCom.Speed);
+			dataGps.speed(gpsCom.speed);
 			dataGps.dopP(gpsCom.dop_p);
 			dataGps.dopH(gpsCom.dop_h);
 			dataGps.dopV(gpsCom.dop_v);
@@ -182,7 +182,7 @@ void Gps::print() {
 	std::cout << std::setprecision(4) << std::fixed;
 	std::cout << "alt        " << dataGps.alt() << std::endl;
 	std::cout << "cog        " << dataGps.cog() << std::endl;
-	std::cout << "Speed        " << dataGps.Speed() << std::endl;
+	std::cout << "speed      " << dataGps.speed() << std::endl;
 	std::cout << "dopP       " << dataGps.dopP() << std::endl;
 	std::cout << "dopH       " << dataGps.dopH() << std::endl;
 	std::cout << "dopV       " << dataGps.dopV() << std::endl;
