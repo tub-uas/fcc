@@ -24,10 +24,11 @@ bool drv_serial::init(const char *_devPath, int32_t _baudRate) {
 	mp_baudRate = _baudRate;
 
 	if (access() && config()) {
+		return true;
+	} else {
 		perror("ERROR: Serial driver init failed");
 		return false;
 	}
-	return false;
 }
 
 bool drv_serial::access() {
