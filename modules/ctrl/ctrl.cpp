@@ -211,7 +211,10 @@ bool Ctrl::init() {
 		return false;
 	}
 
-	if (sigGen.set(0.5, 0.0, (10.0/180.0)*M_PI, 0.1) != true) {
+	const static float max_deflection_degree = 10.0;
+	const static float time_constant_seconds = 0.3;
+	const static float time_delay_seconds = 0.1;
+	if (sigGen.set(time_constant_seconds, 0.0, (max_deflection_degree/180.0)*M_PI, time_delay_seconds) != true) {
 		return false;
 	}
 

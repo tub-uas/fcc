@@ -434,6 +434,7 @@ void Watchdog::run() {
 	// yellowLed = true;
 
 	const double timeout = 0.1;
+	const double timeoutSlow = 1.5;
 	static double dataRaiInTime = timer.getSysTimeS();
 	static double dataRaiOutTime = timer.getSysTimeS();
 	static double dataSFusionTime = timer.getSysTimeS();
@@ -646,7 +647,7 @@ void Watchdog::run() {
 			dataWatchdogLock.unlock();
 		}
 
-		if (timer.getSysTimeS() - dataGpsTime > timeout) {
+		if (timer.getSysTimeS() - dataGpsTime > timeoutSlow) {
 			std::cout << "Gps failure" << std::endl;
 			std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
 			allGood &= false;

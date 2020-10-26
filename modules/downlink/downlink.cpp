@@ -406,7 +406,7 @@ void Downlink::run() {
 	const double dataGpsInterval = 1.0;
 	const double dataPsuInterval = 1.0;
 	const double dataCtrlInterval = 0.0;
-	const double dataWatchdogInterval = 0.0;
+	const double dataWatchdogInterval = 1.0;
 
 	static double dataRaiInTime = timer.getSysTimeS();
 	static double dataRaiOutTime = timer.getSysTimeS();
