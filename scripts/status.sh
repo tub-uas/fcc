@@ -22,6 +22,9 @@ done
 
 echo "----- Checking if logs are present on branch $BRANCH ------"
 
+dt=$(date '+%Y-%m-%d-%H-%M-%S');
+echo "-- Current date $dt --"
+
 du -csh ../logs/*
 
 echo "----- `basename "$0"` done on branch $BRANCH ------"
