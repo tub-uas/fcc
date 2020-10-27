@@ -185,17 +185,14 @@ void RaiOut::publish() {
 
 		if (timer.getSysTime() < aliveTime + aliveReset) {
 			dataRaiOut.alive(true);
+			raiCom.send(); // Send the commands to RAI over CAN
 		} else {
 			dataRaiOut.alive(false);
 		}
 
 		writerRaiOut->write(&dataRaiOut);
 		dataRaiOutLock.unlock();
-
-		if (listener.dataCtrl.alive()) {
-			raiCom.send(); // Send the commands to RAI over CAN
-		}
-
+		
 		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
