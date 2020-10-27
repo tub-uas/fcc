@@ -6,8 +6,8 @@
 #include <cmath>
 
 // #define NORMAL_PID
-// #define CHRIS_CTRL
-#define IDENT
+#define CHRIS_CTRL
+// #define IDENT
 
 Listener::Listener() : publication_matched(0),
                        subscription_matched(0) {
@@ -314,11 +314,11 @@ void Ctrl::run() {
 
 						case Mixer::ATT: {
 
-							dataCtrl.xi(outRoll);
-							dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
-							dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+							dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+							dataCtrl.eta(outPitch); // convert back to ctrl command
+							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);  // convert back to ctrl command
 
-							pidPitch.reset();
+							pidRoll.reset();
 							// pidYaw.reset();
 							break;
 						}
@@ -327,7 +327,7 @@ void Ctrl::run() {
 
 							dataCtrl.xi(outRoll);
 							dataCtrl.eta(outPitch);
-							dataCtrl.zeta(listener.dataRaiIn.yaw() / 2.0);  // convert back to ctrl command
+							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);  // convert back to ctrl command
 
 							// dataCtrl.zeta(outYaw);
 							break;
@@ -366,6 +366,7 @@ void Ctrl::run() {
 
 							dataCtrl.xi(listener.dataRaiIn.roll());
 							dataCtrl.eta(listener.dataRaiIn.pitch());
+							dataCtrl.zeta(listener.dataRaiIn.yaw());
 
 							pidRoll.reset();
 							pidPitch.reset();
@@ -374,8 +375,9 @@ void Ctrl::run() {
 
 						case Mixer::ATT: {
 
-							dataCtrl.xi(outRoll + (listener.dataRaiIn.roll() / 2.0));
-							dataCtrl.eta(listener.dataRaiIn.pitch() / 2.0); // convert back to ctrl command
+							dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+							dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / Mixer::ATT_MULT)); // convert back to ctrl command
+							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
 
 							pidPitch.reset();
 							break;
@@ -383,15 +385,14 @@ void Ctrl::run() {
 
 						case Mixer::NAV: {
 
-							dataCtrl.xi(outRoll + (listener.dataRaiIn.roll() / 2.0));
-							dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / 2.0));
+							dataCtrl.xi(outRoll + (listener.dataRaiIn.roll() / Mixer::ATT_MULT));
+							dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / Mixer::ATT_MULT));
+							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
 
 							break;
 						}
 
 					}
-
-					dataCtrl.zeta(listener.dataRaiIn.yaw());
 
 				#elif defined(IDENT)
 
@@ -417,19 +418,19 @@ void Ctrl::run() {
 						case Mixer::ATT: {
 
 							if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
-								sigGen.setOffset(-listener.dataRaiIn.pitch()/2.0);
+								sigGen.setOffset(-listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
 								idStartTime = timer.getSysTimeS();
 								mode = 1;
 							}
 
 							if (mode == 1) {
-								dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
+								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
 								dataCtrl.eta(-sigGen.three211(timer.getSysTimeS()-idStartTime));
-								dataCtrl.zeta(listener.dataRaiIn.yaw()/2.0);
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
 							} else {
-								dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
-								dataCtrl.eta(listener.dataRaiIn.pitch()/2.0);
-								dataCtrl.zeta(listener.dataRaiIn.yaw()/2.0);
+								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+								dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
 							}
 
 							break;
@@ -438,19 +439,19 @@ void Ctrl::run() {
 						case Mixer::NAV: {
 
 							if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
-								sigGen.setOffset(listener.dataRaiIn.yaw()/2.0);
+								sigGen.setOffset(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
 								idStartTime = timer.getSysTimeS();
 								mode = 2;
 							}
 
 							if (mode == 2) {
-								dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
-								dataCtrl.eta(listener.dataRaiIn.pitch()/2.0);
+								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+								dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
 								dataCtrl.zeta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
 							} else {
-								dataCtrl.xi(listener.dataRaiIn.roll()/2.0);
-								dataCtrl.eta(listener.dataRaiIn.pitch()/2.0);
-								dataCtrl.zeta(listener.dataRaiIn.yaw()/2.0);
+								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+								dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
 							}
 
 							break;

@@ -12,9 +12,11 @@ public:
 	static constexpr float ELE_MAX = 0.3141592654;
 	static constexpr float RUD_MAX = 0.3490658504;
 
-	float ail_max_cmd = AIL_MAX * 2.0;
-	float ele_max_cmd = ELE_MAX * 2.0;
-	float rud_max_cmd = RUD_MAX * 2.0;
+	static constexpr float ATT_MULT = 4.0;
+
+	float ail_max_cmd = AIL_MAX * ATT_MULT;
+	float ele_max_cmd = ELE_MAX * ATT_MULT;
+	float rud_max_cmd = RUD_MAX * ATT_MULT;
 
 	enum Surface {
 		THR = 0,
