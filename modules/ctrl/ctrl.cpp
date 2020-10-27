@@ -6,8 +6,8 @@
 #include <cmath>
 
 // #define NORMAL_PID
-#define CHRIS_CTRL
-// #define IDENT
+// #define CHRIS_CTRL
+#define IDENT
 
 Listener::Listener() : publication_matched(0),
                        subscription_matched(0) {
@@ -456,7 +456,7 @@ void Ctrl::run() {
 							break;
 						}
 					}
-					
+
 				#endif
 
 				dataCtrl.etaT(listener.dataRaiIn.thr());
