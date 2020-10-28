@@ -6,5 +6,6 @@ struct DataCtrl {
 	float              etaT;    // aka. throttle
 	float              etaF;    // aka. flaps
 	unsigned short     fltMode;
+	unsigned short     fltFunc;
 	boolean            alive;
 };

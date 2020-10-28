@@ -34,6 +34,12 @@ public:
 		NAV,
 	};
 
+	enum Func {
+		CTRL = 0,
+		CR_CTRL,
+		IDENT,
+	};
+
 	Mixer();
 
 	Mixer(float ail_max_cmd, float ele_max_cmd, float rud_max_cmd);
@@ -48,6 +54,9 @@ public:
 
 	uint16_t mode2pwm(enum Mode mode);
 
+	enum Func pwm2func(uint16_t pwm);
+
+	uint16_t func2pwm(enum Func func);
 
 
 private:

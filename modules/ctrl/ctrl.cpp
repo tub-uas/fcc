@@ -202,34 +202,32 @@ bool Ctrl::init() {
 
 	aliveTime = timer.getSysTime();
 
-	#if defined(NORMAL_PID)
-		if (pidRoll.set(0.5, 0.0/*0.5*/, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
-			return false;
-		}
-		if (pidPitch.set(0.5, 0.0/*0.5*/, 0.0, Mixer::ELE_MAX, -Mixer::ELE_MAX, false) != true) {
-			return false;
-		}
-		if (pidYaw.set(0.0, 0.0/*0.5*/, 1.0, Mixer::RUD_MAX, -Mixer::RUD_MAX, false) != true) {
-			return false;
-		}
+	/* Normal PID controller */
+	if (pidRoll.set(0.5, 0.0/*0.5*/, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
+		return false;
+	}
+	if (pidPitch.set(0.5, 0.0/*0.5*/, 0.0, Mixer::ELE_MAX, -Mixer::ELE_MAX, false) != true) {
+		return false;
+	}
+	if (pidYaw.set(0.0, 0.0/*0.5*/, 1.0, Mixer::RUD_MAX, -Mixer::RUD_MAX, false) != true) {
+		return false;
+	}
 
-	#elif defined(CHRIS_CTRL)
-		if (pidRoll.set(0.1, 0.0, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
-			return false;
-		}
-		if (pidPitch.set(0.1, 0.0, 0.0, Mixer::ELE_MAX, -Mixer::ELE_MAX, false) != true) {
-			return false;
-		}
+	/* Chris controller */
+	if (pidRollCr.set(0.1, 0.0, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
+		return false;
+	}
+	if (pidPitchCr.set(0.1, 0.0, 0.0, Mixer::ELE_MAX, -Mixer::ELE_MAX, false) != true) {
+		return false;
+	}
 
-	#elif defined(IDENT)
-		const static float max_deflection_degree = 10.0;
-		const static float time_constant_seconds = 0.3;
-		const static float time_delay_seconds = 0.1;
-		if (sigGen.set(time_constant_seconds, 0.0, (max_deflection_degree/180.0)*M_PI, time_delay_seconds) != true) {
-			return false;
-		}
-
-	#endif
+	/* Ident signals */
+	const static float max_deflection_degree = 10.0;
+	const static float time_constant_seconds = 0.3;
+	const static float time_delay_seconds = 0.1;
+	if (sigGen.set(time_constant_seconds, 0.0, (max_deflection_degree/180.0)*M_PI, time_delay_seconds) != true) {
+		return false;
+	}
 
 	return true;
 }
@@ -275,198 +273,217 @@ void Ctrl::run() {
 
 			if (listener.dataRaiIn.alive() && listener.dataSFusion.alive()) {
 
-				#if defined(NORMAL_PID)
+				switch (listener.dataRaiIn.fltFunc()) {
 
-					static float lastTime = timer.getSysTimeS();
-					float deltaTime = timer.getSysTimeS()-lastTime;
+					case Mixer::CTRL: {
 
-					float outRoll = 0.0;
-					pidRoll.run(deltaTime, listener.dataRaiIn.roll(), -listener.dataSFusion.phi(), &outRoll);
+						std::cout << "CTRL" << std::endl;
 
-					float outPitch = 0.0;
-					pidPitch.run(deltaTime, listener.dataRaiIn.pitch(), -listener.dataSFusion.the(), &outPitch);
+						static float lastTime = timer.getSysTimeS();
+						float deltaTime = timer.getSysTimeS()-lastTime;
 
-					// float outYaw = 0.0;
-					// pidYaw.run(deltaTime, listener.dataRaiIn.yaw(), -listener.dataSFusion.psi(), &outYaw);
+						float outRoll = 0.0;
+						pidRoll.run(deltaTime, listener.dataRaiIn.roll(), -listener.dataSFusion.phi(), &outRoll);
 
-					lastTime = timer.getSysTimeS();
+						float outPitch = 0.0;
+						pidPitch.run(deltaTime, listener.dataRaiIn.pitch(), -listener.dataSFusion.the(), &outPitch);
 
-					// std::cout << "soll:      " << listener.dataRaiIn.yaw() << std::endl
-					//           << "ist:       " << listener.dataSFusion.psi() << std::endl
-					//           << "stell:     " << outYaw << std::endl
-					//           << "deltaTime: " << deltaTime << std::endl;
+						// float outYaw = 0.0;
+						// pidYaw.run(deltaTime, listener.dataRaiIn.yaw(), -listener.dataSFusion.psi(), &outYaw);
 
-					switch (listener.dataRaiIn.fltMode()) {
+						lastTime = timer.getSysTimeS();
 
-						/* in default case give pilot control */
-						default:
-						case Mixer::MAN: {
+						// std::cout << "soll:      " << listener.dataRaiIn.yaw() << std::endl
+						//           << "ist:       " << listener.dataSFusion.psi() << std::endl
+						//           << "stell:     " << outYaw << std::endl
+						//           << "deltaTime: " << deltaTime << std::endl;
 
-							dataCtrl.xi(listener.dataRaiIn.roll());
-							dataCtrl.eta(listener.dataRaiIn.pitch());
-							dataCtrl.zeta(listener.dataRaiIn.yaw());
+						switch (listener.dataRaiIn.fltMode()) {
 
-							pidRoll.reset();
-							pidPitch.reset();
-							// pidYaw.reset();
-							break;
+							/* in default case give pilot control */
+							default:
+							case Mixer::MAN: {
+
+								dataCtrl.xi(listener.dataRaiIn.roll());
+								dataCtrl.eta(listener.dataRaiIn.pitch());
+								dataCtrl.zeta(listener.dataRaiIn.yaw());
+
+								pidRoll.reset();
+								pidPitch.reset();
+								// pidYaw.reset();
+								break;
+							}
+
+							case Mixer::ATT: {
+
+								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+								dataCtrl.eta(outPitch); // convert back to ctrl command
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);  // convert back to ctrl command
+
+								pidRoll.reset();
+								// pidYaw.reset();
+								break;
+							}
+
+							case Mixer::NAV: {
+
+								dataCtrl.xi(outRoll);
+								dataCtrl.eta(outPitch);
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);  // convert back to ctrl command
+
+								// dataCtrl.zeta(outYaw);
+								break;
+							}
 						}
 
-						case Mixer::ATT: {
-
-							dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
-							dataCtrl.eta(outPitch); // convert back to ctrl command
-							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);  // convert back to ctrl command
-
-							pidRoll.reset();
-							// pidYaw.reset();
-							break;
-						}
-
-						case Mixer::NAV: {
-
-							dataCtrl.xi(outRoll);
-							dataCtrl.eta(outPitch);
-							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);  // convert back to ctrl command
-
-							// dataCtrl.zeta(outYaw);
-							break;
-						}
-
+						break;
 					}
 
-				#elif defined(CHRIS_CTRL)
+					case Mixer::CR_CTRL: {
 
-					static float lastTime = timer.getSysTimeS();
-					float deltaTime = timer.getSysTimeS()-lastTime;
+						std::cout << "CR_CTRL" << std::endl;
 
-					// printf("gyrX: %10.5f \t gyrY: %10.5f \t gyrZ: %10.5f \n",
-					//        listener.dataSFusion.gyrX(),
-					//        listener.dataSFusion.gyrY(),
-					//        listener.dataSFusion.gyrZ());
+						static float lastTime = timer.getSysTimeS();
+						float deltaTime = timer.getSysTimeS()-lastTime;
 
-					float outRoll = 0.0;
-					pidRoll.run(deltaTime, 0, -listener.dataSFusion.gyrX(), &outRoll);
+						// printf("gyrX: %10.5f \t gyrY: %10.5f \t gyrZ: %10.5f \n",
+						//        listener.dataSFusion.gyrX(),
+						//        listener.dataSFusion.gyrY(),
+						//        listener.dataSFusion.gyrZ());
 
-					float outPitch = 0.0;
-					pidPitch.run(deltaTime, 0, -listener.dataSFusion.gyrY(), &outPitch);
+						float outRoll = 0.0;
+						pidRoll.run(deltaTime, 0, -listener.dataSFusion.gyrX(), &outRoll);
 
-					lastTime = timer.getSysTimeS();
+						float outPitch = 0.0;
+						pidPitch.run(deltaTime, 0, -listener.dataSFusion.gyrY(), &outPitch);
 
-					// std::cout << "soll:      " << listener.dataRaiIn.yaw() << std::endl
-					//           << "ist:       " << listener.dataSFusion.psi() << std::endl
-					//           << "stell:     " << outYaw << std::endl
-					//           << "deltaTime: " << deltaTime << std::endl;
+						lastTime = timer.getSysTimeS();
 
-					switch (listener.dataRaiIn.fltMode()) {
+						// std::cout << "soll:      " << listener.dataRaiIn.yaw() << std::endl
+						//           << "ist:       " << listener.dataSFusion.psi() << std::endl
+						//           << "stell:     " << outYaw << std::endl
+						//           << "deltaTime: " << deltaTime << std::endl;
 
-						/* in default case give pilot control */
-						default:
-						case Mixer::MAN: {
+						switch (listener.dataRaiIn.fltMode()) {
 
-							dataCtrl.xi(listener.dataRaiIn.roll());
-							dataCtrl.eta(listener.dataRaiIn.pitch());
-							dataCtrl.zeta(listener.dataRaiIn.yaw());
+							/* in default case give pilot control */
+							default:
+							case Mixer::MAN: {
 
-							pidRoll.reset();
-							pidPitch.reset();
-							break;
+								dataCtrl.xi(listener.dataRaiIn.roll());
+								dataCtrl.eta(listener.dataRaiIn.pitch());
+								dataCtrl.zeta(listener.dataRaiIn.yaw());
+
+								pidRoll.reset();
+								pidPitch.reset();
+								break;
+							}
+
+							case Mixer::ATT: {
+
+								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+								dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / Mixer::ATT_MULT)); // convert back to ctrl command
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
+
+								pidPitch.reset();
+								break;
+							}
+
+							case Mixer::NAV: {
+
+								dataCtrl.xi(outRoll + (listener.dataRaiIn.roll() / Mixer::ATT_MULT));
+								dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / Mixer::ATT_MULT));
+								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
+
+								break;
+							}
 						}
 
-						case Mixer::ATT: {
-
-							dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
-							dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / Mixer::ATT_MULT)); // convert back to ctrl command
-							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
-
-							pidPitch.reset();
-							break;
-						}
-
-						case Mixer::NAV: {
-
-							dataCtrl.xi(outRoll + (listener.dataRaiIn.roll() / Mixer::ATT_MULT));
-							dataCtrl.eta(outPitch + (listener.dataRaiIn.pitch() / Mixer::ATT_MULT));
-							dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
-
-							break;
-						}
-
+						break;
 					}
 
-				#elif defined(IDENT)
+					case Mixer::IDENT: {
 
-					static double idReadyTime = timer.getSysTimeS();
-					static double idStartTime = timer.getSysTimeS();
-					static int mode = 0;
+						std::cout << "IDENT" << std::endl;
 
-					switch (listener.dataRaiIn.fltMode()) {
+						static double idReadyTime = timer.getSysTimeS();
+						static double idStartTime = timer.getSysTimeS();
+						static int mode = 0;
 
-						/* in default case give pilot control */
-						default:
-						case Mixer::MAN: {
+						switch (listener.dataRaiIn.fltMode()) {
 
-							dataCtrl.xi(listener.dataRaiIn.roll());
-							dataCtrl.eta(listener.dataRaiIn.pitch());
-							dataCtrl.zeta(listener.dataRaiIn.yaw());
+							/* in default case give pilot control */
+							default:
+							case Mixer::MAN: {
 
-							idReadyTime = timer.getSysTimeS();
-							mode = 0;
-							break;
+								dataCtrl.xi(listener.dataRaiIn.roll());
+								dataCtrl.eta(listener.dataRaiIn.pitch());
+								dataCtrl.zeta(listener.dataRaiIn.yaw());
+
+								idReadyTime = timer.getSysTimeS();
+								mode = 0;
+								break;
+							}
+
+							case Mixer::ATT: {
+
+								if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
+									sigGen.setOffset(-listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
+									idStartTime = timer.getSysTimeS();
+									mode = 1;
+								}
+
+								if (mode == 1) {
+									dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+									dataCtrl.eta(-sigGen.three211(timer.getSysTimeS()-idStartTime));
+									dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
+								} else {
+									dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+									dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
+									dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
+								}
+
+								break;
+							}
+
+							case Mixer::NAV: {
+
+								if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
+									sigGen.setOffset(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
+									idStartTime = timer.getSysTimeS();
+									mode = 2;
+								}
+
+								if (mode == 2) {
+									dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+									dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
+									dataCtrl.zeta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
+								} else {
+									dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
+									dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
+									dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
+								}
+
+								break;
+							}
 						}
 
-						case Mixer::ATT: {
-
-							if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
-								sigGen.setOffset(-listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
-								idStartTime = timer.getSysTimeS();
-								mode = 1;
-							}
-
-							if (mode == 1) {
-								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
-								dataCtrl.eta(-sigGen.three211(timer.getSysTimeS()-idStartTime));
-								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
-							} else {
-								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
-								dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
-								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
-							}
-
-							break;
-						}
-
-						case Mixer::NAV: {
-
-							if (mode == 0 && timer.getSysTimeS() > idReadyTime + 0.5) {
-								sigGen.setOffset(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
-								idStartTime = timer.getSysTimeS();
-								mode = 2;
-							}
-
-							if (mode == 2) {
-								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
-								dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
-								dataCtrl.zeta(sigGen.doublet(timer.getSysTimeS()-idStartTime));
-							} else {
-								dataCtrl.xi(listener.dataRaiIn.roll() / Mixer::ATT_MULT);
-								dataCtrl.eta(listener.dataRaiIn.pitch() / Mixer::ATT_MULT);
-								dataCtrl.zeta(listener.dataRaiIn.yaw() / Mixer::ATT_MULT);
-							}
-
-							break;
-						}
+						break;
 					}
 
-				#endif
-
-				dataCtrl.etaT(listener.dataRaiIn.thr());
-				dataCtrl.etaF(69.0);
-				dataCtrl.fltMode(listener.dataRaiIn.fltMode());
-
-				// reset the alive timer
-				aliveTime = timer.getSysTime();
+					default:
+						std::cout << "Error: Unknown flight function" << std::endl;
+						break;
+				}
 			}
+
+			dataCtrl.etaT(listener.dataRaiIn.thr());
+			dataCtrl.etaF(69.0);
+			dataCtrl.fltMode(listener.dataRaiIn.fltMode());
+			dataCtrl.fltFunc(listener.dataRaiIn.fltFunc());
+
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			listener.newDataRaiIn = false;
 			listener.newDataSFusion = false;

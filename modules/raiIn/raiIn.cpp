@@ -133,6 +133,7 @@ void RaiIn::run() {
 			std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
 
 			enum Mixer::Mode mode = mixer.pwm2mode(raiCom.channel[6]);
+			enum Mixer::Func func = mixer.pwm2func(raiCom.channel[5]);
 
 			dataRaiIn.senseTime(raiCom.time);
 			dataRaiIn.chnl(raiCom.channel);
@@ -141,6 +142,7 @@ void RaiIn::run() {
 			dataRaiIn.yaw(mixer.pwm2rad(Mixer::RUD, raiCom.channel[3], mode));
 			dataRaiIn.thr(mixer.pwm2rad(Mixer::THR, raiCom.channel[0], mode));
 			dataRaiIn.fltMode(mode);
+			dataRaiIn.fltFunc(func);
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();

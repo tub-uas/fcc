@@ -192,7 +192,7 @@ void RaiOut::publish() {
 
 		writerRaiOut->write(&dataRaiOut);
 		dataRaiOutLock.unlock();
-		
+
 		// print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
@@ -225,6 +225,7 @@ void RaiOut::run() {
 				dataRaiOut.yaw(listener.dataCtrl.zeta());
 				dataRaiOut.thr(listener.dataCtrl.etaT());
 				dataRaiOut.fltMode(listener.dataCtrl.fltMode());
+				dataRaiOut.fltFunc(listener.dataCtrl.fltFunc());
 
 				raiCom.time = timer.getSysTimeS();
 				raiCom.channel[0] = mixer.rad2pwm(Mixer::THR, listener.dataCtrl.etaT());
@@ -232,8 +233,8 @@ void RaiOut::run() {
 				raiCom.channel[2] = mixer.rad2pwm(Mixer::ELE, listener.dataCtrl.eta());
 				raiCom.channel[3] = mixer.rad2pwm(Mixer::RUD, listener.dataCtrl.zeta());
 				raiCom.channel[4] = mixer.rad2pwm(Mixer::AILL, -listener.dataCtrl.xi());
-				raiCom.channel[5] = 1500;
-				raiCom.channel[6] = mixer.mode2pwm(Mixer::MAN);
+				raiCom.channel[5] = mixer.func2pwm((Mixer::Func)listener.dataCtrl.fltFunc());
+				raiCom.channel[6] = mixer.mode2pwm((Mixer::Mode)listener.dataCtrl.fltMode());
 				raiCom.channel[7] = 1500;
 				raiCom.channel[8] = 1500;
 				raiCom.channel[9] = 1500;

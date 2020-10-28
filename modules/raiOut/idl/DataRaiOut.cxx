@@ -48,13 +48,16 @@ DataRaiOut::DataRaiOut()
     m_thr = 0.0;
     // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
     m_fltMode = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    m_fltFunc = 0;
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
     m_alive = false;
 
 }
 
 DataRaiOut::~DataRaiOut()
 {
+
 
 
 
@@ -74,6 +77,7 @@ DataRaiOut::DataRaiOut(const DataRaiOut &x)
     m_yaw = x.m_yaw;
     m_thr = x.m_thr;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 }
 
@@ -86,6 +90,7 @@ DataRaiOut::DataRaiOut(DataRaiOut &&x)
     m_yaw = x.m_yaw;
     m_thr = x.m_thr;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 }
 
@@ -99,6 +104,7 @@ DataRaiOut& DataRaiOut::operator=(const DataRaiOut &x)
     m_yaw = x.m_yaw;
     m_thr = x.m_thr;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 
     return *this;
@@ -114,6 +120,7 @@ DataRaiOut& DataRaiOut::operator=(DataRaiOut &&x)
     m_yaw = x.m_yaw;
     m_thr = x.m_thr;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 
     return *this;
@@ -140,6 +147,9 @@ size_t DataRaiOut::getMaxCdrSerializedSize(size_t current_alignment)
 
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
@@ -181,6 +191,9 @@ size_t DataRaiOut::getCdrSerializedSize(const DataRaiOut& data, size_t current_a
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
+    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
+
+
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
 
 
@@ -199,6 +212,7 @@ void DataRaiOut::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_yaw;
     scdr << m_thr;
     scdr << m_fltMode;
+    scdr << m_fltFunc;
     scdr << m_alive;
 }
 
@@ -213,6 +227,7 @@ void DataRaiOut::deserialize(eprosima::fastcdr::Cdr &dcdr)
     dcdr >> m_yaw;
     dcdr >> m_thr;
     dcdr >> m_fltMode;
+    dcdr >> m_fltFunc;
     dcdr >> m_alive;
 }
 
@@ -414,6 +429,33 @@ uint16_t& DataRaiOut::fltMode()
 }
 
 /*!
+ * @brief This function sets a value in member fltFunc
+ * @param _fltFunc New value for member fltFunc
+ */
+void DataRaiOut::fltFunc(uint16_t _fltFunc)
+{
+m_fltFunc = _fltFunc;
+}
+
+/*!
+ * @brief This function returns the value of member fltFunc
+ * @return Value of member fltFunc
+ */
+uint16_t DataRaiOut::fltFunc() const
+{
+    return m_fltFunc;
+}
+
+/*!
+ * @brief This function returns a reference to member fltFunc
+ * @return Reference to member fltFunc
+ */
+uint16_t& DataRaiOut::fltFunc()
+{
+    return m_fltFunc;
+}
+
+/*!
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
@@ -455,6 +497,7 @@ size_t DataRaiOut::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 
 
+
     return current_align;
 }
 
@@ -466,6 +509,7 @@ bool DataRaiOut::isKeyDefined()
 void DataRaiOut::serializeKey(eprosima::fastcdr::Cdr &scdr) const
 {
     (void) scdr;
+     
      
      
      
