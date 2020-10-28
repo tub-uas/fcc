@@ -10,6 +10,7 @@ echo "----- Checking Wifi devices on branch $BRANCH ------"
 # mkdir ../old-logs
 # mv ../logs ../old-logs/logs-$dt
 
-scp -r pi@raspberrypi.local:/home/pi/fcc/logs/ /home/fabian/tub-uas/fcc/logs
+mkdir -p /home/fabian/tub-uas/fcc/logs
+scp -r pi@raspberrypi.local:/home/pi/fcc/logs/* /home/fabian/tub-uas/fcc/logs/
 
 echo "----- `basename "$0"` done on branch $BRANCH ------"
