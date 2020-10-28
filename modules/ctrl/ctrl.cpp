@@ -277,8 +277,6 @@ void Ctrl::run() {
 
 					case Mixer::CTRL: {
 
-						std::cout << "CTRL" << std::endl;
-
 						static float lastTime = timer.getSysTimeS();
 						float deltaTime = timer.getSysTimeS()-lastTime;
 
@@ -341,8 +339,6 @@ void Ctrl::run() {
 
 					case Mixer::CR_CTRL: {
 
-						std::cout << "CR_CTRL" << std::endl;
-
 						static float lastTime = timer.getSysTimeS();
 						float deltaTime = timer.getSysTimeS()-lastTime;
 
@@ -352,10 +348,10 @@ void Ctrl::run() {
 						//        listener.dataSFusion.gyrZ());
 
 						float outRoll = 0.0;
-						pidRoll.run(deltaTime, 0, -listener.dataSFusion.gyrX(), &outRoll);
+						pidRollCr.run(deltaTime, 0, -listener.dataSFusion.gyrX(), &outRoll);
 
 						float outPitch = 0.0;
-						pidPitch.run(deltaTime, 0, -listener.dataSFusion.gyrY(), &outPitch);
+						pidPitchCr.run(deltaTime, 0, -listener.dataSFusion.gyrY(), &outPitch);
 
 						lastTime = timer.getSysTimeS();
 
@@ -403,8 +399,6 @@ void Ctrl::run() {
 					}
 
 					case Mixer::IDENT: {
-
-						std::cout << "IDENT" << std::endl;
 
 						static double idReadyTime = timer.getSysTimeS();
 						static double idStartTime = timer.getSysTimeS();
