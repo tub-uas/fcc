@@ -48,13 +48,16 @@ DataCtrl::DataCtrl()
     m_etaF = 0.0;
     // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
     m_fltMode = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    m_fltFunc = 0;
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
     m_alive = false;
 
 }
 
 DataCtrl::~DataCtrl()
 {
+
 
 
 
@@ -74,6 +77,7 @@ DataCtrl::DataCtrl(const DataCtrl &x)
     m_etaT = x.m_etaT;
     m_etaF = x.m_etaF;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 }
 
@@ -86,6 +90,7 @@ DataCtrl::DataCtrl(DataCtrl &&x)
     m_etaT = x.m_etaT;
     m_etaF = x.m_etaF;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 }
 
@@ -99,6 +104,7 @@ DataCtrl& DataCtrl::operator=(const DataCtrl &x)
     m_etaT = x.m_etaT;
     m_etaF = x.m_etaF;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 
     return *this;
@@ -114,6 +120,7 @@ DataCtrl& DataCtrl::operator=(DataCtrl &&x)
     m_etaT = x.m_etaT;
     m_etaF = x.m_etaF;
     m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
     m_alive = x.m_alive;
 
     return *this;
@@ -140,6 +147,9 @@ size_t DataCtrl::getMaxCdrSerializedSize(size_t current_alignment)
 
 
     current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+
+
+    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
@@ -179,6 +189,9 @@ size_t DataCtrl::getCdrSerializedSize(const DataCtrl& data, size_t current_align
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
+    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
+
+
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
 
 
@@ -196,6 +209,7 @@ void DataCtrl::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_etaT;
     scdr << m_etaF;
     scdr << m_fltMode;
+    scdr << m_fltFunc;
     scdr << m_alive;
 }
 
@@ -209,6 +223,7 @@ void DataCtrl::deserialize(eprosima::fastcdr::Cdr &dcdr)
     dcdr >> m_etaT;
     dcdr >> m_etaF;
     dcdr >> m_fltMode;
+    dcdr >> m_fltFunc;
     dcdr >> m_alive;
 }
 
@@ -402,6 +417,33 @@ uint16_t& DataCtrl::fltMode()
 }
 
 /*!
+ * @brief This function sets a value in member fltFunc
+ * @param _fltFunc New value for member fltFunc
+ */
+void DataCtrl::fltFunc(uint16_t _fltFunc)
+{
+m_fltFunc = _fltFunc;
+}
+
+/*!
+ * @brief This function returns the value of member fltFunc
+ * @return Value of member fltFunc
+ */
+uint16_t DataCtrl::fltFunc() const
+{
+    return m_fltFunc;
+}
+
+/*!
+ * @brief This function returns a reference to member fltFunc
+ * @return Reference to member fltFunc
+ */
+uint16_t& DataCtrl::fltFunc()
+{
+    return m_fltFunc;
+}
+
+/*!
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
@@ -443,6 +485,7 @@ size_t DataCtrl::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 
 
+
     return current_align;
 }
 
@@ -454,6 +497,7 @@ bool DataCtrl::isKeyDefined()
 void DataCtrl::serializeKey(eprosima::fastcdr::Cdr &scdr) const
 {
     (void) scdr;
+     
      
      
      

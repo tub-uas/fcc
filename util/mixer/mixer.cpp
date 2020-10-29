@@ -158,3 +158,39 @@ uint16_t Mixer::mode2pwm(enum Mode mode) {
 
 	return 0;
 }
+
+enum Mixer::Func Mixer::pwm2func(uint16_t pwm) {
+
+	if (pwm > 800 && pwm < 1250) {
+		return CTRL;
+
+	} else if (pwm >= 1250 && pwm <= 1750) {
+		return CR_CTRL;
+
+	} else if (pwm > 1750 && pwm < 2200) {
+		return IDENT;
+	}
+
+	std::cout << "Mixer pwm2func error, pwm out of bounds " << pwm << std::endl;
+	return CTRL;
+}
+
+uint16_t Mixer::func2pwm(enum Func func) {
+
+	switch (func) {
+		case CTRL:
+			return 1900;
+
+		case CR_CTRL:
+			return 1500;
+
+		case IDENT:
+			return 1100;
+
+		default:
+			std::cout << "Mixer func2pwm error, unkown func" << std::endl;
+			break;
+	}
+
+	return 0;
+}

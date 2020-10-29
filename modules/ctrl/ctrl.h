@@ -103,6 +103,9 @@ private:
 	Pid    pidRoll;
 	Pid    pidPitch;
 	Pid    pidYaw;
+	Pid    pidRollCr;
+	Pid    pidPitchCr;
+	Pid    pidYawCr;
 	SigGen sigGen;
 
 };

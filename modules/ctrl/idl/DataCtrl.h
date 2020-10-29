@@ -233,6 +233,24 @@ public:
     eProsima_user_DllExport uint16_t& fltMode();
 
     /*!
+     * @brief This function sets a value in member fltFunc
+     * @param _fltFunc New value for member fltFunc
+     */
+    eProsima_user_DllExport void fltFunc(uint16_t _fltFunc);
+
+    /*!
+     * @brief This function returns the value of member fltFunc
+     * @return Value of member fltFunc
+     */
+    eProsima_user_DllExport uint16_t fltFunc() const;
+
+    /*!
+     * @brief This function returns a reference to member fltFunc
+     * @return Reference to member fltFunc
+     */
+    eProsima_user_DllExport uint16_t& fltFunc();
+
+    /*!
      * @brief This function sets a value in member alive
      * @param _alive New value for member alive
      */
@@ -309,6 +327,7 @@ private:
     float m_etaT;
     float m_etaF;
     uint16_t m_fltMode;
+    uint16_t m_fltFunc;
     bool m_alive;
 };
 

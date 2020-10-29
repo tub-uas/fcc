@@ -6,5 +6,6 @@ struct DataRaiOut {
 	float               yaw;
 	float               thr;
 	unsigned short      fltMode;
+	unsigned short      fltFunc;
 	boolean             alive;
 };
