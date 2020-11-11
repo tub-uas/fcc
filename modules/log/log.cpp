@@ -536,6 +536,7 @@ void Log::run() {
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.etaT()), sizeof(listener.dataCtrl.etaT()));
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.etaF()), sizeof(listener.dataCtrl.etaF()));
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.fltMode()), sizeof(listener.dataCtrl.fltMode()));
+			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.fltFunc()), sizeof(listener.dataCtrl.fltFunc()));
 			ctrlFile.write(reinterpret_cast<const char*>(&listener.dataCtrl.alive()), sizeof(listener.dataCtrl.alive()));
 			ctrlFile.flush();
 			listener.newDataCtrl = false;
@@ -614,6 +615,7 @@ void Log::run() {
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.yaw()), sizeof(listener.dataRaiIn.yaw()));
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.thr()), sizeof(listener.dataRaiIn.thr()));
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.fltMode()), sizeof(listener.dataRaiIn.fltMode()));
+			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.fltFunc()), sizeof(listener.dataRaiIn.fltFunc()));
 			raiInFile.write(reinterpret_cast<const char*>(&listener.dataRaiIn.alive()), sizeof(listener.dataRaiIn.alive()));
 			raiInFile.flush();
 			listener.newDataRaiIn = false;
@@ -631,6 +633,7 @@ void Log::run() {
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.yaw()), sizeof(listener.dataRaiOut.yaw()));
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.thr()), sizeof(listener.dataRaiOut.thr()));
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.fltMode()), sizeof(listener.dataRaiOut.fltMode()));
+			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.fltFunc()), sizeof(listener.dataRaiOut.fltFunc()));
 			raiOutFile.write(reinterpret_cast<const char*>(&listener.dataRaiOut.alive()), sizeof(listener.dataRaiOut.alive()));
 			raiOutFile.flush();
 			listener.newDataRaiOut = false;
