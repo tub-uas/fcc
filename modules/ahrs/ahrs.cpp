@@ -143,6 +143,7 @@ void Ahrs::run() {
 			dataAhrs.magX(ahrsCom.mag[0]);
 			dataAhrs.magY(ahrsCom.mag[1]);
 			dataAhrs.magZ(ahrsCom.mag[3]);
+			std::cout << "Ahr X " << ahrsCom.mag[0] << "   Y " << ahrsCom.mag[1] << "   Z " << ahrsCom.mag[2] << std::endl;
 			dataAhrs.temp(ahrsCom.temp);
 			dataAhrs.press(ahrsCom.press);
 			dataAhrs.phi(ahrsCom.att[0]);

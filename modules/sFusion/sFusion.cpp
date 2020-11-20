@@ -254,6 +254,7 @@ void SFusion::run() {
 				dataSFusion.magX(listener.dataAhrs.magX());
 				dataSFusion.magY(listener.dataAhrs.magY());
 				dataSFusion.magZ(listener.dataAhrs.magZ());
+				std::cout << "Sfu X " << listener.dataAhrs.magX() << "   Y " << listener.dataAhrs.magY() << "   Z " << listener.dataAhrs.magZ() << std::endl;
 				dataSFusion.temp(listener.dataAhrs.temp());
 				dataSFusion.press(listener.dataAhrs.press());
 				dataSFusion.phi(listener.dataAhrs.phi());

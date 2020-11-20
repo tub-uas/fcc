@@ -497,6 +497,7 @@ void Log::run() {
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magX()), sizeof(listener.dataAhrs.magX()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magY()), sizeof(listener.dataAhrs.magY()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.magZ()), sizeof(listener.dataAhrs.magZ()));
+			std::cout << "Log X " << listener.dataAhrs.magX() << "   Y " << listener.dataAhrs.magY() << "   Z " << listener.dataAhrs.magZ() << std::endl;
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.temp()), sizeof(listener.dataAhrs.temp()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.press()), sizeof(listener.dataAhrs.press()));
 			ahrsFile.write(reinterpret_cast<const char*>(&listener.dataAhrs.phi()), sizeof(listener.dataAhrs.phi()));
