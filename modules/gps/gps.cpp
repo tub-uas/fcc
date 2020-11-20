@@ -151,9 +151,9 @@ void Gps::run() {
 			dataGps.month(gpsCom.month);
 			dataGps.year(gpsCom.year);
 			dataGps.variation(gpsCom.variation);
-			dataGps.magX(gpsCom.mag[1]);
-			dataGps.magY(gpsCom.mag[2]);
-			dataGps.magZ(gpsCom.mag[3]);
+			dataGps.magX(gpsCom.mag[0]);
+			dataGps.magY(gpsCom.mag[1]);
+			dataGps.magZ(gpsCom.mag[2]);
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
