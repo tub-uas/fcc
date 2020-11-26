@@ -2,6 +2,10 @@
 *
 !*.*
 !*/
+
+# Fast-DDS
+!depend/fast-dds/java/**
+!depend/fast-dds/src/**
 !LICENSE
 
 # Custom stuff
