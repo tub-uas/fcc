@@ -5,7 +5,6 @@
 !LICENSE
 
 # Custom stuff
-**/test
 **/build
 **/install
 **/avs_logs
