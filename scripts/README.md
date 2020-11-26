@@ -10,7 +10,7 @@ Make sure that the scripts are executable (if you edit them, they become not exe
 Here you can find a short description of what each script does:
 - `autostart.sh` gets executed on RaspberryPi startup. It is called from `/etc/rc.local` using `su pi -c '/home/pi/fcc/scripts/autostart.sh &'` automatically every time the RaspberryPi boots.
 - `cmake.sh` removes all existing build directories, creates new build directories and runs `cmake` in each of them. Next step would then be to run `make` in all build directories (see `make.sh`).
-- `enableHotspot.sh` enables a local WiFi hotspot on Ubuntu. This is way the RaspberryPi can connect to the WiFi hotspots computer and get accessed via SSH (makes life a lot easier than having to plug in the ethernet cable every time).
+- `enableHotspot.sh` enables a local WiFi hotspot on Ubuntu. This is way the RaspberryPi can connect to the WiFi hotspots computer and get accessed via SSH (makes life a lot easier than having to plug in the Ethernet cable every time).
 - `getLogs.sh` copies all log files from the RaspberryPi `logs` directory into the local `logs` directory using Secure Copy (SCP). Make sure that the `logs` directory is located at `/home/pi/fcc/logs` on the RaspberryPi, otherwise edit the path in the script.
 - `hotspot.sh` lists all currently via WiFi connected devices.
 - `init.sh` initializes the RaspberryPi hardware. Gets run by `autostart.sh`.
