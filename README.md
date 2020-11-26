@@ -30,12 +30,19 @@ TODO
 We are only supporting RaspberryPis. Currently we are using a standard RaspberryPi 3 Model B. It is connected to a custom build shield (hat) that provides power and communication over the CAN Bus.
 
 RaspberryPi with CAN interface shield:
-![Side](docs/side.jpg)
-![Side](docs/top.jpg)
+![](docs/rpi_side.jpg)
+![](docs/rpi_top.jpg)
 RaspberryPi mounted in complete stack:
-![Side](docs/stack.jpg)
+![](docs/stack.jpg)
 
 For more information about the shield have a look at the [`mfs-hardware`](https://github.com/tub-uas/mfs-hardware) repository.
+
+## Flightmodes
+TODO
+
+## Dynamics and Control
+We are using the following body coordinate system:
+![](docs/coordinate_system.jpg)
 
 ## Styleguide
 TODO
