@@ -19,4 +19,4 @@ jobs:
     - name: install-fast-dds
       shell: bash
       working-directory: depend/fast-dds
-      run: install.sh
+      run: sudo install.sh
