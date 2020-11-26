@@ -141,14 +141,14 @@ enum Mixer::Mode Mixer::pwm2mode(uint16_t pwm) {
 uint16_t Mixer::mode2pwm(enum Mode mode) {
 
 	switch (mode) {
-		case MAN:
-			return 1900;
+		case NAV:
+			return 1100;
 
 		case ATT:
 			return 1500;
 
-		case NAV:
-			return 1100;
+		case MAN:
+			return 1900;
 
 		case INV:
 		default:
@@ -179,13 +179,13 @@ uint16_t Mixer::func2pwm(enum Func func) {
 
 	switch (func) {
 		case FUNC1:
-			return 1900;
+			return 1100;
 
 		case FUNC2:
 			return 1500;
 
 		case FUNC3:
-			return 1100;
+			return 1900;
 
 		default:
 			std::cout << "Mixer func2pwm error, unkown func" << std::endl;
