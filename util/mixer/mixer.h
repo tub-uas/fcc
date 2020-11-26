@@ -35,9 +35,9 @@ public:
 	};
 
 	enum Func {
-		CTRL = 0,
-		CR_CTRL,
-		IDENT,
+		FUNC1 = 0,
+		FUNC2,
+		FUNC3,
 	};
 
 	Mixer();

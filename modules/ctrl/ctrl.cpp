@@ -5,10 +5,6 @@
 #include <typeinfo>
 #include <cmath>
 
-// #define NORMAL_PID
-#define CHRIS_CTRL
-// #define IDENT
-
 Listener::Listener() : publication_matched(0),
                        subscription_matched(0) {
 }
@@ -275,7 +271,7 @@ void Ctrl::run() {
 
 				switch (listener.dataRaiIn.fltFunc()) {
 
-					case Mixer::CTRL: {
+					case Mixer::FUNC1: {
 
 						static float lastTime = timer.getSysTimeS();
 						float deltaTime = timer.getSysTimeS()-lastTime;
@@ -337,7 +333,7 @@ void Ctrl::run() {
 						break;
 					}
 
-					case Mixer::CR_CTRL: {
+					case Mixer::FUNC2: {
 
 						static float lastTime = timer.getSysTimeS();
 						float deltaTime = timer.getSysTimeS()-lastTime;
@@ -398,7 +394,7 @@ void Ctrl::run() {
 						break;
 					}
 
-					case Mixer::IDENT: {
+					case Mixer::FUNC3: {
 
 						static double idReadyTime = timer.getSysTimeS();
 						static double idStartTime = timer.getSysTimeS();
