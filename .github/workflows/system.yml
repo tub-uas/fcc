@@ -16,7 +16,18 @@ jobs:
     - name: install-cmake
       shell: bash
       run: sudo apt-get install cmake
+    - name: install-deps
+      shell: bash
+      run: sudo apt install libasio-dev libtinyxml2-dev
     - name: install-fast-dds
       shell: bash
       working-directory: depend/fast-dds
-      run: sudo install.sh
+      run: sudo ./install.sh
+    - name: cmake
+      shell: bash
+      working-directory: scripts
+      run: ./cmake.sh
+    - name: make
+      shell: bash
+      working-directory: scripts
+      run: ./make.sh
