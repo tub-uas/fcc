@@ -1,0 +1,26 @@
+var namespace_d_d_s =
+[
+    [ "AnnotationDescriptor", "interface_d_d_s_1_1_annotation_descriptor.html", "interface_d_d_s_1_1_annotation_descriptor" ],
+    [ "BytesDataReader", "interface_d_d_s_1_1_bytes_data_reader.html", null ],
+    [ "BytesDataWriter", "interface_d_d_s_1_1_bytes_data_writer.html", "interface_d_d_s_1_1_bytes_data_writer" ],
+    [ "BytesTypeSupport", "interface_d_d_s_1_1_bytes_type_support.html", null ],
+    [ "DynamicData", "interface_d_d_s_1_1_dynamic_data.html", "interface_d_d_s_1_1_dynamic_data" ],
+    [ "DynamicDataFactory", "interface_d_d_s_1_1_dynamic_data_factory.html", "interface_d_d_s_1_1_dynamic_data_factory" ],
+    [ "DynamicType", "interface_d_d_s_1_1_dynamic_type.html", "interface_d_d_s_1_1_dynamic_type" ],
+    [ "DynamicTypeBuilder", "interface_d_d_s_1_1_dynamic_type_builder.html", "interface_d_d_s_1_1_dynamic_type_builder" ],
+    [ "DynamicTypeBuilderFactory", "interface_d_d_s_1_1_dynamic_type_builder_factory.html", "interface_d_d_s_1_1_dynamic_type_builder_factory" ],
+    [ "DynamicTypeMember", "interface_d_d_s_1_1_dynamic_type_member.html", "interface_d_d_s_1_1_dynamic_type_member" ],
+    [ "DynamicTypeSupport", "interface_d_d_s_1_1_dynamic_type_support.html", "interface_d_d_s_1_1_dynamic_type_support" ],
+    [ "KeyedBytesDataReader", "interface_d_d_s_1_1_keyed_bytes_data_reader.html", null ],
+    [ "KeyedBytesDataWriter", "interface_d_d_s_1_1_keyed_bytes_data_writer.html", "interface_d_d_s_1_1_keyed_bytes_data_writer" ],
+    [ "KeyedBytesTypeSupport", "interface_d_d_s_1_1_keyed_bytes_type_support.html", null ],
+    [ "KeyedStringDataReader", "interface_d_d_s_1_1_keyed_string_data_reader.html", null ],
+    [ "KeyedStringDataWriter", "interface_d_d_s_1_1_keyed_string_data_writer.html", "interface_d_d_s_1_1_keyed_string_data_writer" ],
+    [ "KeyedStringTypeSupport", "interface_d_d_s_1_1_keyed_string_type_support.html", null ],
+    [ "MemberDescriptor", "interface_d_d_s_1_1_member_descriptor.html", "interface_d_d_s_1_1_member_descriptor" ],
+    [ "StringDataReader", "interface_d_d_s_1_1_string_data_reader.html", null ],
+    [ "StringDataWriter", "interface_d_d_s_1_1_string_data_writer.html", null ],
+    [ "StringTypeSupport", "interface_d_d_s_1_1_string_type_support.html", null ],
+    [ "TypeDescriptor", "interface_d_d_s_1_1_type_descriptor.html", "interface_d_d_s_1_1_type_descriptor" ],
+    [ "TypeSupport", "interface_d_d_s_1_1_type_support.html", null ]
+];
