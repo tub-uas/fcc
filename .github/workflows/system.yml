@@ -1,0 +1,22 @@
+name: system
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: install-cmake
+      shell: bash
+      run: sudo apt-get install cmake
+    - name: install-fast-dds
+      shell: bash
+      working-directory: depend/fast-dds
+      run: sudo install.sh
