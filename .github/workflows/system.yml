@@ -15,11 +15,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: install-cmake
       shell: bash
-      run: sudo apt-get install cmake
-    - name: install-deps
+      run: sudo apt install cmake
+    - name: install-boost
+      shell: bash
+      run: sudo apt install libboost-all-dev
+    - name: install-fastdds-deps
       shell: bash
       run: sudo apt install libasio-dev libtinyxml2-dev
-    - name: install-fast-dds
+    - name: install-fastdds
       shell: bash
       working-directory: depend/fast-dds
       run: sudo ./install.sh
