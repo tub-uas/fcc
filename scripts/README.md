@@ -34,3 +34,4 @@ Here you can find a short description of what each script does:
 8. After compilation is done, you can use `run.sh` to start the modules.
 9. Use `status.sh` to check whether all modules you wanted to start are actually running. You can also check whether a new logfile directory was created (the name of that directory is made up of the current date and time) and whether it is growing in size.
 10. In order to stop execution of the modules run `kill.sh`. This will stop all modules (and close the current logfiles).
+11. Before disconnecting power, shutdown the RaspberryPi using `sudo shutdown now`.

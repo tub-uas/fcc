@@ -18,6 +18,7 @@ General overview of sub-directories. For more information consult `README.md` fi
 - `logs` contains logfiles.
 - `modules` contains the software modules that communicate with each other using Fast-DDS.
 - `scripts` contains scripts for fast and efficient system management.
+- `tests` contains unit and integration tests.
 - `util` contains utility functions used by `driver` and `modules`.
 
 
@@ -26,12 +27,12 @@ TODO
 - TODO some sort of visual graph
 
 ## Hardware
-We are only supporting RaspberryPis. Currently we are using a standard RaspberryPi 3 Model B. It is connected to a custom build shield (hat) that provides power and communication over our CAN Bus.
+We are only supporting RaspberryPis. Currently we are using a standard RaspberryPi 3 Model B. It is connected to a custom build shield (hat) that provides power and communication over the CAN Bus.
 
-RaspberryPi with CAN interface shield
+RaspberryPi with CAN interface shield:
 ![Side](docs/side.jpg)
 ![Side](docs/top.jpg)
-RaspberryPi mounted in complete stack.
+RaspberryPi mounted in complete stack:
 ![Side](docs/stack.jpg)
 
 For more information about the shield have a look at the [`mfs-hardware`](https://github.com/tub-uas/mfs-hardware) repository.
