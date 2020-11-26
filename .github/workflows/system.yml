@@ -20,3 +20,11 @@ jobs:
       shell: bash
       working-directory: depend/fast-dds
       run: sudo ./install.sh
+    - name: cmake
+      shell: bash
+      working-directory: scripts
+      run: ./cmake.sh
+    - name: make
+      shell: bash
+      working-directory: scripts
+      run: ./make.sh
