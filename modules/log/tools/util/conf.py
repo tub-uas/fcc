@@ -42,7 +42,6 @@ class Conf():
     @property
     def allIdlPaths(self):
         allIdlPaths = {}
-        print(self.currentDirModules)
         for root, dirs, files in os.walk(self.currentDirModules, topdown=True):
             for file in files:
                 if file.endswith('.idl'):
