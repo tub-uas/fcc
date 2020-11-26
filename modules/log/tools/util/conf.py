@@ -11,7 +11,7 @@ class Conf():
     @property
     def allModules(self):
         allModules = list()
-        for root, dirs, files in os.walk(self.currentDir, topdown=True):
+        for root, dirs, files in os.walk(self.currentDirModules, topdown=True):
             for file in files:
                 if file.endswith('.idl'):
                     allModules.extend([os.path.splitext(file)[0][4:]])
@@ -30,14 +30,20 @@ class Conf():
         return list(map(lambda x:x[0].lower()+x[1:], self._modules))
 
     @property
-    def currentDir(self):
+    def currentDirFcc(self):
         cwd = os.getcwd().split("fcc", 1)
         return os.path.join(cwd[0], "fcc")
 
     @property
+    def currentDirModules(self):
+        cwd = os.getcwd().split("modules", 1)
+        return os.path.join(cwd[0], "modules")
+
+    @property
     def allIdlPaths(self):
         allIdlPaths = {}
-        for root, dirs, files in os.walk(self.currentDir, topdown=True):
+        print(self.currentDirModules)
+        for root, dirs, files in os.walk(self.currentDirModules, topdown=True):
             for file in files:
                 if file.endswith('.idl'):
                     allIdlPaths[os.path.splitext(file)[0][4:]] = os.path.join(root, file)
