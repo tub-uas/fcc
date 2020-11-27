@@ -1,0 +1,51 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: install-cmake
+      shell: bash
+      run: sudo apt-get install cmake
+    - name: install-gtest
+      shell: bash
+      run: sudo apt-get install libgtest-dev
+    - name: make
+      shell: bash
+      working-directory: /usr/src/gtest
+      run: sudo make
+    - name: symlink
+      shell: bash
+      working-directory: /usr/src/gtest
+      run: sudo cp *.a /usr/lib
+    - name: install-boost
+      shell: bash
+      run: sudo apt-get install libboost-all-dev
+    - name: install-fastdds-deps
+      shell: bash
+      run: sudo apt-get install libasio-dev libtinyxml2-dev
+    - name: install-fastdds
+      shell: bash
+      working-directory: depend/fast-dds
+      run: sudo ./install.sh
+    - name: cmake
+      shell: bash
+      working-directory: tests
+      run: cmake .
+    - name: make
+      shell: bash
+      working-directory: tests
+      run: make
+    - name: test
+      shell: bash
+      working-directory: tests
+      run: ./main_test
