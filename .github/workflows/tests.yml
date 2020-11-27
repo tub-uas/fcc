@@ -19,7 +19,7 @@ jobs:
     - name: install-gtest
       shell: bash
       run: sudo apt-get install libgtest-dev
-    - name: make
+    - name: make-gtest
       shell: bash
       working-directory: /usr/src/gtest
       run: sudo make
@@ -41,7 +41,7 @@ jobs:
       shell: bash
       working-directory: tests
       run: cmake .
-    - name: make
+    - name: make-tests
       shell: bash
       working-directory: tests
       run: make
