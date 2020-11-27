@@ -64,5 +64,11 @@ In addition to above presented modes / functions the pilot can decide whether th
 We are using the following body coordinate system:
 ![](docs/coordinate_system.jpg)
 
+The `default` orientation coordinate system of the stack is the following:
+![](docs/stack_coordinates.jpg)
+
+Because the stack is turned onto its left side inside the Hype aircraft, the `hype` coordinate system is slightly different. While `x` stays the same `y` becomes `z` and `z` becomes `-y`.
+
+
 ## Styleguide
 TODO
