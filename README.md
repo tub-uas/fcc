@@ -26,6 +26,10 @@ General overview of sub-directories. For more information consult `README.md` fi
 TODO
 - TODO some sort of visual graph
 
+## Operating System
+
+The RaspberryPi is running a Linux kernel with Rreempt-RT. Please follow [this](https://lemariva.com/blog/2019/09/raspberry-pi-4b-preempt-rt-kernel-419y-performance-test) tutorial in order to compile und upload the kernel to the RaspberryPi.
+
 ## Hardware
 We are only supporting RaspberryPis. Currently we are using a standard RaspberryPi 3 Model B. It is connected to a custom build shield (hat) that provides power and communication over the CAN Bus.
 
@@ -37,8 +41,24 @@ RaspberryPi mounted in complete stack:
 
 For more information about the shield have a look at the [`mfs-hardware`](https://github.com/tub-uas/mfs-hardware) repository.
 
-## Flightmodes
-TODO
+## Operation
+We are currently supporting 3x 3 Flightmodes `Mode`. Flightfunction `Func` selects which 3 Flightmodes are active. So on total we could theoretically support 9 different actual modes.
+
+The 3 possible states `Mode` can be in are `MAN` `ATT` and `NAV`. The 3 possible states `Func` can be in are `FUNC1` `FUNC2` and `FUNC3`.
+
+
+| Flightmode / Flightfunction | MAN            | ATT                           | NAV                             |
+|:---------------------------:|:--------------:|:-----------------------------:|:-------------------------------:|
+| FUNC1                       | Manual control | Pitch attitude control        | Pitch attitude and roll control |
+| FUNC2                       | Manual control | Pitch rate damper             | Pitch attitude and roll damper  |
+| FUNC3                       | Manual control | Pitch identification sequence | Yaw identification sequence     |
+
+In addition to above presented modes / functions the pilot can decide whether the control output from the RaspberryPi should actually be used as control input to the aircraft or whether the aircraft should directly be controlled (without going through the RaspberryPi) from pilot commands. This is in addition to the "Manual control" option as seen in the table above where the signals are send through the RaspberryPi but not being modified. This is controlled via software running on the RAI board. We will call this pilot-overwrite.
+
+
+
+
+
 
 ## Dynamics and Control
 We are using the following body coordinate system:
