@@ -1,6 +1,7 @@
 # Flight Control Computer (FCC)
 
 ![Build](https://github.com/tub-uas/fcc/workflows/build/badge.svg)
+![Tests](https://github.com/tub-uas/fcc/workflows/tests/badge.svg)
 
 This repository contains the code running on the Flight Control Computer (FCC). It controlls and communicates the rest of the flight system via CAN (Controller Area Network).
 
