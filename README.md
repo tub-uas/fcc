@@ -29,7 +29,9 @@ TODO
 
 ## Operating System
 
-The RaspberryPi is running a Linux kernel with Rreempt-RT. Please follow [this](https://lemariva.com/blog/2019/09/raspberry-pi-4b-preempt-rt-kernel-419y-performance-test) tutorial in order to compile und upload the kernel to the RaspberryPi.
+The RaspberryPi is running a Linux kernel with Rreempt-RT. Please follow [this](https://lemariva.com/blog/2019/09/raspberry-pi-4b-preempt-rt-kernel-419y-performance-test) tutorial in order to compile und upload the kernel to the RaspberryPi. 
+
+In order to install Fast-RTPS use [this](https://github.com/eProsima/Fast-DDS#manual-installation) and for Mavlink [this](https://mavlink.io/en/getting_started/installation.html) tutorial.
 
 ## Hardware
 We are only supporting RaspberryPis. Currently we are using a standard RaspberryPi 3 Model B. It is connected to a custom build shield (hat) that provides power and communication over the CAN Bus.
