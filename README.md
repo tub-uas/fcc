@@ -37,7 +37,19 @@ Start by setting up a "normal" RaspberryPi system. Then, follow the steps below:
 
 - For Mavlink have a look here [this](https://mavlink.io/en/getting_started/installation.html) tutorial.
 
-- To install the CAN driver and CAN utils use this tutorial [here](https://www.beyondlogic.org/adding-can-controller-area-network-to-the-raspberry-pi/).
+- To install the CAN driver and CAN utils use this tutorial [here](https://www.beyondlogic.org/adding-can-controller-area-network-to-the-raspberry-pi/). But put these two lines
+
+```
+# Enable can (dtparam=spi=on must be set)
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+```
+into your `/boot/config.txt` and these
+```
+auto can0  
+iface can0 can static  
+	bitrate 500000  
+```
+into your `/etc/network/interfaces`.
 
 - In order to get rid the locale errors put `export LC_ALL=C` at the bottom of the `.bashrc` in the home directory and reboot.
 
