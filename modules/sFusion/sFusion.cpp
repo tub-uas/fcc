@@ -47,7 +47,7 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 	void* data = reader->type().create_data();
 
 	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
+		if (info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) {
 			if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
 				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
 				reader->take_next_sample(&dataAhrs, &info);
