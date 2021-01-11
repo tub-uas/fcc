@@ -62,7 +62,7 @@ RaspberryPi with CAN interface shield:
 RaspberryPi mounted in complete stack:
 ![](docs/stack.jpg)
 
-For more information about the shield have a look at the [`mfs-hardware`](https://github.com/tub-uas/mfs-hardware) repository.
+For more information about the shield and the rest of the custom hardware, have a look at the [`mfs-hardware`](https://github.com/tub-uas/mfs-hardware) repository.
 
 ## Operation
 We are currently supporting 3x 3 Flightmodes `Mode`. Flightfunction `Func` selects which 3 Flightmodes are active. So on total we could theoretically support 9 different actual modes.
@@ -79,10 +79,6 @@ The 3 possible states `Mode` can be in are `MAN` `ATT` and `NAV`. The 3 possible
 In addition to above presented modes / functions the pilot can decide whether the control output from the RaspberryPi should actually be used as control input to the aircraft or whether the aircraft should directly be controlled (without going through the RaspberryPi) from pilot commands. This is in addition to the "Manual control" option as seen in the table above where the signals are send through the RaspberryPi but not being modified. This is controlled via software running on the RAI board. We will call this pilot-overwrite.
 
 
-
-
-
-
 ## Dynamics and Control
 We are using the following body coordinate system:
 ![](docs/coordinate_system.jpg)
@@ -94,3 +90,5 @@ Because the stack is turned onto its left side inside the Hype aircraft, the `hy
 
 
 ## Styleguide
+
+In general, follow the [Google C++](https://google.github.io/styleguide/cppguide.html) and the [PEP8 Python](https://www.python.org/dev/peps/pep-0008/) style guides. Where deemed sensible and / or necessary, diverge from these guides.
