@@ -23,13 +23,13 @@ Here you can find a short description of what each script does:
 
 ## Usage
 1. Open a terminal on your local machine. Navigate into the `scripts` directory and ensure that all scripts are executable (see above).
-2. Run `enableHotspot.sh` to turn on the local hotspot.
-3. Run `hotspot.sh` repeatedly to check that RaspberryPi shows up in connected devices. This can take a while.
+2. Run `enableHotspot.sh` to turn on the local hotspot. (Before this will work you need to have enabled the hotspot "by hand" through the GUI (settings) once before.)
+3. Run `hotspot.sh` repeatedly to check that RaspberryPi shows up in connected devices. This can take a while. (You need to ensure that the RaspberryPi has the "right" password to your WiFi hotspot. To change the hotspot password on Ubuntu use `nm-connection-editor`. To change the WiFi settings on the RaspberryPi use `sudo raspi-config`.)
 4. Connect via `ssh`:
-	- Run `terminals.sh` to automatically open a second terminal and prepare `ssh` connection commands. When both terminals are open and have their connection commands prepared simply press `enter` in order to connect.
+	- Run `terminals.sh` to automatically open a second terminal and prepare `ssh` connection commands. When both terminals are open and have their connection commands prepared simply press `enter` in order to connect. (You might need to install `sudo apt install xdotool sshpass`.)
 	- or simply connect via `ssh pi@raspberrypi.local`. The password is `avsoft`.
 5. You will automatically be redirected into the `scripts` directory on the RaspberryPi when connecting via `ssh` (this is done by `cd fcc/scripts` in `/home/pi/.bashrc`).
-6. If you are starting clean or have done big changes, run `cmake.sh`.
+6. If you are starting "clean" or have done "big changes", run `cmake.sh`.
 7. Then run `make.sh`. Depending on how much new code there is, this might take a while.
 8. After compilation is done, you can use `run.sh` to start the modules.
 9. Use `status.sh` to check whether all modules you wanted to start are actually running. You can also check whether a new logfile directory was created (the name of that directory is made up of the current date and time) and whether it is growing in size.
