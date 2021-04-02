@@ -6,7 +6,7 @@
 This repository contains the code running on the Flight Control Computer (FCC). It controls and communicates with the rest of the flight system via CAN (Controller Area Network).
 
 ## General
-Use the readme and scripts in the `scripts/` directory to compile, run and manage the code. You might need to install some dependencies, such as `boost` (a C++ library).
+Use the readme and scripts in the `scripts/` directory to compile, run and manage the code. You might need to install some dependencies, such as `boost` (a C++ library) and `wiringpi`.
 
 ## Architecture
 
