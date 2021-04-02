@@ -51,7 +51,7 @@ iface can0 can static
 ```
 into your `/etc/network/interfaces`.
 
-- In order to get rid the locale errors put `export LC_ALL=C` at the bottom of the `.bashrc` in the home directory and reboot.
+- In order to get rid the locale errors, put `export LC_ALL=C` at the bottom of the `.bashrc` in the home directory and reboot.
 
 ## Hardware
 We are currently using a RaspberryPi 3 (and 4) Model B. It is connected to a custom build shield (hat) that provides power and communication over the CAN bus.
