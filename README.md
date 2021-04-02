@@ -33,9 +33,9 @@ Start by setting up a "normal" RaspberryPi system. Then, follow the steps below:
 
 - The RaspberryPi is running a Linux kernel with Rreempt-RT. Please follow [this](https://lemariva.com/blog/2019/09/raspberry-pi-4b-preempt-rt-kernel-419y-performance-test) tutorial in order to compile und upload the kernel to the RaspberryPi.
 
-- In order to install Fast-RTPS follow [this](https://github.com/eProsima/Fast-DDS#manual-installation).
+- In order to install Fast-RTPS follow [this](https://github.com/eProsima/Fast-DDS#manual-installation). Ensure that you have all [dependencies](https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_linux.html) installed.
 
-- For Mavlink have a look here [this](https://mavlink.io/en/getting_started/installation.html) tutorial.
+- For Mavlink have a look at [this](https://mavlink.io/en/getting_started/installation.html) tutorial.
 
 - To install the CAN driver and CAN utils use this tutorial [here](https://www.beyondlogic.org/adding-can-controller-area-network-to-the-raspberry-pi/). But put these two lines
 
