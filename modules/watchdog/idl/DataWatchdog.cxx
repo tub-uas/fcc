@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataWatchdog.h"
 #include <fastcdr/Cdr.h>
@@ -34,33 +36,33 @@ using namespace eprosima::fastcdr::exception;
 
 DataWatchdog::DataWatchdog()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ddf90b0
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@33723e30
     m_time = 0;
-    // m_allAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@57536d79
+    // m_allAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
     m_allAlive = false;
-    // m_ahrsAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    // m_ahrsAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
     m_ahrsAlive = false;
-    // m_airAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    // m_airAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_airAlive = false;
-    // m_ctrlAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    // m_ctrlAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_ctrlAlive = false;
-    // m_downlinkAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_downlinkAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
     m_downlinkAlive = false;
-    // m_gpsAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    // m_gpsAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
     m_gpsAlive = false;
-    // m_logAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_logAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_logAlive = false;
-    // m_psuAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    // m_psuAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_psuAlive = false;
-    // m_raiInAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_raiInAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_raiInAlive = false;
-    // m_raiOutAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    // m_raiOutAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_raiOutAlive = false;
-    // m_sFusionAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_sFusionAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
     m_sFusionAlive = false;
-    // m_uplinkAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    // m_uplinkAlive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
     m_uplinkAlive = false;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
     m_alive = false;
 
 }
@@ -83,7 +85,8 @@ DataWatchdog::~DataWatchdog()
 
 }
 
-DataWatchdog::DataWatchdog(const DataWatchdog &x)
+DataWatchdog::DataWatchdog(
+        const DataWatchdog& x)
 {
     m_time = x.m_time;
     m_allAlive = x.m_allAlive;
@@ -101,7 +104,8 @@ DataWatchdog::DataWatchdog(const DataWatchdog &x)
     m_alive = x.m_alive;
 }
 
-DataWatchdog::DataWatchdog(DataWatchdog &&x)
+DataWatchdog::DataWatchdog(
+        DataWatchdog&& x)
 {
     m_time = x.m_time;
     m_allAlive = x.m_allAlive;
@@ -119,28 +123,8 @@ DataWatchdog::DataWatchdog(DataWatchdog &&x)
     m_alive = x.m_alive;
 }
 
-DataWatchdog& DataWatchdog::operator=(const DataWatchdog &x)
-{
-
-    m_time = x.m_time;
-    m_allAlive = x.m_allAlive;
-    m_ahrsAlive = x.m_ahrsAlive;
-    m_airAlive = x.m_airAlive;
-    m_ctrlAlive = x.m_ctrlAlive;
-    m_downlinkAlive = x.m_downlinkAlive;
-    m_gpsAlive = x.m_gpsAlive;
-    m_logAlive = x.m_logAlive;
-    m_psuAlive = x.m_psuAlive;
-    m_raiInAlive = x.m_raiInAlive;
-    m_raiOutAlive = x.m_raiOutAlive;
-    m_sFusionAlive = x.m_sFusionAlive;
-    m_uplinkAlive = x.m_uplinkAlive;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataWatchdog& DataWatchdog::operator=(DataWatchdog &&x)
+DataWatchdog& DataWatchdog::operator =(
+        const DataWatchdog& x)
 {
 
     m_time = x.m_time;
@@ -161,7 +145,30 @@ DataWatchdog& DataWatchdog::operator=(DataWatchdog &&x)
     return *this;
 }
 
-size_t DataWatchdog::getMaxCdrSerializedSize(size_t current_alignment)
+DataWatchdog& DataWatchdog::operator =(
+        DataWatchdog&& x)
+{
+
+    m_time = x.m_time;
+    m_allAlive = x.m_allAlive;
+    m_ahrsAlive = x.m_ahrsAlive;
+    m_airAlive = x.m_airAlive;
+    m_ctrlAlive = x.m_ctrlAlive;
+    m_downlinkAlive = x.m_downlinkAlive;
+    m_gpsAlive = x.m_gpsAlive;
+    m_logAlive = x.m_logAlive;
+    m_psuAlive = x.m_psuAlive;
+    m_raiInAlive = x.m_raiInAlive;
+    m_raiOutAlive = x.m_raiOutAlive;
+    m_sFusionAlive = x.m_sFusionAlive;
+    m_uplinkAlive = x.m_uplinkAlive;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataWatchdog::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -212,7 +219,9 @@ size_t DataWatchdog::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataWatchdog::getCdrSerializedSize(const DataWatchdog& data, size_t current_alignment)
+size_t DataWatchdog::getCdrSerializedSize(
+        const DataWatchdog& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -264,7 +273,8 @@ size_t DataWatchdog::getCdrSerializedSize(const DataWatchdog& data, size_t curre
     return current_alignment - initial_alignment;
 }
 
-void DataWatchdog::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataWatchdog::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -281,9 +291,11 @@ void DataWatchdog::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_sFusionAlive;
     scdr << m_uplinkAlive;
     scdr << m_alive;
+
 }
 
-void DataWatchdog::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataWatchdog::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -306,9 +318,10 @@ void DataWatchdog::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataWatchdog::time(uint64_t _time)
+void DataWatchdog::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -333,9 +346,10 @@ uint64_t& DataWatchdog::time()
  * @brief This function sets a value in member allAlive
  * @param _allAlive New value for member allAlive
  */
-void DataWatchdog::allAlive(bool _allAlive)
+void DataWatchdog::allAlive(
+        bool _allAlive)
 {
-m_allAlive = _allAlive;
+    m_allAlive = _allAlive;
 }
 
 /*!
@@ -360,9 +374,10 @@ bool& DataWatchdog::allAlive()
  * @brief This function sets a value in member ahrsAlive
  * @param _ahrsAlive New value for member ahrsAlive
  */
-void DataWatchdog::ahrsAlive(bool _ahrsAlive)
+void DataWatchdog::ahrsAlive(
+        bool _ahrsAlive)
 {
-m_ahrsAlive = _ahrsAlive;
+    m_ahrsAlive = _ahrsAlive;
 }
 
 /*!
@@ -387,9 +402,10 @@ bool& DataWatchdog::ahrsAlive()
  * @brief This function sets a value in member airAlive
  * @param _airAlive New value for member airAlive
  */
-void DataWatchdog::airAlive(bool _airAlive)
+void DataWatchdog::airAlive(
+        bool _airAlive)
 {
-m_airAlive = _airAlive;
+    m_airAlive = _airAlive;
 }
 
 /*!
@@ -414,9 +430,10 @@ bool& DataWatchdog::airAlive()
  * @brief This function sets a value in member ctrlAlive
  * @param _ctrlAlive New value for member ctrlAlive
  */
-void DataWatchdog::ctrlAlive(bool _ctrlAlive)
+void DataWatchdog::ctrlAlive(
+        bool _ctrlAlive)
 {
-m_ctrlAlive = _ctrlAlive;
+    m_ctrlAlive = _ctrlAlive;
 }
 
 /*!
@@ -441,9 +458,10 @@ bool& DataWatchdog::ctrlAlive()
  * @brief This function sets a value in member downlinkAlive
  * @param _downlinkAlive New value for member downlinkAlive
  */
-void DataWatchdog::downlinkAlive(bool _downlinkAlive)
+void DataWatchdog::downlinkAlive(
+        bool _downlinkAlive)
 {
-m_downlinkAlive = _downlinkAlive;
+    m_downlinkAlive = _downlinkAlive;
 }
 
 /*!
@@ -468,9 +486,10 @@ bool& DataWatchdog::downlinkAlive()
  * @brief This function sets a value in member gpsAlive
  * @param _gpsAlive New value for member gpsAlive
  */
-void DataWatchdog::gpsAlive(bool _gpsAlive)
+void DataWatchdog::gpsAlive(
+        bool _gpsAlive)
 {
-m_gpsAlive = _gpsAlive;
+    m_gpsAlive = _gpsAlive;
 }
 
 /*!
@@ -495,9 +514,10 @@ bool& DataWatchdog::gpsAlive()
  * @brief This function sets a value in member logAlive
  * @param _logAlive New value for member logAlive
  */
-void DataWatchdog::logAlive(bool _logAlive)
+void DataWatchdog::logAlive(
+        bool _logAlive)
 {
-m_logAlive = _logAlive;
+    m_logAlive = _logAlive;
 }
 
 /*!
@@ -522,9 +542,10 @@ bool& DataWatchdog::logAlive()
  * @brief This function sets a value in member psuAlive
  * @param _psuAlive New value for member psuAlive
  */
-void DataWatchdog::psuAlive(bool _psuAlive)
+void DataWatchdog::psuAlive(
+        bool _psuAlive)
 {
-m_psuAlive = _psuAlive;
+    m_psuAlive = _psuAlive;
 }
 
 /*!
@@ -549,9 +570,10 @@ bool& DataWatchdog::psuAlive()
  * @brief This function sets a value in member raiInAlive
  * @param _raiInAlive New value for member raiInAlive
  */
-void DataWatchdog::raiInAlive(bool _raiInAlive)
+void DataWatchdog::raiInAlive(
+        bool _raiInAlive)
 {
-m_raiInAlive = _raiInAlive;
+    m_raiInAlive = _raiInAlive;
 }
 
 /*!
@@ -576,9 +598,10 @@ bool& DataWatchdog::raiInAlive()
  * @brief This function sets a value in member raiOutAlive
  * @param _raiOutAlive New value for member raiOutAlive
  */
-void DataWatchdog::raiOutAlive(bool _raiOutAlive)
+void DataWatchdog::raiOutAlive(
+        bool _raiOutAlive)
 {
-m_raiOutAlive = _raiOutAlive;
+    m_raiOutAlive = _raiOutAlive;
 }
 
 /*!
@@ -603,9 +626,10 @@ bool& DataWatchdog::raiOutAlive()
  * @brief This function sets a value in member sFusionAlive
  * @param _sFusionAlive New value for member sFusionAlive
  */
-void DataWatchdog::sFusionAlive(bool _sFusionAlive)
+void DataWatchdog::sFusionAlive(
+        bool _sFusionAlive)
 {
-m_sFusionAlive = _sFusionAlive;
+    m_sFusionAlive = _sFusionAlive;
 }
 
 /*!
@@ -630,9 +654,10 @@ bool& DataWatchdog::sFusionAlive()
  * @brief This function sets a value in member uplinkAlive
  * @param _uplinkAlive New value for member uplinkAlive
  */
-void DataWatchdog::uplinkAlive(bool _uplinkAlive)
+void DataWatchdog::uplinkAlive(
+        bool _uplinkAlive)
 {
-m_uplinkAlive = _uplinkAlive;
+    m_uplinkAlive = _uplinkAlive;
 }
 
 /*!
@@ -657,9 +682,10 @@ bool& DataWatchdog::uplinkAlive()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataWatchdog::alive(bool _alive)
+void DataWatchdog::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -681,7 +707,8 @@ bool& DataWatchdog::alive()
 }
 
 
-size_t DataWatchdog::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataWatchdog::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -706,24 +733,12 @@ size_t DataWatchdog::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataWatchdog::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataWatchdog::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataWatchdog::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+                  
 }

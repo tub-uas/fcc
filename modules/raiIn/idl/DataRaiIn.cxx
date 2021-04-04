@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataRaiIn.h"
 #include <fastcdr/Cdr.h>
@@ -34,25 +36,25 @@ using namespace eprosima::fastcdr::exception;
 
 DataRaiIn::DataRaiIn()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
     m_senseTime = 0.0;
-    // m_chnl com.eprosima.idl.parser.typecode.ArrayTypeCode@369f73a2
+    // m_chnl com.eprosima.idl.parser.typecode.ArrayTypeCode@289d1c02
     memset(&m_chnl, 0, (12) * 2);
-    // m_roll com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_roll com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
     m_roll = 0.0;
-    // m_pitch com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    // m_pitch com.eprosima.idl.parser.typecode.PrimitiveTypeCode@17d0685f
     m_pitch = 0.0;
-    // m_yaw com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_yaw com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3891771e
     m_yaw = 0.0;
-    // m_thr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_thr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@396e2f39
     m_thr = 0.0;
-    // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
     m_fltMode = 0;
-    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
     m_fltFunc = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@18bf3d14
     m_alive = false;
 
 }
@@ -71,7 +73,8 @@ DataRaiIn::~DataRaiIn()
 
 }
 
-DataRaiIn::DataRaiIn(const DataRaiIn &x)
+DataRaiIn::DataRaiIn(
+        const DataRaiIn& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -85,7 +88,8 @@ DataRaiIn::DataRaiIn(const DataRaiIn &x)
     m_alive = x.m_alive;
 }
 
-DataRaiIn::DataRaiIn(DataRaiIn &&x)
+DataRaiIn::DataRaiIn(
+        DataRaiIn&& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -99,7 +103,8 @@ DataRaiIn::DataRaiIn(DataRaiIn &&x)
     m_alive = x.m_alive;
 }
 
-DataRaiIn& DataRaiIn::operator=(const DataRaiIn &x)
+DataRaiIn& DataRaiIn::operator =(
+        const DataRaiIn& x)
 {
 
     m_time = x.m_time;
@@ -116,7 +121,8 @@ DataRaiIn& DataRaiIn::operator=(const DataRaiIn &x)
     return *this;
 }
 
-DataRaiIn& DataRaiIn::operator=(DataRaiIn &&x)
+DataRaiIn& DataRaiIn::operator =(
+        DataRaiIn&& x)
 {
 
     m_time = x.m_time;
@@ -133,7 +139,8 @@ DataRaiIn& DataRaiIn::operator=(DataRaiIn &&x)
     return *this;
 }
 
-size_t DataRaiIn::getMaxCdrSerializedSize(size_t current_alignment)
+size_t DataRaiIn::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -172,7 +179,9 @@ size_t DataRaiIn::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataRaiIn::getCdrSerializedSize(const DataRaiIn& data, size_t current_alignment)
+size_t DataRaiIn::getCdrSerializedSize(
+        const DataRaiIn& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -214,7 +223,8 @@ size_t DataRaiIn::getCdrSerializedSize(const DataRaiIn& data, size_t current_ali
     return current_alignment - initial_alignment;
 }
 
-void DataRaiIn::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataRaiIn::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -228,9 +238,11 @@ void DataRaiIn::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_fltMode;
     scdr << m_fltFunc;
     scdr << m_alive;
+
 }
 
-void DataRaiIn::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataRaiIn::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -250,9 +262,10 @@ void DataRaiIn::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataRaiIn::time(uint64_t _time)
+void DataRaiIn::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -277,9 +290,10 @@ uint64_t& DataRaiIn::time()
  * @brief This function sets a value in member senseTime
  * @param _senseTime New value for member senseTime
  */
-void DataRaiIn::senseTime(float _senseTime)
+void DataRaiIn::senseTime(
+        float _senseTime)
 {
-m_senseTime = _senseTime;
+    m_senseTime = _senseTime;
 }
 
 /*!
@@ -304,18 +318,20 @@ float& DataRaiIn::senseTime()
  * @brief This function copies the value in member chnl
  * @param _chnl New value to be copied in member chnl
  */
-void DataRaiIn::chnl(const std::array<uint16_t, 12> &_chnl)
+void DataRaiIn::chnl(
+        const std::array<uint16_t, 12>& _chnl)
 {
-m_chnl = _chnl;
+    m_chnl = _chnl;
 }
 
 /*!
  * @brief This function moves the value in member chnl
  * @param _chnl New value to be moved in member chnl
  */
-void DataRaiIn::chnl(std::array<uint16_t, 12> &&_chnl)
+void DataRaiIn::chnl(
+        std::array<uint16_t, 12>&& _chnl)
 {
-m_chnl = std::move(_chnl);
+    m_chnl = std::move(_chnl);
 }
 
 /*!
@@ -339,9 +355,10 @@ std::array<uint16_t, 12>& DataRaiIn::chnl()
  * @brief This function sets a value in member roll
  * @param _roll New value for member roll
  */
-void DataRaiIn::roll(float _roll)
+void DataRaiIn::roll(
+        float _roll)
 {
-m_roll = _roll;
+    m_roll = _roll;
 }
 
 /*!
@@ -366,9 +383,10 @@ float& DataRaiIn::roll()
  * @brief This function sets a value in member pitch
  * @param _pitch New value for member pitch
  */
-void DataRaiIn::pitch(float _pitch)
+void DataRaiIn::pitch(
+        float _pitch)
 {
-m_pitch = _pitch;
+    m_pitch = _pitch;
 }
 
 /*!
@@ -393,9 +411,10 @@ float& DataRaiIn::pitch()
  * @brief This function sets a value in member yaw
  * @param _yaw New value for member yaw
  */
-void DataRaiIn::yaw(float _yaw)
+void DataRaiIn::yaw(
+        float _yaw)
 {
-m_yaw = _yaw;
+    m_yaw = _yaw;
 }
 
 /*!
@@ -420,9 +439,10 @@ float& DataRaiIn::yaw()
  * @brief This function sets a value in member thr
  * @param _thr New value for member thr
  */
-void DataRaiIn::thr(float _thr)
+void DataRaiIn::thr(
+        float _thr)
 {
-m_thr = _thr;
+    m_thr = _thr;
 }
 
 /*!
@@ -447,9 +467,10 @@ float& DataRaiIn::thr()
  * @brief This function sets a value in member fltMode
  * @param _fltMode New value for member fltMode
  */
-void DataRaiIn::fltMode(uint16_t _fltMode)
+void DataRaiIn::fltMode(
+        uint16_t _fltMode)
 {
-m_fltMode = _fltMode;
+    m_fltMode = _fltMode;
 }
 
 /*!
@@ -474,9 +495,10 @@ uint16_t& DataRaiIn::fltMode()
  * @brief This function sets a value in member fltFunc
  * @param _fltFunc New value for member fltFunc
  */
-void DataRaiIn::fltFunc(uint16_t _fltFunc)
+void DataRaiIn::fltFunc(
+        uint16_t _fltFunc)
 {
-m_fltFunc = _fltFunc;
+    m_fltFunc = _fltFunc;
 }
 
 /*!
@@ -501,9 +523,10 @@ uint16_t& DataRaiIn::fltFunc()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataRaiIn::alive(bool _alive)
+void DataRaiIn::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -525,7 +548,8 @@ bool& DataRaiIn::alive()
 }
 
 
-size_t DataRaiIn::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataRaiIn::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -546,20 +570,12 @@ size_t DataRaiIn::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataRaiIn::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataRaiIn::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataRaiIn::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+              
 }

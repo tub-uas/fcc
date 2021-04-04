@@ -22,7 +22,6 @@
 #ifndef _DATAPSU_H_
 #define _DATAPSU_H_
 
-// TODO Poner en el contexto.
 
 #include <stdint.h>
 #include <array>
@@ -36,10 +35,10 @@
 #define eProsima_user_DllExport __declspec( dllexport )
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // _WIN32
 
 #if defined(_WIN32)
 #if defined(EPROSIMA_USER_DLL_EXPORT)
@@ -50,18 +49,16 @@
 #endif // DataPsu_SOURCE
 #else
 #define DataPsu_DllAPI
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define DataPsu_DllAPI
 #endif // _WIN32
 
-namespace eprosima
-{
-    namespace fastcdr
-    {
-        class Cdr;
-    }
-}
+namespace eprosima {
+namespace fastcdr {
+class Cdr;
+} // namespace fastcdr
+} // namespace eprosima
 
 
 /*!
@@ -86,31 +83,36 @@ public:
      * @brief Copy constructor.
      * @param x Reference to the object DataPsu that will be copied.
      */
-    eProsima_user_DllExport DataPsu(const DataPsu &x);
+    eProsima_user_DllExport DataPsu(
+            const DataPsu& x);
 
     /*!
      * @brief Move constructor.
      * @param x Reference to the object DataPsu that will be copied.
      */
-    eProsima_user_DllExport DataPsu(DataPsu &&x);
+    eProsima_user_DllExport DataPsu(
+            DataPsu&& x);
 
     /*!
      * @brief Copy assignment.
      * @param x Reference to the object DataPsu that will be copied.
      */
-    eProsima_user_DllExport DataPsu& operator=(const DataPsu &x);
+    eProsima_user_DllExport DataPsu& operator =(
+            const DataPsu& x);
 
     /*!
      * @brief Move assignment.
      * @param x Reference to the object DataPsu that will be copied.
      */
-    eProsima_user_DllExport DataPsu& operator=(DataPsu &&x);
+    eProsima_user_DllExport DataPsu& operator =(
+            DataPsu&& x);
 
     /*!
      * @brief This function sets a value in member time
      * @param _time New value for member time
      */
-    eProsima_user_DllExport void time(uint64_t _time);
+    eProsima_user_DllExport void time(
+            uint64_t _time);
 
     /*!
      * @brief This function returns the value of member time
@@ -128,7 +130,8 @@ public:
      * @brief This function sets a value in member senseTime
      * @param _senseTime New value for member senseTime
      */
-    eProsima_user_DllExport void senseTime(float _senseTime);
+    eProsima_user_DllExport void senseTime(
+            float _senseTime);
 
     /*!
      * @brief This function returns the value of member senseTime
@@ -146,7 +149,8 @@ public:
      * @brief This function sets a value in member mainVolt
      * @param _mainVolt New value for member mainVolt
      */
-    eProsima_user_DllExport void mainVolt(float _mainVolt);
+    eProsima_user_DllExport void mainVolt(
+            float _mainVolt);
 
     /*!
      * @brief This function returns the value of member mainVolt
@@ -164,7 +168,8 @@ public:
      * @brief This function sets a value in member mainCurr
      * @param _mainCurr New value for member mainCurr
      */
-    eProsima_user_DllExport void mainCurr(float _mainCurr);
+    eProsima_user_DllExport void mainCurr(
+            float _mainCurr);
 
     /*!
      * @brief This function returns the value of member mainCurr
@@ -182,7 +187,8 @@ public:
      * @brief This function sets a value in member mainPow
      * @param _mainPow New value for member mainPow
      */
-    eProsima_user_DllExport void mainPow(float _mainPow);
+    eProsima_user_DllExport void mainPow(
+            float _mainPow);
 
     /*!
      * @brief This function returns the value of member mainPow
@@ -200,7 +206,8 @@ public:
      * @brief This function sets a value in member pwrVolt
      * @param _pwrVolt New value for member pwrVolt
      */
-    eProsima_user_DllExport void pwrVolt(float _pwrVolt);
+    eProsima_user_DllExport void pwrVolt(
+            float _pwrVolt);
 
     /*!
      * @brief This function returns the value of member pwrVolt
@@ -218,7 +225,8 @@ public:
      * @brief This function sets a value in member pwrCurr
      * @param _pwrCurr New value for member pwrCurr
      */
-    eProsima_user_DllExport void pwrCurr(float _pwrCurr);
+    eProsima_user_DllExport void pwrCurr(
+            float _pwrCurr);
 
     /*!
      * @brief This function returns the value of member pwrCurr
@@ -236,7 +244,8 @@ public:
      * @brief This function sets a value in member pwrPow
      * @param _pwrPow New value for member pwrPow
      */
-    eProsima_user_DllExport void pwrPow(float _pwrPow);
+    eProsima_user_DllExport void pwrPow(
+            float _pwrPow);
 
     /*!
      * @brief This function returns the value of member pwrPow
@@ -254,7 +263,8 @@ public:
      * @brief This function sets a value in member sysVolt
      * @param _sysVolt New value for member sysVolt
      */
-    eProsima_user_DllExport void sysVolt(float _sysVolt);
+    eProsima_user_DllExport void sysVolt(
+            float _sysVolt);
 
     /*!
      * @brief This function returns the value of member sysVolt
@@ -272,7 +282,8 @@ public:
      * @brief This function sets a value in member sysCurr
      * @param _sysCurr New value for member sysCurr
      */
-    eProsima_user_DllExport void sysCurr(float _sysCurr);
+    eProsima_user_DllExport void sysCurr(
+            float _sysCurr);
 
     /*!
      * @brief This function returns the value of member sysCurr
@@ -290,7 +301,8 @@ public:
      * @brief This function sets a value in member sysPow
      * @param _sysPow New value for member sysPow
      */
-    eProsima_user_DllExport void sysPow(float _sysPow);
+    eProsima_user_DllExport void sysPow(
+            float _sysPow);
 
     /*!
      * @brief This function returns the value of member sysPow
@@ -308,7 +320,8 @@ public:
      * @brief This function sets a value in member alive
      * @param _alive New value for member alive
      */
-    eProsima_user_DllExport void alive(bool _alive);
+    eProsima_user_DllExport void alive(
+            bool _alive);
 
     /*!
      * @brief This function returns the value of member alive
@@ -329,7 +342,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function returns the serialized size of a data depending on the buffer alignment.
@@ -337,20 +351,24 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Serialized size.
      */
-    eProsima_user_DllExport static size_t getCdrSerializedSize(const DataPsu& data, size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getCdrSerializedSize(
+            const DataPsu& data,
+            size_t current_alignment = 0);
 
 
     /*!
      * @brief This function serializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serialize(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serialize(
+            eprosima::fastcdr::Cdr& cdr) const;
 
     /*!
      * @brief This function deserializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void deserialize(eprosima::fastcdr::Cdr &cdr);
+    eProsima_user_DllExport void deserialize(
+            eprosima::fastcdr::Cdr& cdr);
 
 
 
@@ -360,7 +378,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function tells you if the Key has been defined for this type
@@ -371,9 +390,11 @@ public:
      * @brief This function serializes the key members of an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serializeKey(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serializeKey(
+            eprosima::fastcdr::Cdr& cdr) const;
 
 private:
+
     uint64_t m_time;
     float m_senseTime;
     float m_mainVolt;

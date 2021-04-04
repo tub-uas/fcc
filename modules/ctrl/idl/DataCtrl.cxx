@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataCtrl.h"
 #include <fastcdr/Cdr.h>
@@ -34,23 +36,23 @@ using namespace eprosima::fastcdr::exception;
 
 DataCtrl::DataCtrl()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ddf90b0
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
     m_time = 0;
-    // m_xi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@57536d79
+    // m_xi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
     m_xi = 0.0;
-    // m_eta com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b0143d3
+    // m_eta com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_eta = 0.0;
-    // m_zeta com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
+    // m_zeta com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
     m_zeta = 0.0;
-    // m_etaT com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    // m_etaT com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
     m_etaT = 0.0;
-    // m_etaF com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    // m_etaF com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_etaF = 0.0;
-    // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_fltMode = 0;
-    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_fltFunc = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_alive = false;
 
 }
@@ -68,7 +70,8 @@ DataCtrl::~DataCtrl()
 
 }
 
-DataCtrl::DataCtrl(const DataCtrl &x)
+DataCtrl::DataCtrl(
+        const DataCtrl& x)
 {
     m_time = x.m_time;
     m_xi = x.m_xi;
@@ -81,7 +84,8 @@ DataCtrl::DataCtrl(const DataCtrl &x)
     m_alive = x.m_alive;
 }
 
-DataCtrl::DataCtrl(DataCtrl &&x)
+DataCtrl::DataCtrl(
+        DataCtrl&& x)
 {
     m_time = x.m_time;
     m_xi = x.m_xi;
@@ -94,23 +98,8 @@ DataCtrl::DataCtrl(DataCtrl &&x)
     m_alive = x.m_alive;
 }
 
-DataCtrl& DataCtrl::operator=(const DataCtrl &x)
-{
-
-    m_time = x.m_time;
-    m_xi = x.m_xi;
-    m_eta = x.m_eta;
-    m_zeta = x.m_zeta;
-    m_etaT = x.m_etaT;
-    m_etaF = x.m_etaF;
-    m_fltMode = x.m_fltMode;
-    m_fltFunc = x.m_fltFunc;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataCtrl& DataCtrl::operator=(DataCtrl &&x)
+DataCtrl& DataCtrl::operator =(
+        const DataCtrl& x)
 {
 
     m_time = x.m_time;
@@ -126,7 +115,25 @@ DataCtrl& DataCtrl::operator=(DataCtrl &&x)
     return *this;
 }
 
-size_t DataCtrl::getMaxCdrSerializedSize(size_t current_alignment)
+DataCtrl& DataCtrl::operator =(
+        DataCtrl&& x)
+{
+
+    m_time = x.m_time;
+    m_xi = x.m_xi;
+    m_eta = x.m_eta;
+    m_zeta = x.m_zeta;
+    m_etaT = x.m_etaT;
+    m_etaF = x.m_etaF;
+    m_fltMode = x.m_fltMode;
+    m_fltFunc = x.m_fltFunc;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataCtrl::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -162,7 +169,9 @@ size_t DataCtrl::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataCtrl::getCdrSerializedSize(const DataCtrl& data, size_t current_alignment)
+size_t DataCtrl::getCdrSerializedSize(
+        const DataCtrl& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -199,7 +208,8 @@ size_t DataCtrl::getCdrSerializedSize(const DataCtrl& data, size_t current_align
     return current_alignment - initial_alignment;
 }
 
-void DataCtrl::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataCtrl::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -211,9 +221,11 @@ void DataCtrl::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_fltMode;
     scdr << m_fltFunc;
     scdr << m_alive;
+
 }
 
-void DataCtrl::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataCtrl::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -231,9 +243,10 @@ void DataCtrl::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataCtrl::time(uint64_t _time)
+void DataCtrl::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -258,9 +271,10 @@ uint64_t& DataCtrl::time()
  * @brief This function sets a value in member xi
  * @param _xi New value for member xi
  */
-void DataCtrl::xi(float _xi)
+void DataCtrl::xi(
+        float _xi)
 {
-m_xi = _xi;
+    m_xi = _xi;
 }
 
 /*!
@@ -285,9 +299,10 @@ float& DataCtrl::xi()
  * @brief This function sets a value in member eta
  * @param _eta New value for member eta
  */
-void DataCtrl::eta(float _eta)
+void DataCtrl::eta(
+        float _eta)
 {
-m_eta = _eta;
+    m_eta = _eta;
 }
 
 /*!
@@ -312,9 +327,10 @@ float& DataCtrl::eta()
  * @brief This function sets a value in member zeta
  * @param _zeta New value for member zeta
  */
-void DataCtrl::zeta(float _zeta)
+void DataCtrl::zeta(
+        float _zeta)
 {
-m_zeta = _zeta;
+    m_zeta = _zeta;
 }
 
 /*!
@@ -339,9 +355,10 @@ float& DataCtrl::zeta()
  * @brief This function sets a value in member etaT
  * @param _etaT New value for member etaT
  */
-void DataCtrl::etaT(float _etaT)
+void DataCtrl::etaT(
+        float _etaT)
 {
-m_etaT = _etaT;
+    m_etaT = _etaT;
 }
 
 /*!
@@ -366,9 +383,10 @@ float& DataCtrl::etaT()
  * @brief This function sets a value in member etaF
  * @param _etaF New value for member etaF
  */
-void DataCtrl::etaF(float _etaF)
+void DataCtrl::etaF(
+        float _etaF)
 {
-m_etaF = _etaF;
+    m_etaF = _etaF;
 }
 
 /*!
@@ -393,9 +411,10 @@ float& DataCtrl::etaF()
  * @brief This function sets a value in member fltMode
  * @param _fltMode New value for member fltMode
  */
-void DataCtrl::fltMode(uint16_t _fltMode)
+void DataCtrl::fltMode(
+        uint16_t _fltMode)
 {
-m_fltMode = _fltMode;
+    m_fltMode = _fltMode;
 }
 
 /*!
@@ -420,9 +439,10 @@ uint16_t& DataCtrl::fltMode()
  * @brief This function sets a value in member fltFunc
  * @param _fltFunc New value for member fltFunc
  */
-void DataCtrl::fltFunc(uint16_t _fltFunc)
+void DataCtrl::fltFunc(
+        uint16_t _fltFunc)
 {
-m_fltFunc = _fltFunc;
+    m_fltFunc = _fltFunc;
 }
 
 /*!
@@ -447,9 +467,10 @@ uint16_t& DataCtrl::fltFunc()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataCtrl::alive(bool _alive)
+void DataCtrl::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -471,7 +492,8 @@ bool& DataCtrl::alive()
 }
 
 
-size_t DataCtrl::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataCtrl::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -491,19 +513,12 @@ size_t DataCtrl::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataCtrl::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataCtrl::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataCtrl::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
-     
+             
 }

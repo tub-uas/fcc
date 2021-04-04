@@ -22,7 +22,6 @@
 #ifndef _DATAAIR_H_
 #define _DATAAIR_H_
 
-// TODO Poner en el contexto.
 
 #include <stdint.h>
 #include <array>
@@ -36,10 +35,10 @@
 #define eProsima_user_DllExport __declspec( dllexport )
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // _WIN32
 
 #if defined(_WIN32)
 #if defined(EPROSIMA_USER_DLL_EXPORT)
@@ -50,18 +49,16 @@
 #endif // DataAir_SOURCE
 #else
 #define DataAir_DllAPI
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define DataAir_DllAPI
 #endif // _WIN32
 
-namespace eprosima
-{
-    namespace fastcdr
-    {
-        class Cdr;
-    }
-}
+namespace eprosima {
+namespace fastcdr {
+class Cdr;
+} // namespace fastcdr
+} // namespace eprosima
 
 
 /*!
@@ -86,31 +83,36 @@ public:
      * @brief Copy constructor.
      * @param x Reference to the object DataAir that will be copied.
      */
-    eProsima_user_DllExport DataAir(const DataAir &x);
+    eProsima_user_DllExport DataAir(
+            const DataAir& x);
 
     /*!
      * @brief Move constructor.
      * @param x Reference to the object DataAir that will be copied.
      */
-    eProsima_user_DllExport DataAir(DataAir &&x);
+    eProsima_user_DllExport DataAir(
+            DataAir&& x);
 
     /*!
      * @brief Copy assignment.
      * @param x Reference to the object DataAir that will be copied.
      */
-    eProsima_user_DllExport DataAir& operator=(const DataAir &x);
+    eProsima_user_DllExport DataAir& operator =(
+            const DataAir& x);
 
     /*!
      * @brief Move assignment.
      * @param x Reference to the object DataAir that will be copied.
      */
-    eProsima_user_DllExport DataAir& operator=(DataAir &&x);
+    eProsima_user_DllExport DataAir& operator =(
+            DataAir&& x);
 
     /*!
      * @brief This function sets a value in member time
      * @param _time New value for member time
      */
-    eProsima_user_DllExport void time(uint64_t _time);
+    eProsima_user_DllExport void time(
+            uint64_t _time);
 
     /*!
      * @brief This function returns the value of member time
@@ -128,7 +130,8 @@ public:
      * @brief This function sets a value in member senseTime
      * @param _senseTime New value for member senseTime
      */
-    eProsima_user_DllExport void senseTime(float _senseTime);
+    eProsima_user_DllExport void senseTime(
+            float _senseTime);
 
     /*!
      * @brief This function returns the value of member senseTime
@@ -146,7 +149,8 @@ public:
      * @brief This function sets a value in member dynamicPress
      * @param _dynamicPress New value for member dynamicPress
      */
-    eProsima_user_DllExport void dynamicPress(float _dynamicPress);
+    eProsima_user_DllExport void dynamicPress(
+            float _dynamicPress);
 
     /*!
      * @brief This function returns the value of member dynamicPress
@@ -164,7 +168,8 @@ public:
      * @brief This function sets a value in member velocity
      * @param _velocity New value for member velocity
      */
-    eProsima_user_DllExport void velocity(float _velocity);
+    eProsima_user_DllExport void velocity(
+            float _velocity);
 
     /*!
      * @brief This function returns the value of member velocity
@@ -182,7 +187,8 @@ public:
      * @brief This function sets a value in member baroPress
      * @param _baroPress New value for member baroPress
      */
-    eProsima_user_DllExport void baroPress(float _baroPress);
+    eProsima_user_DllExport void baroPress(
+            float _baroPress);
 
     /*!
      * @brief This function returns the value of member baroPress
@@ -200,7 +206,8 @@ public:
      * @brief This function sets a value in member density
      * @param _density New value for member density
      */
-    eProsima_user_DllExport void density(float _density);
+    eProsima_user_DllExport void density(
+            float _density);
 
     /*!
      * @brief This function returns the value of member density
@@ -218,7 +225,8 @@ public:
      * @brief This function sets a value in member temp
      * @param _temp New value for member temp
      */
-    eProsima_user_DllExport void temp(float _temp);
+    eProsima_user_DllExport void temp(
+            float _temp);
 
     /*!
      * @brief This function returns the value of member temp
@@ -236,7 +244,8 @@ public:
      * @brief This function sets a value in member alive
      * @param _alive New value for member alive
      */
-    eProsima_user_DllExport void alive(bool _alive);
+    eProsima_user_DllExport void alive(
+            bool _alive);
 
     /*!
      * @brief This function returns the value of member alive
@@ -257,7 +266,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function returns the serialized size of a data depending on the buffer alignment.
@@ -265,20 +275,24 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Serialized size.
      */
-    eProsima_user_DllExport static size_t getCdrSerializedSize(const DataAir& data, size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getCdrSerializedSize(
+            const DataAir& data,
+            size_t current_alignment = 0);
 
 
     /*!
      * @brief This function serializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serialize(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serialize(
+            eprosima::fastcdr::Cdr& cdr) const;
 
     /*!
      * @brief This function deserializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void deserialize(eprosima::fastcdr::Cdr &cdr);
+    eProsima_user_DllExport void deserialize(
+            eprosima::fastcdr::Cdr& cdr);
 
 
 
@@ -288,7 +302,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function tells you if the Key has been defined for this type
@@ -299,9 +314,11 @@ public:
      * @brief This function serializes the key members of an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serializeKey(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serializeKey(
+            eprosima::fastcdr::Cdr& cdr) const;
 
 private:
+
     uint64_t m_time;
     float m_senseTime;
     float m_dynamicPress;

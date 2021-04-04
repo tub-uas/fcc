@@ -22,7 +22,6 @@
 #ifndef _DATAWATCHDOG_H_
 #define _DATAWATCHDOG_H_
 
-// TODO Poner en el contexto.
 
 #include <stdint.h>
 #include <array>
@@ -36,10 +35,10 @@
 #define eProsima_user_DllExport __declspec( dllexport )
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // _WIN32
 
 #if defined(_WIN32)
 #if defined(EPROSIMA_USER_DLL_EXPORT)
@@ -50,18 +49,16 @@
 #endif // DataWatchdog_SOURCE
 #else
 #define DataWatchdog_DllAPI
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define DataWatchdog_DllAPI
 #endif // _WIN32
 
-namespace eprosima
-{
-    namespace fastcdr
-    {
-        class Cdr;
-    }
-}
+namespace eprosima {
+namespace fastcdr {
+class Cdr;
+} // namespace fastcdr
+} // namespace eprosima
 
 
 /*!
@@ -86,31 +83,36 @@ public:
      * @brief Copy constructor.
      * @param x Reference to the object DataWatchdog that will be copied.
      */
-    eProsima_user_DllExport DataWatchdog(const DataWatchdog &x);
+    eProsima_user_DllExport DataWatchdog(
+            const DataWatchdog& x);
 
     /*!
      * @brief Move constructor.
      * @param x Reference to the object DataWatchdog that will be copied.
      */
-    eProsima_user_DllExport DataWatchdog(DataWatchdog &&x);
+    eProsima_user_DllExport DataWatchdog(
+            DataWatchdog&& x);
 
     /*!
      * @brief Copy assignment.
      * @param x Reference to the object DataWatchdog that will be copied.
      */
-    eProsima_user_DllExport DataWatchdog& operator=(const DataWatchdog &x);
+    eProsima_user_DllExport DataWatchdog& operator =(
+            const DataWatchdog& x);
 
     /*!
      * @brief Move assignment.
      * @param x Reference to the object DataWatchdog that will be copied.
      */
-    eProsima_user_DllExport DataWatchdog& operator=(DataWatchdog &&x);
+    eProsima_user_DllExport DataWatchdog& operator =(
+            DataWatchdog&& x);
 
     /*!
      * @brief This function sets a value in member time
      * @param _time New value for member time
      */
-    eProsima_user_DllExport void time(uint64_t _time);
+    eProsima_user_DllExport void time(
+            uint64_t _time);
 
     /*!
      * @brief This function returns the value of member time
@@ -128,7 +130,8 @@ public:
      * @brief This function sets a value in member allAlive
      * @param _allAlive New value for member allAlive
      */
-    eProsima_user_DllExport void allAlive(bool _allAlive);
+    eProsima_user_DllExport void allAlive(
+            bool _allAlive);
 
     /*!
      * @brief This function returns the value of member allAlive
@@ -146,7 +149,8 @@ public:
      * @brief This function sets a value in member ahrsAlive
      * @param _ahrsAlive New value for member ahrsAlive
      */
-    eProsima_user_DllExport void ahrsAlive(bool _ahrsAlive);
+    eProsima_user_DllExport void ahrsAlive(
+            bool _ahrsAlive);
 
     /*!
      * @brief This function returns the value of member ahrsAlive
@@ -164,7 +168,8 @@ public:
      * @brief This function sets a value in member airAlive
      * @param _airAlive New value for member airAlive
      */
-    eProsima_user_DllExport void airAlive(bool _airAlive);
+    eProsima_user_DllExport void airAlive(
+            bool _airAlive);
 
     /*!
      * @brief This function returns the value of member airAlive
@@ -182,7 +187,8 @@ public:
      * @brief This function sets a value in member ctrlAlive
      * @param _ctrlAlive New value for member ctrlAlive
      */
-    eProsima_user_DllExport void ctrlAlive(bool _ctrlAlive);
+    eProsima_user_DllExport void ctrlAlive(
+            bool _ctrlAlive);
 
     /*!
      * @brief This function returns the value of member ctrlAlive
@@ -200,7 +206,8 @@ public:
      * @brief This function sets a value in member downlinkAlive
      * @param _downlinkAlive New value for member downlinkAlive
      */
-    eProsima_user_DllExport void downlinkAlive(bool _downlinkAlive);
+    eProsima_user_DllExport void downlinkAlive(
+            bool _downlinkAlive);
 
     /*!
      * @brief This function returns the value of member downlinkAlive
@@ -218,7 +225,8 @@ public:
      * @brief This function sets a value in member gpsAlive
      * @param _gpsAlive New value for member gpsAlive
      */
-    eProsima_user_DllExport void gpsAlive(bool _gpsAlive);
+    eProsima_user_DllExport void gpsAlive(
+            bool _gpsAlive);
 
     /*!
      * @brief This function returns the value of member gpsAlive
@@ -236,7 +244,8 @@ public:
      * @brief This function sets a value in member logAlive
      * @param _logAlive New value for member logAlive
      */
-    eProsima_user_DllExport void logAlive(bool _logAlive);
+    eProsima_user_DllExport void logAlive(
+            bool _logAlive);
 
     /*!
      * @brief This function returns the value of member logAlive
@@ -254,7 +263,8 @@ public:
      * @brief This function sets a value in member psuAlive
      * @param _psuAlive New value for member psuAlive
      */
-    eProsima_user_DllExport void psuAlive(bool _psuAlive);
+    eProsima_user_DllExport void psuAlive(
+            bool _psuAlive);
 
     /*!
      * @brief This function returns the value of member psuAlive
@@ -272,7 +282,8 @@ public:
      * @brief This function sets a value in member raiInAlive
      * @param _raiInAlive New value for member raiInAlive
      */
-    eProsima_user_DllExport void raiInAlive(bool _raiInAlive);
+    eProsima_user_DllExport void raiInAlive(
+            bool _raiInAlive);
 
     /*!
      * @brief This function returns the value of member raiInAlive
@@ -290,7 +301,8 @@ public:
      * @brief This function sets a value in member raiOutAlive
      * @param _raiOutAlive New value for member raiOutAlive
      */
-    eProsima_user_DllExport void raiOutAlive(bool _raiOutAlive);
+    eProsima_user_DllExport void raiOutAlive(
+            bool _raiOutAlive);
 
     /*!
      * @brief This function returns the value of member raiOutAlive
@@ -308,7 +320,8 @@ public:
      * @brief This function sets a value in member sFusionAlive
      * @param _sFusionAlive New value for member sFusionAlive
      */
-    eProsima_user_DllExport void sFusionAlive(bool _sFusionAlive);
+    eProsima_user_DllExport void sFusionAlive(
+            bool _sFusionAlive);
 
     /*!
      * @brief This function returns the value of member sFusionAlive
@@ -326,7 +339,8 @@ public:
      * @brief This function sets a value in member uplinkAlive
      * @param _uplinkAlive New value for member uplinkAlive
      */
-    eProsima_user_DllExport void uplinkAlive(bool _uplinkAlive);
+    eProsima_user_DllExport void uplinkAlive(
+            bool _uplinkAlive);
 
     /*!
      * @brief This function returns the value of member uplinkAlive
@@ -344,7 +358,8 @@ public:
      * @brief This function sets a value in member alive
      * @param _alive New value for member alive
      */
-    eProsima_user_DllExport void alive(bool _alive);
+    eProsima_user_DllExport void alive(
+            bool _alive);
 
     /*!
      * @brief This function returns the value of member alive
@@ -365,7 +380,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function returns the serialized size of a data depending on the buffer alignment.
@@ -373,20 +389,24 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Serialized size.
      */
-    eProsima_user_DllExport static size_t getCdrSerializedSize(const DataWatchdog& data, size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getCdrSerializedSize(
+            const DataWatchdog& data,
+            size_t current_alignment = 0);
 
 
     /*!
      * @brief This function serializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serialize(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serialize(
+            eprosima::fastcdr::Cdr& cdr) const;
 
     /*!
      * @brief This function deserializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void deserialize(eprosima::fastcdr::Cdr &cdr);
+    eProsima_user_DllExport void deserialize(
+            eprosima::fastcdr::Cdr& cdr);
 
 
 
@@ -396,7 +416,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function tells you if the Key has been defined for this type
@@ -407,9 +428,11 @@ public:
      * @brief This function serializes the key members of an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serializeKey(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serializeKey(
+            eprosima::fastcdr::Cdr& cdr) const;
 
 private:
+
     uint64_t m_time;
     bool m_allAlive;
     bool m_ahrsAlive;

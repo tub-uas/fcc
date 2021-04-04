@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataAir.h"
 #include <fastcdr/Cdr.h>
@@ -34,21 +36,21 @@ using namespace eprosima::fastcdr::exception;
 
 DataAir::DataAir()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ddf90b0
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@57536d79
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
     m_senseTime = 0.0;
-    // m_dynamicPress com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b0143d3
+    // m_dynamicPress com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
     m_dynamicPress = 0.0;
-    // m_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
+    // m_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_velocity = 0.0;
-    // m_baroPress com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    // m_baroPress com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
     m_baroPress = 0.0;
-    // m_density com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    // m_density com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
     m_density = 0.0;
-    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_temp = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_alive = false;
 
 }
@@ -65,7 +67,8 @@ DataAir::~DataAir()
 
 }
 
-DataAir::DataAir(const DataAir &x)
+DataAir::DataAir(
+        const DataAir& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -77,7 +80,8 @@ DataAir::DataAir(const DataAir &x)
     m_alive = x.m_alive;
 }
 
-DataAir::DataAir(DataAir &&x)
+DataAir::DataAir(
+        DataAir&& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -89,22 +93,8 @@ DataAir::DataAir(DataAir &&x)
     m_alive = x.m_alive;
 }
 
-DataAir& DataAir::operator=(const DataAir &x)
-{
-
-    m_time = x.m_time;
-    m_senseTime = x.m_senseTime;
-    m_dynamicPress = x.m_dynamicPress;
-    m_velocity = x.m_velocity;
-    m_baroPress = x.m_baroPress;
-    m_density = x.m_density;
-    m_temp = x.m_temp;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataAir& DataAir::operator=(DataAir &&x)
+DataAir& DataAir::operator =(
+        const DataAir& x)
 {
 
     m_time = x.m_time;
@@ -119,7 +109,24 @@ DataAir& DataAir::operator=(DataAir &&x)
     return *this;
 }
 
-size_t DataAir::getMaxCdrSerializedSize(size_t current_alignment)
+DataAir& DataAir::operator =(
+        DataAir&& x)
+{
+
+    m_time = x.m_time;
+    m_senseTime = x.m_senseTime;
+    m_dynamicPress = x.m_dynamicPress;
+    m_velocity = x.m_velocity;
+    m_baroPress = x.m_baroPress;
+    m_density = x.m_density;
+    m_temp = x.m_temp;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataAir::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -152,7 +159,9 @@ size_t DataAir::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataAir::getCdrSerializedSize(const DataAir& data, size_t current_alignment)
+size_t DataAir::getCdrSerializedSize(
+        const DataAir& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -186,7 +195,8 @@ size_t DataAir::getCdrSerializedSize(const DataAir& data, size_t current_alignme
     return current_alignment - initial_alignment;
 }
 
-void DataAir::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataAir::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -197,9 +207,11 @@ void DataAir::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_density;
     scdr << m_temp;
     scdr << m_alive;
+
 }
 
-void DataAir::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataAir::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -216,9 +228,10 @@ void DataAir::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataAir::time(uint64_t _time)
+void DataAir::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -243,9 +256,10 @@ uint64_t& DataAir::time()
  * @brief This function sets a value in member senseTime
  * @param _senseTime New value for member senseTime
  */
-void DataAir::senseTime(float _senseTime)
+void DataAir::senseTime(
+        float _senseTime)
 {
-m_senseTime = _senseTime;
+    m_senseTime = _senseTime;
 }
 
 /*!
@@ -270,9 +284,10 @@ float& DataAir::senseTime()
  * @brief This function sets a value in member dynamicPress
  * @param _dynamicPress New value for member dynamicPress
  */
-void DataAir::dynamicPress(float _dynamicPress)
+void DataAir::dynamicPress(
+        float _dynamicPress)
 {
-m_dynamicPress = _dynamicPress;
+    m_dynamicPress = _dynamicPress;
 }
 
 /*!
@@ -297,9 +312,10 @@ float& DataAir::dynamicPress()
  * @brief This function sets a value in member velocity
  * @param _velocity New value for member velocity
  */
-void DataAir::velocity(float _velocity)
+void DataAir::velocity(
+        float _velocity)
 {
-m_velocity = _velocity;
+    m_velocity = _velocity;
 }
 
 /*!
@@ -324,9 +340,10 @@ float& DataAir::velocity()
  * @brief This function sets a value in member baroPress
  * @param _baroPress New value for member baroPress
  */
-void DataAir::baroPress(float _baroPress)
+void DataAir::baroPress(
+        float _baroPress)
 {
-m_baroPress = _baroPress;
+    m_baroPress = _baroPress;
 }
 
 /*!
@@ -351,9 +368,10 @@ float& DataAir::baroPress()
  * @brief This function sets a value in member density
  * @param _density New value for member density
  */
-void DataAir::density(float _density)
+void DataAir::density(
+        float _density)
 {
-m_density = _density;
+    m_density = _density;
 }
 
 /*!
@@ -378,9 +396,10 @@ float& DataAir::density()
  * @brief This function sets a value in member temp
  * @param _temp New value for member temp
  */
-void DataAir::temp(float _temp)
+void DataAir::temp(
+        float _temp)
 {
-m_temp = _temp;
+    m_temp = _temp;
 }
 
 /*!
@@ -405,9 +424,10 @@ float& DataAir::temp()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataAir::alive(bool _alive)
+void DataAir::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -429,7 +449,8 @@ bool& DataAir::alive()
 }
 
 
-size_t DataAir::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataAir::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -448,18 +469,12 @@ size_t DataAir::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataAir::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataAir::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataAir::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
+            
 }

@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataGps.h"
 #include <fastcdr/Cdr.h>
@@ -34,55 +36,55 @@ using namespace eprosima::fastcdr::exception;
 
 DataGps::DataGps()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b0143d3
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_senseTime = 0.0;
-    // m_lat com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    // m_lat com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_lat = 0.0;
-    // m_lon com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    // m_lon com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
     m_lon = 0.0;
-    // m_alt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    // m_alt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
     m_alt = 0.0;
-    // m_speed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_speed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_speed = 0.0;
-    // m_cog com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    // m_cog com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_cog = 0.0;
-    // m_dopP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_dopP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_dopP = 0.0;
-    // m_dopH com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    // m_dopH com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_dopH = 0.0;
-    // m_dopV com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_dopV com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
     m_dopV = 0.0;
-    // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
     m_sats = 0;
-    // m_satsInView com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_satsInView com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
     m_satsInView = 0;
-    // m_fix com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    // m_fix com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
     m_fix = 0;
-    // m_fixMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
+    // m_fixMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
     m_fixMode = 0;
-    // m_second com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f970963
+    // m_second com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
     m_second = 0;
-    // m_minute com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
+    // m_minute com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
     m_minute = 0;
-    // m_hour com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
+    // m_hour com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12c8a2c0
     m_hour = 0;
-    // m_day com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
+    // m_day com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
     m_day = 0;
-    // m_month com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
+    // m_month com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
     m_month = 0;
-    // m_year com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
+    // m_year com.eprosima.idl.parser.typecode.PrimitiveTypeCode@18bf3d14
     m_year = 0;
-    // m_variation com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
+    // m_variation com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4fb64261
     m_variation = 0.0;
-    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5ae63ade
+    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
     m_magX = 0.0;
-    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@610694f1
+    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
     m_magY = 0.0;
-    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43814d18
+    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
     m_magZ = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5c5a1b69
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
     m_alive = false;
 
 }
@@ -116,7 +118,8 @@ DataGps::~DataGps()
 
 }
 
-DataGps::DataGps(const DataGps &x)
+DataGps::DataGps(
+        const DataGps& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -145,7 +148,8 @@ DataGps::DataGps(const DataGps &x)
     m_alive = x.m_alive;
 }
 
-DataGps::DataGps(DataGps &&x)
+DataGps::DataGps(
+        DataGps&& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -174,39 +178,8 @@ DataGps::DataGps(DataGps &&x)
     m_alive = x.m_alive;
 }
 
-DataGps& DataGps::operator=(const DataGps &x)
-{
-
-    m_time = x.m_time;
-    m_senseTime = x.m_senseTime;
-    m_lat = x.m_lat;
-    m_lon = x.m_lon;
-    m_alt = x.m_alt;
-    m_speed = x.m_speed;
-    m_cog = x.m_cog;
-    m_dopP = x.m_dopP;
-    m_dopH = x.m_dopH;
-    m_dopV = x.m_dopV;
-    m_sats = x.m_sats;
-    m_satsInView = x.m_satsInView;
-    m_fix = x.m_fix;
-    m_fixMode = x.m_fixMode;
-    m_second = x.m_second;
-    m_minute = x.m_minute;
-    m_hour = x.m_hour;
-    m_day = x.m_day;
-    m_month = x.m_month;
-    m_year = x.m_year;
-    m_variation = x.m_variation;
-    m_magX = x.m_magX;
-    m_magY = x.m_magY;
-    m_magZ = x.m_magZ;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataGps& DataGps::operator=(DataGps &&x)
+DataGps& DataGps::operator =(
+        const DataGps& x)
 {
 
     m_time = x.m_time;
@@ -238,7 +211,41 @@ DataGps& DataGps::operator=(DataGps &&x)
     return *this;
 }
 
-size_t DataGps::getMaxCdrSerializedSize(size_t current_alignment)
+DataGps& DataGps::operator =(
+        DataGps&& x)
+{
+
+    m_time = x.m_time;
+    m_senseTime = x.m_senseTime;
+    m_lat = x.m_lat;
+    m_lon = x.m_lon;
+    m_alt = x.m_alt;
+    m_speed = x.m_speed;
+    m_cog = x.m_cog;
+    m_dopP = x.m_dopP;
+    m_dopH = x.m_dopH;
+    m_dopV = x.m_dopV;
+    m_sats = x.m_sats;
+    m_satsInView = x.m_satsInView;
+    m_fix = x.m_fix;
+    m_fixMode = x.m_fixMode;
+    m_second = x.m_second;
+    m_minute = x.m_minute;
+    m_hour = x.m_hour;
+    m_day = x.m_day;
+    m_month = x.m_month;
+    m_year = x.m_year;
+    m_variation = x.m_variation;
+    m_magX = x.m_magX;
+    m_magY = x.m_magY;
+    m_magZ = x.m_magZ;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataGps::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -322,7 +329,9 @@ size_t DataGps::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataGps::getCdrSerializedSize(const DataGps& data, size_t current_alignment)
+size_t DataGps::getCdrSerializedSize(
+        const DataGps& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -407,7 +416,8 @@ size_t DataGps::getCdrSerializedSize(const DataGps& data, size_t current_alignme
     return current_alignment - initial_alignment;
 }
 
-void DataGps::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataGps::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -435,9 +445,11 @@ void DataGps::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_magY;
     scdr << m_magZ;
     scdr << m_alive;
+
 }
 
-void DataGps::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataGps::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -471,9 +483,10 @@ void DataGps::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataGps::time(uint64_t _time)
+void DataGps::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -498,9 +511,10 @@ uint64_t& DataGps::time()
  * @brief This function sets a value in member senseTime
  * @param _senseTime New value for member senseTime
  */
-void DataGps::senseTime(float _senseTime)
+void DataGps::senseTime(
+        float _senseTime)
 {
-m_senseTime = _senseTime;
+    m_senseTime = _senseTime;
 }
 
 /*!
@@ -525,9 +539,10 @@ float& DataGps::senseTime()
  * @brief This function sets a value in member lat
  * @param _lat New value for member lat
  */
-void DataGps::lat(float _lat)
+void DataGps::lat(
+        float _lat)
 {
-m_lat = _lat;
+    m_lat = _lat;
 }
 
 /*!
@@ -552,9 +567,10 @@ float& DataGps::lat()
  * @brief This function sets a value in member lon
  * @param _lon New value for member lon
  */
-void DataGps::lon(float _lon)
+void DataGps::lon(
+        float _lon)
 {
-m_lon = _lon;
+    m_lon = _lon;
 }
 
 /*!
@@ -579,9 +595,10 @@ float& DataGps::lon()
  * @brief This function sets a value in member alt
  * @param _alt New value for member alt
  */
-void DataGps::alt(float _alt)
+void DataGps::alt(
+        float _alt)
 {
-m_alt = _alt;
+    m_alt = _alt;
 }
 
 /*!
@@ -606,9 +623,10 @@ float& DataGps::alt()
  * @brief This function sets a value in member speed
  * @param _speed New value for member speed
  */
-void DataGps::speed(float _speed)
+void DataGps::speed(
+        float _speed)
 {
-m_speed = _speed;
+    m_speed = _speed;
 }
 
 /*!
@@ -633,9 +651,10 @@ float& DataGps::speed()
  * @brief This function sets a value in member cog
  * @param _cog New value for member cog
  */
-void DataGps::cog(float _cog)
+void DataGps::cog(
+        float _cog)
 {
-m_cog = _cog;
+    m_cog = _cog;
 }
 
 /*!
@@ -660,9 +679,10 @@ float& DataGps::cog()
  * @brief This function sets a value in member dopP
  * @param _dopP New value for member dopP
  */
-void DataGps::dopP(float _dopP)
+void DataGps::dopP(
+        float _dopP)
 {
-m_dopP = _dopP;
+    m_dopP = _dopP;
 }
 
 /*!
@@ -687,9 +707,10 @@ float& DataGps::dopP()
  * @brief This function sets a value in member dopH
  * @param _dopH New value for member dopH
  */
-void DataGps::dopH(float _dopH)
+void DataGps::dopH(
+        float _dopH)
 {
-m_dopH = _dopH;
+    m_dopH = _dopH;
 }
 
 /*!
@@ -714,9 +735,10 @@ float& DataGps::dopH()
  * @brief This function sets a value in member dopV
  * @param _dopV New value for member dopV
  */
-void DataGps::dopV(float _dopV)
+void DataGps::dopV(
+        float _dopV)
 {
-m_dopV = _dopV;
+    m_dopV = _dopV;
 }
 
 /*!
@@ -741,9 +763,10 @@ float& DataGps::dopV()
  * @brief This function sets a value in member sats
  * @param _sats New value for member sats
  */
-void DataGps::sats(uint16_t _sats)
+void DataGps::sats(
+        uint16_t _sats)
 {
-m_sats = _sats;
+    m_sats = _sats;
 }
 
 /*!
@@ -768,9 +791,10 @@ uint16_t& DataGps::sats()
  * @brief This function sets a value in member satsInView
  * @param _satsInView New value for member satsInView
  */
-void DataGps::satsInView(uint16_t _satsInView)
+void DataGps::satsInView(
+        uint16_t _satsInView)
 {
-m_satsInView = _satsInView;
+    m_satsInView = _satsInView;
 }
 
 /*!
@@ -795,9 +819,10 @@ uint16_t& DataGps::satsInView()
  * @brief This function sets a value in member fix
  * @param _fix New value for member fix
  */
-void DataGps::fix(uint16_t _fix)
+void DataGps::fix(
+        uint16_t _fix)
 {
-m_fix = _fix;
+    m_fix = _fix;
 }
 
 /*!
@@ -822,9 +847,10 @@ uint16_t& DataGps::fix()
  * @brief This function sets a value in member fixMode
  * @param _fixMode New value for member fixMode
  */
-void DataGps::fixMode(uint16_t _fixMode)
+void DataGps::fixMode(
+        uint16_t _fixMode)
 {
-m_fixMode = _fixMode;
+    m_fixMode = _fixMode;
 }
 
 /*!
@@ -849,9 +875,10 @@ uint16_t& DataGps::fixMode()
  * @brief This function sets a value in member second
  * @param _second New value for member second
  */
-void DataGps::second(uint16_t _second)
+void DataGps::second(
+        uint16_t _second)
 {
-m_second = _second;
+    m_second = _second;
 }
 
 /*!
@@ -876,9 +903,10 @@ uint16_t& DataGps::second()
  * @brief This function sets a value in member minute
  * @param _minute New value for member minute
  */
-void DataGps::minute(uint16_t _minute)
+void DataGps::minute(
+        uint16_t _minute)
 {
-m_minute = _minute;
+    m_minute = _minute;
 }
 
 /*!
@@ -903,9 +931,10 @@ uint16_t& DataGps::minute()
  * @brief This function sets a value in member hour
  * @param _hour New value for member hour
  */
-void DataGps::hour(uint16_t _hour)
+void DataGps::hour(
+        uint16_t _hour)
 {
-m_hour = _hour;
+    m_hour = _hour;
 }
 
 /*!
@@ -930,9 +959,10 @@ uint16_t& DataGps::hour()
  * @brief This function sets a value in member day
  * @param _day New value for member day
  */
-void DataGps::day(uint16_t _day)
+void DataGps::day(
+        uint16_t _day)
 {
-m_day = _day;
+    m_day = _day;
 }
 
 /*!
@@ -957,9 +987,10 @@ uint16_t& DataGps::day()
  * @brief This function sets a value in member month
  * @param _month New value for member month
  */
-void DataGps::month(uint16_t _month)
+void DataGps::month(
+        uint16_t _month)
 {
-m_month = _month;
+    m_month = _month;
 }
 
 /*!
@@ -984,9 +1015,10 @@ uint16_t& DataGps::month()
  * @brief This function sets a value in member year
  * @param _year New value for member year
  */
-void DataGps::year(uint16_t _year)
+void DataGps::year(
+        uint16_t _year)
 {
-m_year = _year;
+    m_year = _year;
 }
 
 /*!
@@ -1011,9 +1043,10 @@ uint16_t& DataGps::year()
  * @brief This function sets a value in member variation
  * @param _variation New value for member variation
  */
-void DataGps::variation(float _variation)
+void DataGps::variation(
+        float _variation)
 {
-m_variation = _variation;
+    m_variation = _variation;
 }
 
 /*!
@@ -1038,9 +1071,10 @@ float& DataGps::variation()
  * @brief This function sets a value in member magX
  * @param _magX New value for member magX
  */
-void DataGps::magX(float _magX)
+void DataGps::magX(
+        float _magX)
 {
-m_magX = _magX;
+    m_magX = _magX;
 }
 
 /*!
@@ -1065,9 +1099,10 @@ float& DataGps::magX()
  * @brief This function sets a value in member magY
  * @param _magY New value for member magY
  */
-void DataGps::magY(float _magY)
+void DataGps::magY(
+        float _magY)
 {
-m_magY = _magY;
+    m_magY = _magY;
 }
 
 /*!
@@ -1092,9 +1127,10 @@ float& DataGps::magY()
  * @brief This function sets a value in member magZ
  * @param _magZ New value for member magZ
  */
-void DataGps::magZ(float _magZ)
+void DataGps::magZ(
+        float _magZ)
 {
-m_magZ = _magZ;
+    m_magZ = _magZ;
 }
 
 /*!
@@ -1119,9 +1155,10 @@ float& DataGps::magZ()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataGps::alive(bool _alive)
+void DataGps::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -1143,7 +1180,8 @@ bool& DataGps::alive()
 }
 
 
-size_t DataGps::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataGps::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -1179,35 +1217,12 @@ size_t DataGps::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataGps::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataGps::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataGps::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+                             
 }

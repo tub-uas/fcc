@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataDownlink.h"
 #include <fastcdr/Cdr.h>
@@ -34,9 +36,9 @@ using namespace eprosima::fastcdr::exception;
 
 DataDownlink::DataDownlink()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@eec5a4a
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@192d3247
     m_time = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ddf90b0
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43bd930a
     m_alive = false;
 
 }
@@ -47,28 +49,22 @@ DataDownlink::~DataDownlink()
 
 }
 
-DataDownlink::DataDownlink(const DataDownlink &x)
+DataDownlink::DataDownlink(
+        const DataDownlink& x)
 {
     m_time = x.m_time;
     m_alive = x.m_alive;
 }
 
-DataDownlink::DataDownlink(DataDownlink &&x)
+DataDownlink::DataDownlink(
+        DataDownlink&& x)
 {
     m_time = x.m_time;
     m_alive = x.m_alive;
 }
 
-DataDownlink& DataDownlink::operator=(const DataDownlink &x)
-{
-
-    m_time = x.m_time;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataDownlink& DataDownlink::operator=(DataDownlink &&x)
+DataDownlink& DataDownlink::operator =(
+        const DataDownlink& x)
 {
 
     m_time = x.m_time;
@@ -77,7 +73,18 @@ DataDownlink& DataDownlink::operator=(DataDownlink &&x)
     return *this;
 }
 
-size_t DataDownlink::getMaxCdrSerializedSize(size_t current_alignment)
+DataDownlink& DataDownlink::operator =(
+        DataDownlink&& x)
+{
+
+    m_time = x.m_time;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataDownlink::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -92,7 +99,9 @@ size_t DataDownlink::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataDownlink::getCdrSerializedSize(const DataDownlink& data, size_t current_alignment)
+size_t DataDownlink::getCdrSerializedSize(
+        const DataDownlink& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -108,14 +117,17 @@ size_t DataDownlink::getCdrSerializedSize(const DataDownlink& data, size_t curre
     return current_alignment - initial_alignment;
 }
 
-void DataDownlink::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataDownlink::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
     scdr << m_alive;
+
 }
 
-void DataDownlink::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataDownlink::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -126,9 +138,10 @@ void DataDownlink::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataDownlink::time(uint64_t _time)
+void DataDownlink::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -153,9 +166,10 @@ uint64_t& DataDownlink::time()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataDownlink::alive(bool _alive)
+void DataDownlink::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -177,7 +191,8 @@ bool& DataDownlink::alive()
 }
 
 
-size_t DataDownlink::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataDownlink::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -190,12 +205,12 @@ size_t DataDownlink::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataDownlink::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataDownlink::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataDownlink::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
+      
 }

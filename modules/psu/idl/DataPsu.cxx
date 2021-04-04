@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataPsu.h"
 #include <fastcdr/Cdr.h>
@@ -34,29 +36,29 @@ using namespace eprosima::fastcdr::exception;
 
 DataPsu::DataPsu()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ddf90b0
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@57536d79
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
     m_senseTime = 0.0;
-    // m_mainVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b0143d3
+    // m_mainVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
     m_mainVolt = 0.0;
-    // m_mainCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
+    // m_mainCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_mainCurr = 0.0;
-    // m_mainPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    // m_mainPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
     m_mainPow = 0.0;
-    // m_pwrVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_pwrVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
     m_pwrVolt = 0.0;
-    // m_pwrCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    // m_pwrCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_pwrCurr = 0.0;
-    // m_pwrPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_pwrPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_pwrPow = 0.0;
-    // m_sysVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    // m_sysVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_sysVolt = 0.0;
-    // m_sysCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_sysCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_sysCurr = 0.0;
-    // m_sysPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    // m_sysPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
     m_sysPow = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
     m_alive = false;
 
 }
@@ -77,7 +79,8 @@ DataPsu::~DataPsu()
 
 }
 
-DataPsu::DataPsu(const DataPsu &x)
+DataPsu::DataPsu(
+        const DataPsu& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -93,7 +96,8 @@ DataPsu::DataPsu(const DataPsu &x)
     m_alive = x.m_alive;
 }
 
-DataPsu::DataPsu(DataPsu &&x)
+DataPsu::DataPsu(
+        DataPsu&& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -109,26 +113,8 @@ DataPsu::DataPsu(DataPsu &&x)
     m_alive = x.m_alive;
 }
 
-DataPsu& DataPsu::operator=(const DataPsu &x)
-{
-
-    m_time = x.m_time;
-    m_senseTime = x.m_senseTime;
-    m_mainVolt = x.m_mainVolt;
-    m_mainCurr = x.m_mainCurr;
-    m_mainPow = x.m_mainPow;
-    m_pwrVolt = x.m_pwrVolt;
-    m_pwrCurr = x.m_pwrCurr;
-    m_pwrPow = x.m_pwrPow;
-    m_sysVolt = x.m_sysVolt;
-    m_sysCurr = x.m_sysCurr;
-    m_sysPow = x.m_sysPow;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataPsu& DataPsu::operator=(DataPsu &&x)
+DataPsu& DataPsu::operator =(
+        const DataPsu& x)
 {
 
     m_time = x.m_time;
@@ -147,7 +133,28 @@ DataPsu& DataPsu::operator=(DataPsu &&x)
     return *this;
 }
 
-size_t DataPsu::getMaxCdrSerializedSize(size_t current_alignment)
+DataPsu& DataPsu::operator =(
+        DataPsu&& x)
+{
+
+    m_time = x.m_time;
+    m_senseTime = x.m_senseTime;
+    m_mainVolt = x.m_mainVolt;
+    m_mainCurr = x.m_mainCurr;
+    m_mainPow = x.m_mainPow;
+    m_pwrVolt = x.m_pwrVolt;
+    m_pwrCurr = x.m_pwrCurr;
+    m_pwrPow = x.m_pwrPow;
+    m_sysVolt = x.m_sysVolt;
+    m_sysCurr = x.m_sysCurr;
+    m_sysPow = x.m_sysPow;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataPsu::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -192,7 +199,9 @@ size_t DataPsu::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataPsu::getCdrSerializedSize(const DataPsu& data, size_t current_alignment)
+size_t DataPsu::getCdrSerializedSize(
+        const DataPsu& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -238,7 +247,8 @@ size_t DataPsu::getCdrSerializedSize(const DataPsu& data, size_t current_alignme
     return current_alignment - initial_alignment;
 }
 
-void DataPsu::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataPsu::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -253,9 +263,11 @@ void DataPsu::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_sysCurr;
     scdr << m_sysPow;
     scdr << m_alive;
+
 }
 
-void DataPsu::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataPsu::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -276,9 +288,10 @@ void DataPsu::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataPsu::time(uint64_t _time)
+void DataPsu::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -303,9 +316,10 @@ uint64_t& DataPsu::time()
  * @brief This function sets a value in member senseTime
  * @param _senseTime New value for member senseTime
  */
-void DataPsu::senseTime(float _senseTime)
+void DataPsu::senseTime(
+        float _senseTime)
 {
-m_senseTime = _senseTime;
+    m_senseTime = _senseTime;
 }
 
 /*!
@@ -330,9 +344,10 @@ float& DataPsu::senseTime()
  * @brief This function sets a value in member mainVolt
  * @param _mainVolt New value for member mainVolt
  */
-void DataPsu::mainVolt(float _mainVolt)
+void DataPsu::mainVolt(
+        float _mainVolt)
 {
-m_mainVolt = _mainVolt;
+    m_mainVolt = _mainVolt;
 }
 
 /*!
@@ -357,9 +372,10 @@ float& DataPsu::mainVolt()
  * @brief This function sets a value in member mainCurr
  * @param _mainCurr New value for member mainCurr
  */
-void DataPsu::mainCurr(float _mainCurr)
+void DataPsu::mainCurr(
+        float _mainCurr)
 {
-m_mainCurr = _mainCurr;
+    m_mainCurr = _mainCurr;
 }
 
 /*!
@@ -384,9 +400,10 @@ float& DataPsu::mainCurr()
  * @brief This function sets a value in member mainPow
  * @param _mainPow New value for member mainPow
  */
-void DataPsu::mainPow(float _mainPow)
+void DataPsu::mainPow(
+        float _mainPow)
 {
-m_mainPow = _mainPow;
+    m_mainPow = _mainPow;
 }
 
 /*!
@@ -411,9 +428,10 @@ float& DataPsu::mainPow()
  * @brief This function sets a value in member pwrVolt
  * @param _pwrVolt New value for member pwrVolt
  */
-void DataPsu::pwrVolt(float _pwrVolt)
+void DataPsu::pwrVolt(
+        float _pwrVolt)
 {
-m_pwrVolt = _pwrVolt;
+    m_pwrVolt = _pwrVolt;
 }
 
 /*!
@@ -438,9 +456,10 @@ float& DataPsu::pwrVolt()
  * @brief This function sets a value in member pwrCurr
  * @param _pwrCurr New value for member pwrCurr
  */
-void DataPsu::pwrCurr(float _pwrCurr)
+void DataPsu::pwrCurr(
+        float _pwrCurr)
 {
-m_pwrCurr = _pwrCurr;
+    m_pwrCurr = _pwrCurr;
 }
 
 /*!
@@ -465,9 +484,10 @@ float& DataPsu::pwrCurr()
  * @brief This function sets a value in member pwrPow
  * @param _pwrPow New value for member pwrPow
  */
-void DataPsu::pwrPow(float _pwrPow)
+void DataPsu::pwrPow(
+        float _pwrPow)
 {
-m_pwrPow = _pwrPow;
+    m_pwrPow = _pwrPow;
 }
 
 /*!
@@ -492,9 +512,10 @@ float& DataPsu::pwrPow()
  * @brief This function sets a value in member sysVolt
  * @param _sysVolt New value for member sysVolt
  */
-void DataPsu::sysVolt(float _sysVolt)
+void DataPsu::sysVolt(
+        float _sysVolt)
 {
-m_sysVolt = _sysVolt;
+    m_sysVolt = _sysVolt;
 }
 
 /*!
@@ -519,9 +540,10 @@ float& DataPsu::sysVolt()
  * @brief This function sets a value in member sysCurr
  * @param _sysCurr New value for member sysCurr
  */
-void DataPsu::sysCurr(float _sysCurr)
+void DataPsu::sysCurr(
+        float _sysCurr)
 {
-m_sysCurr = _sysCurr;
+    m_sysCurr = _sysCurr;
 }
 
 /*!
@@ -546,9 +568,10 @@ float& DataPsu::sysCurr()
  * @brief This function sets a value in member sysPow
  * @param _sysPow New value for member sysPow
  */
-void DataPsu::sysPow(float _sysPow)
+void DataPsu::sysPow(
+        float _sysPow)
 {
-m_sysPow = _sysPow;
+    m_sysPow = _sysPow;
 }
 
 /*!
@@ -573,9 +596,10 @@ float& DataPsu::sysPow()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataPsu::alive(bool _alive)
+void DataPsu::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -597,7 +621,8 @@ bool& DataPsu::alive()
 }
 
 
-size_t DataPsu::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataPsu::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -620,22 +645,12 @@ size_t DataPsu::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataPsu::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataPsu::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataPsu::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+                
 }

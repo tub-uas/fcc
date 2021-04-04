@@ -22,7 +22,6 @@
 #ifndef _DATAGPS_H_
 #define _DATAGPS_H_
 
-// TODO Poner en el contexto.
 
 #include <stdint.h>
 #include <array>
@@ -36,10 +35,10 @@
 #define eProsima_user_DllExport __declspec( dllexport )
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define eProsima_user_DllExport
-#endif
+#endif  // _WIN32
 
 #if defined(_WIN32)
 #if defined(EPROSIMA_USER_DLL_EXPORT)
@@ -50,18 +49,16 @@
 #endif // DataGps_SOURCE
 #else
 #define DataGps_DllAPI
-#endif
+#endif  // EPROSIMA_USER_DLL_EXPORT
 #else
 #define DataGps_DllAPI
 #endif // _WIN32
 
-namespace eprosima
-{
-    namespace fastcdr
-    {
-        class Cdr;
-    }
-}
+namespace eprosima {
+namespace fastcdr {
+class Cdr;
+} // namespace fastcdr
+} // namespace eprosima
 
 
 /*!
@@ -86,31 +83,36 @@ public:
      * @brief Copy constructor.
      * @param x Reference to the object DataGps that will be copied.
      */
-    eProsima_user_DllExport DataGps(const DataGps &x);
+    eProsima_user_DllExport DataGps(
+            const DataGps& x);
 
     /*!
      * @brief Move constructor.
      * @param x Reference to the object DataGps that will be copied.
      */
-    eProsima_user_DllExport DataGps(DataGps &&x);
+    eProsima_user_DllExport DataGps(
+            DataGps&& x);
 
     /*!
      * @brief Copy assignment.
      * @param x Reference to the object DataGps that will be copied.
      */
-    eProsima_user_DllExport DataGps& operator=(const DataGps &x);
+    eProsima_user_DllExport DataGps& operator =(
+            const DataGps& x);
 
     /*!
      * @brief Move assignment.
      * @param x Reference to the object DataGps that will be copied.
      */
-    eProsima_user_DllExport DataGps& operator=(DataGps &&x);
+    eProsima_user_DllExport DataGps& operator =(
+            DataGps&& x);
 
     /*!
      * @brief This function sets a value in member time
      * @param _time New value for member time
      */
-    eProsima_user_DllExport void time(uint64_t _time);
+    eProsima_user_DllExport void time(
+            uint64_t _time);
 
     /*!
      * @brief This function returns the value of member time
@@ -128,7 +130,8 @@ public:
      * @brief This function sets a value in member senseTime
      * @param _senseTime New value for member senseTime
      */
-    eProsima_user_DllExport void senseTime(float _senseTime);
+    eProsima_user_DllExport void senseTime(
+            float _senseTime);
 
     /*!
      * @brief This function returns the value of member senseTime
@@ -146,7 +149,8 @@ public:
      * @brief This function sets a value in member lat
      * @param _lat New value for member lat
      */
-    eProsima_user_DllExport void lat(float _lat);
+    eProsima_user_DllExport void lat(
+            float _lat);
 
     /*!
      * @brief This function returns the value of member lat
@@ -164,7 +168,8 @@ public:
      * @brief This function sets a value in member lon
      * @param _lon New value for member lon
      */
-    eProsima_user_DllExport void lon(float _lon);
+    eProsima_user_DllExport void lon(
+            float _lon);
 
     /*!
      * @brief This function returns the value of member lon
@@ -182,7 +187,8 @@ public:
      * @brief This function sets a value in member alt
      * @param _alt New value for member alt
      */
-    eProsima_user_DllExport void alt(float _alt);
+    eProsima_user_DllExport void alt(
+            float _alt);
 
     /*!
      * @brief This function returns the value of member alt
@@ -200,7 +206,8 @@ public:
      * @brief This function sets a value in member speed
      * @param _speed New value for member speed
      */
-    eProsima_user_DllExport void speed(float _speed);
+    eProsima_user_DllExport void speed(
+            float _speed);
 
     /*!
      * @brief This function returns the value of member speed
@@ -218,7 +225,8 @@ public:
      * @brief This function sets a value in member cog
      * @param _cog New value for member cog
      */
-    eProsima_user_DllExport void cog(float _cog);
+    eProsima_user_DllExport void cog(
+            float _cog);
 
     /*!
      * @brief This function returns the value of member cog
@@ -236,7 +244,8 @@ public:
      * @brief This function sets a value in member dopP
      * @param _dopP New value for member dopP
      */
-    eProsima_user_DllExport void dopP(float _dopP);
+    eProsima_user_DllExport void dopP(
+            float _dopP);
 
     /*!
      * @brief This function returns the value of member dopP
@@ -254,7 +263,8 @@ public:
      * @brief This function sets a value in member dopH
      * @param _dopH New value for member dopH
      */
-    eProsima_user_DllExport void dopH(float _dopH);
+    eProsima_user_DllExport void dopH(
+            float _dopH);
 
     /*!
      * @brief This function returns the value of member dopH
@@ -272,7 +282,8 @@ public:
      * @brief This function sets a value in member dopV
      * @param _dopV New value for member dopV
      */
-    eProsima_user_DllExport void dopV(float _dopV);
+    eProsima_user_DllExport void dopV(
+            float _dopV);
 
     /*!
      * @brief This function returns the value of member dopV
@@ -290,7 +301,8 @@ public:
      * @brief This function sets a value in member sats
      * @param _sats New value for member sats
      */
-    eProsima_user_DllExport void sats(uint16_t _sats);
+    eProsima_user_DllExport void sats(
+            uint16_t _sats);
 
     /*!
      * @brief This function returns the value of member sats
@@ -308,7 +320,8 @@ public:
      * @brief This function sets a value in member satsInView
      * @param _satsInView New value for member satsInView
      */
-    eProsima_user_DllExport void satsInView(uint16_t _satsInView);
+    eProsima_user_DllExport void satsInView(
+            uint16_t _satsInView);
 
     /*!
      * @brief This function returns the value of member satsInView
@@ -326,7 +339,8 @@ public:
      * @brief This function sets a value in member fix
      * @param _fix New value for member fix
      */
-    eProsima_user_DllExport void fix(uint16_t _fix);
+    eProsima_user_DllExport void fix(
+            uint16_t _fix);
 
     /*!
      * @brief This function returns the value of member fix
@@ -344,7 +358,8 @@ public:
      * @brief This function sets a value in member fixMode
      * @param _fixMode New value for member fixMode
      */
-    eProsima_user_DllExport void fixMode(uint16_t _fixMode);
+    eProsima_user_DllExport void fixMode(
+            uint16_t _fixMode);
 
     /*!
      * @brief This function returns the value of member fixMode
@@ -362,7 +377,8 @@ public:
      * @brief This function sets a value in member second
      * @param _second New value for member second
      */
-    eProsima_user_DllExport void second(uint16_t _second);
+    eProsima_user_DllExport void second(
+            uint16_t _second);
 
     /*!
      * @brief This function returns the value of member second
@@ -380,7 +396,8 @@ public:
      * @brief This function sets a value in member minute
      * @param _minute New value for member minute
      */
-    eProsima_user_DllExport void minute(uint16_t _minute);
+    eProsima_user_DllExport void minute(
+            uint16_t _minute);
 
     /*!
      * @brief This function returns the value of member minute
@@ -398,7 +415,8 @@ public:
      * @brief This function sets a value in member hour
      * @param _hour New value for member hour
      */
-    eProsima_user_DllExport void hour(uint16_t _hour);
+    eProsima_user_DllExport void hour(
+            uint16_t _hour);
 
     /*!
      * @brief This function returns the value of member hour
@@ -416,7 +434,8 @@ public:
      * @brief This function sets a value in member day
      * @param _day New value for member day
      */
-    eProsima_user_DllExport void day(uint16_t _day);
+    eProsima_user_DllExport void day(
+            uint16_t _day);
 
     /*!
      * @brief This function returns the value of member day
@@ -434,7 +453,8 @@ public:
      * @brief This function sets a value in member month
      * @param _month New value for member month
      */
-    eProsima_user_DllExport void month(uint16_t _month);
+    eProsima_user_DllExport void month(
+            uint16_t _month);
 
     /*!
      * @brief This function returns the value of member month
@@ -452,7 +472,8 @@ public:
      * @brief This function sets a value in member year
      * @param _year New value for member year
      */
-    eProsima_user_DllExport void year(uint16_t _year);
+    eProsima_user_DllExport void year(
+            uint16_t _year);
 
     /*!
      * @brief This function returns the value of member year
@@ -470,7 +491,8 @@ public:
      * @brief This function sets a value in member variation
      * @param _variation New value for member variation
      */
-    eProsima_user_DllExport void variation(float _variation);
+    eProsima_user_DllExport void variation(
+            float _variation);
 
     /*!
      * @brief This function returns the value of member variation
@@ -488,7 +510,8 @@ public:
      * @brief This function sets a value in member magX
      * @param _magX New value for member magX
      */
-    eProsima_user_DllExport void magX(float _magX);
+    eProsima_user_DllExport void magX(
+            float _magX);
 
     /*!
      * @brief This function returns the value of member magX
@@ -506,7 +529,8 @@ public:
      * @brief This function sets a value in member magY
      * @param _magY New value for member magY
      */
-    eProsima_user_DllExport void magY(float _magY);
+    eProsima_user_DllExport void magY(
+            float _magY);
 
     /*!
      * @brief This function returns the value of member magY
@@ -524,7 +548,8 @@ public:
      * @brief This function sets a value in member magZ
      * @param _magZ New value for member magZ
      */
-    eProsima_user_DllExport void magZ(float _magZ);
+    eProsima_user_DllExport void magZ(
+            float _magZ);
 
     /*!
      * @brief This function returns the value of member magZ
@@ -542,7 +567,8 @@ public:
      * @brief This function sets a value in member alive
      * @param _alive New value for member alive
      */
-    eProsima_user_DllExport void alive(bool _alive);
+    eProsima_user_DllExport void alive(
+            bool _alive);
 
     /*!
      * @brief This function returns the value of member alive
@@ -563,7 +589,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function returns the serialized size of a data depending on the buffer alignment.
@@ -571,20 +598,24 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Serialized size.
      */
-    eProsima_user_DllExport static size_t getCdrSerializedSize(const DataGps& data, size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getCdrSerializedSize(
+            const DataGps& data,
+            size_t current_alignment = 0);
 
 
     /*!
      * @brief This function serializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serialize(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serialize(
+            eprosima::fastcdr::Cdr& cdr) const;
 
     /*!
      * @brief This function deserializes an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void deserialize(eprosima::fastcdr::Cdr &cdr);
+    eProsima_user_DllExport void deserialize(
+            eprosima::fastcdr::Cdr& cdr);
 
 
 
@@ -594,7 +625,8 @@ public:
      * @param current_alignment Buffer alignment.
      * @return Maximum serialized size.
      */
-    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(size_t current_alignment = 0);
+    eProsima_user_DllExport static size_t getKeyMaxCdrSerializedSize(
+            size_t current_alignment = 0);
 
     /*!
      * @brief This function tells you if the Key has been defined for this type
@@ -605,9 +637,11 @@ public:
      * @brief This function serializes the key members of an object using CDR serialization.
      * @param cdr CDR serialization object.
      */
-    eProsima_user_DllExport void serializeKey(eprosima::fastcdr::Cdr &cdr) const;
+    eProsima_user_DllExport void serializeKey(
+            eprosima::fastcdr::Cdr& cdr) const;
 
 private:
+
     uint64_t m_time;
     float m_senseTime;
     float m_lat;

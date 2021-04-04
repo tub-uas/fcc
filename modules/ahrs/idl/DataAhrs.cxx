@@ -21,8 +21,10 @@
 
 #ifdef _WIN32
 // Remove linker warning LNK4221 on Visual Studio
-namespace { char dummy; }
-#endif
+namespace {
+char dummy;
+}  // namespace
+#endif  // _WIN32
 
 #include "DataAhrs.h"
 #include <fastcdr/Cdr.h>
@@ -34,47 +36,47 @@ using namespace eprosima::fastcdr::exception;
 
 DataAhrs::DataAhrs()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b0143d3
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5a8e6209
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
     m_senseTime = 0.0;
-    // m_gyrX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4b4523f8
+    // m_gyrX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
     m_gyrX = 0.0;
-    // m_gyrY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@731a74c
+    // m_gyrY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_gyrY = 0.0;
-    // m_gyrZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@369f73a2
+    // m_gyrZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_gyrZ = 0.0;
-    // m_accX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f28c152
+    // m_accX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
     m_accX = 0.0;
-    // m_accY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7d907bac
+    // m_accY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
     m_accY = 0.0;
-    // m_accZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7791a895
+    // m_accZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_accZ = 0.0;
-    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3a5ed7a6
+    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_magX = 0.0;
-    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6325a3ee
+    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_magY = 0.0;
-    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d16f93d
+    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_magZ = 0.0;
-    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b92f0a
+    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
     m_temp = 0.0;
-    // m_press com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2b9627bc
+    // m_press com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
     m_press = 0.0;
-    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@65e2dbf3
+    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
     m_phi = 0.0;
-    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4f970963
+    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
     m_the = 0.0;
-    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7b49cea0
+    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
     m_psi = 0.0;
-    // m_q0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6e0e048a
+    // m_q0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@396e2f39
     m_q0 = 0.0;
-    // m_q1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5bc79255
+    // m_q1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@a74868d
     m_q1 = 0.0;
-    // m_q2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47ef968d
+    // m_q2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12c8a2c0
     m_q2 = 0.0;
-    // m_q3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23e028a9
+    // m_q3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
     m_q3 = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3dd4520b
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
     m_alive = false;
 
 }
@@ -104,7 +106,8 @@ DataAhrs::~DataAhrs()
 
 }
 
-DataAhrs::DataAhrs(const DataAhrs &x)
+DataAhrs::DataAhrs(
+        const DataAhrs& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -129,7 +132,8 @@ DataAhrs::DataAhrs(const DataAhrs &x)
     m_alive = x.m_alive;
 }
 
-DataAhrs::DataAhrs(DataAhrs &&x)
+DataAhrs::DataAhrs(
+        DataAhrs&& x)
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
@@ -154,35 +158,8 @@ DataAhrs::DataAhrs(DataAhrs &&x)
     m_alive = x.m_alive;
 }
 
-DataAhrs& DataAhrs::operator=(const DataAhrs &x)
-{
-
-    m_time = x.m_time;
-    m_senseTime = x.m_senseTime;
-    m_gyrX = x.m_gyrX;
-    m_gyrY = x.m_gyrY;
-    m_gyrZ = x.m_gyrZ;
-    m_accX = x.m_accX;
-    m_accY = x.m_accY;
-    m_accZ = x.m_accZ;
-    m_magX = x.m_magX;
-    m_magY = x.m_magY;
-    m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
-    m_phi = x.m_phi;
-    m_the = x.m_the;
-    m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
-    m_alive = x.m_alive;
-
-    return *this;
-}
-
-DataAhrs& DataAhrs::operator=(DataAhrs &&x)
+DataAhrs& DataAhrs::operator =(
+        const DataAhrs& x)
 {
 
     m_time = x.m_time;
@@ -210,7 +187,37 @@ DataAhrs& DataAhrs::operator=(DataAhrs &&x)
     return *this;
 }
 
-size_t DataAhrs::getMaxCdrSerializedSize(size_t current_alignment)
+DataAhrs& DataAhrs::operator =(
+        DataAhrs&& x)
+{
+
+    m_time = x.m_time;
+    m_senseTime = x.m_senseTime;
+    m_gyrX = x.m_gyrX;
+    m_gyrY = x.m_gyrY;
+    m_gyrZ = x.m_gyrZ;
+    m_accX = x.m_accX;
+    m_accY = x.m_accY;
+    m_accZ = x.m_accZ;
+    m_magX = x.m_magX;
+    m_magY = x.m_magY;
+    m_magZ = x.m_magZ;
+    m_temp = x.m_temp;
+    m_press = x.m_press;
+    m_phi = x.m_phi;
+    m_the = x.m_the;
+    m_psi = x.m_psi;
+    m_q0 = x.m_q0;
+    m_q1 = x.m_q1;
+    m_q2 = x.m_q2;
+    m_q3 = x.m_q3;
+    m_alive = x.m_alive;
+
+    return *this;
+}
+
+size_t DataAhrs::getMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t initial_alignment = current_alignment;
 
@@ -282,7 +289,9 @@ size_t DataAhrs::getMaxCdrSerializedSize(size_t current_alignment)
     return current_alignment - initial_alignment;
 }
 
-size_t DataAhrs::getCdrSerializedSize(const DataAhrs& data, size_t current_alignment)
+size_t DataAhrs::getCdrSerializedSize(
+        const DataAhrs& data,
+        size_t current_alignment)
 {
     (void)data;
     size_t initial_alignment = current_alignment;
@@ -355,7 +364,8 @@ size_t DataAhrs::getCdrSerializedSize(const DataAhrs& data, size_t current_align
     return current_alignment - initial_alignment;
 }
 
-void DataAhrs::serialize(eprosima::fastcdr::Cdr &scdr) const
+void DataAhrs::serialize(
+        eprosima::fastcdr::Cdr& scdr) const
 {
 
     scdr << m_time;
@@ -379,9 +389,11 @@ void DataAhrs::serialize(eprosima::fastcdr::Cdr &scdr) const
     scdr << m_q2;
     scdr << m_q3;
     scdr << m_alive;
+
 }
 
-void DataAhrs::deserialize(eprosima::fastcdr::Cdr &dcdr)
+void DataAhrs::deserialize(
+        eprosima::fastcdr::Cdr& dcdr)
 {
 
     dcdr >> m_time;
@@ -411,9 +423,10 @@ void DataAhrs::deserialize(eprosima::fastcdr::Cdr &dcdr)
  * @brief This function sets a value in member time
  * @param _time New value for member time
  */
-void DataAhrs::time(uint64_t _time)
+void DataAhrs::time(
+        uint64_t _time)
 {
-m_time = _time;
+    m_time = _time;
 }
 
 /*!
@@ -438,9 +451,10 @@ uint64_t& DataAhrs::time()
  * @brief This function sets a value in member senseTime
  * @param _senseTime New value for member senseTime
  */
-void DataAhrs::senseTime(float _senseTime)
+void DataAhrs::senseTime(
+        float _senseTime)
 {
-m_senseTime = _senseTime;
+    m_senseTime = _senseTime;
 }
 
 /*!
@@ -465,9 +479,10 @@ float& DataAhrs::senseTime()
  * @brief This function sets a value in member gyrX
  * @param _gyrX New value for member gyrX
  */
-void DataAhrs::gyrX(float _gyrX)
+void DataAhrs::gyrX(
+        float _gyrX)
 {
-m_gyrX = _gyrX;
+    m_gyrX = _gyrX;
 }
 
 /*!
@@ -492,9 +507,10 @@ float& DataAhrs::gyrX()
  * @brief This function sets a value in member gyrY
  * @param _gyrY New value for member gyrY
  */
-void DataAhrs::gyrY(float _gyrY)
+void DataAhrs::gyrY(
+        float _gyrY)
 {
-m_gyrY = _gyrY;
+    m_gyrY = _gyrY;
 }
 
 /*!
@@ -519,9 +535,10 @@ float& DataAhrs::gyrY()
  * @brief This function sets a value in member gyrZ
  * @param _gyrZ New value for member gyrZ
  */
-void DataAhrs::gyrZ(float _gyrZ)
+void DataAhrs::gyrZ(
+        float _gyrZ)
 {
-m_gyrZ = _gyrZ;
+    m_gyrZ = _gyrZ;
 }
 
 /*!
@@ -546,9 +563,10 @@ float& DataAhrs::gyrZ()
  * @brief This function sets a value in member accX
  * @param _accX New value for member accX
  */
-void DataAhrs::accX(float _accX)
+void DataAhrs::accX(
+        float _accX)
 {
-m_accX = _accX;
+    m_accX = _accX;
 }
 
 /*!
@@ -573,9 +591,10 @@ float& DataAhrs::accX()
  * @brief This function sets a value in member accY
  * @param _accY New value for member accY
  */
-void DataAhrs::accY(float _accY)
+void DataAhrs::accY(
+        float _accY)
 {
-m_accY = _accY;
+    m_accY = _accY;
 }
 
 /*!
@@ -600,9 +619,10 @@ float& DataAhrs::accY()
  * @brief This function sets a value in member accZ
  * @param _accZ New value for member accZ
  */
-void DataAhrs::accZ(float _accZ)
+void DataAhrs::accZ(
+        float _accZ)
 {
-m_accZ = _accZ;
+    m_accZ = _accZ;
 }
 
 /*!
@@ -627,9 +647,10 @@ float& DataAhrs::accZ()
  * @brief This function sets a value in member magX
  * @param _magX New value for member magX
  */
-void DataAhrs::magX(float _magX)
+void DataAhrs::magX(
+        float _magX)
 {
-m_magX = _magX;
+    m_magX = _magX;
 }
 
 /*!
@@ -654,9 +675,10 @@ float& DataAhrs::magX()
  * @brief This function sets a value in member magY
  * @param _magY New value for member magY
  */
-void DataAhrs::magY(float _magY)
+void DataAhrs::magY(
+        float _magY)
 {
-m_magY = _magY;
+    m_magY = _magY;
 }
 
 /*!
@@ -681,9 +703,10 @@ float& DataAhrs::magY()
  * @brief This function sets a value in member magZ
  * @param _magZ New value for member magZ
  */
-void DataAhrs::magZ(float _magZ)
+void DataAhrs::magZ(
+        float _magZ)
 {
-m_magZ = _magZ;
+    m_magZ = _magZ;
 }
 
 /*!
@@ -708,9 +731,10 @@ float& DataAhrs::magZ()
  * @brief This function sets a value in member temp
  * @param _temp New value for member temp
  */
-void DataAhrs::temp(float _temp)
+void DataAhrs::temp(
+        float _temp)
 {
-m_temp = _temp;
+    m_temp = _temp;
 }
 
 /*!
@@ -735,9 +759,10 @@ float& DataAhrs::temp()
  * @brief This function sets a value in member press
  * @param _press New value for member press
  */
-void DataAhrs::press(float _press)
+void DataAhrs::press(
+        float _press)
 {
-m_press = _press;
+    m_press = _press;
 }
 
 /*!
@@ -762,9 +787,10 @@ float& DataAhrs::press()
  * @brief This function sets a value in member phi
  * @param _phi New value for member phi
  */
-void DataAhrs::phi(float _phi)
+void DataAhrs::phi(
+        float _phi)
 {
-m_phi = _phi;
+    m_phi = _phi;
 }
 
 /*!
@@ -789,9 +815,10 @@ float& DataAhrs::phi()
  * @brief This function sets a value in member the
  * @param _the New value for member the
  */
-void DataAhrs::the(float _the)
+void DataAhrs::the(
+        float _the)
 {
-m_the = _the;
+    m_the = _the;
 }
 
 /*!
@@ -816,9 +843,10 @@ float& DataAhrs::the()
  * @brief This function sets a value in member psi
  * @param _psi New value for member psi
  */
-void DataAhrs::psi(float _psi)
+void DataAhrs::psi(
+        float _psi)
 {
-m_psi = _psi;
+    m_psi = _psi;
 }
 
 /*!
@@ -843,9 +871,10 @@ float& DataAhrs::psi()
  * @brief This function sets a value in member q0
  * @param _q0 New value for member q0
  */
-void DataAhrs::q0(float _q0)
+void DataAhrs::q0(
+        float _q0)
 {
-m_q0 = _q0;
+    m_q0 = _q0;
 }
 
 /*!
@@ -870,9 +899,10 @@ float& DataAhrs::q0()
  * @brief This function sets a value in member q1
  * @param _q1 New value for member q1
  */
-void DataAhrs::q1(float _q1)
+void DataAhrs::q1(
+        float _q1)
 {
-m_q1 = _q1;
+    m_q1 = _q1;
 }
 
 /*!
@@ -897,9 +927,10 @@ float& DataAhrs::q1()
  * @brief This function sets a value in member q2
  * @param _q2 New value for member q2
  */
-void DataAhrs::q2(float _q2)
+void DataAhrs::q2(
+        float _q2)
 {
-m_q2 = _q2;
+    m_q2 = _q2;
 }
 
 /*!
@@ -924,9 +955,10 @@ float& DataAhrs::q2()
  * @brief This function sets a value in member q3
  * @param _q3 New value for member q3
  */
-void DataAhrs::q3(float _q3)
+void DataAhrs::q3(
+        float _q3)
 {
-m_q3 = _q3;
+    m_q3 = _q3;
 }
 
 /*!
@@ -951,9 +983,10 @@ float& DataAhrs::q3()
  * @brief This function sets a value in member alive
  * @param _alive New value for member alive
  */
-void DataAhrs::alive(bool _alive)
+void DataAhrs::alive(
+        bool _alive)
 {
-m_alive = _alive;
+    m_alive = _alive;
 }
 
 /*!
@@ -975,7 +1008,8 @@ bool& DataAhrs::alive()
 }
 
 
-size_t DataAhrs::getKeyMaxCdrSerializedSize(size_t current_alignment)
+size_t DataAhrs::getKeyMaxCdrSerializedSize(
+        size_t current_alignment)
 {
     size_t current_align = current_alignment;
 
@@ -1007,31 +1041,12 @@ size_t DataAhrs::getKeyMaxCdrSerializedSize(size_t current_alignment)
 
 bool DataAhrs::isKeyDefined()
 {
-   return false;
+    return false;
 }
 
-void DataAhrs::serializeKey(eprosima::fastcdr::Cdr &scdr) const
+void DataAhrs::serializeKey(
+        eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+                         
 }
