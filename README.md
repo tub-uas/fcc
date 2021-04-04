@@ -6,7 +6,7 @@
 This repository contains the code running on the Flight Control Computer (FCC). It controls and communicates with the rest of the flight system via CAN (Controller Area Network).
 
 ## General
-TODO
+Use the readme and scripts in the `scripts/` directory to compile, run and manage the code. You might need to install some dependencies, such as `boost` (a C++ library) and `wiringpi`.
 
 ## Architecture
 
@@ -33,9 +33,9 @@ Start by setting up a "normal" RaspberryPi system. Then, follow the steps below:
 
 - The RaspberryPi is running a Linux kernel with Rreempt-RT. Please follow [this](https://lemariva.com/blog/2019/09/raspberry-pi-4b-preempt-rt-kernel-419y-performance-test) tutorial in order to compile und upload the kernel to the RaspberryPi.
 
-- In order to install Fast-RTPS follow [this](https://github.com/eProsima/Fast-DDS#manual-installation).
+- In order to install Fast-RTPS follow [this](https://github.com/eProsima/Fast-DDS#manual-installation). Ensure that you have all [dependencies](https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_linux.html) installed.
 
-- For Mavlink have a look here [this](https://mavlink.io/en/getting_started/installation.html) tutorial.
+- For Mavlink have a look at [this](https://mavlink.io/en/getting_started/installation.html) tutorial.
 
 - To install the CAN driver and CAN utils use this tutorial [here](https://www.beyondlogic.org/adding-can-controller-area-network-to-the-raspberry-pi/). But put these two lines
 
@@ -51,7 +51,7 @@ iface can0 can static
 ```
 into your `/etc/network/interfaces`.
 
-- In order to get rid the locale errors put `export LC_ALL=C` at the bottom of the `.bashrc` in the home directory and reboot.
+- In order to get rid the locale errors, put `export LC_ALL=C` at the bottom of the `.bashrc` in the home directory and reboot.
 
 ## Hardware
 We are currently using a RaspberryPi 3 (and 4) Model B. It is connected to a custom build shield (hat) that provides power and communication over the CAN bus.
