@@ -1,0 +1,23 @@
+struct DataAhrs {
+	unsigned long long time;
+	float    senseTime;
+	float    gyrX;
+	float    gyrY;
+	float    gyrZ;
+	float    accX;
+	float    accY;
+	float    accZ;
+	float    magX;
+	float    magY;
+	float    magZ;
+	float    temp;
+	float    press;
+	float    phi;
+	float    the;
+	float    psi;
+	float    q0;
+	float    q1;
+	float    q2;
+	float    q3;
+	boolean  alive;
+};
