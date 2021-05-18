@@ -18,7 +18,11 @@
 
 #include "./idl/DataPsuPubSubTypes.h"
 
-#include "../../util/psuCom/psuCom.h"
+#ifdef SITL
+	#include "../../../psuComSitl/psuComSitl.h"
+#else
+	#include "../../util/psuCom/psuCom.h"
+#endif
 #include "../../util/timer/timer.h"
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener

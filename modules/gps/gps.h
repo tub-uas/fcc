@@ -18,7 +18,11 @@
 
 #include "./idl/DataGpsPubSubTypes.h"
 
-#include "../../util/gpsCom/gpsCom.h"
+#ifdef SITL
+	#include "../../../gpsComSitl/gpsComSitl.h"
+#else
+	#include "../../util/gpsCom/gpsCom.h"
+#endif
 #include "../../util/timer/timer.h"
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener

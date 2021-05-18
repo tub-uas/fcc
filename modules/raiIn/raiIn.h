@@ -18,7 +18,12 @@
 
 #include "./idl/DataRaiInPubSubTypes.h"
 
-#include "../../util/raiCom/raiCom.h"
+#ifdef SITL
+	#include "../../../raiComSitl/raiComSitl.h"
+#else
+	#include "../../util/raiCom/raiCom.h"
+#endif
+
 #include "../../util/mixer/mixer.h"
 #include "../../util/timer/timer.h"
 

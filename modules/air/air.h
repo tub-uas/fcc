@@ -18,7 +18,13 @@
 
 #include "./idl/DataAirPubSubTypes.h"
 
-#include "../../util/airCom/airCom.h"
+// == SITL RUN 
+#ifdef SITL
+	#include "../../../airComSitl/airComSitl.h"
+#else
+	#include "../../util/airCom/airCom.h"
+#endif
+
 #include "../../util/timer/timer.h"
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener
@@ -67,6 +73,7 @@ private:
 	eprosima::fastdds::dds::TypeSupport  typeAir;
 	DataAir      dataAir;
 	std::mutex   dataAirMutex;
+
 
 	AirCom  airCom;
 	Timer   timer;

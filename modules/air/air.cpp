@@ -30,6 +30,7 @@ Air::Air() : participant(nullptr),
              topicAir(nullptr),
              writerAir(nullptr),
              typeAir(new DataAirPubSubType()) {
+
 }
 
 Air::~Air() {
@@ -113,7 +114,7 @@ void Air::publish() {
 		writerAir->write(&dataAir);
 		dataAirLock.unlock();
 
-		// print();
+		print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
