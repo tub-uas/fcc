@@ -18,6 +18,7 @@
 **/logs
 **/decoded
 *.log
+*.vscode/
 
 *cache*
 
