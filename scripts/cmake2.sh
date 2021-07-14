@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-#test
+
 declare -a ACTIVE_MODULES=("raiIn" "raiOut" "ahrs" "air" "gps" "psu" "ctrl" "sFusion" "log" "downlink" "watchdog")
 
 MODULE_DIR=./../modules
