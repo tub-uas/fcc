@@ -28,14 +28,17 @@ endif()
 
 message(STATUS "Configuring ${PROJECT_NAME}")
 
-set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -latomic")
+
 
 add_compile_options(-Wall -Wextra -Werror)
+
 
 set(IDL_PATH "idl")
 set(UTIL_PATH "../../util")
 set(DRIVER_PATH "../../driver")
 
+include_directories(/usr/local/lib)
+include_directories(/usr/local/include)
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
 add_library(pid ${UTIL_PATH}/pid/pid.cpp)
 add_library(sigGen ${UTIL_PATH}/sigGen/sigGen.cpp)
