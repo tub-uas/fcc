@@ -1,14 +1,14 @@
 struct DataPsu {
 	unsigned long long time;
-	float    senseTime;
-	float    mainVolt;
-	float    mainCurr;
-	float    mainPow;
-	float    pwrVolt;
-	float    pwrCurr;
-	float    pwrPow;
-	float    sysVolt;
-	float    sysCurr;
-	float    sysPow;
+	double    senseTime;
+	double    main_volt;
+	double    main_curr;
+	double    main_pwr;
+	double    pwr_volt;
+	double    pwr_curr;
+	double    pwr_pwr;
+	double    sys_volt;
+	double    sys_curr;
+	double    sys_pwr;
 	boolean  alive;
 };

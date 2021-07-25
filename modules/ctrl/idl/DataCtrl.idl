@@ -1,11 +1,21 @@
 struct DataCtrl {
 	unsigned long long time;
-	float              xi;      // aka. aileron
-	float              eta;     // aka. elevator
-	float              zeta;    // aka. rudder
-	float              etaT;    // aka. throttle
-	float              etaF;    // aka. flaps
-	unsigned short     fltMode;
-	unsigned short     fltFunc;
+	double             xi_setpoint;      // aka. aileron
+	double             eta_setpoint;     // aka. elevator
+	double             zeta_setpoint;    // aka. rudder
+	double             throttle_setpoint;    // aka. throttle
+	double             flaps_setpoint;    // aka. flaps
+	double             roll_setpoint;
+	double             roll_rate_setpoint;
+	double             pitch_setpoint;
+	double             pitch_rate_setpoint;
+	double             yaw_setpoint;
+	double             yaw_rate_setpoint;
+	double             tas_setpoint;
+	double             tas_rate_setpoint;
+	double             hgt_setpoint;
+	double             hgt_rate_setpoint;
+	unsigned short     flight_mode;
+	unsigned short     flight_fct;
 	boolean            alive;
 };
