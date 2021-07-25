@@ -90,6 +90,10 @@ bool RaiIn::init() {
 		return false;
 	}
 
+	// == INIT MIXER ===========================================================
+	Mixer.init(1000,2000);
+
+
 	return true;
 }
 
@@ -132,24 +136,60 @@ void RaiIn::run() {
 
 			std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
 
-			enum Mixer::Mode mode = mixer.pwm2mode(raiCom.channel[6]);
-			enum Mixer::Func func = mixer.pwm2func(raiCom.channel[5]);
+			// == MIXER SETTING ================================================
+			mixer.set_flight_mode(raiCom.channel[6]);
+			mixer.set_flight_fct(raiCom.channel[5]);
+			mixer.set_thr_setpoint(raiCom.channel[0]);
+			mixer.set_ail_right_setpoint(raiCom.channel[1]);
+			mixer.set_ele_setpoint(raiCom.channel[2]);
+			mixer.set_rud_setpoint(raiCom.channel[3]);
+			mixer.set_ail_left_setpoint(raiCom.channel[4]);
+
+
+
+
+			// == PUBLISH DATA =================================================
+			dataRaiIn.flight_mode(mixer.get_flight_mode());
+			dataRaiIn.flight_fct(mixer.get_flight_func());
 
 			dataRaiIn.senseTime(raiCom.time);
 			dataRaiIn.chnl(raiCom.channel);
-			dataRaiIn.roll(mixer.pwm2rad(Mixer::AILR, raiCom.channel[1], mode)); // we are assuming ail is symmetrical
-			dataRaiIn.pitch(mixer.pwm2rad(Mixer::ELE, raiCom.channel[2], mode));
-			dataRaiIn.yaw(mixer.pwm2rad(Mixer::RUD, raiCom.channel[3], mode));
-			dataRaiIn.thr(mixer.pwm2rad(Mixer::THR, raiCom.channel[0], mode));
-			dataRaiIn.fltMode(mode);
-			dataRaiIn.fltFunc(func);
+			
+			// == DIRECT CONTROL == MODE - MANUAL         | FCT - 0 ============ 
+			dataRaiIn.xi_setpoint(mixer.get_ail_setpoint());
+			dataRaiIn.eta_setpoint(mixer.get_ele_setpoint());
+			dataRaiIn.zeta_setpoint(mixer.get_rud_setpoint());
+			
+			// == ATTITUDE CONTROL == MODE - MANUAL       | FCT - 1 ============
+			dataRaiIn.roll_setpoint(mixer.get_roll_setpoint()); // we are assuming ail is symmetrical
+			dataRaiIn.pitch_setpoint(mixer.get_pitch_setpoint());
+			dataRaiIn.yaw_rate_setpoint(mixer.get_yaw_rate_setpoint());
+			
+			dataRaiIn.throttle_setpoint(mixer.get_thr_setpoint());
 
-			// reset the alive timer
+			// == AUTOPILOT CONTROL == MODE - MANUAL      | FCT - 2 ============
+			dataRaiIn.hgt_setpoint(mixer.get_hgt_setpoint());
+			dataRaiIn.tas_setpoint(mixer.get_tas_setpoint());
+			dataRaiIn.yaw_setpoint(mixer.get_yaw_setpoint());
+
+			// =================================================================
+			// == AUTONOMOUS CONTROL == MODE - NAVIGATION | FCT - 0 ============
+
+			// == AUTONOMOUS CONTROL == MODE - MISSION    | FCT - 1 ============
+
+			// == AUTONOMOUS CONTROL == MODE - AI         | FCT - 2 ============
+
+			// =================================================================
+			// == EXPERIMENTAL CONTROL == MODE - EXP 1      | FCT - 0 ==========
+
+			// == EXPERIMENTAL CONTROL == MODE - EXP 2      | FCT - 1 ==========
+
+			// == EXPERIMENTAL CONTROL == MODE - EXP 3      | FCT - 2 ==========
+
+
+			// == UPDATE ALIVE TIMER ===========================================
 			aliveTime = timer.getSysTime();
-
 			dataRaiInLock.unlock();
-
-			// raiCom.print();
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);

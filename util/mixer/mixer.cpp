@@ -35,13 +35,13 @@ void Mixer::set_flight_mode(uint16_t mode_pwm)
 	// GET RANGE FROM PWM 0 1 2 by scaling Motor
 	double modelevel = 2.0*_get_normalized_pwm(mode_pwm,MOTOR);
 	if(modelevel < 0.5f) {
-		_flight_mode = MAN;
+		_flight_mode = AUTONOMOUS;
 	}
 	else if(modelevel > 1.5f) {
-		_flight_mode = EXP;
+		_flight_mode = EXPERIMENTAL;
 	}
 	else {
-		_flight_mode = AUTO;
+		_flight_mode = MANUAL;
 	}
 }
 

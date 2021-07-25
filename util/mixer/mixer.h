@@ -19,9 +19,9 @@ typedef enum {
 } controltype_t;
 
 typedef enum {
-	MAN = 0,
-	AUTO,
-	EXP,
+	MANUAL = 0,
+	AUTONOMOUS,
+	EXPERIMENTAL,
 } flight_mode_t;
 
 typedef enum {
@@ -115,7 +115,7 @@ private:
 	uint16_t _max_pwm{1500};
 
 	// == MODE AND FUNCTIONS ===================================================
-	flight_mode_t _flight_mode{MAN};
+	flight_mode_t _flight_mode{MANUAL};
 	flight_fct_t  _flight_fct{FCT_0};
 
 	// == VALUES FOR MANUAL CONTROL (MAN) ======================================
