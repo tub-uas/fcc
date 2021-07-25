@@ -198,32 +198,7 @@ bool Ctrl::init() {
 
 	aliveTime = timer.getSysTime();
 
-	/* Normal PID controller */
-	if (pidRoll.set(0.5, 0.0/*0.5*/, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
-		return false;
-	}
-	if (pidPitch.set(0.5, 0.0/*0.5*/, 0.0, Mixer::ELE_MAX, -Mixer::ELE_MAX, false) != true) {
-		return false;
-	}
-	if (pidYaw.set(0.0, 0.0/*0.5*/, 1.0, Mixer::RUD_MAX, -Mixer::RUD_MAX, false) != true) {
-		return false;
-	}
-
-	/* Chris controller */
-	if (pidRollCr.set(0.1, 0.0, 0.0, Mixer::AIL_MAX, -Mixer::AIL_MAX, false) != true) {
-		return false;
-	}
-	if (pidPitchCr.set(0.1, 0.0, 0.0, Mixer::ELE_MAX, -Mixer::ELE_MAX, false) != true) {
-		return false;
-	}
-
-	/* Ident signals */
-	const static float max_deflection_degree = 10.0;
-	const static float time_constant_seconds = 0.3;
-	const static float time_delay_seconds = 0.1;
-	if (sigGen.set(time_constant_seconds, 0.0, (max_deflection_degree/180.0)*M_PI, time_delay_seconds) != true) {
-		return false;
-	}
+	
 
 	return true;
 }

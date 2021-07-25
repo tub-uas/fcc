@@ -25,10 +25,13 @@
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 #include "./../sFusion/idl/DataSFusionPubSubTypes.h"
 
-#include "../../util/pid/pid.h"
+#include "../../lib/ecf/ecf_pid/pid.h"
+#include "../../lib/ecf/ecf_highpass/highpass.h"
+#include "../../lib/ecf/ecf_lowpass/lowpass.h"
+
 #include "../../util/mixer/mixer.h"
-#include "../../util/sigGen/sigGen.h"
 #include "../../util/timer/timer.h"
+
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
@@ -103,10 +106,7 @@ private:
 	Pid    pidRoll;
 	Pid    pidPitch;
 	Pid    pidYaw;
-	Pid    pidRollCr;
-	Pid    pidPitchCr;
-	Pid    pidYawCr;
-	SigGen sigGen;
+
 
 };
 
