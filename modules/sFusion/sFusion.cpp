@@ -60,6 +60,18 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 				dataAirLock.unlock();
 				newDataAir = true;
 
+			} else if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
+				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+				reader->take_next_sample(&dataRaiIn, &info);
+				dataRaiInLock.unlock();
+				newDataRaiIn = true;
+
+			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
+				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+				reader->take_next_sample(&dataGps, &info);
+				dataGpsLock.unlock();
+				newDataGps = true;
+
 			} else {
 				reader->take_next_sample(&data, &info);
 			}
@@ -83,7 +95,14 @@ SFusion::SFusion() : participant(nullptr),
                      typeAhrs(new DataAhrsPubSubType()),
                      topicAir(nullptr),
                      readerAir(nullptr),
-                     typeAir(new DataAirPubSubType()) {
+                     typeAir(new DataAirPubSubType()),
+					 topicRaiIn(nullptr),
+					 readerRaiIn(nullptr),
+					 typeRaiIn(new DataRaiInPubSubType()),
+					 topicGps(nullptr),
+					 readerGps(nullptr),
+					 typeGps(new DataGpsPubSubType()),
+					  {
 
 }
 
@@ -115,6 +134,24 @@ SFusion::~SFusion() {
 
 	if (topicAir != nullptr) {
 		participant->delete_topic(topicAir);
+	}
+
+
+	if (readerRaiIn != nullptr) {
+		subscriber->delete_datareader(readerRaiIn);
+	}
+
+	if (topicRaiIn != nullptr) {
+		participant->delete_topic(topicRaiIn);
+	}
+
+
+	if (readerGps != nullptr) {
+		subscriber->delete_datareader(readerGps);
+	}
+
+	if (topicGps != nullptr) {
+		participant->delete_topic(topicGps);
 	}
 
 	if (subscriber != nullptr) {
@@ -175,6 +212,24 @@ bool SFusion::init() {
 	// Create the subscriptions Topic
 	topicAir = participant->create_topic("DataAir", "DataAir", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topicAir == nullptr) {
+		return false;
+	}
+
+	// Register the Type
+	typeRaiIn.register_type(participant);
+
+	// Create the subscriptions Topic
+	topicRaiIn = participant->create_topic("DataRaiIn", "DataRaiIn", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicRaiIn == nullptr) {
+		return false;
+	}
+
+	// Register the Type
+	typeGps.register_type(participant);
+
+	// Create the subscriptions Topic
+	topicGps = participant->create_topic("DataGps", "DataGps", eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
+	if (topicGps == nullptr) {
 		return false;
 	}
 

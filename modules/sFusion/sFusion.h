@@ -24,6 +24,8 @@
 #include "./idl/DataSFusionPubSubTypes.h"
 #include "./../ahrs/idl/DataAhrsPubSubTypes.h"
 #include "./../air/idl/DataAirPubSubTypes.h"
+#include "./../gps/idl/DataGpsPubSubTypes.h"
+#include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
 
@@ -50,6 +52,14 @@ public:
 	DataAir dataAir;
 	std::mutex dataAirMutex;
 	std::atomic_bool newDataAir;
+
+	DataRaiIn dataRaiIn;
+	std::mutex dataRaiInMutex;
+	std::atomic_bool newDataRaiIn;
+
+	DataGps dataGps;
+	std::mutex dataGpsMutex;
+	std::atomic_bool newDataGps;
 
 private:
 	std::atomic_int publication_matched;
@@ -95,6 +105,14 @@ private:
 	eprosima::fastdds::dds::Topic       *topicAir;
 	eprosima::fastdds::dds::DataReader  *readerAir;
 	eprosima::fastdds::dds::TypeSupport  typeAir;
+
+	eprosima::fastdds::dds::Topic       *topicRaiIn;
+	eprosima::fastdds::dds::DataReader  *readerRaiIn;
+	eprosima::fastdds::dds::TypeSupport  typeRaiIn;
+
+	eprosima::fastdds::dds::Topic       *topicGps;
+	eprosima::fastdds::dds::DataReader  *readerGps;
+	eprosima::fastdds::dds::TypeSupport  typeGps;
 
 	Timer  timer;
 
