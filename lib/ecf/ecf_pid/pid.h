@@ -6,6 +6,14 @@
 
 #include "../../util/timer/timer.h"
 
+typedef struct {
+	double kP;
+	double kI;
+	double kD;
+	double lim_max;
+	double lim_min;
+} pid_setup_t;
+
 class Pid {
 
 public:
@@ -15,6 +23,7 @@ public:
 	~Pid() {};
 
 	bool init(double kP, double kI, double kD, double lim_max, double lim_min);
+	bool init(pid_setup_t setup);
 
 	double update(double target, double is, double dt);
 

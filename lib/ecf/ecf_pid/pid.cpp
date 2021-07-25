@@ -21,6 +21,20 @@ bool Pid::init(double kP, double kI, double kD, double lim_max, double lim_min)
 	return _is_init;
 }
 
+bool Pid::init(pid_setup_t setup)
+{
+	_cmd = 0.0;
+	_cmd_last = _cmd;
+	set_p_gain(setup.kP);
+	set_i_gain(setup.kI);
+	set_d_gain(setup.kD);
+	set_limit_max(setup.lim_max);
+	set_limit_min(setup.lim_min);
+
+	_is_init = true;
+	return _is_init;
+}
+
 
 
 double Pid::update(double target, double is, double dt) {
