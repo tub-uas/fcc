@@ -101,8 +101,8 @@ SFusion::SFusion() : participant(nullptr),
 					 typeRaiIn(new DataRaiInPubSubType()),
 					 topicGps(nullptr),
 					 readerGps(nullptr),
-					 typeGps(new DataGpsPubSubType()),
-					  {
+					 typeGps(new DataGpsPubSubType())
+					{
 
 }
 
@@ -286,7 +286,10 @@ void SFusion::publish() {
 
 
 void SFusion::run() {
-
+	estimator_height.init(0.0,0.2,0.01);
+	double time = 0.0, time_last = 0.0;
+	double dt = 0.0;  
+	double a_z_n = 0.0;
 	while (1) {
 
 		// std::cout << this->name << " run" << std::endl;
@@ -296,29 +299,50 @@ void SFusion::run() {
 			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
 			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
 			std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
+			std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
+			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
 
 			// todo: as soon as we are actually using air, remove comment
-			if (listener.dataAhrs.alive() /* && listener.dataAir.alive()*/) {
+			if (listener.dataAhrs.alive()  && listener.dataAir.alive() && 
+			    listener.dataGps.alive() && listener.dataRaiIn.alive()) {
+				
+				time = listener.dataAhrs.time()/1.0e9;
+				dt = (time-time_last);
+				time_last = time;
 
-				dataSFusion.gyrX(listener.dataAhrs.gyrX());
-				dataSFusion.gyrY(listener.dataAhrs.gyrY());
-				dataSFusion.gyrZ(listener.dataAhrs.gyrZ());
-				dataSFusion.accX(listener.dataAhrs.accX());
-				dataSFusion.accY(listener.dataAhrs.accY());
-				dataSFusion.accZ(listener.dataAhrs.accZ());
-				dataSFusion.magX(listener.dataAhrs.magX());
-				dataSFusion.magY(listener.dataAhrs.magY());
-				dataSFusion.magZ(listener.dataAhrs.magZ());
-				dataSFusion.temp(listener.dataAhrs.temp());
-				dataSFusion.press(listener.dataAhrs.press());
+				dataSFusion.p(listener.dataAhrs.gyrX());
+				dataSFusion.q(listener.dataAhrs.gyrY());
+				dataSFusion.r(listener.dataAhrs.gyrZ());
+				dataSFusion.a_x(listener.dataAhrs.accX());
+				dataSFusion.a_y(listener.dataAhrs.accY());
+				dataSFusion.a_z(listener.dataAhrs.accZ());
 				dataSFusion.phi(listener.dataAhrs.phi());
 				dataSFusion.the(listener.dataAhrs.the());
 				dataSFusion.psi(listener.dataAhrs.psi());
-				dataSFusion.q0(listener.dataAhrs.q0());
-				dataSFusion.q1(listener.dataAhrs.q1());
-				dataSFusion.q2(listener.dataAhrs.q2());
-				dataSFusion.q3(listener.dataAhrs.q3());
+				a_z_n = get_z_accel(dataSFusion.a_x(),dataSFusion.a_y(),dataSFusion.a_z(),dataSFusion.phi(),dataSFusion.the());
 
+				dataSFusion.true_airspeed(listener.dataAir.true_airspeed());
+				dataSFusion.indicated_airspeed(listener.dataAir.indicated_airspeed());
+				dataSFusion.density(listener.dataAir.density());
+				dataSFusion.dynamic_pressure(listener.dataAir.dynamic_pressure());
+				dataSFusion.barometric_pressure(listener.dataAir.barometric_pressure());
+				estimator_height.update(listener.dataAir.barometric_height(),a_z_n,dt);
+
+				dataSFusion.height(estimator_height.get_height());
+				dataSFusion.height_rate(estimator_height.get_height_rate());
+
+
+				// AoA and Ssa estimation
+				dataSFusion.aoa(-1.0);
+				dataSFusion.ssa(-1.0);
+				dataSFusion.gamma(dataSFusion.the()-dataSFusion.aoa());
+
+
+
+				dataSFusion.latitude(listener.dataGps.lat());
+				dataSFusion.longitude(listener.dataGps.lon());
+				// TRANSFORMATION TO CARTESIAN COORDINATE SYSTEM XYZ
+				
 				dataSFusion.posN(-1.0);
 				dataSFusion.posE(-1.0);
 				dataSFusion.posD(-1.0);
@@ -328,9 +352,9 @@ void SFusion::run() {
 				dataSFusion.windN(-1.0);
 				dataSFusion.windE(-1.0);
 				dataSFusion.windD(-1.0);
-				dataSFusion.ssa(-1.0);
-				dataSFusion.aoa(-1.0);
-				dataSFusion.gamma(-1.0);
+				
+				
+				
 
 				// reset the alive timer
 				aliveTime = timer.getSysTime();
@@ -341,6 +365,8 @@ void SFusion::run() {
 
 			dataAhrsLock.unlock();
 			dataAirLock.unlock();
+			dataGpsLock.unlock();
+			dataRaiInLock.unlock();
 			dataSFusionLock.unlock();
 		}
 
@@ -352,29 +378,27 @@ void SFusion::run() {
 
 }
 
+double SFusion::get_z_accel(double a_x, double a_y, double a_z,double phi, double the)
+{
+	const double gravity = 9.80665;
+	return gravity*(-a_x*std::cos(the) + a_y*std::sin(phi)*std::cos(the) + a_z*std::cos(phi)*cos(the));
+}
+
 
 void SFusion::print() {
 
 	std::cout << "--- " << this->name << " " << dataSFusion.time() << " ---" << std::endl;
 
-	std::cout << "gyrX   " << dataSFusion.gyrX() << std::endl;
-	std::cout << "gyrY   " << dataSFusion.gyrY() << std::endl;
-	std::cout << "gyrZ   " << dataSFusion.gyrZ() << std::endl;
-	std::cout << "accX   " << dataSFusion.accX() << std::endl;
-	std::cout << "accY   " << dataSFusion.accY() << std::endl;
-	std::cout << "accZ   " << dataSFusion.accZ() << std::endl;
-	std::cout << "magX   " << dataSFusion.magX() << std::endl;
-	std::cout << "magY   " << dataSFusion.magY() << std::endl;
-	std::cout << "magZ   " << dataSFusion.magZ() << std::endl;
-	std::cout << "temp   " << dataSFusion.temp() << std::endl;
-	std::cout << "press  " << dataSFusion.press() << std::endl;
+	std::cout << "gyrX   " << dataSFusion.p() << std::endl;
+	std::cout << "gyrY   " << dataSFusion.q() << std::endl;
+	std::cout << "gyrZ   " << dataSFusion.r() << std::endl;
+	std::cout << "accX   " << dataSFusion.a_x() << std::endl;
+	std::cout << "accY   " << dataSFusion.a_y() << std::endl;
+	std::cout << "accZ   " << dataSFusion.a_z() << std::endl;
+	std::cout << "press  " << dataSFusion.barometric_pressure() << std::endl;
 	std::cout << "phi    " << dataSFusion.phi() << std::endl;
 	std::cout << "the    " << dataSFusion.the() << std::endl;
 	std::cout << "psi    " << dataSFusion.psi() << std::endl;
-	std::cout << "q0     " << dataSFusion.q0() << std::endl;
-	std::cout << "q1     " << dataSFusion.q1() << std::endl;
-	std::cout << "q2     " << dataSFusion.q2() << std::endl;
-	std::cout << "q3     " << dataSFusion.q3() << std::endl;
 	std::cout << "posN   " << dataSFusion.posN() << std::endl;
 	std::cout << "posE   " << dataSFusion.posE() << std::endl;
 	std::cout << "posD   " << dataSFusion.posD() << std::endl;

@@ -36,21 +36,25 @@ using namespace eprosima::fastcdr::exception;
 
 DataAir::DataAir()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_senseTime = 0.0;
-    // m_dynamicPress com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
-    m_dynamicPress = 0.0;
-    // m_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
-    m_velocity = 0.0;
-    // m_baroPress com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
-    m_baroPress = 0.0;
-    // m_density com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
+    // m_dynamic_pressure com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
+    m_dynamic_pressure = 0.0;
+    // m_true_airspeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
+    m_true_airspeed = 0.0;
+    // m_indicated_airspeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
+    m_indicated_airspeed = 0.0;
+    // m_barometric_pressure com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
+    m_barometric_pressure = 0.0;
+    // m_barometric_height com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
+    m_barometric_height = 0.0;
+    // m_density com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
     m_density = 0.0;
-    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
-    m_temp = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
+    // m_temperature com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
+    m_temperature = 0.0;
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
     m_alive = false;
 
 }
@@ -65,6 +69,8 @@ DataAir::~DataAir()
 
 
 
+
+
 }
 
 DataAir::DataAir(
@@ -72,11 +78,13 @@ DataAir::DataAir(
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_dynamicPress = x.m_dynamicPress;
-    m_velocity = x.m_velocity;
-    m_baroPress = x.m_baroPress;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_barometric_height = x.m_barometric_height;
     m_density = x.m_density;
-    m_temp = x.m_temp;
+    m_temperature = x.m_temperature;
     m_alive = x.m_alive;
 }
 
@@ -85,11 +93,13 @@ DataAir::DataAir(
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_dynamicPress = x.m_dynamicPress;
-    m_velocity = x.m_velocity;
-    m_baroPress = x.m_baroPress;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_barometric_height = x.m_barometric_height;
     m_density = x.m_density;
-    m_temp = x.m_temp;
+    m_temperature = x.m_temperature;
     m_alive = x.m_alive;
 }
 
@@ -99,11 +109,13 @@ DataAir& DataAir::operator =(
 
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_dynamicPress = x.m_dynamicPress;
-    m_velocity = x.m_velocity;
-    m_baroPress = x.m_baroPress;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_barometric_height = x.m_barometric_height;
     m_density = x.m_density;
-    m_temp = x.m_temp;
+    m_temperature = x.m_temperature;
     m_alive = x.m_alive;
 
     return *this;
@@ -115,11 +127,13 @@ DataAir& DataAir::operator =(
 
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_dynamicPress = x.m_dynamicPress;
-    m_velocity = x.m_velocity;
-    m_baroPress = x.m_baroPress;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_barometric_height = x.m_barometric_height;
     m_density = x.m_density;
-    m_temp = x.m_temp;
+    m_temperature = x.m_temperature;
     m_alive = x.m_alive;
 
     return *this;
@@ -134,22 +148,28 @@ size_t DataAir::getMaxCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -170,22 +190,28 @@ size_t DataAir::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -201,11 +227,13 @@ void DataAir::serialize(
 
     scdr << m_time;
     scdr << m_senseTime;
-    scdr << m_dynamicPress;
-    scdr << m_velocity;
-    scdr << m_baroPress;
+    scdr << m_dynamic_pressure;
+    scdr << m_true_airspeed;
+    scdr << m_indicated_airspeed;
+    scdr << m_barometric_pressure;
+    scdr << m_barometric_height;
     scdr << m_density;
-    scdr << m_temp;
+    scdr << m_temperature;
     scdr << m_alive;
 
 }
@@ -216,11 +244,13 @@ void DataAir::deserialize(
 
     dcdr >> m_time;
     dcdr >> m_senseTime;
-    dcdr >> m_dynamicPress;
-    dcdr >> m_velocity;
-    dcdr >> m_baroPress;
+    dcdr >> m_dynamic_pressure;
+    dcdr >> m_true_airspeed;
+    dcdr >> m_indicated_airspeed;
+    dcdr >> m_barometric_pressure;
+    dcdr >> m_barometric_height;
     dcdr >> m_density;
-    dcdr >> m_temp;
+    dcdr >> m_temperature;
     dcdr >> m_alive;
 }
 
@@ -257,7 +287,7 @@ uint64_t& DataAir::time()
  * @param _senseTime New value for member senseTime
  */
 void DataAir::senseTime(
-        float _senseTime)
+        double _senseTime)
 {
     m_senseTime = _senseTime;
 }
@@ -266,7 +296,7 @@ void DataAir::senseTime(
  * @brief This function returns the value of member senseTime
  * @return Value of member senseTime
  */
-float DataAir::senseTime() const
+double DataAir::senseTime() const
 {
     return m_senseTime;
 }
@@ -275,93 +305,149 @@ float DataAir::senseTime() const
  * @brief This function returns a reference to member senseTime
  * @return Reference to member senseTime
  */
-float& DataAir::senseTime()
+double& DataAir::senseTime()
 {
     return m_senseTime;
 }
 
 /*!
- * @brief This function sets a value in member dynamicPress
- * @param _dynamicPress New value for member dynamicPress
+ * @brief This function sets a value in member dynamic_pressure
+ * @param _dynamic_pressure New value for member dynamic_pressure
  */
-void DataAir::dynamicPress(
-        float _dynamicPress)
+void DataAir::dynamic_pressure(
+        double _dynamic_pressure)
 {
-    m_dynamicPress = _dynamicPress;
+    m_dynamic_pressure = _dynamic_pressure;
 }
 
 /*!
- * @brief This function returns the value of member dynamicPress
- * @return Value of member dynamicPress
+ * @brief This function returns the value of member dynamic_pressure
+ * @return Value of member dynamic_pressure
  */
-float DataAir::dynamicPress() const
+double DataAir::dynamic_pressure() const
 {
-    return m_dynamicPress;
+    return m_dynamic_pressure;
 }
 
 /*!
- * @brief This function returns a reference to member dynamicPress
- * @return Reference to member dynamicPress
+ * @brief This function returns a reference to member dynamic_pressure
+ * @return Reference to member dynamic_pressure
  */
-float& DataAir::dynamicPress()
+double& DataAir::dynamic_pressure()
 {
-    return m_dynamicPress;
+    return m_dynamic_pressure;
 }
 
 /*!
- * @brief This function sets a value in member velocity
- * @param _velocity New value for member velocity
+ * @brief This function sets a value in member true_airspeed
+ * @param _true_airspeed New value for member true_airspeed
  */
-void DataAir::velocity(
-        float _velocity)
+void DataAir::true_airspeed(
+        double _true_airspeed)
 {
-    m_velocity = _velocity;
+    m_true_airspeed = _true_airspeed;
 }
 
 /*!
- * @brief This function returns the value of member velocity
- * @return Value of member velocity
+ * @brief This function returns the value of member true_airspeed
+ * @return Value of member true_airspeed
  */
-float DataAir::velocity() const
+double DataAir::true_airspeed() const
 {
-    return m_velocity;
+    return m_true_airspeed;
 }
 
 /*!
- * @brief This function returns a reference to member velocity
- * @return Reference to member velocity
+ * @brief This function returns a reference to member true_airspeed
+ * @return Reference to member true_airspeed
  */
-float& DataAir::velocity()
+double& DataAir::true_airspeed()
 {
-    return m_velocity;
+    return m_true_airspeed;
 }
 
 /*!
- * @brief This function sets a value in member baroPress
- * @param _baroPress New value for member baroPress
+ * @brief This function sets a value in member indicated_airspeed
+ * @param _indicated_airspeed New value for member indicated_airspeed
  */
-void DataAir::baroPress(
-        float _baroPress)
+void DataAir::indicated_airspeed(
+        double _indicated_airspeed)
 {
-    m_baroPress = _baroPress;
+    m_indicated_airspeed = _indicated_airspeed;
 }
 
 /*!
- * @brief This function returns the value of member baroPress
- * @return Value of member baroPress
+ * @brief This function returns the value of member indicated_airspeed
+ * @return Value of member indicated_airspeed
  */
-float DataAir::baroPress() const
+double DataAir::indicated_airspeed() const
 {
-    return m_baroPress;
+    return m_indicated_airspeed;
 }
 
 /*!
- * @brief This function returns a reference to member baroPress
- * @return Reference to member baroPress
+ * @brief This function returns a reference to member indicated_airspeed
+ * @return Reference to member indicated_airspeed
  */
-float& DataAir::baroPress()
+double& DataAir::indicated_airspeed()
 {
-    return m_baroPress;
+    return m_indicated_airspeed;
+}
+
+/*!
+ * @brief This function sets a value in member barometric_pressure
+ * @param _barometric_pressure New value for member barometric_pressure
+ */
+void DataAir::barometric_pressure(
+        double _barometric_pressure)
+{
+    m_barometric_pressure = _barometric_pressure;
+}
+
+/*!
+ * @brief This function returns the value of member barometric_pressure
+ * @return Value of member barometric_pressure
+ */
+double DataAir::barometric_pressure() const
+{
+    return m_barometric_pressure;
+}
+
+/*!
+ * @brief This function returns a reference to member barometric_pressure
+ * @return Reference to member barometric_pressure
+ */
+double& DataAir::barometric_pressure()
+{
+    return m_barometric_pressure;
+}
+
+/*!
+ * @brief This function sets a value in member barometric_height
+ * @param _barometric_height New value for member barometric_height
+ */
+void DataAir::barometric_height(
+        double _barometric_height)
+{
+    m_barometric_height = _barometric_height;
+}
+
+/*!
+ * @brief This function returns the value of member barometric_height
+ * @return Value of member barometric_height
+ */
+double DataAir::barometric_height() const
+{
+    return m_barometric_height;
+}
+
+/*!
+ * @brief This function returns a reference to member barometric_height
+ * @return Reference to member barometric_height
+ */
+double& DataAir::barometric_height()
+{
+    return m_barometric_height;
 }
 
 /*!
@@ -369,7 +455,7 @@ float& DataAir::baroPress()
  * @param _density New value for member density
  */
 void DataAir::density(
-        float _density)
+        double _density)
 {
     m_density = _density;
 }
@@ -378,7 +464,7 @@ void DataAir::density(
  * @brief This function returns the value of member density
  * @return Value of member density
  */
-float DataAir::density() const
+double DataAir::density() const
 {
     return m_density;
 }
@@ -387,37 +473,37 @@ float DataAir::density() const
  * @brief This function returns a reference to member density
  * @return Reference to member density
  */
-float& DataAir::density()
+double& DataAir::density()
 {
     return m_density;
 }
 
 /*!
- * @brief This function sets a value in member temp
- * @param _temp New value for member temp
+ * @brief This function sets a value in member temperature
+ * @param _temperature New value for member temperature
  */
-void DataAir::temp(
-        float _temp)
+void DataAir::temperature(
+        double _temperature)
 {
-    m_temp = _temp;
+    m_temperature = _temperature;
 }
 
 /*!
- * @brief This function returns the value of member temp
- * @return Value of member temp
+ * @brief This function returns the value of member temperature
+ * @return Value of member temperature
  */
-float DataAir::temp() const
+double DataAir::temperature() const
 {
-    return m_temp;
+    return m_temperature;
 }
 
 /*!
- * @brief This function returns a reference to member temp
- * @return Reference to member temp
+ * @brief This function returns a reference to member temperature
+ * @return Reference to member temperature
  */
-float& DataAir::temp()
+double& DataAir::temperature()
 {
-    return m_temp;
+    return m_temperature;
 }
 
 /*!
@@ -464,6 +550,8 @@ size_t DataAir::getKeyMaxCdrSerializedSize(
 
 
 
+
+
     return current_align;
 }
 
@@ -476,5 +564,5 @@ void DataAir::serializeKey(
         eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-            
+              
 }

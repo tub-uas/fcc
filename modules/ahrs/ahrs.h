@@ -17,8 +17,12 @@
 #include <fastdds/dds/publisher/DataWriterListener.hpp>
 
 #include "./idl/DataAhrsPubSubTypes.h"
-
-#include "../../util/ahrsCom/ahrsCom.h"
+// == SITL RUN
+#ifdef SITL
+	#include "../../../ahrsComSitl/ahrsComSitl.h"
+#else
+	#include "../../util/ahrsCom/ahrsCom.h"
+#endif
 #include "../../util/timer/timer.h"
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener

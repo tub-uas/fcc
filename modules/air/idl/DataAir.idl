@@ -1,7 +1,7 @@
 struct DataAir {
 	unsigned long long time;
 	double    senseTime;
-	double    dynamic_pressure;;
+	double    dynamic_pressure;
 	double    true_airspeed;
 	double    indicated_airspeed;
 	double    barometric_pressure;

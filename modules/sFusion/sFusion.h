@@ -28,6 +28,9 @@
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
+// #include "../../lib/ecf/ecf_aoa_ssa/aoa_ssa.h"
+#include "../../lib/ecf/ecf_height/height.h"
+// #include "../../lib/ecf/ecf_wind/wind.h"
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
@@ -81,6 +84,9 @@ public:
 	void run();
 	void publish();
 	void print();
+
+	double get_z_accel(double a_x, double a_y, double a_z, double phi, double the);
+	Height estimator_height;
 
 	const unsigned long long aliveReset = 1e5;  // in us
 	std::atomic_ullong aliveTime;

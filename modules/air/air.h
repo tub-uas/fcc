@@ -59,6 +59,8 @@ public:
 	void publish();
 	void print();
 
+	double get_barometric_height();
+	double get_indicated_airspeed();
 	const unsigned long long aliveReset = 1e5;  // in us
 	std::atomic_ullong aliveTime;
 

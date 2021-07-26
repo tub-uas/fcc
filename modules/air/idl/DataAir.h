@@ -131,114 +131,152 @@ public:
      * @param _senseTime New value for member senseTime
      */
     eProsima_user_DllExport void senseTime(
-            float _senseTime);
+            double _senseTime);
 
     /*!
      * @brief This function returns the value of member senseTime
      * @return Value of member senseTime
      */
-    eProsima_user_DllExport float senseTime() const;
+    eProsima_user_DllExport double senseTime() const;
 
     /*!
      * @brief This function returns a reference to member senseTime
      * @return Reference to member senseTime
      */
-    eProsima_user_DllExport float& senseTime();
+    eProsima_user_DllExport double& senseTime();
 
     /*!
-     * @brief This function sets a value in member dynamicPress
-     * @param _dynamicPress New value for member dynamicPress
+     * @brief This function sets a value in member dynamic_pressure
+     * @param _dynamic_pressure New value for member dynamic_pressure
      */
-    eProsima_user_DllExport void dynamicPress(
-            float _dynamicPress);
+    eProsima_user_DllExport void dynamic_pressure(
+            double _dynamic_pressure);
 
     /*!
-     * @brief This function returns the value of member dynamicPress
-     * @return Value of member dynamicPress
+     * @brief This function returns the value of member dynamic_pressure
+     * @return Value of member dynamic_pressure
      */
-    eProsima_user_DllExport float dynamicPress() const;
+    eProsima_user_DllExport double dynamic_pressure() const;
 
     /*!
-     * @brief This function returns a reference to member dynamicPress
-     * @return Reference to member dynamicPress
+     * @brief This function returns a reference to member dynamic_pressure
+     * @return Reference to member dynamic_pressure
      */
-    eProsima_user_DllExport float& dynamicPress();
+    eProsima_user_DllExport double& dynamic_pressure();
 
     /*!
-     * @brief This function sets a value in member velocity
-     * @param _velocity New value for member velocity
+     * @brief This function sets a value in member true_airspeed
+     * @param _true_airspeed New value for member true_airspeed
      */
-    eProsima_user_DllExport void velocity(
-            float _velocity);
+    eProsima_user_DllExport void true_airspeed(
+            double _true_airspeed);
 
     /*!
-     * @brief This function returns the value of member velocity
-     * @return Value of member velocity
+     * @brief This function returns the value of member true_airspeed
+     * @return Value of member true_airspeed
      */
-    eProsima_user_DllExport float velocity() const;
+    eProsima_user_DllExport double true_airspeed() const;
 
     /*!
-     * @brief This function returns a reference to member velocity
-     * @return Reference to member velocity
+     * @brief This function returns a reference to member true_airspeed
+     * @return Reference to member true_airspeed
      */
-    eProsima_user_DllExport float& velocity();
+    eProsima_user_DllExport double& true_airspeed();
 
     /*!
-     * @brief This function sets a value in member baroPress
-     * @param _baroPress New value for member baroPress
+     * @brief This function sets a value in member indicated_airspeed
+     * @param _indicated_airspeed New value for member indicated_airspeed
      */
-    eProsima_user_DllExport void baroPress(
-            float _baroPress);
+    eProsima_user_DllExport void indicated_airspeed(
+            double _indicated_airspeed);
 
     /*!
-     * @brief This function returns the value of member baroPress
-     * @return Value of member baroPress
+     * @brief This function returns the value of member indicated_airspeed
+     * @return Value of member indicated_airspeed
      */
-    eProsima_user_DllExport float baroPress() const;
+    eProsima_user_DllExport double indicated_airspeed() const;
 
     /*!
-     * @brief This function returns a reference to member baroPress
-     * @return Reference to member baroPress
+     * @brief This function returns a reference to member indicated_airspeed
+     * @return Reference to member indicated_airspeed
      */
-    eProsima_user_DllExport float& baroPress();
+    eProsima_user_DllExport double& indicated_airspeed();
+
+    /*!
+     * @brief This function sets a value in member barometric_pressure
+     * @param _barometric_pressure New value for member barometric_pressure
+     */
+    eProsima_user_DllExport void barometric_pressure(
+            double _barometric_pressure);
+
+    /*!
+     * @brief This function returns the value of member barometric_pressure
+     * @return Value of member barometric_pressure
+     */
+    eProsima_user_DllExport double barometric_pressure() const;
+
+    /*!
+     * @brief This function returns a reference to member barometric_pressure
+     * @return Reference to member barometric_pressure
+     */
+    eProsima_user_DllExport double& barometric_pressure();
+
+    /*!
+     * @brief This function sets a value in member barometric_height
+     * @param _barometric_height New value for member barometric_height
+     */
+    eProsima_user_DllExport void barometric_height(
+            double _barometric_height);
+
+    /*!
+     * @brief This function returns the value of member barometric_height
+     * @return Value of member barometric_height
+     */
+    eProsima_user_DllExport double barometric_height() const;
+
+    /*!
+     * @brief This function returns a reference to member barometric_height
+     * @return Reference to member barometric_height
+     */
+    eProsima_user_DllExport double& barometric_height();
 
     /*!
      * @brief This function sets a value in member density
      * @param _density New value for member density
      */
     eProsima_user_DllExport void density(
-            float _density);
+            double _density);
 
     /*!
      * @brief This function returns the value of member density
      * @return Value of member density
      */
-    eProsima_user_DllExport float density() const;
+    eProsima_user_DllExport double density() const;
 
     /*!
      * @brief This function returns a reference to member density
      * @return Reference to member density
      */
-    eProsima_user_DllExport float& density();
+    eProsima_user_DllExport double& density();
 
     /*!
-     * @brief This function sets a value in member temp
-     * @param _temp New value for member temp
+     * @brief This function sets a value in member temperature
+     * @param _temperature New value for member temperature
      */
-    eProsima_user_DllExport void temp(
-            float _temp);
+    eProsima_user_DllExport void temperature(
+            double _temperature);
 
     /*!
-     * @brief This function returns the value of member temp
-     * @return Value of member temp
+     * @brief This function returns the value of member temperature
+     * @return Value of member temperature
      */
-    eProsima_user_DllExport float temp() const;
+    eProsima_user_DllExport double temperature() const;
 
     /*!
-     * @brief This function returns a reference to member temp
-     * @return Reference to member temp
+     * @brief This function returns a reference to member temperature
+     * @return Reference to member temperature
      */
-    eProsima_user_DllExport float& temp();
+    eProsima_user_DllExport double& temperature();
 
     /*!
      * @brief This function sets a value in member alive
@@ -320,12 +358,14 @@ public:
 private:
 
     uint64_t m_time;
-    float m_senseTime;
-    float m_dynamicPress;
-    float m_velocity;
-    float m_baroPress;
-    float m_density;
-    float m_temp;
+    double m_senseTime;
+    double m_dynamic_pressure;
+    double m_true_airspeed;
+    double m_indicated_airspeed;
+    double m_barometric_pressure;
+    double m_barometric_height;
+    double m_density;
+    double m_temperature;
     bool m_alive;
 };
 

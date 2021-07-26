@@ -35,15 +35,20 @@ add_compile_options(-Wall -Wextra -Werror)
 set(IDL_PATH "idl")
 set(UTIL_PATH "../../util")
 set(DRIVER_PATH "../../driver")
+set(ECF_LIB_PATH "../../lib/ecf")
 
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
+add_library(ecf_height ${ECF_LIB_PATH}/ecf_height/height.cpp)
+add_library(drv_can ${DRIVER_PATH}/drv_can/drv_can.cpp)
+add_library(raiCom ${UTIL_PATH}/raiCom/raiCom.cpp)
 
 add_library(DataSFusion ./${IDL_PATH}/DataSFusion.cxx ./${IDL_PATH}/DataSFusionPubSubTypes.cxx)
 add_library(DataAhrs ../ahrs/${IDL_PATH}/DataAhrs.cxx ../ahrs/${IDL_PATH}/DataAhrsPubSubTypes.cxx)
 add_library(DataAir ../air/${IDL_PATH}/DataAir.cxx ../air/${IDL_PATH}/DataAirPubSubTypes.cxx)
-# add_library(DataGps ../gps/${IDL_PATH}/DataGps.cxx ../gps/${IDL_PATH}/DataGpsPubSubTypes.cxx)
+add_library(DataGps ../gps/${IDL_PATH}/DataGps.cxx ../gps/${IDL_PATH}/DataGpsPubSubTypes.cxx)
+add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/DataRaiInPubSubTypes.cxx)
 
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
-target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs DataAir timer)
-# target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs
-#                                       DataAir DataGps drv_can raiCom timer)
+# target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs DataAir timer)
+target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs
+                                       DataAir DataGps DataRaiIn drv_can raiCom timer ecf_height)
