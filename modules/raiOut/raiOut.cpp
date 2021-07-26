@@ -186,7 +186,7 @@ void RaiOut::publish() {
 		if (timer.getSysTime() < aliveTime + aliveReset) {
 			dataRaiOut.alive(true);
 			raiCom.send(); // Send the commands to RAI over CAN
-			std::cout << "sending ..." << std::endl;
+			
 		} else {
 			dataRaiOut.alive(false);
 		}
@@ -228,9 +228,9 @@ void RaiOut::run() {
 				dataRaiOut.flaps_setpoint(listener.dataCtrl.flaps_setpoint());
 				dataRaiOut.flight_mode((uint16_t)listener.dataCtrl.flight_mode());
 				dataRaiOut.flight_fct((uint16_t)listener.dataCtrl.flight_fct());
-
+				std::cout << "MIXER CH0 ... " << mixer.get_thr_pwm_setpoint(dataRaiOut.throttle_setpoint()/mixer.get_thr_max()); << std::endl
 				raiCom.time = timer.getSysTimeS();
-				raiCom.channel[0] = 1000; //mixer.get_thr_pwm_setpoint(dataRaiOut.throttle_setpoint()/mixer.get_thr_max());
+				raiCom.channel[0] = 1000; //
 				raiCom.channel[1] = mixer.get_ail_right_pwm_setpoint(dataRaiOut.xi_setpoint()/mixer.get_ail_max());
 				raiCom.channel[2] = mixer.get_ele_pwm_setpoint(dataRaiOut.eta_setpoint()/mixer.get_ele_max());
 				raiCom.channel[3] = mixer.get_rud_pwm_setpoint(dataRaiOut.zeta_setpoint()/mixer.get_rud_max());
