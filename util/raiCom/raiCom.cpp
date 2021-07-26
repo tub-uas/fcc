@@ -93,7 +93,7 @@ bool RaiCom::send(std::array<uint16_t, CAN_META_RAI_CHNL_NUM> channel, float tim
 
 			memcpy(&frame.data[2*j], &pwm, sizeof(uint16_t));
 		}
-
+		
 		drv_can_send(can_sckt, frame);
 	}
 

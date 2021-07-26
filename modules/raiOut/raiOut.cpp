@@ -186,6 +186,7 @@ void RaiOut::publish() {
 		if (timer.getSysTime() < aliveTime + aliveReset) {
 			dataRaiOut.alive(true);
 			raiCom.send(); // Send the commands to RAI over CAN
+			std::cout << "sending ..." << std::endl;
 		} else {
 			dataRaiOut.alive(false);
 		}
