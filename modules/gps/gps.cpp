@@ -104,8 +104,7 @@ void Gps::publish() {
 		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
 		dataGps.time(timer.getSysTime());
 
-		if (timer.getSysTime() < aliveTime + aliveReset
-		    && gpsCom.valid) {
+		if (timer.getSysTime() < aliveTime + aliveReset) {
 			dataGps.alive(true);
 		} else {
 			dataGps.alive(false);
