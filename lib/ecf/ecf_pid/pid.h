@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <array>
 
-#include "../../util/timer/timer.h"
+#include "../../../util/timer/timer.h"
 
 typedef struct {
 	double kP;
@@ -24,6 +24,7 @@ public:
 
 	bool init(double kP, double kI, double kD, double lim_max, double lim_min);
 	bool init(pid_setup_t setup);
+	
 
 	double update(double target, double is, double dt);
 
@@ -43,6 +44,7 @@ public:
 	double get_limit_max() { return _lim_max; }
 	double get_limit_min() { return _lim_min; }
 	
+	bool get_init_state() { return _is_init; }
 
 private:
 	

@@ -74,7 +74,7 @@ public:
 	// == GETTER FUNCTIONS =====================================================
 	double get_thr_max() { return _thr_max; }
 	double get_ail_max() { return _ail_max; }
-	double get_max_max() { return _ele_max; }
+	double get_ele_max() { return _ele_max; }
 	double get_rud_max() { return _rud_max; }
 	double get_flp_max() { return _flp_max; }
 
@@ -108,7 +108,10 @@ public:
 	uint16_t get_ail_right_pwm_setpoint(double norm) { return _get_pwm_from_normalized(norm, SURFACE); }
 	uint16_t get_ele_pwm_setpoint(double norm) { return _get_pwm_from_normalized(norm, SURFACE); }
 	uint16_t get_rud_pwm_setpoint(double norm) { return _get_pwm_from_normalized(norm, SURFACE); }
-	uint16_t get_flp_setpoint(double norm) { return _get_pwm_from_normalized(norm, SURFACE); }
+	uint16_t get_flp_pwm_setpoint(double norm) { return _get_pwm_from_normalized(norm, SURFACE); }
+
+	uint16_t get_flight_mode_pwm(flight_mode_t mode);
+	uint16_t get_flight_fct_pwm(flight_fct_t fct);
 
 
 private:

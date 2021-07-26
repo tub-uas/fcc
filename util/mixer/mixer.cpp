@@ -50,6 +50,31 @@ void Mixer::set_flight_mode(uint16_t mode_pwm)
  *
  * @return  void    [return description]
  */
+uint16_t Mixer::get_flight_mode_pwm(flight_mode_t mode) 
+{
+	uint16_t pwm_val_mode = 1500;
+	switch(mode)
+	{
+		case MANUAL:
+			pwm_val_mode = 1500;
+			break;
+		
+		case AUTONOMOUS:
+			pwm_val_mode = 1000;
+			break;
+		
+		case EXPERIMENTAL:
+			pwm_val_mode = 2000;
+			break;
+	}
+	return pwm_val_mode;
+}		
+
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
 void Mixer::set_flight_fct(uint16_t fct_pwm)
 {
 	// GET RANGE FROM PWM 0 1 2 by scaling Motor
@@ -64,6 +89,26 @@ void Mixer::set_flight_fct(uint16_t fct_pwm)
 		_flight_fct = FCT_1;
 	}
 }
+
+uint16_t Mixer::get_flight_fct_pwm(flight_fct_t fct) 
+{
+	uint16_t pwm_val_fct = 1500;
+	switch(fct)
+	{
+		case FCT_0:
+			pwm_val_fct = 1000;
+			break;
+		
+		case FCT_1:
+			pwm_val_fct = 1500;
+			break;
+		
+		case FCT_2:
+			pwm_val_fct = 2000;
+			break;
+	}
+	return pwm_val_fct;
+}		
 
 /**
  * [Mixer description]

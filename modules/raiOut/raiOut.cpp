@@ -169,7 +169,7 @@ bool RaiOut::init() {
 	if (raiCom.init() == false) {
 		return false;
 	}
-
+	mixer.init(1000,2000);
 	return true;
 }
 
@@ -199,7 +199,7 @@ void RaiOut::publish() {
 		std::this_thread::sleep_until(next_wakeup);
 		next_wakeup += std::chrono::milliseconds(10);
 	}
-
+	
 }
 
 
@@ -220,21 +220,22 @@ void RaiOut::run() {
 			if (listener.dataCtrl.alive()) {
 
 				dataRaiOut.chnl(raiCom.channel);
-				dataRaiOut.roll(listener.dataCtrl.xi());
-				dataRaiOut.pitch(listener.dataCtrl.eta());
-				dataRaiOut.yaw(listener.dataCtrl.zeta());
-				dataRaiOut.thr(listener.dataCtrl.etaT());
-				dataRaiOut.fltMode(listener.dataCtrl.fltMode());
-				dataRaiOut.fltFunc(listener.dataCtrl.fltFunc());
+				dataRaiOut.xi_setpoint(listener.dataCtrl.xi_setpoint());
+				dataRaiOut.eta_setpoint(listener.dataCtrl.eta_setpoint());
+				dataRaiOut.zeta_setpoint(listener.dataCtrl.zeta_setpoint());
+				dataRaiOut.throttle_setpoint(listener.dataCtrl.throttle_setpoint());
+				dataRaiOut.flaps_setpoint(listener.dataCtrl.flaps_setpoint());
+				dataRaiOut.flight_mode((uint16_t)listener.dataCtrl.flight_mode());
+				dataRaiOut.flight_fct((uint16_t)listener.dataCtrl.flight_fct());
 
 				raiCom.time = timer.getSysTimeS();
-				raiCom.channel[0] = mixer.rad2pwm(Mixer::THR, listener.dataCtrl.etaT());
-				raiCom.channel[1] = mixer.rad2pwm(Mixer::AILR, listener.dataCtrl.xi());
-				raiCom.channel[2] = mixer.rad2pwm(Mixer::ELE, listener.dataCtrl.eta());
-				raiCom.channel[3] = mixer.rad2pwm(Mixer::RUD, listener.dataCtrl.zeta());
-				raiCom.channel[4] = mixer.rad2pwm(Mixer::AILL, -listener.dataCtrl.xi());
-				raiCom.channel[5] = mixer.func2pwm((Mixer::Func)listener.dataCtrl.fltFunc());
-				raiCom.channel[6] = mixer.mode2pwm((Mixer::Mode)listener.dataCtrl.fltMode());
+				raiCom.channel[0] = mixer.get_thr_pwm_setpoint(dataRaiOut.throttle_setpoint()/mixer.get_thr_max());
+				raiCom.channel[1] = mixer.get_ail_right_pwm_setpoint(dataRaiOut.xi_setpoint()/mixer.get_ail_max());
+				raiCom.channel[2] = mixer.get_ele_pwm_setpoint(dataRaiOut.eta_setpoint()/mixer.get_ele_max());
+				raiCom.channel[3] = mixer.get_rud_pwm_setpoint(dataRaiOut.zeta_setpoint()/mixer.get_rud_max());
+				raiCom.channel[4] = mixer.get_ail_left_pwm_setpoint(dataRaiOut.xi_setpoint()/mixer.get_ail_max());
+				raiCom.channel[5] = mixer.get_flight_fct_pwm((flight_fct_t)dataRaiOut.flight_fct());
+				raiCom.channel[6] = mixer.get_flight_mode_pwm((flight_mode_t)dataRaiOut.flight_mode());
 				raiCom.channel[7] = 1500;
 				raiCom.channel[8] = 1500;
 				raiCom.channel[9] = 1500;
@@ -270,11 +271,13 @@ void RaiOut::print() {
 		std::cout << "chnl[" << i << "]" << " " << dataRaiOut.chnl().at(i) << std::endl;
 	}
 
-	std::cout << "roll      " << dataRaiOut.roll() << std::endl;
-	std::cout << "pitch     " << dataRaiOut.pitch() << std::endl;
-	std::cout << "yaw       " << dataRaiOut.yaw() << std::endl;
-	std::cout << "thr       " << dataRaiOut.thr() << std::endl;
-	std::cout << "fltMode   " << dataRaiOut.fltMode() << std::endl;
-	std::cout << "alive     " << dataRaiOut.alive() << std::endl;
+	std::cout << "xi_sp       " << dataRaiOut.xi_setpoint() << std::endl;
+	std::cout << "eta_sp      " << dataRaiOut.eta_setpoint() << std::endl;
+	std::cout << "zeta_sp     " << dataRaiOut.zeta_setpoint() << std::endl;
+	std::cout << "throttle_sp " << dataRaiOut.throttle_setpoint() << std::endl;
+	std::cout << "flaps_sp    " << dataRaiOut.flaps_setpoint() << std::endl;
+	std::cout << "flight_mode " << dataRaiOut.flight_mode() << std::endl;
+	std::cout << "flight_fct  " << dataRaiOut.flight_fct() << std::endl;
+	std::cout << "alive       " << dataRaiOut.alive() << std::endl;
 
 }

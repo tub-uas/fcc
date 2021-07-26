@@ -135,11 +135,13 @@ void Air::run() {
 			std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
 
 			dataAir.senseTime(airCom.time);
-			dataAir.dynamicPress(airCom.dynamicPress);
-			dataAir.velocity(airCom.velocity);
-			dataAir.baroPress(airCom.baroPress);
+			dataAir.dynamic_pressure(airCom.dynamicPress);
+			dataAir.true_airspeed(airCom.velocity);
+			dataAir.indicated_airspeed(get_indicated_airspeed());
+			dataAir.barometric_pressure(airCom.baroPress);
+			dataAir.barometric_height(get_barometric_height());
 			dataAir.density(airCom.density);
-			dataAir.temp(airCom.temp);
+			dataAir.temperature(airCom.temp);
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
@@ -157,16 +159,35 @@ void Air::run() {
 
 }
 
+/**
+ * Compute barometric height by wikipedia formula
+ * https://de.wikipedia.org/wiki/Barometrische_Höhenformel
+ *
+ * @return  double  [return description]
+ */
+double Air::get_barometric_height() 
+{
+	const double K = 288.15/0.0065;
+	const double exponent = 1/5.255;
+	
+	return K*(1-pow(airCom.baroPress/101325.0,exponent));
+}
+
+double Air::get_indicated_airspeed()
+{
+	return sqrt(2*airCom.dynamicPress/1.225);
+}
+
 void Air::print() {
 
 	std::cout << "--- " << this->name << " " << dataAir.time() << " ---" << std::endl;
 
 	std::cout << "senseTime    " << dataAir.senseTime() << std::endl;
-	std::cout << "dynamicPress " << dataAir.dynamicPress() << std::endl;
-	std::cout << "velocity     " << dataAir.velocity() << std::endl;
-	std::cout << "baroPress    " << dataAir.baroPress() << std::endl;
+	std::cout << "dynamicPress " << dataAir.dynamic_pressure() << std::endl;
+	std::cout << "velocity     " << dataAir.true_airspeed() << std::endl;
+	std::cout << "baroPress    " << dataAir.indicated_airspeed() << std::endl;
 	std::cout << "density      " << dataAir.density() << std::endl;
-	std::cout << "temp         " << dataAir.temp() << std::endl;
+	std::cout << "temp         " << dataAir.temperature() << std::endl;
 	std::cout << "alive        " << dataAir.alive() << std::endl;
 
 }

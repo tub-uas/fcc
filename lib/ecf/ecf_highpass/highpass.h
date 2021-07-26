@@ -9,6 +9,7 @@ public:
     bool init(double tau, double delta_t);
     double update(double u);
     void reset();
+	bool get_init_state() { return _is_init; }
 private:
     
     bool _is_init{false};

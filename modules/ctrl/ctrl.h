@@ -32,6 +32,19 @@
 #include "../../util/mixer/mixer.h"
 #include "../../util/timer/timer.h"
 
+typedef enum {
+	MANUAL_MODE = 0,
+	STABILIZED_MODE,
+	AUTOPILOT_MODE
+} manual_modes_t;
+
+typedef enum {
+	FLIGHTPLAN_MODE = 0,
+	MISSION_MODE,
+	AI_MODE
+} autonomous_mode_t;
+
+
 
 class Listener : public eprosima::fastdds::dds::DataWriterListener, public eprosima::fastdds::dds::DataReaderListener
 {
@@ -78,6 +91,20 @@ public:
 	void publish();
 	void print();
 
+	bool update_raiIn_data();
+	bool update_sfusion_data();
+
+	double ctrl_pitch_damper(double k_eta_q);
+	double ctrl_roll_damper(double k_xi_p);
+	double ctrl_yaw_damper(double k_zeta_r, double tc_hp);
+
+	double ctrl_att_pitch(double k_p, double k_i, double k_d, double dt);
+	double ctrl_att_roll(double k_p, double k_i, double k_d, double dt);
+
+	
+
+
+
 	const unsigned long long aliveReset = 1e5;  // in us
 	std::atomic_ullong aliveTime;
 
@@ -103,10 +130,73 @@ private:
 	eprosima::fastdds::dds::TypeSupport  typeSFusion;
 
 	Timer  timer;
-	Pid    pidRoll;
-	Pid    pidPitch;
-	Pid    pidYaw;
+	
+	Pid    _pid_att_roll;
+	Pid    _pid_att_pitch;
+	Highpass _yaw_damper_hp;
+	
+	
+	double _p;
+	double _q;
+	double _r;
 
+	double _a_x;
+	double _a_y;
+	double _a_z;
+
+	double _true_airspeed;
+	double _indicated_airspeed;
+	double _density;
+	double _dynamic_pressure;
+	double _barometric_pressure;
+	
+	double _height_rate;
+	double _height;
+	
+	double _aoa;
+	double _ssa;
+	double _gamma;
+	double _phi;
+	double _the;
+	double _psi;
+
+	double _latitude;
+	double _longitude;
+	double _posN;
+	double _posE;
+	double _posD;
+
+	double _speedN;
+	double _speedE;
+	double _speedD;
+
+	double _windN;
+	double _windE;
+	double _windD;
+
+	double _xi_setpoint;
+	double _eta_setpoint;
+	double _zeta_setpoint;
+	double _throttle_setpoint;
+	double _flaps_setpoint;
+	double _roll_setpoint;
+	double _pitch_setpoint;
+	double _yaw_setpoint;
+	double _hgt_setpoint;
+	double _tas_setpoint;
+	double _roll_rate_setpoint;
+	double _pitch_rate_setpoint;
+	double _yaw_rate_setpoint;
+	double _hgt_rate_setpoint;
+	double _tas_rate_setpoint;
+	flight_mode_t _flight_mode;
+	flight_fct_t _flight_fct;
+
+	bool _raiIn_alive{false};
+	bool _sfusion_alive{false};
+
+	// double _turn_compensation();
+	// double _turn_coordination();
 
 };
 

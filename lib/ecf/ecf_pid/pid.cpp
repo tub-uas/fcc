@@ -40,7 +40,7 @@ bool Pid::init(pid_setup_t setup)
 double Pid::update(double target, double is, double dt) {
 
 	// Check if time is negative
-	if (dt <= 0.0 || !_is_init) {
+	if (dt <= 0.0 || _is_init == false) {
 		return _cmd_last;
 	}
 
