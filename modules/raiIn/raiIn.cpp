@@ -186,7 +186,7 @@ void RaiIn::run() {
 
 			// == EXPERIMENTAL CONTROL == MODE - EXP 3      | FCT - 2 ==========
 
-
+			print();
 			// == UPDATE ALIVE TIMER ===========================================
 			aliveTime = timer.getSysTime();
 			dataRaiInLock.unlock();

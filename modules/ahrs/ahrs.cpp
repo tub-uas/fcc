@@ -154,7 +154,7 @@ void Ahrs::run() {
 
 			dataAhrsLock.unlock();
 
-			// ahrsCom.print();
+		        print();
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);

@@ -189,6 +189,7 @@ void RaiOut::publish() {
 			
 		} else {
 			dataRaiOut.alive(false);
+			std::cout << "timeout..." << std::endl;
 		}
 
 		writerRaiOut->write(&dataRaiOut);
