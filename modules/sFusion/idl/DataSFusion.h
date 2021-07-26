@@ -127,574 +127,574 @@ public:
     eProsima_user_DllExport uint64_t& time();
 
     /*!
-     * @brief This function sets a value in member gyrX
-     * @param _gyrX New value for member gyrX
+     * @brief This function sets a value in member p
+     * @param _p New value for member p
      */
-    eProsima_user_DllExport void gyrX(
-            float _gyrX);
+    eProsima_user_DllExport void p(
+            double _p);
 
     /*!
-     * @brief This function returns the value of member gyrX
-     * @return Value of member gyrX
+     * @brief This function returns the value of member p
+     * @return Value of member p
      */
-    eProsima_user_DllExport float gyrX() const;
+    eProsima_user_DllExport double p() const;
 
     /*!
-     * @brief This function returns a reference to member gyrX
-     * @return Reference to member gyrX
+     * @brief This function returns a reference to member p
+     * @return Reference to member p
      */
-    eProsima_user_DllExport float& gyrX();
+    eProsima_user_DllExport double& p();
 
     /*!
-     * @brief This function sets a value in member gyrY
-     * @param _gyrY New value for member gyrY
+     * @brief This function sets a value in member q
+     * @param _q New value for member q
      */
-    eProsima_user_DllExport void gyrY(
-            float _gyrY);
+    eProsima_user_DllExport void q(
+            double _q);
 
     /*!
-     * @brief This function returns the value of member gyrY
-     * @return Value of member gyrY
+     * @brief This function returns the value of member q
+     * @return Value of member q
      */
-    eProsima_user_DllExport float gyrY() const;
+    eProsima_user_DllExport double q() const;
 
     /*!
-     * @brief This function returns a reference to member gyrY
-     * @return Reference to member gyrY
+     * @brief This function returns a reference to member q
+     * @return Reference to member q
      */
-    eProsima_user_DllExport float& gyrY();
+    eProsima_user_DllExport double& q();
 
     /*!
-     * @brief This function sets a value in member gyrZ
-     * @param _gyrZ New value for member gyrZ
+     * @brief This function sets a value in member r
+     * @param _r New value for member r
      */
-    eProsima_user_DllExport void gyrZ(
-            float _gyrZ);
+    eProsima_user_DllExport void r(
+            double _r);
 
     /*!
-     * @brief This function returns the value of member gyrZ
-     * @return Value of member gyrZ
+     * @brief This function returns the value of member r
+     * @return Value of member r
      */
-    eProsima_user_DllExport float gyrZ() const;
+    eProsima_user_DllExport double r() const;
 
     /*!
-     * @brief This function returns a reference to member gyrZ
-     * @return Reference to member gyrZ
+     * @brief This function returns a reference to member r
+     * @return Reference to member r
      */
-    eProsima_user_DllExport float& gyrZ();
+    eProsima_user_DllExport double& r();
 
     /*!
-     * @brief This function sets a value in member accX
-     * @param _accX New value for member accX
+     * @brief This function sets a value in member a_x
+     * @param _a_x New value for member a_x
      */
-    eProsima_user_DllExport void accX(
-            float _accX);
+    eProsima_user_DllExport void a_x(
+            double _a_x);
 
     /*!
-     * @brief This function returns the value of member accX
-     * @return Value of member accX
+     * @brief This function returns the value of member a_x
+     * @return Value of member a_x
      */
-    eProsima_user_DllExport float accX() const;
+    eProsima_user_DllExport double a_x() const;
 
     /*!
-     * @brief This function returns a reference to member accX
-     * @return Reference to member accX
+     * @brief This function returns a reference to member a_x
+     * @return Reference to member a_x
      */
-    eProsima_user_DllExport float& accX();
+    eProsima_user_DllExport double& a_x();
 
     /*!
-     * @brief This function sets a value in member accY
-     * @param _accY New value for member accY
+     * @brief This function sets a value in member a_y
+     * @param _a_y New value for member a_y
      */
-    eProsima_user_DllExport void accY(
-            float _accY);
+    eProsima_user_DllExport void a_y(
+            double _a_y);
 
     /*!
-     * @brief This function returns the value of member accY
-     * @return Value of member accY
+     * @brief This function returns the value of member a_y
+     * @return Value of member a_y
      */
-    eProsima_user_DllExport float accY() const;
+    eProsima_user_DllExport double a_y() const;
 
     /*!
-     * @brief This function returns a reference to member accY
-     * @return Reference to member accY
+     * @brief This function returns a reference to member a_y
+     * @return Reference to member a_y
      */
-    eProsima_user_DllExport float& accY();
+    eProsima_user_DllExport double& a_y();
 
     /*!
-     * @brief This function sets a value in member accZ
-     * @param _accZ New value for member accZ
+     * @brief This function sets a value in member a_z
+     * @param _a_z New value for member a_z
      */
-    eProsima_user_DllExport void accZ(
-            float _accZ);
+    eProsima_user_DllExport void a_z(
+            double _a_z);
 
     /*!
-     * @brief This function returns the value of member accZ
-     * @return Value of member accZ
+     * @brief This function returns the value of member a_z
+     * @return Value of member a_z
      */
-    eProsima_user_DllExport float accZ() const;
+    eProsima_user_DllExport double a_z() const;
 
     /*!
-     * @brief This function returns a reference to member accZ
-     * @return Reference to member accZ
+     * @brief This function returns a reference to member a_z
+     * @return Reference to member a_z
      */
-    eProsima_user_DllExport float& accZ();
+    eProsima_user_DllExport double& a_z();
 
     /*!
-     * @brief This function sets a value in member magX
-     * @param _magX New value for member magX
+     * @brief This function sets a value in member true_airspeed
+     * @param _true_airspeed New value for member true_airspeed
      */
-    eProsima_user_DllExport void magX(
-            float _magX);
+    eProsima_user_DllExport void true_airspeed(
+            double _true_airspeed);
 
     /*!
-     * @brief This function returns the value of member magX
-     * @return Value of member magX
+     * @brief This function returns the value of member true_airspeed
+     * @return Value of member true_airspeed
      */
-    eProsima_user_DllExport float magX() const;
+    eProsima_user_DllExport double true_airspeed() const;
 
     /*!
-     * @brief This function returns a reference to member magX
-     * @return Reference to member magX
+     * @brief This function returns a reference to member true_airspeed
+     * @return Reference to member true_airspeed
      */
-    eProsima_user_DllExport float& magX();
+    eProsima_user_DllExport double& true_airspeed();
 
     /*!
-     * @brief This function sets a value in member magY
-     * @param _magY New value for member magY
+     * @brief This function sets a value in member indicated_airspeed
+     * @param _indicated_airspeed New value for member indicated_airspeed
      */
-    eProsima_user_DllExport void magY(
-            float _magY);
+    eProsima_user_DllExport void indicated_airspeed(
+            double _indicated_airspeed);
 
     /*!
-     * @brief This function returns the value of member magY
-     * @return Value of member magY
+     * @brief This function returns the value of member indicated_airspeed
+     * @return Value of member indicated_airspeed
      */
-    eProsima_user_DllExport float magY() const;
+    eProsima_user_DllExport double indicated_airspeed() const;
 
     /*!
-     * @brief This function returns a reference to member magY
-     * @return Reference to member magY
+     * @brief This function returns a reference to member indicated_airspeed
+     * @return Reference to member indicated_airspeed
      */
-    eProsima_user_DllExport float& magY();
+    eProsima_user_DllExport double& indicated_airspeed();
 
     /*!
-     * @brief This function sets a value in member magZ
-     * @param _magZ New value for member magZ
+     * @brief This function sets a value in member density
+     * @param _density New value for member density
      */
-    eProsima_user_DllExport void magZ(
-            float _magZ);
+    eProsima_user_DllExport void density(
+            double _density);
 
     /*!
-     * @brief This function returns the value of member magZ
-     * @return Value of member magZ
+     * @brief This function returns the value of member density
+     * @return Value of member density
      */
-    eProsima_user_DllExport float magZ() const;
+    eProsima_user_DllExport double density() const;
 
     /*!
-     * @brief This function returns a reference to member magZ
-     * @return Reference to member magZ
+     * @brief This function returns a reference to member density
+     * @return Reference to member density
      */
-    eProsima_user_DllExport float& magZ();
+    eProsima_user_DllExport double& density();
 
     /*!
-     * @brief This function sets a value in member temp
-     * @param _temp New value for member temp
+     * @brief This function sets a value in member dynamic_pressure
+     * @param _dynamic_pressure New value for member dynamic_pressure
      */
-    eProsima_user_DllExport void temp(
-            float _temp);
+    eProsima_user_DllExport void dynamic_pressure(
+            double _dynamic_pressure);
 
     /*!
-     * @brief This function returns the value of member temp
-     * @return Value of member temp
+     * @brief This function returns the value of member dynamic_pressure
+     * @return Value of member dynamic_pressure
      */
-    eProsima_user_DllExport float temp() const;
+    eProsima_user_DllExport double dynamic_pressure() const;
 
     /*!
-     * @brief This function returns a reference to member temp
-     * @return Reference to member temp
+     * @brief This function returns a reference to member dynamic_pressure
+     * @return Reference to member dynamic_pressure
      */
-    eProsima_user_DllExport float& temp();
+    eProsima_user_DllExport double& dynamic_pressure();
 
     /*!
-     * @brief This function sets a value in member press
-     * @param _press New value for member press
+     * @brief This function sets a value in member barometric_pressure
+     * @param _barometric_pressure New value for member barometric_pressure
      */
-    eProsima_user_DllExport void press(
-            float _press);
+    eProsima_user_DllExport void barometric_pressure(
+            double _barometric_pressure);
 
     /*!
-     * @brief This function returns the value of member press
-     * @return Value of member press
+     * @brief This function returns the value of member barometric_pressure
+     * @return Value of member barometric_pressure
      */
-    eProsima_user_DllExport float press() const;
+    eProsima_user_DllExport double barometric_pressure() const;
 
     /*!
-     * @brief This function returns a reference to member press
-     * @return Reference to member press
+     * @brief This function returns a reference to member barometric_pressure
+     * @return Reference to member barometric_pressure
      */
-    eProsima_user_DllExport float& press();
+    eProsima_user_DllExport double& barometric_pressure();
 
     /*!
-     * @brief This function sets a value in member phi
-     * @param _phi New value for member phi
+     * @brief This function sets a value in member height_rate
+     * @param _height_rate New value for member height_rate
      */
-    eProsima_user_DllExport void phi(
-            float _phi);
+    eProsima_user_DllExport void height_rate(
+            double _height_rate);
 
     /*!
-     * @brief This function returns the value of member phi
-     * @return Value of member phi
+     * @brief This function returns the value of member height_rate
+     * @return Value of member height_rate
      */
-    eProsima_user_DllExport float phi() const;
+    eProsima_user_DllExport double height_rate() const;
 
     /*!
-     * @brief This function returns a reference to member phi
-     * @return Reference to member phi
+     * @brief This function returns a reference to member height_rate
+     * @return Reference to member height_rate
      */
-    eProsima_user_DllExport float& phi();
+    eProsima_user_DllExport double& height_rate();
 
     /*!
-     * @brief This function sets a value in member the
-     * @param _the New value for member the
+     * @brief This function sets a value in member height
+     * @param _height New value for member height
      */
-    eProsima_user_DllExport void the(
-            float _the);
+    eProsima_user_DllExport void height(
+            double _height);
 
     /*!
-     * @brief This function returns the value of member the
-     * @return Value of member the
+     * @brief This function returns the value of member height
+     * @return Value of member height
      */
-    eProsima_user_DllExport float the() const;
+    eProsima_user_DllExport double height() const;
 
     /*!
-     * @brief This function returns a reference to member the
-     * @return Reference to member the
+     * @brief This function returns a reference to member height
+     * @return Reference to member height
      */
-    eProsima_user_DllExport float& the();
-
-    /*!
-     * @brief This function sets a value in member psi
-     * @param _psi New value for member psi
-     */
-    eProsima_user_DllExport void psi(
-            float _psi);
-
-    /*!
-     * @brief This function returns the value of member psi
-     * @return Value of member psi
-     */
-    eProsima_user_DllExport float psi() const;
-
-    /*!
-     * @brief This function returns a reference to member psi
-     * @return Reference to member psi
-     */
-    eProsima_user_DllExport float& psi();
-
-    /*!
-     * @brief This function sets a value in member q0
-     * @param _q0 New value for member q0
-     */
-    eProsima_user_DllExport void q0(
-            float _q0);
-
-    /*!
-     * @brief This function returns the value of member q0
-     * @return Value of member q0
-     */
-    eProsima_user_DllExport float q0() const;
-
-    /*!
-     * @brief This function returns a reference to member q0
-     * @return Reference to member q0
-     */
-    eProsima_user_DllExport float& q0();
-
-    /*!
-     * @brief This function sets a value in member q1
-     * @param _q1 New value for member q1
-     */
-    eProsima_user_DllExport void q1(
-            float _q1);
-
-    /*!
-     * @brief This function returns the value of member q1
-     * @return Value of member q1
-     */
-    eProsima_user_DllExport float q1() const;
-
-    /*!
-     * @brief This function returns a reference to member q1
-     * @return Reference to member q1
-     */
-    eProsima_user_DllExport float& q1();
-
-    /*!
-     * @brief This function sets a value in member q2
-     * @param _q2 New value for member q2
-     */
-    eProsima_user_DllExport void q2(
-            float _q2);
-
-    /*!
-     * @brief This function returns the value of member q2
-     * @return Value of member q2
-     */
-    eProsima_user_DllExport float q2() const;
-
-    /*!
-     * @brief This function returns a reference to member q2
-     * @return Reference to member q2
-     */
-    eProsima_user_DllExport float& q2();
-
-    /*!
-     * @brief This function sets a value in member q3
-     * @param _q3 New value for member q3
-     */
-    eProsima_user_DllExport void q3(
-            float _q3);
-
-    /*!
-     * @brief This function returns the value of member q3
-     * @return Value of member q3
-     */
-    eProsima_user_DllExport float q3() const;
-
-    /*!
-     * @brief This function returns a reference to member q3
-     * @return Reference to member q3
-     */
-    eProsima_user_DllExport float& q3();
-
-    /*!
-     * @brief This function sets a value in member posN
-     * @param _posN New value for member posN
-     */
-    eProsima_user_DllExport void posN(
-            float _posN);
-
-    /*!
-     * @brief This function returns the value of member posN
-     * @return Value of member posN
-     */
-    eProsima_user_DllExport float posN() const;
-
-    /*!
-     * @brief This function returns a reference to member posN
-     * @return Reference to member posN
-     */
-    eProsima_user_DllExport float& posN();
-
-    /*!
-     * @brief This function sets a value in member posE
-     * @param _posE New value for member posE
-     */
-    eProsima_user_DllExport void posE(
-            float _posE);
-
-    /*!
-     * @brief This function returns the value of member posE
-     * @return Value of member posE
-     */
-    eProsima_user_DllExport float posE() const;
-
-    /*!
-     * @brief This function returns a reference to member posE
-     * @return Reference to member posE
-     */
-    eProsima_user_DllExport float& posE();
-
-    /*!
-     * @brief This function sets a value in member posD
-     * @param _posD New value for member posD
-     */
-    eProsima_user_DllExport void posD(
-            float _posD);
-
-    /*!
-     * @brief This function returns the value of member posD
-     * @return Value of member posD
-     */
-    eProsima_user_DllExport float posD() const;
-
-    /*!
-     * @brief This function returns a reference to member posD
-     * @return Reference to member posD
-     */
-    eProsima_user_DllExport float& posD();
-
-    /*!
-     * @brief This function sets a value in member speedN
-     * @param _speedN New value for member speedN
-     */
-    eProsima_user_DllExport void speedN(
-            float _speedN);
-
-    /*!
-     * @brief This function returns the value of member speedN
-     * @return Value of member speedN
-     */
-    eProsima_user_DllExport float speedN() const;
-
-    /*!
-     * @brief This function returns a reference to member speedN
-     * @return Reference to member speedN
-     */
-    eProsima_user_DllExport float& speedN();
-
-    /*!
-     * @brief This function sets a value in member speedE
-     * @param _speedE New value for member speedE
-     */
-    eProsima_user_DllExport void speedE(
-            float _speedE);
-
-    /*!
-     * @brief This function returns the value of member speedE
-     * @return Value of member speedE
-     */
-    eProsima_user_DllExport float speedE() const;
-
-    /*!
-     * @brief This function returns a reference to member speedE
-     * @return Reference to member speedE
-     */
-    eProsima_user_DllExport float& speedE();
-
-    /*!
-     * @brief This function sets a value in member speedD
-     * @param _speedD New value for member speedD
-     */
-    eProsima_user_DllExport void speedD(
-            float _speedD);
-
-    /*!
-     * @brief This function returns the value of member speedD
-     * @return Value of member speedD
-     */
-    eProsima_user_DllExport float speedD() const;
-
-    /*!
-     * @brief This function returns a reference to member speedD
-     * @return Reference to member speedD
-     */
-    eProsima_user_DllExport float& speedD();
-
-    /*!
-     * @brief This function sets a value in member windN
-     * @param _windN New value for member windN
-     */
-    eProsima_user_DllExport void windN(
-            float _windN);
-
-    /*!
-     * @brief This function returns the value of member windN
-     * @return Value of member windN
-     */
-    eProsima_user_DllExport float windN() const;
-
-    /*!
-     * @brief This function returns a reference to member windN
-     * @return Reference to member windN
-     */
-    eProsima_user_DllExport float& windN();
-
-    /*!
-     * @brief This function sets a value in member windE
-     * @param _windE New value for member windE
-     */
-    eProsima_user_DllExport void windE(
-            float _windE);
-
-    /*!
-     * @brief This function returns the value of member windE
-     * @return Value of member windE
-     */
-    eProsima_user_DllExport float windE() const;
-
-    /*!
-     * @brief This function returns a reference to member windE
-     * @return Reference to member windE
-     */
-    eProsima_user_DllExport float& windE();
-
-    /*!
-     * @brief This function sets a value in member windD
-     * @param _windD New value for member windD
-     */
-    eProsima_user_DllExport void windD(
-            float _windD);
-
-    /*!
-     * @brief This function returns the value of member windD
-     * @return Value of member windD
-     */
-    eProsima_user_DllExport float windD() const;
-
-    /*!
-     * @brief This function returns a reference to member windD
-     * @return Reference to member windD
-     */
-    eProsima_user_DllExport float& windD();
+    eProsima_user_DllExport double& height();
 
     /*!
      * @brief This function sets a value in member ssa
      * @param _ssa New value for member ssa
      */
     eProsima_user_DllExport void ssa(
-            float _ssa);
+            double _ssa);
 
     /*!
      * @brief This function returns the value of member ssa
      * @return Value of member ssa
      */
-    eProsima_user_DllExport float ssa() const;
+    eProsima_user_DllExport double ssa() const;
 
     /*!
      * @brief This function returns a reference to member ssa
      * @return Reference to member ssa
      */
-    eProsima_user_DllExport float& ssa();
+    eProsima_user_DllExport double& ssa();
 
     /*!
      * @brief This function sets a value in member aoa
      * @param _aoa New value for member aoa
      */
     eProsima_user_DllExport void aoa(
-            float _aoa);
+            double _aoa);
 
     /*!
      * @brief This function returns the value of member aoa
      * @return Value of member aoa
      */
-    eProsima_user_DllExport float aoa() const;
+    eProsima_user_DllExport double aoa() const;
 
     /*!
      * @brief This function returns a reference to member aoa
      * @return Reference to member aoa
      */
-    eProsima_user_DllExport float& aoa();
+    eProsima_user_DllExport double& aoa();
 
     /*!
      * @brief This function sets a value in member gamma
      * @param _gamma New value for member gamma
      */
     eProsima_user_DllExport void gamma(
-            float _gamma);
+            double _gamma);
 
     /*!
      * @brief This function returns the value of member gamma
      * @return Value of member gamma
      */
-    eProsima_user_DllExport float gamma() const;
+    eProsima_user_DllExport double gamma() const;
 
     /*!
      * @brief This function returns a reference to member gamma
      * @return Reference to member gamma
      */
-    eProsima_user_DllExport float& gamma();
+    eProsima_user_DllExport double& gamma();
+
+    /*!
+     * @brief This function sets a value in member phi
+     * @param _phi New value for member phi
+     */
+    eProsima_user_DllExport void phi(
+            double _phi);
+
+    /*!
+     * @brief This function returns the value of member phi
+     * @return Value of member phi
+     */
+    eProsima_user_DllExport double phi() const;
+
+    /*!
+     * @brief This function returns a reference to member phi
+     * @return Reference to member phi
+     */
+    eProsima_user_DllExport double& phi();
+
+    /*!
+     * @brief This function sets a value in member the
+     * @param _the New value for member the
+     */
+    eProsima_user_DllExport void the(
+            double _the);
+
+    /*!
+     * @brief This function returns the value of member the
+     * @return Value of member the
+     */
+    eProsima_user_DllExport double the() const;
+
+    /*!
+     * @brief This function returns a reference to member the
+     * @return Reference to member the
+     */
+    eProsima_user_DllExport double& the();
+
+    /*!
+     * @brief This function sets a value in member psi
+     * @param _psi New value for member psi
+     */
+    eProsima_user_DllExport void psi(
+            double _psi);
+
+    /*!
+     * @brief This function returns the value of member psi
+     * @return Value of member psi
+     */
+    eProsima_user_DllExport double psi() const;
+
+    /*!
+     * @brief This function returns a reference to member psi
+     * @return Reference to member psi
+     */
+    eProsima_user_DllExport double& psi();
+
+    /*!
+     * @brief This function sets a value in member latitude
+     * @param _latitude New value for member latitude
+     */
+    eProsima_user_DllExport void latitude(
+            double _latitude);
+
+    /*!
+     * @brief This function returns the value of member latitude
+     * @return Value of member latitude
+     */
+    eProsima_user_DllExport double latitude() const;
+
+    /*!
+     * @brief This function returns a reference to member latitude
+     * @return Reference to member latitude
+     */
+    eProsima_user_DllExport double& latitude();
+
+    /*!
+     * @brief This function sets a value in member longitude
+     * @param _longitude New value for member longitude
+     */
+    eProsima_user_DllExport void longitude(
+            double _longitude);
+
+    /*!
+     * @brief This function returns the value of member longitude
+     * @return Value of member longitude
+     */
+    eProsima_user_DllExport double longitude() const;
+
+    /*!
+     * @brief This function returns a reference to member longitude
+     * @return Reference to member longitude
+     */
+    eProsima_user_DllExport double& longitude();
+
+    /*!
+     * @brief This function sets a value in member posN
+     * @param _posN New value for member posN
+     */
+    eProsima_user_DllExport void posN(
+            double _posN);
+
+    /*!
+     * @brief This function returns the value of member posN
+     * @return Value of member posN
+     */
+    eProsima_user_DllExport double posN() const;
+
+    /*!
+     * @brief This function returns a reference to member posN
+     * @return Reference to member posN
+     */
+    eProsima_user_DllExport double& posN();
+
+    /*!
+     * @brief This function sets a value in member posE
+     * @param _posE New value for member posE
+     */
+    eProsima_user_DllExport void posE(
+            double _posE);
+
+    /*!
+     * @brief This function returns the value of member posE
+     * @return Value of member posE
+     */
+    eProsima_user_DllExport double posE() const;
+
+    /*!
+     * @brief This function returns a reference to member posE
+     * @return Reference to member posE
+     */
+    eProsima_user_DllExport double& posE();
+
+    /*!
+     * @brief This function sets a value in member posD
+     * @param _posD New value for member posD
+     */
+    eProsima_user_DllExport void posD(
+            double _posD);
+
+    /*!
+     * @brief This function returns the value of member posD
+     * @return Value of member posD
+     */
+    eProsima_user_DllExport double posD() const;
+
+    /*!
+     * @brief This function returns a reference to member posD
+     * @return Reference to member posD
+     */
+    eProsima_user_DllExport double& posD();
+
+    /*!
+     * @brief This function sets a value in member speedN
+     * @param _speedN New value for member speedN
+     */
+    eProsima_user_DllExport void speedN(
+            double _speedN);
+
+    /*!
+     * @brief This function returns the value of member speedN
+     * @return Value of member speedN
+     */
+    eProsima_user_DllExport double speedN() const;
+
+    /*!
+     * @brief This function returns a reference to member speedN
+     * @return Reference to member speedN
+     */
+    eProsima_user_DllExport double& speedN();
+
+    /*!
+     * @brief This function sets a value in member speedE
+     * @param _speedE New value for member speedE
+     */
+    eProsima_user_DllExport void speedE(
+            double _speedE);
+
+    /*!
+     * @brief This function returns the value of member speedE
+     * @return Value of member speedE
+     */
+    eProsima_user_DllExport double speedE() const;
+
+    /*!
+     * @brief This function returns a reference to member speedE
+     * @return Reference to member speedE
+     */
+    eProsima_user_DllExport double& speedE();
+
+    /*!
+     * @brief This function sets a value in member speedD
+     * @param _speedD New value for member speedD
+     */
+    eProsima_user_DllExport void speedD(
+            double _speedD);
+
+    /*!
+     * @brief This function returns the value of member speedD
+     * @return Value of member speedD
+     */
+    eProsima_user_DllExport double speedD() const;
+
+    /*!
+     * @brief This function returns a reference to member speedD
+     * @return Reference to member speedD
+     */
+    eProsima_user_DllExport double& speedD();
+
+    /*!
+     * @brief This function sets a value in member windN
+     * @param _windN New value for member windN
+     */
+    eProsima_user_DllExport void windN(
+            double _windN);
+
+    /*!
+     * @brief This function returns the value of member windN
+     * @return Value of member windN
+     */
+    eProsima_user_DllExport double windN() const;
+
+    /*!
+     * @brief This function returns a reference to member windN
+     * @return Reference to member windN
+     */
+    eProsima_user_DllExport double& windN();
+
+    /*!
+     * @brief This function sets a value in member windE
+     * @param _windE New value for member windE
+     */
+    eProsima_user_DllExport void windE(
+            double _windE);
+
+    /*!
+     * @brief This function returns the value of member windE
+     * @return Value of member windE
+     */
+    eProsima_user_DllExport double windE() const;
+
+    /*!
+     * @brief This function returns a reference to member windE
+     * @return Reference to member windE
+     */
+    eProsima_user_DllExport double& windE();
+
+    /*!
+     * @brief This function sets a value in member windD
+     * @param _windD New value for member windD
+     */
+    eProsima_user_DllExport void windD(
+            double _windD);
+
+    /*!
+     * @brief This function returns the value of member windD
+     * @return Value of member windD
+     */
+    eProsima_user_DllExport double windD() const;
+
+    /*!
+     * @brief This function returns a reference to member windD
+     * @return Reference to member windD
+     */
+    eProsima_user_DllExport double& windD();
 
     /*!
      * @brief This function sets a value in member alive
@@ -776,36 +776,36 @@ public:
 private:
 
     uint64_t m_time;
-    float m_gyrX;
-    float m_gyrY;
-    float m_gyrZ;
-    float m_accX;
-    float m_accY;
-    float m_accZ;
-    float m_magX;
-    float m_magY;
-    float m_magZ;
-    float m_temp;
-    float m_press;
-    float m_phi;
-    float m_the;
-    float m_psi;
-    float m_q0;
-    float m_q1;
-    float m_q2;
-    float m_q3;
-    float m_posN;
-    float m_posE;
-    float m_posD;
-    float m_speedN;
-    float m_speedE;
-    float m_speedD;
-    float m_windN;
-    float m_windE;
-    float m_windD;
-    float m_ssa;
-    float m_aoa;
-    float m_gamma;
+    double m_p;
+    double m_q;
+    double m_r;
+    double m_a_x;
+    double m_a_y;
+    double m_a_z;
+    double m_true_airspeed;
+    double m_indicated_airspeed;
+    double m_density;
+    double m_dynamic_pressure;
+    double m_barometric_pressure;
+    double m_height_rate;
+    double m_height;
+    double m_ssa;
+    double m_aoa;
+    double m_gamma;
+    double m_phi;
+    double m_the;
+    double m_psi;
+    double m_latitude;
+    double m_longitude;
+    double m_posN;
+    double m_posE;
+    double m_posD;
+    double m_speedN;
+    double m_speedE;
+    double m_speedD;
+    double m_windN;
+    double m_windE;
+    double m_windD;
     bool m_alive;
 };
 

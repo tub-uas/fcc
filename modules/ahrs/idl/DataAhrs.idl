@@ -10,7 +10,7 @@ struct DataAhrs {
 	double    magX;
 	double    magY;
 	double    magZ;
-	double    tempertaure;
+	double    temperature;
 	double    barometric_pressure;
 	double    phi;
 	double    the;

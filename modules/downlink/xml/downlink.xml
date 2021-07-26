@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <mavlink>
-    <include>common.xml</include>
+    <!--<include>common.xml</include>-->
     <dialect>10</dialect>
     <messages>
         <message id="10000" name="DataRaiIn">

@@ -36,69 +36,69 @@ using namespace eprosima::fastcdr::exception;
 
 DataSFusion::DataSFusion()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_time = 0;
-    // m_gyrX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
-    m_gyrX = 0.0;
-    // m_gyrY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
-    m_gyrY = 0.0;
-    // m_gyrZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
-    m_gyrZ = 0.0;
-    // m_accX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
-    m_accX = 0.0;
-    // m_accY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
-    m_accY = 0.0;
-    // m_accZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
-    m_accZ = 0.0;
-    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
-    m_magX = 0.0;
-    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
-    m_magY = 0.0;
-    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
-    m_magZ = 0.0;
-    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
-    m_temp = 0.0;
-    // m_press com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
-    m_press = 0.0;
-    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
-    m_phi = 0.0;
-    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
-    m_the = 0.0;
-    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
-    m_psi = 0.0;
-    // m_q0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
-    m_q0 = 0.0;
-    // m_q1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@a74868d
-    m_q1 = 0.0;
-    // m_q2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12c8a2c0
-    m_q2 = 0.0;
-    // m_q3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
-    m_q3 = 0.0;
-    // m_posN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
-    m_posN = 0.0;
-    // m_posE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@18bf3d14
-    m_posE = 0.0;
-    // m_posD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4fb64261
-    m_posD = 0.0;
-    // m_speedN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
-    m_speedN = 0.0;
-    // m_speedE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
-    m_speedE = 0.0;
-    // m_speedD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
-    m_speedD = 0.0;
-    // m_windN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
-    m_windN = 0.0;
-    // m_windE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@25bbf683
-    m_windE = 0.0;
-    // m_windD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ec8211c
-    m_windD = 0.0;
-    // m_ssa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7276c8cd
+    // m_p com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
+    m_p = 0.0;
+    // m_q com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
+    m_q = 0.0;
+    // m_r com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
+    m_r = 0.0;
+    // m_a_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
+    m_a_x = 0.0;
+    // m_a_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
+    m_a_y = 0.0;
+    // m_a_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
+    m_a_z = 0.0;
+    // m_true_airspeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
+    m_true_airspeed = 0.0;
+    // m_indicated_airspeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
+    m_indicated_airspeed = 0.0;
+    // m_density com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
+    m_density = 0.0;
+    // m_dynamic_pressure com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
+    m_dynamic_pressure = 0.0;
+    // m_barometric_pressure com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
+    m_barometric_pressure = 0.0;
+    // m_height_rate com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
+    m_height_rate = 0.0;
+    // m_height com.eprosima.idl.parser.typecode.PrimitiveTypeCode@17d0685f
+    m_height = 0.0;
+    // m_ssa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3891771e
     m_ssa = 0.0;
-    // m_aoa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@544a2ea6
+    // m_aoa com.eprosima.idl.parser.typecode.PrimitiveTypeCode@396e2f39
     m_aoa = 0.0;
-    // m_gamma com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2e3fc542
+    // m_gamma com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
     m_gamma = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@150c158
+    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
+    m_phi = 0.0;
+    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
+    m_the = 0.0;
+    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
+    m_psi = 0.0;
+    // m_latitude com.eprosima.idl.parser.typecode.PrimitiveTypeCode@25bbf683
+    m_latitude = 0.0;
+    // m_longitude com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ec8211c
+    m_longitude = 0.0;
+    // m_posN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7276c8cd
+    m_posN = 0.0;
+    // m_posE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@544a2ea6
+    m_posE = 0.0;
+    // m_posD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2e3fc542
+    m_posD = 0.0;
+    // m_speedN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@150c158
+    m_speedN = 0.0;
+    // m_speedE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4524411f
+    m_speedE = 0.0;
+    // m_speedD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@401e7803
+    m_speedD = 0.0;
+    // m_windN com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10dba097
+    m_windN = 0.0;
+    // m_windE com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1786f9d5
+    m_windE = 0.0;
+    // m_windD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@704d6e83
+    m_windD = 0.0;
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43a0cee9
     m_alive = false;
 
 }
@@ -143,24 +143,27 @@ DataSFusion::DataSFusion(
         const DataSFusion& x)
 {
     m_time = x.m_time;
-    m_gyrX = x.m_gyrX;
-    m_gyrY = x.m_gyrY;
-    m_gyrZ = x.m_gyrZ;
-    m_accX = x.m_accX;
-    m_accY = x.m_accY;
-    m_accZ = x.m_accZ;
-    m_magX = x.m_magX;
-    m_magY = x.m_magY;
-    m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_p = x.m_p;
+    m_q = x.m_q;
+    m_r = x.m_r;
+    m_a_x = x.m_a_x;
+    m_a_y = x.m_a_y;
+    m_a_z = x.m_a_z;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_density = x.m_density;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_height_rate = x.m_height_rate;
+    m_height = x.m_height;
+    m_ssa = x.m_ssa;
+    m_aoa = x.m_aoa;
+    m_gamma = x.m_gamma;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
@@ -170,9 +173,6 @@ DataSFusion::DataSFusion(
     m_windN = x.m_windN;
     m_windE = x.m_windE;
     m_windD = x.m_windD;
-    m_ssa = x.m_ssa;
-    m_aoa = x.m_aoa;
-    m_gamma = x.m_gamma;
     m_alive = x.m_alive;
 }
 
@@ -180,24 +180,27 @@ DataSFusion::DataSFusion(
         DataSFusion&& x)
 {
     m_time = x.m_time;
-    m_gyrX = x.m_gyrX;
-    m_gyrY = x.m_gyrY;
-    m_gyrZ = x.m_gyrZ;
-    m_accX = x.m_accX;
-    m_accY = x.m_accY;
-    m_accZ = x.m_accZ;
-    m_magX = x.m_magX;
-    m_magY = x.m_magY;
-    m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_p = x.m_p;
+    m_q = x.m_q;
+    m_r = x.m_r;
+    m_a_x = x.m_a_x;
+    m_a_y = x.m_a_y;
+    m_a_z = x.m_a_z;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_density = x.m_density;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_height_rate = x.m_height_rate;
+    m_height = x.m_height;
+    m_ssa = x.m_ssa;
+    m_aoa = x.m_aoa;
+    m_gamma = x.m_gamma;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
@@ -207,9 +210,6 @@ DataSFusion::DataSFusion(
     m_windN = x.m_windN;
     m_windE = x.m_windE;
     m_windD = x.m_windD;
-    m_ssa = x.m_ssa;
-    m_aoa = x.m_aoa;
-    m_gamma = x.m_gamma;
     m_alive = x.m_alive;
 }
 
@@ -218,24 +218,27 @@ DataSFusion& DataSFusion::operator =(
 {
 
     m_time = x.m_time;
-    m_gyrX = x.m_gyrX;
-    m_gyrY = x.m_gyrY;
-    m_gyrZ = x.m_gyrZ;
-    m_accX = x.m_accX;
-    m_accY = x.m_accY;
-    m_accZ = x.m_accZ;
-    m_magX = x.m_magX;
-    m_magY = x.m_magY;
-    m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_p = x.m_p;
+    m_q = x.m_q;
+    m_r = x.m_r;
+    m_a_x = x.m_a_x;
+    m_a_y = x.m_a_y;
+    m_a_z = x.m_a_z;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_density = x.m_density;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_height_rate = x.m_height_rate;
+    m_height = x.m_height;
+    m_ssa = x.m_ssa;
+    m_aoa = x.m_aoa;
+    m_gamma = x.m_gamma;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
@@ -245,9 +248,6 @@ DataSFusion& DataSFusion::operator =(
     m_windN = x.m_windN;
     m_windE = x.m_windE;
     m_windD = x.m_windD;
-    m_ssa = x.m_ssa;
-    m_aoa = x.m_aoa;
-    m_gamma = x.m_gamma;
     m_alive = x.m_alive;
 
     return *this;
@@ -258,24 +258,27 @@ DataSFusion& DataSFusion::operator =(
 {
 
     m_time = x.m_time;
-    m_gyrX = x.m_gyrX;
-    m_gyrY = x.m_gyrY;
-    m_gyrZ = x.m_gyrZ;
-    m_accX = x.m_accX;
-    m_accY = x.m_accY;
-    m_accZ = x.m_accZ;
-    m_magX = x.m_magX;
-    m_magY = x.m_magY;
-    m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_p = x.m_p;
+    m_q = x.m_q;
+    m_r = x.m_r;
+    m_a_x = x.m_a_x;
+    m_a_y = x.m_a_y;
+    m_a_z = x.m_a_z;
+    m_true_airspeed = x.m_true_airspeed;
+    m_indicated_airspeed = x.m_indicated_airspeed;
+    m_density = x.m_density;
+    m_dynamic_pressure = x.m_dynamic_pressure;
+    m_barometric_pressure = x.m_barometric_pressure;
+    m_height_rate = x.m_height_rate;
+    m_height = x.m_height;
+    m_ssa = x.m_ssa;
+    m_aoa = x.m_aoa;
+    m_gamma = x.m_gamma;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
     m_posN = x.m_posN;
     m_posE = x.m_posE;
     m_posD = x.m_posD;
@@ -285,9 +288,6 @@ DataSFusion& DataSFusion::operator =(
     m_windN = x.m_windN;
     m_windE = x.m_windE;
     m_windD = x.m_windD;
-    m_ssa = x.m_ssa;
-    m_aoa = x.m_aoa;
-    m_gamma = x.m_gamma;
     m_alive = x.m_alive;
 
     return *this;
@@ -302,94 +302,94 @@ size_t DataSFusion::getMaxCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -410,94 +410,94 @@ size_t DataSFusion::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -512,24 +512,27 @@ void DataSFusion::serialize(
 {
 
     scdr << m_time;
-    scdr << m_gyrX;
-    scdr << m_gyrY;
-    scdr << m_gyrZ;
-    scdr << m_accX;
-    scdr << m_accY;
-    scdr << m_accZ;
-    scdr << m_magX;
-    scdr << m_magY;
-    scdr << m_magZ;
-    scdr << m_temp;
-    scdr << m_press;
+    scdr << m_p;
+    scdr << m_q;
+    scdr << m_r;
+    scdr << m_a_x;
+    scdr << m_a_y;
+    scdr << m_a_z;
+    scdr << m_true_airspeed;
+    scdr << m_indicated_airspeed;
+    scdr << m_density;
+    scdr << m_dynamic_pressure;
+    scdr << m_barometric_pressure;
+    scdr << m_height_rate;
+    scdr << m_height;
+    scdr << m_ssa;
+    scdr << m_aoa;
+    scdr << m_gamma;
     scdr << m_phi;
     scdr << m_the;
     scdr << m_psi;
-    scdr << m_q0;
-    scdr << m_q1;
-    scdr << m_q2;
-    scdr << m_q3;
+    scdr << m_latitude;
+    scdr << m_longitude;
     scdr << m_posN;
     scdr << m_posE;
     scdr << m_posD;
@@ -539,9 +542,6 @@ void DataSFusion::serialize(
     scdr << m_windN;
     scdr << m_windE;
     scdr << m_windD;
-    scdr << m_ssa;
-    scdr << m_aoa;
-    scdr << m_gamma;
     scdr << m_alive;
 
 }
@@ -551,24 +551,27 @@ void DataSFusion::deserialize(
 {
 
     dcdr >> m_time;
-    dcdr >> m_gyrX;
-    dcdr >> m_gyrY;
-    dcdr >> m_gyrZ;
-    dcdr >> m_accX;
-    dcdr >> m_accY;
-    dcdr >> m_accZ;
-    dcdr >> m_magX;
-    dcdr >> m_magY;
-    dcdr >> m_magZ;
-    dcdr >> m_temp;
-    dcdr >> m_press;
+    dcdr >> m_p;
+    dcdr >> m_q;
+    dcdr >> m_r;
+    dcdr >> m_a_x;
+    dcdr >> m_a_y;
+    dcdr >> m_a_z;
+    dcdr >> m_true_airspeed;
+    dcdr >> m_indicated_airspeed;
+    dcdr >> m_density;
+    dcdr >> m_dynamic_pressure;
+    dcdr >> m_barometric_pressure;
+    dcdr >> m_height_rate;
+    dcdr >> m_height;
+    dcdr >> m_ssa;
+    dcdr >> m_aoa;
+    dcdr >> m_gamma;
     dcdr >> m_phi;
     dcdr >> m_the;
     dcdr >> m_psi;
-    dcdr >> m_q0;
-    dcdr >> m_q1;
-    dcdr >> m_q2;
-    dcdr >> m_q3;
+    dcdr >> m_latitude;
+    dcdr >> m_longitude;
     dcdr >> m_posN;
     dcdr >> m_posE;
     dcdr >> m_posD;
@@ -578,9 +581,6 @@ void DataSFusion::deserialize(
     dcdr >> m_windN;
     dcdr >> m_windE;
     dcdr >> m_windD;
-    dcdr >> m_ssa;
-    dcdr >> m_aoa;
-    dcdr >> m_gamma;
     dcdr >> m_alive;
 }
 
@@ -613,759 +613,367 @@ uint64_t& DataSFusion::time()
 }
 
 /*!
- * @brief This function sets a value in member gyrX
- * @param _gyrX New value for member gyrX
+ * @brief This function sets a value in member p
+ * @param _p New value for member p
  */
-void DataSFusion::gyrX(
-        float _gyrX)
+void DataSFusion::p(
+        double _p)
 {
-    m_gyrX = _gyrX;
+    m_p = _p;
 }
 
 /*!
- * @brief This function returns the value of member gyrX
- * @return Value of member gyrX
+ * @brief This function returns the value of member p
+ * @return Value of member p
  */
-float DataSFusion::gyrX() const
+double DataSFusion::p() const
 {
-    return m_gyrX;
+    return m_p;
 }
 
 /*!
- * @brief This function returns a reference to member gyrX
- * @return Reference to member gyrX
+ * @brief This function returns a reference to member p
+ * @return Reference to member p
  */
-float& DataSFusion::gyrX()
+double& DataSFusion::p()
 {
-    return m_gyrX;
+    return m_p;
 }
 
 /*!
- * @brief This function sets a value in member gyrY
- * @param _gyrY New value for member gyrY
+ * @brief This function sets a value in member q
+ * @param _q New value for member q
  */
-void DataSFusion::gyrY(
-        float _gyrY)
+void DataSFusion::q(
+        double _q)
 {
-    m_gyrY = _gyrY;
+    m_q = _q;
 }
 
 /*!
- * @brief This function returns the value of member gyrY
- * @return Value of member gyrY
+ * @brief This function returns the value of member q
+ * @return Value of member q
  */
-float DataSFusion::gyrY() const
+double DataSFusion::q() const
 {
-    return m_gyrY;
+    return m_q;
 }
 
 /*!
- * @brief This function returns a reference to member gyrY
- * @return Reference to member gyrY
+ * @brief This function returns a reference to member q
+ * @return Reference to member q
  */
-float& DataSFusion::gyrY()
+double& DataSFusion::q()
 {
-    return m_gyrY;
+    return m_q;
 }
 
 /*!
- * @brief This function sets a value in member gyrZ
- * @param _gyrZ New value for member gyrZ
+ * @brief This function sets a value in member r
+ * @param _r New value for member r
  */
-void DataSFusion::gyrZ(
-        float _gyrZ)
+void DataSFusion::r(
+        double _r)
 {
-    m_gyrZ = _gyrZ;
+    m_r = _r;
 }
 
 /*!
- * @brief This function returns the value of member gyrZ
- * @return Value of member gyrZ
+ * @brief This function returns the value of member r
+ * @return Value of member r
  */
-float DataSFusion::gyrZ() const
+double DataSFusion::r() const
 {
-    return m_gyrZ;
+    return m_r;
 }
 
 /*!
- * @brief This function returns a reference to member gyrZ
- * @return Reference to member gyrZ
+ * @brief This function returns a reference to member r
+ * @return Reference to member r
  */
-float& DataSFusion::gyrZ()
+double& DataSFusion::r()
 {
-    return m_gyrZ;
+    return m_r;
 }
 
 /*!
- * @brief This function sets a value in member accX
- * @param _accX New value for member accX
+ * @brief This function sets a value in member a_x
+ * @param _a_x New value for member a_x
  */
-void DataSFusion::accX(
-        float _accX)
+void DataSFusion::a_x(
+        double _a_x)
 {
-    m_accX = _accX;
+    m_a_x = _a_x;
 }
 
 /*!
- * @brief This function returns the value of member accX
- * @return Value of member accX
+ * @brief This function returns the value of member a_x
+ * @return Value of member a_x
  */
-float DataSFusion::accX() const
+double DataSFusion::a_x() const
 {
-    return m_accX;
+    return m_a_x;
 }
 
 /*!
- * @brief This function returns a reference to member accX
- * @return Reference to member accX
+ * @brief This function returns a reference to member a_x
+ * @return Reference to member a_x
  */
-float& DataSFusion::accX()
+double& DataSFusion::a_x()
 {
-    return m_accX;
+    return m_a_x;
 }
 
 /*!
- * @brief This function sets a value in member accY
- * @param _accY New value for member accY
+ * @brief This function sets a value in member a_y
+ * @param _a_y New value for member a_y
  */
-void DataSFusion::accY(
-        float _accY)
+void DataSFusion::a_y(
+        double _a_y)
 {
-    m_accY = _accY;
+    m_a_y = _a_y;
 }
 
 /*!
- * @brief This function returns the value of member accY
- * @return Value of member accY
+ * @brief This function returns the value of member a_y
+ * @return Value of member a_y
  */
-float DataSFusion::accY() const
+double DataSFusion::a_y() const
 {
-    return m_accY;
+    return m_a_y;
 }
 
 /*!
- * @brief This function returns a reference to member accY
- * @return Reference to member accY
+ * @brief This function returns a reference to member a_y
+ * @return Reference to member a_y
  */
-float& DataSFusion::accY()
+double& DataSFusion::a_y()
 {
-    return m_accY;
+    return m_a_y;
 }
 
 /*!
- * @brief This function sets a value in member accZ
- * @param _accZ New value for member accZ
+ * @brief This function sets a value in member a_z
+ * @param _a_z New value for member a_z
  */
-void DataSFusion::accZ(
-        float _accZ)
+void DataSFusion::a_z(
+        double _a_z)
 {
-    m_accZ = _accZ;
+    m_a_z = _a_z;
 }
 
 /*!
- * @brief This function returns the value of member accZ
- * @return Value of member accZ
+ * @brief This function returns the value of member a_z
+ * @return Value of member a_z
  */
-float DataSFusion::accZ() const
+double DataSFusion::a_z() const
 {
-    return m_accZ;
+    return m_a_z;
 }
 
 /*!
- * @brief This function returns a reference to member accZ
- * @return Reference to member accZ
+ * @brief This function returns a reference to member a_z
+ * @return Reference to member a_z
  */
-float& DataSFusion::accZ()
+double& DataSFusion::a_z()
 {
-    return m_accZ;
+    return m_a_z;
 }
 
 /*!
- * @brief This function sets a value in member magX
- * @param _magX New value for member magX
+ * @brief This function sets a value in member true_airspeed
+ * @param _true_airspeed New value for member true_airspeed
  */
-void DataSFusion::magX(
-        float _magX)
+void DataSFusion::true_airspeed(
+        double _true_airspeed)
 {
-    m_magX = _magX;
+    m_true_airspeed = _true_airspeed;
 }
 
 /*!
- * @brief This function returns the value of member magX
- * @return Value of member magX
+ * @brief This function returns the value of member true_airspeed
+ * @return Value of member true_airspeed
  */
-float DataSFusion::magX() const
+double DataSFusion::true_airspeed() const
 {
-    return m_magX;
+    return m_true_airspeed;
 }
 
 /*!
- * @brief This function returns a reference to member magX
- * @return Reference to member magX
+ * @brief This function returns a reference to member true_airspeed
+ * @return Reference to member true_airspeed
  */
-float& DataSFusion::magX()
+double& DataSFusion::true_airspeed()
 {
-    return m_magX;
+    return m_true_airspeed;
 }
 
 /*!
- * @brief This function sets a value in member magY
- * @param _magY New value for member magY
+ * @brief This function sets a value in member indicated_airspeed
+ * @param _indicated_airspeed New value for member indicated_airspeed
  */
-void DataSFusion::magY(
-        float _magY)
+void DataSFusion::indicated_airspeed(
+        double _indicated_airspeed)
 {
-    m_magY = _magY;
+    m_indicated_airspeed = _indicated_airspeed;
 }
 
 /*!
- * @brief This function returns the value of member magY
- * @return Value of member magY
+ * @brief This function returns the value of member indicated_airspeed
+ * @return Value of member indicated_airspeed
  */
-float DataSFusion::magY() const
+double DataSFusion::indicated_airspeed() const
 {
-    return m_magY;
+    return m_indicated_airspeed;
 }
 
 /*!
- * @brief This function returns a reference to member magY
- * @return Reference to member magY
+ * @brief This function returns a reference to member indicated_airspeed
+ * @return Reference to member indicated_airspeed
  */
-float& DataSFusion::magY()
+double& DataSFusion::indicated_airspeed()
 {
-    return m_magY;
+    return m_indicated_airspeed;
 }
 
 /*!
- * @brief This function sets a value in member magZ
- * @param _magZ New value for member magZ
+ * @brief This function sets a value in member density
+ * @param _density New value for member density
  */
-void DataSFusion::magZ(
-        float _magZ)
+void DataSFusion::density(
+        double _density)
 {
-    m_magZ = _magZ;
+    m_density = _density;
 }
 
 /*!
- * @brief This function returns the value of member magZ
- * @return Value of member magZ
+ * @brief This function returns the value of member density
+ * @return Value of member density
  */
-float DataSFusion::magZ() const
+double DataSFusion::density() const
 {
-    return m_magZ;
+    return m_density;
 }
 
 /*!
- * @brief This function returns a reference to member magZ
- * @return Reference to member magZ
+ * @brief This function returns a reference to member density
+ * @return Reference to member density
  */
-float& DataSFusion::magZ()
+double& DataSFusion::density()
 {
-    return m_magZ;
+    return m_density;
 }
 
 /*!
- * @brief This function sets a value in member temp
- * @param _temp New value for member temp
+ * @brief This function sets a value in member dynamic_pressure
+ * @param _dynamic_pressure New value for member dynamic_pressure
  */
-void DataSFusion::temp(
-        float _temp)
+void DataSFusion::dynamic_pressure(
+        double _dynamic_pressure)
 {
-    m_temp = _temp;
+    m_dynamic_pressure = _dynamic_pressure;
 }
 
 /*!
- * @brief This function returns the value of member temp
- * @return Value of member temp
+ * @brief This function returns the value of member dynamic_pressure
+ * @return Value of member dynamic_pressure
  */
-float DataSFusion::temp() const
+double DataSFusion::dynamic_pressure() const
 {
-    return m_temp;
+    return m_dynamic_pressure;
 }
 
 /*!
- * @brief This function returns a reference to member temp
- * @return Reference to member temp
+ * @brief This function returns a reference to member dynamic_pressure
+ * @return Reference to member dynamic_pressure
  */
-float& DataSFusion::temp()
+double& DataSFusion::dynamic_pressure()
 {
-    return m_temp;
+    return m_dynamic_pressure;
 }
 
 /*!
- * @brief This function sets a value in member press
- * @param _press New value for member press
+ * @brief This function sets a value in member barometric_pressure
+ * @param _barometric_pressure New value for member barometric_pressure
  */
-void DataSFusion::press(
-        float _press)
+void DataSFusion::barometric_pressure(
+        double _barometric_pressure)
 {
-    m_press = _press;
+    m_barometric_pressure = _barometric_pressure;
 }
 
 /*!
- * @brief This function returns the value of member press
- * @return Value of member press
+ * @brief This function returns the value of member barometric_pressure
+ * @return Value of member barometric_pressure
  */
-float DataSFusion::press() const
+double DataSFusion::barometric_pressure() const
 {
-    return m_press;
+    return m_barometric_pressure;
 }
 
 /*!
- * @brief This function returns a reference to member press
- * @return Reference to member press
+ * @brief This function returns a reference to member barometric_pressure
+ * @return Reference to member barometric_pressure
  */
-float& DataSFusion::press()
+double& DataSFusion::barometric_pressure()
 {
-    return m_press;
+    return m_barometric_pressure;
 }
 
 /*!
- * @brief This function sets a value in member phi
- * @param _phi New value for member phi
+ * @brief This function sets a value in member height_rate
+ * @param _height_rate New value for member height_rate
  */
-void DataSFusion::phi(
-        float _phi)
+void DataSFusion::height_rate(
+        double _height_rate)
 {
-    m_phi = _phi;
+    m_height_rate = _height_rate;
 }
 
 /*!
- * @brief This function returns the value of member phi
- * @return Value of member phi
+ * @brief This function returns the value of member height_rate
+ * @return Value of member height_rate
  */
-float DataSFusion::phi() const
+double DataSFusion::height_rate() const
 {
-    return m_phi;
+    return m_height_rate;
 }
 
 /*!
- * @brief This function returns a reference to member phi
- * @return Reference to member phi
+ * @brief This function returns a reference to member height_rate
+ * @return Reference to member height_rate
  */
-float& DataSFusion::phi()
+double& DataSFusion::height_rate()
 {
-    return m_phi;
+    return m_height_rate;
 }
 
 /*!
- * @brief This function sets a value in member the
- * @param _the New value for member the
+ * @brief This function sets a value in member height
+ * @param _height New value for member height
  */
-void DataSFusion::the(
-        float _the)
+void DataSFusion::height(
+        double _height)
 {
-    m_the = _the;
+    m_height = _height;
 }
 
 /*!
- * @brief This function returns the value of member the
- * @return Value of member the
+ * @brief This function returns the value of member height
+ * @return Value of member height
  */
-float DataSFusion::the() const
+double DataSFusion::height() const
 {
-    return m_the;
+    return m_height;
 }
 
 /*!
- * @brief This function returns a reference to member the
- * @return Reference to member the
+ * @brief This function returns a reference to member height
+ * @return Reference to member height
  */
-float& DataSFusion::the()
+double& DataSFusion::height()
 {
-    return m_the;
-}
-
-/*!
- * @brief This function sets a value in member psi
- * @param _psi New value for member psi
- */
-void DataSFusion::psi(
-        float _psi)
-{
-    m_psi = _psi;
-}
-
-/*!
- * @brief This function returns the value of member psi
- * @return Value of member psi
- */
-float DataSFusion::psi() const
-{
-    return m_psi;
-}
-
-/*!
- * @brief This function returns a reference to member psi
- * @return Reference to member psi
- */
-float& DataSFusion::psi()
-{
-    return m_psi;
-}
-
-/*!
- * @brief This function sets a value in member q0
- * @param _q0 New value for member q0
- */
-void DataSFusion::q0(
-        float _q0)
-{
-    m_q0 = _q0;
-}
-
-/*!
- * @brief This function returns the value of member q0
- * @return Value of member q0
- */
-float DataSFusion::q0() const
-{
-    return m_q0;
-}
-
-/*!
- * @brief This function returns a reference to member q0
- * @return Reference to member q0
- */
-float& DataSFusion::q0()
-{
-    return m_q0;
-}
-
-/*!
- * @brief This function sets a value in member q1
- * @param _q1 New value for member q1
- */
-void DataSFusion::q1(
-        float _q1)
-{
-    m_q1 = _q1;
-}
-
-/*!
- * @brief This function returns the value of member q1
- * @return Value of member q1
- */
-float DataSFusion::q1() const
-{
-    return m_q1;
-}
-
-/*!
- * @brief This function returns a reference to member q1
- * @return Reference to member q1
- */
-float& DataSFusion::q1()
-{
-    return m_q1;
-}
-
-/*!
- * @brief This function sets a value in member q2
- * @param _q2 New value for member q2
- */
-void DataSFusion::q2(
-        float _q2)
-{
-    m_q2 = _q2;
-}
-
-/*!
- * @brief This function returns the value of member q2
- * @return Value of member q2
- */
-float DataSFusion::q2() const
-{
-    return m_q2;
-}
-
-/*!
- * @brief This function returns a reference to member q2
- * @return Reference to member q2
- */
-float& DataSFusion::q2()
-{
-    return m_q2;
-}
-
-/*!
- * @brief This function sets a value in member q3
- * @param _q3 New value for member q3
- */
-void DataSFusion::q3(
-        float _q3)
-{
-    m_q3 = _q3;
-}
-
-/*!
- * @brief This function returns the value of member q3
- * @return Value of member q3
- */
-float DataSFusion::q3() const
-{
-    return m_q3;
-}
-
-/*!
- * @brief This function returns a reference to member q3
- * @return Reference to member q3
- */
-float& DataSFusion::q3()
-{
-    return m_q3;
-}
-
-/*!
- * @brief This function sets a value in member posN
- * @param _posN New value for member posN
- */
-void DataSFusion::posN(
-        float _posN)
-{
-    m_posN = _posN;
-}
-
-/*!
- * @brief This function returns the value of member posN
- * @return Value of member posN
- */
-float DataSFusion::posN() const
-{
-    return m_posN;
-}
-
-/*!
- * @brief This function returns a reference to member posN
- * @return Reference to member posN
- */
-float& DataSFusion::posN()
-{
-    return m_posN;
-}
-
-/*!
- * @brief This function sets a value in member posE
- * @param _posE New value for member posE
- */
-void DataSFusion::posE(
-        float _posE)
-{
-    m_posE = _posE;
-}
-
-/*!
- * @brief This function returns the value of member posE
- * @return Value of member posE
- */
-float DataSFusion::posE() const
-{
-    return m_posE;
-}
-
-/*!
- * @brief This function returns a reference to member posE
- * @return Reference to member posE
- */
-float& DataSFusion::posE()
-{
-    return m_posE;
-}
-
-/*!
- * @brief This function sets a value in member posD
- * @param _posD New value for member posD
- */
-void DataSFusion::posD(
-        float _posD)
-{
-    m_posD = _posD;
-}
-
-/*!
- * @brief This function returns the value of member posD
- * @return Value of member posD
- */
-float DataSFusion::posD() const
-{
-    return m_posD;
-}
-
-/*!
- * @brief This function returns a reference to member posD
- * @return Reference to member posD
- */
-float& DataSFusion::posD()
-{
-    return m_posD;
-}
-
-/*!
- * @brief This function sets a value in member speedN
- * @param _speedN New value for member speedN
- */
-void DataSFusion::speedN(
-        float _speedN)
-{
-    m_speedN = _speedN;
-}
-
-/*!
- * @brief This function returns the value of member speedN
- * @return Value of member speedN
- */
-float DataSFusion::speedN() const
-{
-    return m_speedN;
-}
-
-/*!
- * @brief This function returns a reference to member speedN
- * @return Reference to member speedN
- */
-float& DataSFusion::speedN()
-{
-    return m_speedN;
-}
-
-/*!
- * @brief This function sets a value in member speedE
- * @param _speedE New value for member speedE
- */
-void DataSFusion::speedE(
-        float _speedE)
-{
-    m_speedE = _speedE;
-}
-
-/*!
- * @brief This function returns the value of member speedE
- * @return Value of member speedE
- */
-float DataSFusion::speedE() const
-{
-    return m_speedE;
-}
-
-/*!
- * @brief This function returns a reference to member speedE
- * @return Reference to member speedE
- */
-float& DataSFusion::speedE()
-{
-    return m_speedE;
-}
-
-/*!
- * @brief This function sets a value in member speedD
- * @param _speedD New value for member speedD
- */
-void DataSFusion::speedD(
-        float _speedD)
-{
-    m_speedD = _speedD;
-}
-
-/*!
- * @brief This function returns the value of member speedD
- * @return Value of member speedD
- */
-float DataSFusion::speedD() const
-{
-    return m_speedD;
-}
-
-/*!
- * @brief This function returns a reference to member speedD
- * @return Reference to member speedD
- */
-float& DataSFusion::speedD()
-{
-    return m_speedD;
-}
-
-/*!
- * @brief This function sets a value in member windN
- * @param _windN New value for member windN
- */
-void DataSFusion::windN(
-        float _windN)
-{
-    m_windN = _windN;
-}
-
-/*!
- * @brief This function returns the value of member windN
- * @return Value of member windN
- */
-float DataSFusion::windN() const
-{
-    return m_windN;
-}
-
-/*!
- * @brief This function returns a reference to member windN
- * @return Reference to member windN
- */
-float& DataSFusion::windN()
-{
-    return m_windN;
-}
-
-/*!
- * @brief This function sets a value in member windE
- * @param _windE New value for member windE
- */
-void DataSFusion::windE(
-        float _windE)
-{
-    m_windE = _windE;
-}
-
-/*!
- * @brief This function returns the value of member windE
- * @return Value of member windE
- */
-float DataSFusion::windE() const
-{
-    return m_windE;
-}
-
-/*!
- * @brief This function returns a reference to member windE
- * @return Reference to member windE
- */
-float& DataSFusion::windE()
-{
-    return m_windE;
-}
-
-/*!
- * @brief This function sets a value in member windD
- * @param _windD New value for member windD
- */
-void DataSFusion::windD(
-        float _windD)
-{
-    m_windD = _windD;
-}
-
-/*!
- * @brief This function returns the value of member windD
- * @return Value of member windD
- */
-float DataSFusion::windD() const
-{
-    return m_windD;
-}
-
-/*!
- * @brief This function returns a reference to member windD
- * @return Reference to member windD
- */
-float& DataSFusion::windD()
-{
-    return m_windD;
+    return m_height;
 }
 
 /*!
@@ -1373,7 +981,7 @@ float& DataSFusion::windD()
  * @param _ssa New value for member ssa
  */
 void DataSFusion::ssa(
-        float _ssa)
+        double _ssa)
 {
     m_ssa = _ssa;
 }
@@ -1382,7 +990,7 @@ void DataSFusion::ssa(
  * @brief This function returns the value of member ssa
  * @return Value of member ssa
  */
-float DataSFusion::ssa() const
+double DataSFusion::ssa() const
 {
     return m_ssa;
 }
@@ -1391,7 +999,7 @@ float DataSFusion::ssa() const
  * @brief This function returns a reference to member ssa
  * @return Reference to member ssa
  */
-float& DataSFusion::ssa()
+double& DataSFusion::ssa()
 {
     return m_ssa;
 }
@@ -1401,7 +1009,7 @@ float& DataSFusion::ssa()
  * @param _aoa New value for member aoa
  */
 void DataSFusion::aoa(
-        float _aoa)
+        double _aoa)
 {
     m_aoa = _aoa;
 }
@@ -1410,7 +1018,7 @@ void DataSFusion::aoa(
  * @brief This function returns the value of member aoa
  * @return Value of member aoa
  */
-float DataSFusion::aoa() const
+double DataSFusion::aoa() const
 {
     return m_aoa;
 }
@@ -1419,7 +1027,7 @@ float DataSFusion::aoa() const
  * @brief This function returns a reference to member aoa
  * @return Reference to member aoa
  */
-float& DataSFusion::aoa()
+double& DataSFusion::aoa()
 {
     return m_aoa;
 }
@@ -1429,7 +1037,7 @@ float& DataSFusion::aoa()
  * @param _gamma New value for member gamma
  */
 void DataSFusion::gamma(
-        float _gamma)
+        double _gamma)
 {
     m_gamma = _gamma;
 }
@@ -1438,7 +1046,7 @@ void DataSFusion::gamma(
  * @brief This function returns the value of member gamma
  * @return Value of member gamma
  */
-float DataSFusion::gamma() const
+double DataSFusion::gamma() const
 {
     return m_gamma;
 }
@@ -1447,9 +1055,401 @@ float DataSFusion::gamma() const
  * @brief This function returns a reference to member gamma
  * @return Reference to member gamma
  */
-float& DataSFusion::gamma()
+double& DataSFusion::gamma()
 {
     return m_gamma;
+}
+
+/*!
+ * @brief This function sets a value in member phi
+ * @param _phi New value for member phi
+ */
+void DataSFusion::phi(
+        double _phi)
+{
+    m_phi = _phi;
+}
+
+/*!
+ * @brief This function returns the value of member phi
+ * @return Value of member phi
+ */
+double DataSFusion::phi() const
+{
+    return m_phi;
+}
+
+/*!
+ * @brief This function returns a reference to member phi
+ * @return Reference to member phi
+ */
+double& DataSFusion::phi()
+{
+    return m_phi;
+}
+
+/*!
+ * @brief This function sets a value in member the
+ * @param _the New value for member the
+ */
+void DataSFusion::the(
+        double _the)
+{
+    m_the = _the;
+}
+
+/*!
+ * @brief This function returns the value of member the
+ * @return Value of member the
+ */
+double DataSFusion::the() const
+{
+    return m_the;
+}
+
+/*!
+ * @brief This function returns a reference to member the
+ * @return Reference to member the
+ */
+double& DataSFusion::the()
+{
+    return m_the;
+}
+
+/*!
+ * @brief This function sets a value in member psi
+ * @param _psi New value for member psi
+ */
+void DataSFusion::psi(
+        double _psi)
+{
+    m_psi = _psi;
+}
+
+/*!
+ * @brief This function returns the value of member psi
+ * @return Value of member psi
+ */
+double DataSFusion::psi() const
+{
+    return m_psi;
+}
+
+/*!
+ * @brief This function returns a reference to member psi
+ * @return Reference to member psi
+ */
+double& DataSFusion::psi()
+{
+    return m_psi;
+}
+
+/*!
+ * @brief This function sets a value in member latitude
+ * @param _latitude New value for member latitude
+ */
+void DataSFusion::latitude(
+        double _latitude)
+{
+    m_latitude = _latitude;
+}
+
+/*!
+ * @brief This function returns the value of member latitude
+ * @return Value of member latitude
+ */
+double DataSFusion::latitude() const
+{
+    return m_latitude;
+}
+
+/*!
+ * @brief This function returns a reference to member latitude
+ * @return Reference to member latitude
+ */
+double& DataSFusion::latitude()
+{
+    return m_latitude;
+}
+
+/*!
+ * @brief This function sets a value in member longitude
+ * @param _longitude New value for member longitude
+ */
+void DataSFusion::longitude(
+        double _longitude)
+{
+    m_longitude = _longitude;
+}
+
+/*!
+ * @brief This function returns the value of member longitude
+ * @return Value of member longitude
+ */
+double DataSFusion::longitude() const
+{
+    return m_longitude;
+}
+
+/*!
+ * @brief This function returns a reference to member longitude
+ * @return Reference to member longitude
+ */
+double& DataSFusion::longitude()
+{
+    return m_longitude;
+}
+
+/*!
+ * @brief This function sets a value in member posN
+ * @param _posN New value for member posN
+ */
+void DataSFusion::posN(
+        double _posN)
+{
+    m_posN = _posN;
+}
+
+/*!
+ * @brief This function returns the value of member posN
+ * @return Value of member posN
+ */
+double DataSFusion::posN() const
+{
+    return m_posN;
+}
+
+/*!
+ * @brief This function returns a reference to member posN
+ * @return Reference to member posN
+ */
+double& DataSFusion::posN()
+{
+    return m_posN;
+}
+
+/*!
+ * @brief This function sets a value in member posE
+ * @param _posE New value for member posE
+ */
+void DataSFusion::posE(
+        double _posE)
+{
+    m_posE = _posE;
+}
+
+/*!
+ * @brief This function returns the value of member posE
+ * @return Value of member posE
+ */
+double DataSFusion::posE() const
+{
+    return m_posE;
+}
+
+/*!
+ * @brief This function returns a reference to member posE
+ * @return Reference to member posE
+ */
+double& DataSFusion::posE()
+{
+    return m_posE;
+}
+
+/*!
+ * @brief This function sets a value in member posD
+ * @param _posD New value for member posD
+ */
+void DataSFusion::posD(
+        double _posD)
+{
+    m_posD = _posD;
+}
+
+/*!
+ * @brief This function returns the value of member posD
+ * @return Value of member posD
+ */
+double DataSFusion::posD() const
+{
+    return m_posD;
+}
+
+/*!
+ * @brief This function returns a reference to member posD
+ * @return Reference to member posD
+ */
+double& DataSFusion::posD()
+{
+    return m_posD;
+}
+
+/*!
+ * @brief This function sets a value in member speedN
+ * @param _speedN New value for member speedN
+ */
+void DataSFusion::speedN(
+        double _speedN)
+{
+    m_speedN = _speedN;
+}
+
+/*!
+ * @brief This function returns the value of member speedN
+ * @return Value of member speedN
+ */
+double DataSFusion::speedN() const
+{
+    return m_speedN;
+}
+
+/*!
+ * @brief This function returns a reference to member speedN
+ * @return Reference to member speedN
+ */
+double& DataSFusion::speedN()
+{
+    return m_speedN;
+}
+
+/*!
+ * @brief This function sets a value in member speedE
+ * @param _speedE New value for member speedE
+ */
+void DataSFusion::speedE(
+        double _speedE)
+{
+    m_speedE = _speedE;
+}
+
+/*!
+ * @brief This function returns the value of member speedE
+ * @return Value of member speedE
+ */
+double DataSFusion::speedE() const
+{
+    return m_speedE;
+}
+
+/*!
+ * @brief This function returns a reference to member speedE
+ * @return Reference to member speedE
+ */
+double& DataSFusion::speedE()
+{
+    return m_speedE;
+}
+
+/*!
+ * @brief This function sets a value in member speedD
+ * @param _speedD New value for member speedD
+ */
+void DataSFusion::speedD(
+        double _speedD)
+{
+    m_speedD = _speedD;
+}
+
+/*!
+ * @brief This function returns the value of member speedD
+ * @return Value of member speedD
+ */
+double DataSFusion::speedD() const
+{
+    return m_speedD;
+}
+
+/*!
+ * @brief This function returns a reference to member speedD
+ * @return Reference to member speedD
+ */
+double& DataSFusion::speedD()
+{
+    return m_speedD;
+}
+
+/*!
+ * @brief This function sets a value in member windN
+ * @param _windN New value for member windN
+ */
+void DataSFusion::windN(
+        double _windN)
+{
+    m_windN = _windN;
+}
+
+/*!
+ * @brief This function returns the value of member windN
+ * @return Value of member windN
+ */
+double DataSFusion::windN() const
+{
+    return m_windN;
+}
+
+/*!
+ * @brief This function returns a reference to member windN
+ * @return Reference to member windN
+ */
+double& DataSFusion::windN()
+{
+    return m_windN;
+}
+
+/*!
+ * @brief This function sets a value in member windE
+ * @param _windE New value for member windE
+ */
+void DataSFusion::windE(
+        double _windE)
+{
+    m_windE = _windE;
+}
+
+/*!
+ * @brief This function returns the value of member windE
+ * @return Value of member windE
+ */
+double DataSFusion::windE() const
+{
+    return m_windE;
+}
+
+/*!
+ * @brief This function returns a reference to member windE
+ * @return Reference to member windE
+ */
+double& DataSFusion::windE()
+{
+    return m_windE;
+}
+
+/*!
+ * @brief This function sets a value in member windD
+ * @param _windD New value for member windD
+ */
+void DataSFusion::windD(
+        double _windD)
+{
+    m_windD = _windD;
+}
+
+/*!
+ * @brief This function returns the value of member windD
+ * @return Value of member windD
+ */
+double DataSFusion::windD() const
+{
+    return m_windD;
+}
+
+/*!
+ * @brief This function returns a reference to member windD
+ * @return Reference to member windD
+ */
+double& DataSFusion::windD()
+{
+    return m_windD;
 }
 
 /*!

@@ -95,10 +95,12 @@ public:
 	double get_roll_setpoint() { return _roll_max * _ail_setpoint; }
 	double get_pitch_setpoint() { return _pitch_max * _ele_setpoint; }
 
+	double get_yaw_setpoint() { return 0.0; }
 	double get_yaw_rate_setpoint() { return _yaw_rate_max * _rud_setpoint; }
 	double get_spd_setpoint() { return (_spd_max-_spd_min)*_thr_setpoint + _spd_min; };
 	double get_hgt_rate_setpoint() { return _hgt_rate_max * _ele_setpoint; };
 	double get_hgt_setpoint();
+	
 
 
 	uint16_t get_thr_pwm_setpoint(double norm) { return _get_pwm_from_normalized(norm,MOTOR); }

@@ -91,7 +91,7 @@ bool RaiIn::init() {
 	}
 
 	// == INIT MIXER ===========================================================
-	Mixer.init(1000,2000);
+	mixer.init(1000,2000);
 
 
 	return true;
@@ -150,7 +150,7 @@ void RaiIn::run() {
 
 			// == PUBLISH DATA =================================================
 			dataRaiIn.flight_mode(mixer.get_flight_mode());
-			dataRaiIn.flight_fct(mixer.get_flight_func());
+			dataRaiIn.flight_fct(mixer.get_flight_fct());
 
 			dataRaiIn.senseTime(raiCom.time);
 			dataRaiIn.chnl(raiCom.channel);
@@ -169,7 +169,7 @@ void RaiIn::run() {
 
 			// == AUTOPILOT CONTROL == MODE - MANUAL      | FCT - 2 ============
 			dataRaiIn.hgt_setpoint(mixer.get_hgt_setpoint());
-			dataRaiIn.tas_setpoint(mixer.get_tas_setpoint());
+			dataRaiIn.tas_setpoint(mixer.get_spd_setpoint());
 			dataRaiIn.yaw_setpoint(mixer.get_yaw_setpoint());
 
 			// =================================================================
@@ -208,11 +208,12 @@ void RaiIn::print() {
 	for (int i=0; i<CAN_META_RAI_CHNL_NUM; i++) {
 		std::cout << "chnl[" << i << "]" << "   " << dataRaiIn.chnl().at(i) << std::endl;
 	}
-	std::cout << "roll      " << dataRaiIn.roll() << std::endl;
-	std::cout << "pitch     " << dataRaiIn.pitch() << std::endl;
-	std::cout << "yaw       " << dataRaiIn.yaw() << std::endl;
-	std::cout << "thr       " << dataRaiIn.thr() << std::endl;
-	std::cout << "fltMode   " << dataRaiIn.fltMode() << std::endl;
-	std::cout << "alive     " << dataRaiIn.alive() << std::endl;
+	std::cout << "roll_sp      " << dataRaiIn.roll_setpoint() << std::endl;
+	std::cout << "pitch_sp     " << dataRaiIn.pitch_setpoint() << std::endl;
+	std::cout << "yaw_sp       " << dataRaiIn.yaw_setpoint() << std::endl;
+	std::cout << "thr_sp       " << dataRaiIn.throttle_setpoint() << std::endl;
+	std::cout << "flight_mode  " << dataRaiIn.flight_mode() << std::endl;
+	std::cout << "flight_fct   " << dataRaiIn.flight_fct() << std::endl;
+	std::cout << "alive        " << dataRaiIn.alive() << std::endl;
 
 }

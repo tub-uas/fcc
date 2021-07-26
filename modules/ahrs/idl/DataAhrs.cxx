@@ -36,47 +36,39 @@ using namespace eprosima::fastcdr::exception;
 
 DataAhrs::DataAhrs()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_senseTime = 0.0;
-    // m_gyrX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
+    // m_gyrX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_gyrX = 0.0;
-    // m_gyrY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
+    // m_gyrY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_gyrY = 0.0;
-    // m_gyrZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
+    // m_gyrZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
     m_gyrZ = 0.0;
-    // m_accX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
+    // m_accX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
     m_accX = 0.0;
-    // m_accY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
+    // m_accY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
     m_accY = 0.0;
-    // m_accZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
+    // m_accZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
     m_accZ = 0.0;
-    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
+    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
     m_magX = 0.0;
-    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
+    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
     m_magY = 0.0;
-    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
+    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
     m_magZ = 0.0;
-    // m_temp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
-    m_temp = 0.0;
-    // m_press com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
-    m_press = 0.0;
-    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
+    // m_temperature com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
+    m_temperature = 0.0;
+    // m_barometric_pressure com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
+    m_barometric_pressure = 0.0;
+    // m_phi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@17d0685f
     m_phi = 0.0;
-    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
+    // m_the com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3891771e
     m_the = 0.0;
-    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
+    // m_psi com.eprosima.idl.parser.typecode.PrimitiveTypeCode@396e2f39
     m_psi = 0.0;
-    // m_q0 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@396e2f39
-    m_q0 = 0.0;
-    // m_q1 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@a74868d
-    m_q1 = 0.0;
-    // m_q2 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12c8a2c0
-    m_q2 = 0.0;
-    // m_q3 com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
-    m_q3 = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
     m_alive = false;
 
 }
@@ -100,10 +92,6 @@ DataAhrs::~DataAhrs()
 
 
 
-
-
-
-
 }
 
 DataAhrs::DataAhrs(
@@ -120,15 +108,11 @@ DataAhrs::DataAhrs(
     m_magX = x.m_magX;
     m_magY = x.m_magY;
     m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_temperature = x.m_temperature;
+    m_barometric_pressure = x.m_barometric_pressure;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 }
 
@@ -146,15 +130,11 @@ DataAhrs::DataAhrs(
     m_magX = x.m_magX;
     m_magY = x.m_magY;
     m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_temperature = x.m_temperature;
+    m_barometric_pressure = x.m_barometric_pressure;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 }
 
@@ -173,15 +153,11 @@ DataAhrs& DataAhrs::operator =(
     m_magX = x.m_magX;
     m_magY = x.m_magY;
     m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_temperature = x.m_temperature;
+    m_barometric_pressure = x.m_barometric_pressure;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 
     return *this;
@@ -202,15 +178,11 @@ DataAhrs& DataAhrs::operator =(
     m_magX = x.m_magX;
     m_magY = x.m_magY;
     m_magZ = x.m_magZ;
-    m_temp = x.m_temp;
-    m_press = x.m_press;
+    m_temperature = x.m_temperature;
+    m_barometric_pressure = x.m_barometric_pressure;
     m_phi = x.m_phi;
     m_the = x.m_the;
     m_psi = x.m_psi;
-    m_q0 = x.m_q0;
-    m_q1 = x.m_q1;
-    m_q2 = x.m_q2;
-    m_q3 = x.m_q3;
     m_alive = x.m_alive;
 
     return *this;
@@ -225,61 +197,49 @@ size_t DataAhrs::getMaxCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -300,61 +260,49 @@ size_t DataAhrs::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -379,15 +327,11 @@ void DataAhrs::serialize(
     scdr << m_magX;
     scdr << m_magY;
     scdr << m_magZ;
-    scdr << m_temp;
-    scdr << m_press;
+    scdr << m_temperature;
+    scdr << m_barometric_pressure;
     scdr << m_phi;
     scdr << m_the;
     scdr << m_psi;
-    scdr << m_q0;
-    scdr << m_q1;
-    scdr << m_q2;
-    scdr << m_q3;
     scdr << m_alive;
 
 }
@@ -407,15 +351,11 @@ void DataAhrs::deserialize(
     dcdr >> m_magX;
     dcdr >> m_magY;
     dcdr >> m_magZ;
-    dcdr >> m_temp;
-    dcdr >> m_press;
+    dcdr >> m_temperature;
+    dcdr >> m_barometric_pressure;
     dcdr >> m_phi;
     dcdr >> m_the;
     dcdr >> m_psi;
-    dcdr >> m_q0;
-    dcdr >> m_q1;
-    dcdr >> m_q2;
-    dcdr >> m_q3;
     dcdr >> m_alive;
 }
 
@@ -452,7 +392,7 @@ uint64_t& DataAhrs::time()
  * @param _senseTime New value for member senseTime
  */
 void DataAhrs::senseTime(
-        float _senseTime)
+        double _senseTime)
 {
     m_senseTime = _senseTime;
 }
@@ -461,7 +401,7 @@ void DataAhrs::senseTime(
  * @brief This function returns the value of member senseTime
  * @return Value of member senseTime
  */
-float DataAhrs::senseTime() const
+double DataAhrs::senseTime() const
 {
     return m_senseTime;
 }
@@ -470,7 +410,7 @@ float DataAhrs::senseTime() const
  * @brief This function returns a reference to member senseTime
  * @return Reference to member senseTime
  */
-float& DataAhrs::senseTime()
+double& DataAhrs::senseTime()
 {
     return m_senseTime;
 }
@@ -480,7 +420,7 @@ float& DataAhrs::senseTime()
  * @param _gyrX New value for member gyrX
  */
 void DataAhrs::gyrX(
-        float _gyrX)
+        double _gyrX)
 {
     m_gyrX = _gyrX;
 }
@@ -489,7 +429,7 @@ void DataAhrs::gyrX(
  * @brief This function returns the value of member gyrX
  * @return Value of member gyrX
  */
-float DataAhrs::gyrX() const
+double DataAhrs::gyrX() const
 {
     return m_gyrX;
 }
@@ -498,7 +438,7 @@ float DataAhrs::gyrX() const
  * @brief This function returns a reference to member gyrX
  * @return Reference to member gyrX
  */
-float& DataAhrs::gyrX()
+double& DataAhrs::gyrX()
 {
     return m_gyrX;
 }
@@ -508,7 +448,7 @@ float& DataAhrs::gyrX()
  * @param _gyrY New value for member gyrY
  */
 void DataAhrs::gyrY(
-        float _gyrY)
+        double _gyrY)
 {
     m_gyrY = _gyrY;
 }
@@ -517,7 +457,7 @@ void DataAhrs::gyrY(
  * @brief This function returns the value of member gyrY
  * @return Value of member gyrY
  */
-float DataAhrs::gyrY() const
+double DataAhrs::gyrY() const
 {
     return m_gyrY;
 }
@@ -526,7 +466,7 @@ float DataAhrs::gyrY() const
  * @brief This function returns a reference to member gyrY
  * @return Reference to member gyrY
  */
-float& DataAhrs::gyrY()
+double& DataAhrs::gyrY()
 {
     return m_gyrY;
 }
@@ -536,7 +476,7 @@ float& DataAhrs::gyrY()
  * @param _gyrZ New value for member gyrZ
  */
 void DataAhrs::gyrZ(
-        float _gyrZ)
+        double _gyrZ)
 {
     m_gyrZ = _gyrZ;
 }
@@ -545,7 +485,7 @@ void DataAhrs::gyrZ(
  * @brief This function returns the value of member gyrZ
  * @return Value of member gyrZ
  */
-float DataAhrs::gyrZ() const
+double DataAhrs::gyrZ() const
 {
     return m_gyrZ;
 }
@@ -554,7 +494,7 @@ float DataAhrs::gyrZ() const
  * @brief This function returns a reference to member gyrZ
  * @return Reference to member gyrZ
  */
-float& DataAhrs::gyrZ()
+double& DataAhrs::gyrZ()
 {
     return m_gyrZ;
 }
@@ -564,7 +504,7 @@ float& DataAhrs::gyrZ()
  * @param _accX New value for member accX
  */
 void DataAhrs::accX(
-        float _accX)
+        double _accX)
 {
     m_accX = _accX;
 }
@@ -573,7 +513,7 @@ void DataAhrs::accX(
  * @brief This function returns the value of member accX
  * @return Value of member accX
  */
-float DataAhrs::accX() const
+double DataAhrs::accX() const
 {
     return m_accX;
 }
@@ -582,7 +522,7 @@ float DataAhrs::accX() const
  * @brief This function returns a reference to member accX
  * @return Reference to member accX
  */
-float& DataAhrs::accX()
+double& DataAhrs::accX()
 {
     return m_accX;
 }
@@ -592,7 +532,7 @@ float& DataAhrs::accX()
  * @param _accY New value for member accY
  */
 void DataAhrs::accY(
-        float _accY)
+        double _accY)
 {
     m_accY = _accY;
 }
@@ -601,7 +541,7 @@ void DataAhrs::accY(
  * @brief This function returns the value of member accY
  * @return Value of member accY
  */
-float DataAhrs::accY() const
+double DataAhrs::accY() const
 {
     return m_accY;
 }
@@ -610,7 +550,7 @@ float DataAhrs::accY() const
  * @brief This function returns a reference to member accY
  * @return Reference to member accY
  */
-float& DataAhrs::accY()
+double& DataAhrs::accY()
 {
     return m_accY;
 }
@@ -620,7 +560,7 @@ float& DataAhrs::accY()
  * @param _accZ New value for member accZ
  */
 void DataAhrs::accZ(
-        float _accZ)
+        double _accZ)
 {
     m_accZ = _accZ;
 }
@@ -629,7 +569,7 @@ void DataAhrs::accZ(
  * @brief This function returns the value of member accZ
  * @return Value of member accZ
  */
-float DataAhrs::accZ() const
+double DataAhrs::accZ() const
 {
     return m_accZ;
 }
@@ -638,7 +578,7 @@ float DataAhrs::accZ() const
  * @brief This function returns a reference to member accZ
  * @return Reference to member accZ
  */
-float& DataAhrs::accZ()
+double& DataAhrs::accZ()
 {
     return m_accZ;
 }
@@ -648,7 +588,7 @@ float& DataAhrs::accZ()
  * @param _magX New value for member magX
  */
 void DataAhrs::magX(
-        float _magX)
+        double _magX)
 {
     m_magX = _magX;
 }
@@ -657,7 +597,7 @@ void DataAhrs::magX(
  * @brief This function returns the value of member magX
  * @return Value of member magX
  */
-float DataAhrs::magX() const
+double DataAhrs::magX() const
 {
     return m_magX;
 }
@@ -666,7 +606,7 @@ float DataAhrs::magX() const
  * @brief This function returns a reference to member magX
  * @return Reference to member magX
  */
-float& DataAhrs::magX()
+double& DataAhrs::magX()
 {
     return m_magX;
 }
@@ -676,7 +616,7 @@ float& DataAhrs::magX()
  * @param _magY New value for member magY
  */
 void DataAhrs::magY(
-        float _magY)
+        double _magY)
 {
     m_magY = _magY;
 }
@@ -685,7 +625,7 @@ void DataAhrs::magY(
  * @brief This function returns the value of member magY
  * @return Value of member magY
  */
-float DataAhrs::magY() const
+double DataAhrs::magY() const
 {
     return m_magY;
 }
@@ -694,7 +634,7 @@ float DataAhrs::magY() const
  * @brief This function returns a reference to member magY
  * @return Reference to member magY
  */
-float& DataAhrs::magY()
+double& DataAhrs::magY()
 {
     return m_magY;
 }
@@ -704,7 +644,7 @@ float& DataAhrs::magY()
  * @param _magZ New value for member magZ
  */
 void DataAhrs::magZ(
-        float _magZ)
+        double _magZ)
 {
     m_magZ = _magZ;
 }
@@ -713,7 +653,7 @@ void DataAhrs::magZ(
  * @brief This function returns the value of member magZ
  * @return Value of member magZ
  */
-float DataAhrs::magZ() const
+double DataAhrs::magZ() const
 {
     return m_magZ;
 }
@@ -722,65 +662,65 @@ float DataAhrs::magZ() const
  * @brief This function returns a reference to member magZ
  * @return Reference to member magZ
  */
-float& DataAhrs::magZ()
+double& DataAhrs::magZ()
 {
     return m_magZ;
 }
 
 /*!
- * @brief This function sets a value in member temp
- * @param _temp New value for member temp
+ * @brief This function sets a value in member temperature
+ * @param _temperature New value for member temperature
  */
-void DataAhrs::temp(
-        float _temp)
+void DataAhrs::temperature(
+        double _temperature)
 {
-    m_temp = _temp;
+    m_temperature = _temperature;
 }
 
 /*!
- * @brief This function returns the value of member temp
- * @return Value of member temp
+ * @brief This function returns the value of member temperature
+ * @return Value of member temperature
  */
-float DataAhrs::temp() const
+double DataAhrs::temperature() const
 {
-    return m_temp;
+    return m_temperature;
 }
 
 /*!
- * @brief This function returns a reference to member temp
- * @return Reference to member temp
+ * @brief This function returns a reference to member temperature
+ * @return Reference to member temperature
  */
-float& DataAhrs::temp()
+double& DataAhrs::temperature()
 {
-    return m_temp;
+    return m_temperature;
 }
 
 /*!
- * @brief This function sets a value in member press
- * @param _press New value for member press
+ * @brief This function sets a value in member barometric_pressure
+ * @param _barometric_pressure New value for member barometric_pressure
  */
-void DataAhrs::press(
-        float _press)
+void DataAhrs::barometric_pressure(
+        double _barometric_pressure)
 {
-    m_press = _press;
+    m_barometric_pressure = _barometric_pressure;
 }
 
 /*!
- * @brief This function returns the value of member press
- * @return Value of member press
+ * @brief This function returns the value of member barometric_pressure
+ * @return Value of member barometric_pressure
  */
-float DataAhrs::press() const
+double DataAhrs::barometric_pressure() const
 {
-    return m_press;
+    return m_barometric_pressure;
 }
 
 /*!
- * @brief This function returns a reference to member press
- * @return Reference to member press
+ * @brief This function returns a reference to member barometric_pressure
+ * @return Reference to member barometric_pressure
  */
-float& DataAhrs::press()
+double& DataAhrs::barometric_pressure()
 {
-    return m_press;
+    return m_barometric_pressure;
 }
 
 /*!
@@ -788,7 +728,7 @@ float& DataAhrs::press()
  * @param _phi New value for member phi
  */
 void DataAhrs::phi(
-        float _phi)
+        double _phi)
 {
     m_phi = _phi;
 }
@@ -797,7 +737,7 @@ void DataAhrs::phi(
  * @brief This function returns the value of member phi
  * @return Value of member phi
  */
-float DataAhrs::phi() const
+double DataAhrs::phi() const
 {
     return m_phi;
 }
@@ -806,7 +746,7 @@ float DataAhrs::phi() const
  * @brief This function returns a reference to member phi
  * @return Reference to member phi
  */
-float& DataAhrs::phi()
+double& DataAhrs::phi()
 {
     return m_phi;
 }
@@ -816,7 +756,7 @@ float& DataAhrs::phi()
  * @param _the New value for member the
  */
 void DataAhrs::the(
-        float _the)
+        double _the)
 {
     m_the = _the;
 }
@@ -825,7 +765,7 @@ void DataAhrs::the(
  * @brief This function returns the value of member the
  * @return Value of member the
  */
-float DataAhrs::the() const
+double DataAhrs::the() const
 {
     return m_the;
 }
@@ -834,7 +774,7 @@ float DataAhrs::the() const
  * @brief This function returns a reference to member the
  * @return Reference to member the
  */
-float& DataAhrs::the()
+double& DataAhrs::the()
 {
     return m_the;
 }
@@ -844,7 +784,7 @@ float& DataAhrs::the()
  * @param _psi New value for member psi
  */
 void DataAhrs::psi(
-        float _psi)
+        double _psi)
 {
     m_psi = _psi;
 }
@@ -853,7 +793,7 @@ void DataAhrs::psi(
  * @brief This function returns the value of member psi
  * @return Value of member psi
  */
-float DataAhrs::psi() const
+double DataAhrs::psi() const
 {
     return m_psi;
 }
@@ -862,121 +802,9 @@ float DataAhrs::psi() const
  * @brief This function returns a reference to member psi
  * @return Reference to member psi
  */
-float& DataAhrs::psi()
+double& DataAhrs::psi()
 {
     return m_psi;
-}
-
-/*!
- * @brief This function sets a value in member q0
- * @param _q0 New value for member q0
- */
-void DataAhrs::q0(
-        float _q0)
-{
-    m_q0 = _q0;
-}
-
-/*!
- * @brief This function returns the value of member q0
- * @return Value of member q0
- */
-float DataAhrs::q0() const
-{
-    return m_q0;
-}
-
-/*!
- * @brief This function returns a reference to member q0
- * @return Reference to member q0
- */
-float& DataAhrs::q0()
-{
-    return m_q0;
-}
-
-/*!
- * @brief This function sets a value in member q1
- * @param _q1 New value for member q1
- */
-void DataAhrs::q1(
-        float _q1)
-{
-    m_q1 = _q1;
-}
-
-/*!
- * @brief This function returns the value of member q1
- * @return Value of member q1
- */
-float DataAhrs::q1() const
-{
-    return m_q1;
-}
-
-/*!
- * @brief This function returns a reference to member q1
- * @return Reference to member q1
- */
-float& DataAhrs::q1()
-{
-    return m_q1;
-}
-
-/*!
- * @brief This function sets a value in member q2
- * @param _q2 New value for member q2
- */
-void DataAhrs::q2(
-        float _q2)
-{
-    m_q2 = _q2;
-}
-
-/*!
- * @brief This function returns the value of member q2
- * @return Value of member q2
- */
-float DataAhrs::q2() const
-{
-    return m_q2;
-}
-
-/*!
- * @brief This function returns a reference to member q2
- * @return Reference to member q2
- */
-float& DataAhrs::q2()
-{
-    return m_q2;
-}
-
-/*!
- * @brief This function sets a value in member q3
- * @param _q3 New value for member q3
- */
-void DataAhrs::q3(
-        float _q3)
-{
-    m_q3 = _q3;
-}
-
-/*!
- * @brief This function returns the value of member q3
- * @return Value of member q3
- */
-float DataAhrs::q3() const
-{
-    return m_q3;
-}
-
-/*!
- * @brief This function returns a reference to member q3
- * @return Reference to member q3
- */
-float& DataAhrs::q3()
-{
-    return m_q3;
 }
 
 /*!
@@ -1032,10 +860,6 @@ size_t DataAhrs::getKeyMaxCdrSerializedSize(
 
 
 
-
-
-
-
     return current_align;
 }
 
@@ -1048,5 +872,5 @@ void DataAhrs::serializeKey(
         eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-                         
+                     
 }

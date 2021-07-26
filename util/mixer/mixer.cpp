@@ -10,7 +10,7 @@
  ****************************************************************************/
 
 
-#include "Mixer.h"
+#include "mixer.h"
 
 
 
@@ -160,7 +160,7 @@ double Mixer::get_hgt_setpoint()
  */
 double Mixer::_get_normalized_pwm(uint16_t pwm, controltype_t type)
 {
-	uint16_t constrained_pwm;
+	uint16_t constrained_pwm = 0.0;
 	double output = 0.0;
 	switch(type) {
 		case SURFACE:
@@ -188,7 +188,7 @@ double Mixer::_get_normalized_pwm(uint16_t pwm, controltype_t type)
  */
 uint16_t Mixer::_get_pwm_from_normalized(double norm, controltype_t type)
 {
-	uint16_t constrained_pwm;
+
 	uint16_t output = 0;
 	switch(type) {
 		case SURFACE:

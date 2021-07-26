@@ -143,15 +143,11 @@ void Ahrs::run() {
 			dataAhrs.magX(ahrsCom.mag[0]);
 			dataAhrs.magY(ahrsCom.mag[1]);
 			dataAhrs.magZ(ahrsCom.mag[2]);
-			dataAhrs.temp(ahrsCom.temp);
-			dataAhrs.press(ahrsCom.press);
+			dataAhrs.temperature(ahrsCom.temp);
+			dataAhrs.barometric_pressure(ahrsCom.press);
 			dataAhrs.phi(ahrsCom.att[0]);
 			dataAhrs.the(ahrsCom.att[1]);
 			dataAhrs.psi(ahrsCom.att[2]);
-			dataAhrs.q0(-1.0);
-			dataAhrs.q1(-2.0);
-			dataAhrs.q2(-3.0);
-			dataAhrs.q3(-4.0);
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
@@ -183,15 +179,11 @@ void Ahrs::print() {
 	std::cout << "magX      " << dataAhrs.magX() << std::endl;
 	std::cout << "magY      " << dataAhrs.magY() << std::endl;
 	std::cout << "magZ      " << dataAhrs.magZ() << std::endl;
-	std::cout << "temp      " << dataAhrs.temp() << std::endl;
-	std::cout << "press     " << dataAhrs.press() << std::endl;
+	std::cout << "temp      " << dataAhrs.temperature() << std::endl;
+	std::cout << "press     " << dataAhrs.barometric_pressure() << std::endl;
 	std::cout << "phi       " << dataAhrs.phi() << std::endl;
 	std::cout << "the       " << dataAhrs.the() << std::endl;
 	std::cout << "psi       " << dataAhrs.psi() << std::endl;
-	std::cout << "q0        " << dataAhrs.q0() << std::endl;
-	std::cout << "q1        " << dataAhrs.q1() << std::endl;
-	std::cout << "q2        " << dataAhrs.q2() << std::endl;
-	std::cout << "q3        " << dataAhrs.q3() << std::endl;
 	std::cout << "alive     " << dataAhrs.alive() << std::endl;
 
 }
