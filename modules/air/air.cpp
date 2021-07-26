@@ -182,10 +182,12 @@ void Air::print() {
 
 	std::cout << "--- " << this->name << " " << dataAir.time() << " ---" << std::endl;
 
-	std::cout << "senseTime    " << dataAir.senseTime() << std::endl;
-	std::cout << "dynamicPress " << dataAir.dynamic_pressure() << std::endl;
-	std::cout << "velocity     " << dataAir.true_airspeed() << std::endl;
-	std::cout << "baroPress    " << dataAir.indicated_airspeed() << std::endl;
+	std::cout << "senseTime           " << dataAir.senseTime() << std::endl;
+	std::cout << "dynamicPress        " << dataAir.dynamic_pressure() << std::endl;
+	std::cout << "true_airspeed       " << dataAir.true_airspeed() << std::endl;
+	std::cout << "indicated_airspeed  " << dataAir.indicated_airspeed() << std::endl;
+	std::cout << "barometric_pressure " << dataAir.barometric_pressure() << std::endl;
+	std::cout << "barometric_height   " << dataAir.barometric_height() << std::endl;
 	std::cout << "density      " << dataAir.density() << std::endl;
 	std::cout << "temp         " << dataAir.temperature() << std::endl;
 	std::cout << "alive        " << dataAir.alive() << std::endl;
