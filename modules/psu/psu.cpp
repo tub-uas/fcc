@@ -134,15 +134,15 @@ void Psu::run() {
 			std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 
 			dataPsu.senseTime(psuCom.time);
-			dataPsu.mainVolt(psuCom.mainVolt);
-			dataPsu.mainCurr(psuCom.mainCurr);
-			dataPsu.mainPow(psuCom.mainPow);
-			dataPsu.pwrVolt(psuCom.pwrVolt);
-			dataPsu.pwrCurr(psuCom.pwrCurr);
-			dataPsu.pwrPow(psuCom.pwrPow);
-			dataPsu.sysVolt(psuCom.sysVolt);
-			dataPsu.sysCurr(psuCom.sysCurr);
-			dataPsu.sysPow(psuCom.sysPow);
+			dataPsu.main_volt(psuCom.mainVolt);
+			dataPsu.main_curr(psuCom.mainCurr);
+			dataPsu.main_pwr(psuCom.mainPow);
+			dataPsu.pwr_volt(psuCom.pwrVolt);
+			dataPsu.pwr_curr(psuCom.pwrCurr);
+			dataPsu.pwr_pwr(psuCom.pwrPow);
+			dataPsu.sys_volt(psuCom.sysVolt);
+			dataPsu.sys_curr(psuCom.sysCurr);
+			dataPsu.sys_pwr(psuCom.sysPow);
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
@@ -165,15 +165,15 @@ void Psu::print() {
 	std::cout << "--- " << this->name << " " << dataPsu.time() << " ---" << std::endl;
 
 	std::cout << "senseTime " << dataPsu.senseTime() << std::endl;
-	std::cout << "mainVolt  " << dataPsu.mainVolt() << std::endl;
-	std::cout << "mainCurr  " << dataPsu.mainCurr() << std::endl;
-	std::cout << "mainPow   " << dataPsu.mainPow() << std::endl;
-	std::cout << "pwrVolt   " << dataPsu.pwrVolt() << std::endl;
-	std::cout << "pwrCurr   " << dataPsu.pwrCurr() << std::endl;
-	std::cout << "pwrPow    " << dataPsu.pwrPow() << std::endl;
-	std::cout << "sysVolt   " << dataPsu.sysVolt() << std::endl;
-	std::cout << "sysCurr   " << dataPsu.sysCurr() << std::endl;
-	std::cout << "sysPow    " << dataPsu.sysPow() << std::endl;
+	std::cout << "mainVolt  " << dataPsu.main_volt() << std::endl;
+	std::cout << "mainCurr  " << dataPsu.main_curr() << std::endl;
+	std::cout << "mainPow   " << dataPsu.main_pwr() << std::endl;
+	std::cout << "pwrVolt   " << dataPsu.pwr_volt() << std::endl;
+	std::cout << "pwrCurr   " << dataPsu.pwr_curr() << std::endl;
+	std::cout << "pwrPow    " << dataPsu.pwr_pwr() << std::endl;
+	std::cout << "sysVolt   " << dataPsu.sys_volt() << std::endl;
+	std::cout << "sysCurr   " << dataPsu.sys_curr() << std::endl;
+	std::cout << "sysPow    " << dataPsu.sys_pwr() << std::endl;
 	std::cout << "alive     " << dataPsu.alive() << std::endl;
 
 }
