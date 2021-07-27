@@ -159,7 +159,7 @@ void Gps::run() {
 
 			dataGpsLock.unlock();
 
-			print();
+			// print();
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
