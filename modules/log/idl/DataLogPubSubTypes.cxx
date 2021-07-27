@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataLogPubSubType::DataLogPubSubType()
 {
     setName("DataLog");
-    m_typeSize = static_cast<uint32_t>(DataLog::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataLog::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataLog::isKeyDefined();
     size_t keyLength = DataLog::getKeyMaxCdrSerializedSize() > 16 ?
             DataLog::getKeyMaxCdrSerializedSize() : 16;

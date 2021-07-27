@@ -339,8 +339,8 @@ void SFusion::run() {
 
 
 
-				dataSFusion.latitude(listener.dataGps.lat());
-				dataSFusion.longitude(listener.dataGps.lon());
+				dataSFusion.latitude(listener.dataGps.latitude());
+				dataSFusion.longitude(listener.dataGps.longitude());
 				// TRANSFORMATION TO CARTESIAN COORDINATE SYSTEM XYZ
 				
 				dataSFusion.posN(-1.0);

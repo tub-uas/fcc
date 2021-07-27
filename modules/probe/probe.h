@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <thread>
 #include <chrono>
+#include <map>
 
 #include <fastdds/dds/domain/DomainParticipantFactory.hpp>
 #include <fastdds/dds/domain/DomainParticipant.hpp>
@@ -21,7 +22,7 @@
 #include <fastdds/dds/subscriber/qos/DataReaderQos.hpp>
 #include <fastdds/dds/subscriber/SampleInfo.hpp>
 
-#include "./idl/DataDownlinkPubSubTypes.h"
+#include "./../downlink/idl/DataDownlinkPubSubTypes.h"
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 #include "./../raiOut/idl/DataRaiOutPubSubTypes.h"
 #include "./../sFusion/idl/DataSFusionPubSubTypes.h"
@@ -32,8 +33,10 @@
 #include "./../ctrl/idl/DataCtrlPubSubTypes.h"
 #include "./../watchdog/idl/DataWatchdogPubSubTypes.h"
 
+#include "../../util/timer/timer.h"
 
-#define PRINT_DATA(stringname,data) (std::cout << "["stringname "] " << data << std::endl; )
+
+#define PRINT_DATA(stringname,data) std::cout << "[" << stringname << "] " << data << std::endl; 
 
 
 
@@ -128,11 +131,23 @@ private:
 
 	eprosima::fastdds::dds::Topic       *topic_probe;
 	eprosima::fastdds::dds::DataReader  *reader_probe;
-	eprosima::fastdds::dds::TypeSupport  type_probe;
+	eprosima::fastdds::dds::TypeSupport  type_probe_raiIn;
+	eprosima::fastdds::dds::TypeSupport  type_probe_raiOut;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Ahrs;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Air;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Gps;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Psu;
+	eprosima::fastdds::dds::TypeSupport  type_probe_SFusion;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Downlink;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Ctrl;
+	eprosima::fastdds::dds::TypeSupport  type_probe_Watchdog;
+	std::map<std::string, eprosima::fastdds::dds::TypeSupport> type_probe;
+
 
 	std::string _topicname;
 	std::string _data_topic_name{"Data"};
 	bool _run{true};	
+	Timer timer;
 };
 
 #endif // DOWNLINK_H

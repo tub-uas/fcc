@@ -36,9 +36,9 @@ using namespace eprosima::fastcdr::exception;
 
 DataLog::DataLog()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@192d3247
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_time = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43bd930a
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_alive = false;
 
 }

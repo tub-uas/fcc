@@ -36,55 +36,55 @@ using namespace eprosima::fastcdr::exception;
 
 DataGps::DataGps()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_senseTime = 0.0;
-    // m_lat com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
-    m_lat = 0.0;
-    // m_lon com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
-    m_lon = 0.0;
-    // m_alt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
-    m_alt = 0.0;
-    // m_speed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
-    m_speed = 0.0;
-    // m_cog com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
-    m_cog = 0.0;
-    // m_dopP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
-    m_dopP = 0.0;
-    // m_dopH com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
-    m_dopH = 0.0;
-    // m_dopV com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
-    m_dopV = 0.0;
-    // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
+    // m_latitude com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
+    m_latitude = 0.0;
+    // m_longitude com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
+    m_longitude = 0.0;
+    // m_alt_msl com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
+    m_alt_msl = 0.0;
+    // m_groundspeed com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
+    m_groundspeed = 0.0;
+    // m_course_over_ground com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
+    m_course_over_ground = 0.0;
+    // m_dop_position com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
+    m_dop_position = 0.0;
+    // m_dop_height com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
+    m_dop_height = 0.0;
+    // m_dop_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
+    m_dop_velocity = 0.0;
+    // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
     m_sats = 0;
-    // m_satsInView com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
-    m_satsInView = 0;
-    // m_fix com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
+    // m_sats_in_view com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
+    m_sats_in_view = 0;
+    // m_fix com.eprosima.idl.parser.typecode.PrimitiveTypeCode@17d0685f
     m_fix = 0;
-    // m_fixMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
-    m_fixMode = 0;
-    // m_second com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
+    // m_fix_mode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3891771e
+    m_fix_mode = 0;
+    // m_second com.eprosima.idl.parser.typecode.PrimitiveTypeCode@78ac1102
     m_second = 0;
-    // m_minute com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
+    // m_minute com.eprosima.idl.parser.typecode.PrimitiveTypeCode@a74868d
     m_minute = 0;
-    // m_hour com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12c8a2c0
+    // m_hour com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
     m_hour = 0;
-    // m_day com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
+    // m_day com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
     m_day = 0;
-    // m_month com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
+    // m_month com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
     m_month = 0;
-    // m_year com.eprosima.idl.parser.typecode.PrimitiveTypeCode@18bf3d14
+    // m_year com.eprosima.idl.parser.typecode.PrimitiveTypeCode@25bbf683
     m_year = 0;
-    // m_variation com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4fb64261
+    // m_variation com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ec8211c
     m_variation = 0.0;
-    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
+    // m_magX com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7276c8cd
     m_magX = 0.0;
-    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
+    // m_magY com.eprosima.idl.parser.typecode.PrimitiveTypeCode@544a2ea6
     m_magY = 0.0;
-    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
+    // m_magZ com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2e3fc542
     m_magZ = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@150c158
     m_alive = false;
 
 }
@@ -123,18 +123,18 @@ DataGps::DataGps(
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_lat = x.m_lat;
-    m_lon = x.m_lon;
-    m_alt = x.m_alt;
-    m_speed = x.m_speed;
-    m_cog = x.m_cog;
-    m_dopP = x.m_dopP;
-    m_dopH = x.m_dopH;
-    m_dopV = x.m_dopV;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
+    m_alt_msl = x.m_alt_msl;
+    m_groundspeed = x.m_groundspeed;
+    m_course_over_ground = x.m_course_over_ground;
+    m_dop_position = x.m_dop_position;
+    m_dop_height = x.m_dop_height;
+    m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
-    m_satsInView = x.m_satsInView;
+    m_sats_in_view = x.m_sats_in_view;
     m_fix = x.m_fix;
-    m_fixMode = x.m_fixMode;
+    m_fix_mode = x.m_fix_mode;
     m_second = x.m_second;
     m_minute = x.m_minute;
     m_hour = x.m_hour;
@@ -153,18 +153,18 @@ DataGps::DataGps(
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_lat = x.m_lat;
-    m_lon = x.m_lon;
-    m_alt = x.m_alt;
-    m_speed = x.m_speed;
-    m_cog = x.m_cog;
-    m_dopP = x.m_dopP;
-    m_dopH = x.m_dopH;
-    m_dopV = x.m_dopV;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
+    m_alt_msl = x.m_alt_msl;
+    m_groundspeed = x.m_groundspeed;
+    m_course_over_ground = x.m_course_over_ground;
+    m_dop_position = x.m_dop_position;
+    m_dop_height = x.m_dop_height;
+    m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
-    m_satsInView = x.m_satsInView;
+    m_sats_in_view = x.m_sats_in_view;
     m_fix = x.m_fix;
-    m_fixMode = x.m_fixMode;
+    m_fix_mode = x.m_fix_mode;
     m_second = x.m_second;
     m_minute = x.m_minute;
     m_hour = x.m_hour;
@@ -184,18 +184,18 @@ DataGps& DataGps::operator =(
 
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_lat = x.m_lat;
-    m_lon = x.m_lon;
-    m_alt = x.m_alt;
-    m_speed = x.m_speed;
-    m_cog = x.m_cog;
-    m_dopP = x.m_dopP;
-    m_dopH = x.m_dopH;
-    m_dopV = x.m_dopV;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
+    m_alt_msl = x.m_alt_msl;
+    m_groundspeed = x.m_groundspeed;
+    m_course_over_ground = x.m_course_over_ground;
+    m_dop_position = x.m_dop_position;
+    m_dop_height = x.m_dop_height;
+    m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
-    m_satsInView = x.m_satsInView;
+    m_sats_in_view = x.m_sats_in_view;
     m_fix = x.m_fix;
-    m_fixMode = x.m_fixMode;
+    m_fix_mode = x.m_fix_mode;
     m_second = x.m_second;
     m_minute = x.m_minute;
     m_hour = x.m_hour;
@@ -217,18 +217,18 @@ DataGps& DataGps::operator =(
 
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_lat = x.m_lat;
-    m_lon = x.m_lon;
-    m_alt = x.m_alt;
-    m_speed = x.m_speed;
-    m_cog = x.m_cog;
-    m_dopP = x.m_dopP;
-    m_dopH = x.m_dopH;
-    m_dopV = x.m_dopV;
+    m_latitude = x.m_latitude;
+    m_longitude = x.m_longitude;
+    m_alt_msl = x.m_alt_msl;
+    m_groundspeed = x.m_groundspeed;
+    m_course_over_ground = x.m_course_over_ground;
+    m_dop_position = x.m_dop_position;
+    m_dop_height = x.m_dop_height;
+    m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
-    m_satsInView = x.m_satsInView;
+    m_sats_in_view = x.m_sats_in_view;
     m_fix = x.m_fix;
-    m_fixMode = x.m_fixMode;
+    m_fix_mode = x.m_fix_mode;
     m_second = x.m_second;
     m_minute = x.m_minute;
     m_hour = x.m_hour;
@@ -253,34 +253,31 @@ size_t DataGps::getMaxCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
@@ -310,16 +307,19 @@ size_t DataGps::getMaxCdrSerializedSize(
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -340,34 +340,31 @@ size_t DataGps::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
-
-
-    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
@@ -397,16 +394,19 @@ size_t DataGps::getCdrSerializedSize(
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -422,18 +422,18 @@ void DataGps::serialize(
 
     scdr << m_time;
     scdr << m_senseTime;
-    scdr << m_lat;
-    scdr << m_lon;
-    scdr << m_alt;
-    scdr << m_speed;
-    scdr << m_cog;
-    scdr << m_dopP;
-    scdr << m_dopH;
-    scdr << m_dopV;
+    scdr << m_latitude;
+    scdr << m_longitude;
+    scdr << m_alt_msl;
+    scdr << m_groundspeed;
+    scdr << m_course_over_ground;
+    scdr << m_dop_position;
+    scdr << m_dop_height;
+    scdr << m_dop_velocity;
     scdr << m_sats;
-    scdr << m_satsInView;
+    scdr << m_sats_in_view;
     scdr << m_fix;
-    scdr << m_fixMode;
+    scdr << m_fix_mode;
     scdr << m_second;
     scdr << m_minute;
     scdr << m_hour;
@@ -454,18 +454,18 @@ void DataGps::deserialize(
 
     dcdr >> m_time;
     dcdr >> m_senseTime;
-    dcdr >> m_lat;
-    dcdr >> m_lon;
-    dcdr >> m_alt;
-    dcdr >> m_speed;
-    dcdr >> m_cog;
-    dcdr >> m_dopP;
-    dcdr >> m_dopH;
-    dcdr >> m_dopV;
+    dcdr >> m_latitude;
+    dcdr >> m_longitude;
+    dcdr >> m_alt_msl;
+    dcdr >> m_groundspeed;
+    dcdr >> m_course_over_ground;
+    dcdr >> m_dop_position;
+    dcdr >> m_dop_height;
+    dcdr >> m_dop_velocity;
     dcdr >> m_sats;
-    dcdr >> m_satsInView;
+    dcdr >> m_sats_in_view;
     dcdr >> m_fix;
-    dcdr >> m_fixMode;
+    dcdr >> m_fix_mode;
     dcdr >> m_second;
     dcdr >> m_minute;
     dcdr >> m_hour;
@@ -512,7 +512,7 @@ uint64_t& DataGps::time()
  * @param _senseTime New value for member senseTime
  */
 void DataGps::senseTime(
-        float _senseTime)
+        double _senseTime)
 {
     m_senseTime = _senseTime;
 }
@@ -521,7 +521,7 @@ void DataGps::senseTime(
  * @brief This function returns the value of member senseTime
  * @return Value of member senseTime
  */
-float DataGps::senseTime() const
+double DataGps::senseTime() const
 {
     return m_senseTime;
 }
@@ -530,233 +530,233 @@ float DataGps::senseTime() const
  * @brief This function returns a reference to member senseTime
  * @return Reference to member senseTime
  */
-float& DataGps::senseTime()
+double& DataGps::senseTime()
 {
     return m_senseTime;
 }
 
 /*!
- * @brief This function sets a value in member lat
- * @param _lat New value for member lat
+ * @brief This function sets a value in member latitude
+ * @param _latitude New value for member latitude
  */
-void DataGps::lat(
-        float _lat)
+void DataGps::latitude(
+        double _latitude)
 {
-    m_lat = _lat;
+    m_latitude = _latitude;
 }
 
 /*!
- * @brief This function returns the value of member lat
- * @return Value of member lat
+ * @brief This function returns the value of member latitude
+ * @return Value of member latitude
  */
-float DataGps::lat() const
+double DataGps::latitude() const
 {
-    return m_lat;
+    return m_latitude;
 }
 
 /*!
- * @brief This function returns a reference to member lat
- * @return Reference to member lat
+ * @brief This function returns a reference to member latitude
+ * @return Reference to member latitude
  */
-float& DataGps::lat()
+double& DataGps::latitude()
 {
-    return m_lat;
+    return m_latitude;
 }
 
 /*!
- * @brief This function sets a value in member lon
- * @param _lon New value for member lon
+ * @brief This function sets a value in member longitude
+ * @param _longitude New value for member longitude
  */
-void DataGps::lon(
-        float _lon)
+void DataGps::longitude(
+        double _longitude)
 {
-    m_lon = _lon;
+    m_longitude = _longitude;
 }
 
 /*!
- * @brief This function returns the value of member lon
- * @return Value of member lon
+ * @brief This function returns the value of member longitude
+ * @return Value of member longitude
  */
-float DataGps::lon() const
+double DataGps::longitude() const
 {
-    return m_lon;
+    return m_longitude;
 }
 
 /*!
- * @brief This function returns a reference to member lon
- * @return Reference to member lon
+ * @brief This function returns a reference to member longitude
+ * @return Reference to member longitude
  */
-float& DataGps::lon()
+double& DataGps::longitude()
 {
-    return m_lon;
+    return m_longitude;
 }
 
 /*!
- * @brief This function sets a value in member alt
- * @param _alt New value for member alt
+ * @brief This function sets a value in member alt_msl
+ * @param _alt_msl New value for member alt_msl
  */
-void DataGps::alt(
-        float _alt)
+void DataGps::alt_msl(
+        double _alt_msl)
 {
-    m_alt = _alt;
+    m_alt_msl = _alt_msl;
 }
 
 /*!
- * @brief This function returns the value of member alt
- * @return Value of member alt
+ * @brief This function returns the value of member alt_msl
+ * @return Value of member alt_msl
  */
-float DataGps::alt() const
+double DataGps::alt_msl() const
 {
-    return m_alt;
+    return m_alt_msl;
 }
 
 /*!
- * @brief This function returns a reference to member alt
- * @return Reference to member alt
+ * @brief This function returns a reference to member alt_msl
+ * @return Reference to member alt_msl
  */
-float& DataGps::alt()
+double& DataGps::alt_msl()
 {
-    return m_alt;
+    return m_alt_msl;
 }
 
 /*!
- * @brief This function sets a value in member speed
- * @param _speed New value for member speed
+ * @brief This function sets a value in member groundspeed
+ * @param _groundspeed New value for member groundspeed
  */
-void DataGps::speed(
-        float _speed)
+void DataGps::groundspeed(
+        double _groundspeed)
 {
-    m_speed = _speed;
+    m_groundspeed = _groundspeed;
 }
 
 /*!
- * @brief This function returns the value of member speed
- * @return Value of member speed
+ * @brief This function returns the value of member groundspeed
+ * @return Value of member groundspeed
  */
-float DataGps::speed() const
+double DataGps::groundspeed() const
 {
-    return m_speed;
+    return m_groundspeed;
 }
 
 /*!
- * @brief This function returns a reference to member speed
- * @return Reference to member speed
+ * @brief This function returns a reference to member groundspeed
+ * @return Reference to member groundspeed
  */
-float& DataGps::speed()
+double& DataGps::groundspeed()
 {
-    return m_speed;
+    return m_groundspeed;
 }
 
 /*!
- * @brief This function sets a value in member cog
- * @param _cog New value for member cog
+ * @brief This function sets a value in member course_over_ground
+ * @param _course_over_ground New value for member course_over_ground
  */
-void DataGps::cog(
-        float _cog)
+void DataGps::course_over_ground(
+        double _course_over_ground)
 {
-    m_cog = _cog;
+    m_course_over_ground = _course_over_ground;
 }
 
 /*!
- * @brief This function returns the value of member cog
- * @return Value of member cog
+ * @brief This function returns the value of member course_over_ground
+ * @return Value of member course_over_ground
  */
-float DataGps::cog() const
+double DataGps::course_over_ground() const
 {
-    return m_cog;
+    return m_course_over_ground;
 }
 
 /*!
- * @brief This function returns a reference to member cog
- * @return Reference to member cog
+ * @brief This function returns a reference to member course_over_ground
+ * @return Reference to member course_over_ground
  */
-float& DataGps::cog()
+double& DataGps::course_over_ground()
 {
-    return m_cog;
+    return m_course_over_ground;
 }
 
 /*!
- * @brief This function sets a value in member dopP
- * @param _dopP New value for member dopP
+ * @brief This function sets a value in member dop_position
+ * @param _dop_position New value for member dop_position
  */
-void DataGps::dopP(
-        float _dopP)
+void DataGps::dop_position(
+        double _dop_position)
 {
-    m_dopP = _dopP;
+    m_dop_position = _dop_position;
 }
 
 /*!
- * @brief This function returns the value of member dopP
- * @return Value of member dopP
+ * @brief This function returns the value of member dop_position
+ * @return Value of member dop_position
  */
-float DataGps::dopP() const
+double DataGps::dop_position() const
 {
-    return m_dopP;
+    return m_dop_position;
 }
 
 /*!
- * @brief This function returns a reference to member dopP
- * @return Reference to member dopP
+ * @brief This function returns a reference to member dop_position
+ * @return Reference to member dop_position
  */
-float& DataGps::dopP()
+double& DataGps::dop_position()
 {
-    return m_dopP;
+    return m_dop_position;
 }
 
 /*!
- * @brief This function sets a value in member dopH
- * @param _dopH New value for member dopH
+ * @brief This function sets a value in member dop_height
+ * @param _dop_height New value for member dop_height
  */
-void DataGps::dopH(
-        float _dopH)
+void DataGps::dop_height(
+        double _dop_height)
 {
-    m_dopH = _dopH;
+    m_dop_height = _dop_height;
 }
 
 /*!
- * @brief This function returns the value of member dopH
- * @return Value of member dopH
+ * @brief This function returns the value of member dop_height
+ * @return Value of member dop_height
  */
-float DataGps::dopH() const
+double DataGps::dop_height() const
 {
-    return m_dopH;
+    return m_dop_height;
 }
 
 /*!
- * @brief This function returns a reference to member dopH
- * @return Reference to member dopH
+ * @brief This function returns a reference to member dop_height
+ * @return Reference to member dop_height
  */
-float& DataGps::dopH()
+double& DataGps::dop_height()
 {
-    return m_dopH;
+    return m_dop_height;
 }
 
 /*!
- * @brief This function sets a value in member dopV
- * @param _dopV New value for member dopV
+ * @brief This function sets a value in member dop_velocity
+ * @param _dop_velocity New value for member dop_velocity
  */
-void DataGps::dopV(
-        float _dopV)
+void DataGps::dop_velocity(
+        double _dop_velocity)
 {
-    m_dopV = _dopV;
+    m_dop_velocity = _dop_velocity;
 }
 
 /*!
- * @brief This function returns the value of member dopV
- * @return Value of member dopV
+ * @brief This function returns the value of member dop_velocity
+ * @return Value of member dop_velocity
  */
-float DataGps::dopV() const
+double DataGps::dop_velocity() const
 {
-    return m_dopV;
+    return m_dop_velocity;
 }
 
 /*!
- * @brief This function returns a reference to member dopV
- * @return Reference to member dopV
+ * @brief This function returns a reference to member dop_velocity
+ * @return Reference to member dop_velocity
  */
-float& DataGps::dopV()
+double& DataGps::dop_velocity()
 {
-    return m_dopV;
+    return m_dop_velocity;
 }
 
 /*!
@@ -788,31 +788,31 @@ uint16_t& DataGps::sats()
 }
 
 /*!
- * @brief This function sets a value in member satsInView
- * @param _satsInView New value for member satsInView
+ * @brief This function sets a value in member sats_in_view
+ * @param _sats_in_view New value for member sats_in_view
  */
-void DataGps::satsInView(
-        uint16_t _satsInView)
+void DataGps::sats_in_view(
+        uint16_t _sats_in_view)
 {
-    m_satsInView = _satsInView;
+    m_sats_in_view = _sats_in_view;
 }
 
 /*!
- * @brief This function returns the value of member satsInView
- * @return Value of member satsInView
+ * @brief This function returns the value of member sats_in_view
+ * @return Value of member sats_in_view
  */
-uint16_t DataGps::satsInView() const
+uint16_t DataGps::sats_in_view() const
 {
-    return m_satsInView;
+    return m_sats_in_view;
 }
 
 /*!
- * @brief This function returns a reference to member satsInView
- * @return Reference to member satsInView
+ * @brief This function returns a reference to member sats_in_view
+ * @return Reference to member sats_in_view
  */
-uint16_t& DataGps::satsInView()
+uint16_t& DataGps::sats_in_view()
 {
-    return m_satsInView;
+    return m_sats_in_view;
 }
 
 /*!
@@ -844,31 +844,31 @@ uint16_t& DataGps::fix()
 }
 
 /*!
- * @brief This function sets a value in member fixMode
- * @param _fixMode New value for member fixMode
+ * @brief This function sets a value in member fix_mode
+ * @param _fix_mode New value for member fix_mode
  */
-void DataGps::fixMode(
-        uint16_t _fixMode)
+void DataGps::fix_mode(
+        uint16_t _fix_mode)
 {
-    m_fixMode = _fixMode;
+    m_fix_mode = _fix_mode;
 }
 
 /*!
- * @brief This function returns the value of member fixMode
- * @return Value of member fixMode
+ * @brief This function returns the value of member fix_mode
+ * @return Value of member fix_mode
  */
-uint16_t DataGps::fixMode() const
+uint16_t DataGps::fix_mode() const
 {
-    return m_fixMode;
+    return m_fix_mode;
 }
 
 /*!
- * @brief This function returns a reference to member fixMode
- * @return Reference to member fixMode
+ * @brief This function returns a reference to member fix_mode
+ * @return Reference to member fix_mode
  */
-uint16_t& DataGps::fixMode()
+uint16_t& DataGps::fix_mode()
 {
-    return m_fixMode;
+    return m_fix_mode;
 }
 
 /*!
@@ -1044,7 +1044,7 @@ uint16_t& DataGps::year()
  * @param _variation New value for member variation
  */
 void DataGps::variation(
-        float _variation)
+        double _variation)
 {
     m_variation = _variation;
 }
@@ -1053,7 +1053,7 @@ void DataGps::variation(
  * @brief This function returns the value of member variation
  * @return Value of member variation
  */
-float DataGps::variation() const
+double DataGps::variation() const
 {
     return m_variation;
 }
@@ -1062,7 +1062,7 @@ float DataGps::variation() const
  * @brief This function returns a reference to member variation
  * @return Reference to member variation
  */
-float& DataGps::variation()
+double& DataGps::variation()
 {
     return m_variation;
 }
@@ -1072,7 +1072,7 @@ float& DataGps::variation()
  * @param _magX New value for member magX
  */
 void DataGps::magX(
-        float _magX)
+        double _magX)
 {
     m_magX = _magX;
 }
@@ -1081,7 +1081,7 @@ void DataGps::magX(
  * @brief This function returns the value of member magX
  * @return Value of member magX
  */
-float DataGps::magX() const
+double DataGps::magX() const
 {
     return m_magX;
 }
@@ -1090,7 +1090,7 @@ float DataGps::magX() const
  * @brief This function returns a reference to member magX
  * @return Reference to member magX
  */
-float& DataGps::magX()
+double& DataGps::magX()
 {
     return m_magX;
 }
@@ -1100,7 +1100,7 @@ float& DataGps::magX()
  * @param _magY New value for member magY
  */
 void DataGps::magY(
-        float _magY)
+        double _magY)
 {
     m_magY = _magY;
 }
@@ -1109,7 +1109,7 @@ void DataGps::magY(
  * @brief This function returns the value of member magY
  * @return Value of member magY
  */
-float DataGps::magY() const
+double DataGps::magY() const
 {
     return m_magY;
 }
@@ -1118,7 +1118,7 @@ float DataGps::magY() const
  * @brief This function returns a reference to member magY
  * @return Reference to member magY
  */
-float& DataGps::magY()
+double& DataGps::magY()
 {
     return m_magY;
 }
@@ -1128,7 +1128,7 @@ float& DataGps::magY()
  * @param _magZ New value for member magZ
  */
 void DataGps::magZ(
-        float _magZ)
+        double _magZ)
 {
     m_magZ = _magZ;
 }
@@ -1137,7 +1137,7 @@ void DataGps::magZ(
  * @brief This function returns the value of member magZ
  * @return Value of member magZ
  */
-float DataGps::magZ() const
+double DataGps::magZ() const
 {
     return m_magZ;
 }
@@ -1146,7 +1146,7 @@ float DataGps::magZ() const
  * @brief This function returns a reference to member magZ
  * @return Reference to member magZ
  */
-float& DataGps::magZ()
+double& DataGps::magZ()
 {
     return m_magZ;
 }

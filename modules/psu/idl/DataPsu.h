@@ -131,190 +131,190 @@ public:
      * @param _senseTime New value for member senseTime
      */
     eProsima_user_DllExport void senseTime(
-            float _senseTime);
+            double _senseTime);
 
     /*!
      * @brief This function returns the value of member senseTime
      * @return Value of member senseTime
      */
-    eProsima_user_DllExport float senseTime() const;
+    eProsima_user_DllExport double senseTime() const;
 
     /*!
      * @brief This function returns a reference to member senseTime
      * @return Reference to member senseTime
      */
-    eProsima_user_DllExport float& senseTime();
+    eProsima_user_DllExport double& senseTime();
 
     /*!
-     * @brief This function sets a value in member mainVolt
-     * @param _mainVolt New value for member mainVolt
+     * @brief This function sets a value in member main_volt
+     * @param _main_volt New value for member main_volt
      */
-    eProsima_user_DllExport void mainVolt(
-            float _mainVolt);
+    eProsima_user_DllExport void main_volt(
+            double _main_volt);
 
     /*!
-     * @brief This function returns the value of member mainVolt
-     * @return Value of member mainVolt
+     * @brief This function returns the value of member main_volt
+     * @return Value of member main_volt
      */
-    eProsima_user_DllExport float mainVolt() const;
+    eProsima_user_DllExport double main_volt() const;
 
     /*!
-     * @brief This function returns a reference to member mainVolt
-     * @return Reference to member mainVolt
+     * @brief This function returns a reference to member main_volt
+     * @return Reference to member main_volt
      */
-    eProsima_user_DllExport float& mainVolt();
+    eProsima_user_DllExport double& main_volt();
 
     /*!
-     * @brief This function sets a value in member mainCurr
-     * @param _mainCurr New value for member mainCurr
+     * @brief This function sets a value in member main_curr
+     * @param _main_curr New value for member main_curr
      */
-    eProsima_user_DllExport void mainCurr(
-            float _mainCurr);
+    eProsima_user_DllExport void main_curr(
+            double _main_curr);
 
     /*!
-     * @brief This function returns the value of member mainCurr
-     * @return Value of member mainCurr
+     * @brief This function returns the value of member main_curr
+     * @return Value of member main_curr
      */
-    eProsima_user_DllExport float mainCurr() const;
+    eProsima_user_DllExport double main_curr() const;
 
     /*!
-     * @brief This function returns a reference to member mainCurr
-     * @return Reference to member mainCurr
+     * @brief This function returns a reference to member main_curr
+     * @return Reference to member main_curr
      */
-    eProsima_user_DllExport float& mainCurr();
+    eProsima_user_DllExport double& main_curr();
 
     /*!
-     * @brief This function sets a value in member mainPow
-     * @param _mainPow New value for member mainPow
+     * @brief This function sets a value in member main_pwr
+     * @param _main_pwr New value for member main_pwr
      */
-    eProsima_user_DllExport void mainPow(
-            float _mainPow);
+    eProsima_user_DllExport void main_pwr(
+            double _main_pwr);
 
     /*!
-     * @brief This function returns the value of member mainPow
-     * @return Value of member mainPow
+     * @brief This function returns the value of member main_pwr
+     * @return Value of member main_pwr
      */
-    eProsima_user_DllExport float mainPow() const;
+    eProsima_user_DllExport double main_pwr() const;
 
     /*!
-     * @brief This function returns a reference to member mainPow
-     * @return Reference to member mainPow
+     * @brief This function returns a reference to member main_pwr
+     * @return Reference to member main_pwr
      */
-    eProsima_user_DllExport float& mainPow();
+    eProsima_user_DllExport double& main_pwr();
 
     /*!
-     * @brief This function sets a value in member pwrVolt
-     * @param _pwrVolt New value for member pwrVolt
+     * @brief This function sets a value in member pwr_volt
+     * @param _pwr_volt New value for member pwr_volt
      */
-    eProsima_user_DllExport void pwrVolt(
-            float _pwrVolt);
+    eProsima_user_DllExport void pwr_volt(
+            double _pwr_volt);
 
     /*!
-     * @brief This function returns the value of member pwrVolt
-     * @return Value of member pwrVolt
+     * @brief This function returns the value of member pwr_volt
+     * @return Value of member pwr_volt
      */
-    eProsima_user_DllExport float pwrVolt() const;
+    eProsima_user_DllExport double pwr_volt() const;
 
     /*!
-     * @brief This function returns a reference to member pwrVolt
-     * @return Reference to member pwrVolt
+     * @brief This function returns a reference to member pwr_volt
+     * @return Reference to member pwr_volt
      */
-    eProsima_user_DllExport float& pwrVolt();
+    eProsima_user_DllExport double& pwr_volt();
 
     /*!
-     * @brief This function sets a value in member pwrCurr
-     * @param _pwrCurr New value for member pwrCurr
+     * @brief This function sets a value in member pwr_curr
+     * @param _pwr_curr New value for member pwr_curr
      */
-    eProsima_user_DllExport void pwrCurr(
-            float _pwrCurr);
+    eProsima_user_DllExport void pwr_curr(
+            double _pwr_curr);
 
     /*!
-     * @brief This function returns the value of member pwrCurr
-     * @return Value of member pwrCurr
+     * @brief This function returns the value of member pwr_curr
+     * @return Value of member pwr_curr
      */
-    eProsima_user_DllExport float pwrCurr() const;
+    eProsima_user_DllExport double pwr_curr() const;
 
     /*!
-     * @brief This function returns a reference to member pwrCurr
-     * @return Reference to member pwrCurr
+     * @brief This function returns a reference to member pwr_curr
+     * @return Reference to member pwr_curr
      */
-    eProsima_user_DllExport float& pwrCurr();
+    eProsima_user_DllExport double& pwr_curr();
 
     /*!
-     * @brief This function sets a value in member pwrPow
-     * @param _pwrPow New value for member pwrPow
+     * @brief This function sets a value in member pwr_pwr
+     * @param _pwr_pwr New value for member pwr_pwr
      */
-    eProsima_user_DllExport void pwrPow(
-            float _pwrPow);
+    eProsima_user_DllExport void pwr_pwr(
+            double _pwr_pwr);
 
     /*!
-     * @brief This function returns the value of member pwrPow
-     * @return Value of member pwrPow
+     * @brief This function returns the value of member pwr_pwr
+     * @return Value of member pwr_pwr
      */
-    eProsima_user_DllExport float pwrPow() const;
+    eProsima_user_DllExport double pwr_pwr() const;
 
     /*!
-     * @brief This function returns a reference to member pwrPow
-     * @return Reference to member pwrPow
+     * @brief This function returns a reference to member pwr_pwr
+     * @return Reference to member pwr_pwr
      */
-    eProsima_user_DllExport float& pwrPow();
+    eProsima_user_DllExport double& pwr_pwr();
 
     /*!
-     * @brief This function sets a value in member sysVolt
-     * @param _sysVolt New value for member sysVolt
+     * @brief This function sets a value in member sys_volt
+     * @param _sys_volt New value for member sys_volt
      */
-    eProsima_user_DllExport void sysVolt(
-            float _sysVolt);
+    eProsima_user_DllExport void sys_volt(
+            double _sys_volt);
 
     /*!
-     * @brief This function returns the value of member sysVolt
-     * @return Value of member sysVolt
+     * @brief This function returns the value of member sys_volt
+     * @return Value of member sys_volt
      */
-    eProsima_user_DllExport float sysVolt() const;
+    eProsima_user_DllExport double sys_volt() const;
 
     /*!
-     * @brief This function returns a reference to member sysVolt
-     * @return Reference to member sysVolt
+     * @brief This function returns a reference to member sys_volt
+     * @return Reference to member sys_volt
      */
-    eProsima_user_DllExport float& sysVolt();
+    eProsima_user_DllExport double& sys_volt();
 
     /*!
-     * @brief This function sets a value in member sysCurr
-     * @param _sysCurr New value for member sysCurr
+     * @brief This function sets a value in member sys_curr
+     * @param _sys_curr New value for member sys_curr
      */
-    eProsima_user_DllExport void sysCurr(
-            float _sysCurr);
+    eProsima_user_DllExport void sys_curr(
+            double _sys_curr);
 
     /*!
-     * @brief This function returns the value of member sysCurr
-     * @return Value of member sysCurr
+     * @brief This function returns the value of member sys_curr
+     * @return Value of member sys_curr
      */
-    eProsima_user_DllExport float sysCurr() const;
+    eProsima_user_DllExport double sys_curr() const;
 
     /*!
-     * @brief This function returns a reference to member sysCurr
-     * @return Reference to member sysCurr
+     * @brief This function returns a reference to member sys_curr
+     * @return Reference to member sys_curr
      */
-    eProsima_user_DllExport float& sysCurr();
+    eProsima_user_DllExport double& sys_curr();
 
     /*!
-     * @brief This function sets a value in member sysPow
-     * @param _sysPow New value for member sysPow
+     * @brief This function sets a value in member sys_pwr
+     * @param _sys_pwr New value for member sys_pwr
      */
-    eProsima_user_DllExport void sysPow(
-            float _sysPow);
+    eProsima_user_DllExport void sys_pwr(
+            double _sys_pwr);
 
     /*!
-     * @brief This function returns the value of member sysPow
-     * @return Value of member sysPow
+     * @brief This function returns the value of member sys_pwr
+     * @return Value of member sys_pwr
      */
-    eProsima_user_DllExport float sysPow() const;
+    eProsima_user_DllExport double sys_pwr() const;
 
     /*!
-     * @brief This function returns a reference to member sysPow
-     * @return Reference to member sysPow
+     * @brief This function returns a reference to member sys_pwr
+     * @return Reference to member sys_pwr
      */
-    eProsima_user_DllExport float& sysPow();
+    eProsima_user_DllExport double& sys_pwr();
 
     /*!
      * @brief This function sets a value in member alive
@@ -396,16 +396,16 @@ public:
 private:
 
     uint64_t m_time;
-    float m_senseTime;
-    float m_mainVolt;
-    float m_mainCurr;
-    float m_mainPow;
-    float m_pwrVolt;
-    float m_pwrCurr;
-    float m_pwrPow;
-    float m_sysVolt;
-    float m_sysCurr;
-    float m_sysPow;
+    double m_senseTime;
+    double m_main_volt;
+    double m_main_curr;
+    double m_main_pwr;
+    double m_pwr_volt;
+    double m_pwr_curr;
+    double m_pwr_pwr;
+    double m_sys_volt;
+    double m_sys_curr;
+    double m_sys_pwr;
     bool m_alive;
 };
 

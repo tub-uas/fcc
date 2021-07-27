@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataGpsPubSubType::DataGpsPubSubType()
 {
     setName("DataGps");
-    m_typeSize = static_cast<uint32_t>(DataGps::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataGps::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataGps::isKeyDefined();
     size_t keyLength = DataGps::getKeyMaxCdrSerializedSize() > 16 ?
             DataGps::getKeyMaxCdrSerializedSize() : 16;

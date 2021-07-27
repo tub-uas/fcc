@@ -15,14 +15,14 @@ int main(int argc, const char* argv[]) {
 
 	Probe *probe = new Probe(listen_to);
 
-	std::cout << probe->name << " " << listen_to << " " << " start" << std::endl;
+	std::cout << probe->name << " " << listen_to  << " start" << std::endl;
 	
 	if (probe->init()) {
 		probe->run();
 	}
 
-	std::cout << downlink->name << " stop" << std::endl;
+	std::cout << probe->name << " stop" << std::endl;
 
-	delete Probe;
+	delete probe;
 	return 0;
 }

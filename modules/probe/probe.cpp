@@ -105,42 +105,54 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 Probe::Probe(std::string to_listen) : participant(nullptr),
                        subscriber(nullptr),
                        topic_probe(nullptr),
-                       reader_probe(nullptr),
+                       reader_probe(nullptr)
 {
 
 	_topicname = to_listen;
 	_data_topic_name.append(to_listen);
+	
 	if(_topicname.compare("RaiIn") == 0) {
-		type_probe = new DataRaiInPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataRaiInPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("RaiOut") == 0) {
-		type_probe = new DataRaiOutPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataRaiOutPubSubType());
+		type_probe.insert({_topicname, probe});
+		
 	}
 	else if(_topicname.compare("SFusion") == 0) {
-		type_probe = new DataSFusionPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataSFusionPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("Ahrs") == 0) {
-		type_probe = new DataAhrsPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataAhrsPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("Air") == 0) {
-		type_probe = new DataAirPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataAirPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("Gps") == 0) {
-		type_probe = new DataGpsPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataGpsPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("Psu") == 0) {
-		type_probe = new DataPsuPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataPsuPubSubType());
+		type_probe.insert({_topicname, probe});
+	}
+	else if(_topicname.compare("Ctrl") == 0) {
+		eprosima::fastdds::dds::TypeSupport probe(new DataCtrlPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("Watchdog") == 0) {
-		type_probe = new DataWatchdogPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataWatchdogPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
 	else if(_topicname.compare("Downlink") == 0) {
-		type_probe = new DataDownlinkPubSubType();
+		eprosima::fastdds::dds::TypeSupport probe(new DataRaiOutPubSubType());
+		type_probe.insert({_topicname, probe});
 	}
-	else if(_topicname.compare("Log") == 0) {
-		type_probe = new DataLogPubSubType();
-	}
-
+	
 }
 
 Probe::~Probe() {
@@ -174,7 +186,7 @@ bool Probe::init() {
 	}
 
 	// Register the Type
-	type_probe.register_type(participant);
+	type_probe[_topicname].register_type(participant);
 	// Create the subscriptions Topic
 	topic_probe = participant->create_topic(_data_topic_name, _data_topic_name, eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topic_probe == nullptr) {
@@ -223,7 +235,7 @@ void Probe::run() {
 
 		if (listener.newDataSFusion) {
 
-			
+			std::cout << "reached..." << std::endl;			
 			std::unique_lock<std::mutex> dataSFusionLock {listener.dataSFusionMutex};
 			
 			print_SFusion();
@@ -313,23 +325,23 @@ void Probe::print_RaiIn()
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataRaiIn.time())
 	PRINT_DATA("SENSE_TIME",listener.dataRaiIn.senseTime())
-	PRINT_DATA("CH 01",listener.dataRaiIn.chnk().at(0))
-	PRINT_DATA("CH 02",listener.dataRaiIn.chnk().at(1))
-	PRINT_DATA("CH 03",listener.dataRaiIn.chnk().at(2))
-	PRINT_DATA("CH 04",listener.dataRaiIn.chnk().at(3))
-	PRINT_DATA("CH 05",listener.dataRaiIn.chnk().at(4))
-	PRINT_DATA("CH 06",listener.dataRaiIn.chnk().at(5))
-	PRINT_DATA("CH 07",listener.dataRaiIn.chnk().at(6))
-	PRINT_DATA("CH 08",listener.dataRaiIn.chnk().at(7))
-	PRINT_DATA("CH 09",listener.dataRaiIn.chnk().at(8))
-	PRINT_DATA("CH 10",listener.dataRaiIn.chnk().at(9))
-	PRINT_DATA("CH 11",listener.dataRaiIn.chnk().at(10))
-	PRINT_DATA("CH 12",listener.dataRaiIn.chnk().at(11))
-	PRINT_DATA("ROLL",listener.dataRaiIn.roll())
-	PRINT_DATA("PITCH",listener.dataRaiIn.pitch())
-	PRINT_DATA("YAW",listener.dataRaiIn.yaw())
-	PRINT_DATA("FLIGHT_MODE",listener.dataRaiIn.fltMode())
-	PRINT_DATA("FLIGHT_FUNC",listener.dataRaiIn.fltfunc())
+	PRINT_DATA("CH 01",listener.dataRaiIn.chnl().at(0))
+	PRINT_DATA("CH 02",listener.dataRaiIn.chnl().at(1))
+	PRINT_DATA("CH 03",listener.dataRaiIn.chnl().at(2))
+	PRINT_DATA("CH 04",listener.dataRaiIn.chnl().at(3))
+	PRINT_DATA("CH 05",listener.dataRaiIn.chnl().at(4))
+	PRINT_DATA("CH 06",listener.dataRaiIn.chnl().at(5))
+	PRINT_DATA("CH 07",listener.dataRaiIn.chnl().at(6))
+	PRINT_DATA("CH 08",listener.dataRaiIn.chnl().at(7))
+	PRINT_DATA("CH 09",listener.dataRaiIn.chnl().at(8))
+	PRINT_DATA("CH 10",listener.dataRaiIn.chnl().at(9))
+	PRINT_DATA("CH 11",listener.dataRaiIn.chnl().at(10))
+	PRINT_DATA("CH 12",listener.dataRaiIn.chnl().at(11))
+	PRINT_DATA("ROLL_SETPOINT",listener.dataRaiIn.roll_setpoint())
+	PRINT_DATA("PITCH_SETPOINT",listener.dataRaiIn.pitch_setpoint())
+	PRINT_DATA("YAW_SETPOINT",listener.dataRaiIn.yaw_setpoint())
+	PRINT_DATA("FLIGHT_MODE",listener.dataRaiIn.flight_mode())
+	PRINT_DATA("FLIGHT_FUNC",listener.dataRaiIn.flight_fct())
 	PRINT_DATA("FLIGHT_ALIVE",listener.dataRaiIn.alive())
 
 }
@@ -339,23 +351,25 @@ void Probe::print_RaiOut()
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataRaiOut.time())
 	PRINT_DATA("SENSE_TIME",listener.dataRaiOut.senseTime())
-	PRINT_DATA("CH 01",listener.dataRaiOut.chnk().at(0))
-	PRINT_DATA("CH 02",listener.dataRaiOut.chnk().at(1))
-	PRINT_DATA("CH 03",listener.dataRaiOut.chnk().at(2))
-	PRINT_DATA("CH 04",listener.dataRaiOut.chnk().at(3))
-	PRINT_DATA("CH 05",listener.dataRaiOut.chnk().at(4))
-	PRINT_DATA("CH 06",listener.dataRaiOut.chnk().at(5))
-	PRINT_DATA("CH 07",listener.dataRaiOut.chnk().at(6))
-	PRINT_DATA("CH 08",listener.dataRaiOut.chnk().at(7))
-	PRINT_DATA("CH 09",listener.dataRaiOut.chnk().at(8))
-	PRINT_DATA("CH 10",listener.dataRaiOut.chnk().at(9))
-	PRINT_DATA("CH 11",listener.dataRaiOut.chnk().at(10))
-	PRINT_DATA("CH 12",listener.dataRaiOut.chnk().at(11))
-	PRINT_DATA("ROLL",listener.dataRaiOut.roll())
-	PRINT_DATA("PITCH",listener.dataRaiOut.pitch())
-	PRINT_DATA("YAW",listener.dataRaiOut.yaw())
-	PRINT_DATA("FLIGHT_MODE",listener.dataRaiOut.fltMode())
-	PRINT_DATA("FLIGHT_FUNC",listener.dataRaiOut.fltfunc())
+	PRINT_DATA("CH 01",listener.dataRaiOut.chnl().at(0))
+	PRINT_DATA("CH 02",listener.dataRaiOut.chnl().at(1))
+	PRINT_DATA("CH 03",listener.dataRaiOut.chnl().at(2))
+	PRINT_DATA("CH 04",listener.dataRaiOut.chnl().at(3))
+	PRINT_DATA("CH 05",listener.dataRaiOut.chnl().at(4))
+	PRINT_DATA("CH 06",listener.dataRaiOut.chnl().at(5))
+	PRINT_DATA("CH 07",listener.dataRaiOut.chnl().at(6))
+	PRINT_DATA("CH 08",listener.dataRaiOut.chnl().at(7))
+	PRINT_DATA("CH 09",listener.dataRaiOut.chnl().at(8))
+	PRINT_DATA("CH 10",listener.dataRaiOut.chnl().at(9))
+	PRINT_DATA("CH 11",listener.dataRaiOut.chnl().at(10))
+	PRINT_DATA("CH 12",listener.dataRaiOut.chnl().at(11))
+	PRINT_DATA("XI_SETPOINT",listener.dataRaiOut.xi_setpoint())
+	PRINT_DATA("ETA_SETPOINT",listener.dataRaiOut.eta_setpoint())
+	PRINT_DATA("ZETA_SETPOINT",listener.dataRaiOut.zeta_setpoint())
+	PRINT_DATA("THROTTLE_SETPOINT",listener.dataRaiOut.throttle_setpoint())
+	PRINT_DATA("FLAPS_SETPOINT",listener.dataRaiOut.flaps_setpoint())
+	PRINT_DATA("FLIGHT_MODE",listener.dataRaiOut.flight_mode())
+	PRINT_DATA("FLIGHT_FUNC",listener.dataRaiOut.flight_fct())
 	PRINT_DATA("FLIGHT_ALIVE",listener.dataRaiOut.alive())
 }
 
@@ -363,17 +377,15 @@ void Probe::print_SFusion()
 {
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataSFusion.time())
-	PRINT_DATA("GYR_X",listener.dataSFusion.gyrX())
-	PRINT_DATA("GYR_Y",listener.dataSFusion.gyrY())
-	PRINT_DATA("GYR_Z",listener.dataSFusion.gyrZ())
-	PRINT_DATA("ACC_X",listener.dataSFusion.accX())
-	PRINT_DATA("ACC_Y",listener.dataSFusion.accY())
-	PRINT_DATA("ACC_Z",listener.dataSFusion.accZ())
-	PRINT_DATA("MAG_X",listener.dataSFusion.magX())
-	PRINT_DATA("MAG_Y",listener.dataSFusion.magY())
-	PRINT_DATA("MAG_Z",listener.dataSFusion.magZ())
-	PRINT_DATA("TEMPERATURE",listener.dataSFusion.temp())
-	PRINT_DATA("BAROMETRIC_PRESSURE",listener.dataSFusion.press())
+	PRINT_DATA("GYR_X",listener.dataSFusion.p())
+	PRINT_DATA("GYR_Y",listener.dataSFusion.q())
+	PRINT_DATA("GYR_Z",listener.dataSFusion.r())
+	PRINT_DATA("ACC_X",listener.dataSFusion.a_x())
+	PRINT_DATA("ACC_Y",listener.dataSFusion.a_y())
+	PRINT_DATA("ACC_Z",listener.dataSFusion.a_z())
+	PRINT_DATA("BAROMETRIC_PRESSURE",listener.dataSFusion.barometric_pressure())
+	PRINT_DATA("HEIGHT",listener.dataSFusion.height())
+	PRINT_DATA("HEIGHT_RATE",listener.dataSFusion.height_rate())
 	PRINT_DATA("PHI",listener.dataSFusion.phi())
 	PRINT_DATA("THETA",listener.dataSFusion.the())
 	PRINT_DATA("PSI",listener.dataSFusion.psi())
@@ -407,8 +419,8 @@ void Probe::print_Ahrs()
 	PRINT_DATA("MAG_X",listener.dataAhrs.magX())
 	PRINT_DATA("MAG_Y",listener.dataAhrs.magY())
 	PRINT_DATA("MAG_Z",listener.dataAhrs.magZ())
-	PRINT_DATA("TEMP",listener.dataAhrs.temp())
-	PRINT_DATA("PRESS",listener.dataAhrs.press())
+	PRINT_DATA("TEMP",listener.dataAhrs.temperature())
+	PRINT_DATA("PRESS",listener.dataAhrs.barometric_pressure())
 	PRINT_DATA("PHI",listener.dataAhrs.phi())
 	PRINT_DATA("THETA",listener.dataAhrs.the())
 	PRINT_DATA("PSI",listener.dataAhrs.psi())
@@ -420,11 +432,13 @@ void Probe::print_Air()
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataAir.time())
 	PRINT_DATA("SENSE_TIME",listener.dataAir.senseTime())
-	PRINT_DATA("DYN_PRESSURE",listener.dataAir.dynamicPress())
-	PRINT_DATA("TRUE_AIRSPEED",listener.dataAir.velocity())
-	PRINT_DATA("BARO_PRESSURE",listener.dataAir.baroPress())
+	PRINT_DATA("DYN_PRESSURE",listener.dataAir.dynamic_pressure())
+	PRINT_DATA("TRUE_AIRSPEED",listener.dataAir.true_airspeed())
+	PRINT_DATA("INDICATED_AIRSPEED",listener.dataAir.indicated_airspeed())
+	PRINT_DATA("BARO_PRESSURE",listener.dataAir.barometric_pressure())
+	PRINT_DATA("BARO_HEIGHT",listener.dataAir.barometric_height())
 	PRINT_DATA("DENSITY",listener.dataAir.density())
-	PRINT_DATA("TEMPERATURE",listener.dataAir.temp())
+	PRINT_DATA("TEMPERATURE",listener.dataAir.temperature())
 	PRINT_DATA("ALIVE",listener.dataAir.alive())
 }
 
@@ -433,18 +447,18 @@ void Probe::print_Gps()
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataGps.time())
 	PRINT_DATA("SENSE_TIME",listener.dataGps.senseTime())
-	PRINT_DATA("LAT",listener.dataGps.lat())
-	PRINT_DATA("LON",listener.dataGps.lon())
-	PRINT_DATA("ALT",listener.dataGps.alt())
-	PRINT_DATA("SPEED",listener.dataGps.speed())
-	PRINT_DATA("COG",listener.dataGps.cog())
-	PRINT_DATA("DOP_P",listener.dataGps.dopP())
-	PRINT_DATA("DOP_H",listener.dataGps.dopH())
-	PRINT_DATA("DOP_V",listener.dataGps.dopV())
+	PRINT_DATA("LAT",listener.dataGps.latitude())
+	PRINT_DATA("LON",listener.dataGps.longitude())
+	PRINT_DATA("ALT",listener.dataGps.alt_msl())
+	PRINT_DATA("SPEED",listener.dataGps.groundspeed())
+	PRINT_DATA("COG",listener.dataGps.course_over_ground())
+	PRINT_DATA("DOP_P",listener.dataGps.dop_position())
+	PRINT_DATA("DOP_H",listener.dataGps.dop_height())
+	PRINT_DATA("DOP_V",listener.dataGps.dop_velocity())
 	PRINT_DATA("SATS",listener.dataGps.sats())
-	PRINT_DATA("SATS_IN_VIEW",listener.dataGps.satsInView())
+	PRINT_DATA("SATS_IN_VIEW",listener.dataGps.sats_in_view())
 	PRINT_DATA("FIX",listener.dataGps.fix())
-	PRINT_DATA("FIX_MODE",listener.dataGps.fixMode())
+	PRINT_DATA("FIX_MODE",listener.dataGps.fix_mode())
 	PRINT_DATA("SECOND",listener.dataGps.second())
 	PRINT_DATA("MINUTE",listener.dataGps.minute())
 	PRINT_DATA("HOUR",listener.dataGps.hour())
@@ -452,9 +466,9 @@ void Probe::print_Gps()
 	PRINT_DATA("MONTH",listener.dataGps.month())
 	PRINT_DATA("YEAR",listener.dataGps.year())
 	PRINT_DATA("VARIATON",listener.dataGps.variation())
-	PRINT_DATA("MAG_X",listener.dataGps.mag_x())
-	PRINT_DATA("MAG_Y",listener.dataGps.mag_y())
-	PRINT_DATA("MAG_Z",listener.dataGps.mag_z())
+	PRINT_DATA("MAG_X",listener.dataGps.magX())
+	PRINT_DATA("MAG_Y",listener.dataGps.magY())
+	PRINT_DATA("MAG_Z",listener.dataGps.magZ())
 	PRINT_DATA("ALIVE",listener.dataGps.alive())
 
 }
@@ -463,13 +477,23 @@ void Probe::print_Ctrl()
 {
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataCtrl.time())
-	PRINT_DATA("XI",listener.dataCtrl.xi())
-	PRINT_DATA("ETA",listener.dataCtrl.eta())
-	PRINT_DATA("ZETA",listener.dataCtrl.zeta())
-	PRINT_DATA("ETA_T",listener.dataCtrl.etaT())
-	PRINT_DATA("ETA_F",listener.dataCtrl.etaF())
-	PRINT_DATA("FLIGHT_MODE",listener.dataCtrl.fltmode())
-	PRINT_DATA("FLIGHT_FUNC",listener.dataCtrl.fltfunc())
+	PRINT_DATA("XI",listener.dataCtrl.xi_setpoint())
+	PRINT_DATA("ETA",listener.dataCtrl.eta_setpoint())
+	PRINT_DATA("ZETA",listener.dataCtrl.zeta_setpoint())
+	PRINT_DATA("THROTTLE",listener.dataCtrl.throttle_setpoint())
+	PRINT_DATA("FLAPS",listener.dataCtrl.flaps_setpoint())
+	PRINT_DATA("ROLL",listener.dataCtrl.roll_setpoint())
+	PRINT_DATA("PITCH",listener.dataCtrl.pitch_setpoint())
+	PRINT_DATA("YAW",listener.dataCtrl.yaw_setpoint())
+	PRINT_DATA("TAS",listener.dataCtrl.tas_setpoint())
+	PRINT_DATA("HEIGHT",listener.dataCtrl.hgt_setpoint())
+	PRINT_DATA("ROLL_RATE",listener.dataCtrl.roll_rate_setpoint())
+	PRINT_DATA("PITCH_RATE",listener.dataCtrl.pitch_rate_setpoint())
+	PRINT_DATA("YAW_RATE",listener.dataCtrl.yaw_rate_setpoint())
+	PRINT_DATA("TAS_RATE",listener.dataCtrl.tas_rate_setpoint())
+	PRINT_DATA("HEIGHT_RATE",listener.dataCtrl.hgt_rate_setpoint())
+	PRINT_DATA("FLIGHT_MODE",listener.dataCtrl.flight_mode())
+	PRINT_DATA("FLIGHT_FUNC",listener.dataCtrl.flight_fct())
 	PRINT_DATA("ALIVE",listener.dataCtrl.alive())
 }
 
@@ -478,15 +502,15 @@ void Probe::print_Psu()
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataPsu.time())
 	PRINT_DATA("SENSETIME",listener.dataPsu.senseTime())
-	PRINT_DATA("MAIN_VOLT",listener.dataPsu.mainVolt())
-	PRINT_DATA("MAIN_CURR",listener.dataPsu.mainCurr())
-	PRINT_DATA("MAIN_POW",listener.dataPsu.mainPow())
-	PRINT_DATA("PWR_VOLT",listener.dataPsu.pwrVolt())
-	PRINT_DATA("PWR_CURR",listener.dataPsu.pwrCurr())
-	PRINT_DATA("PWR_POW",listener.dataPsu.pwrPow())
-	PRINT_DATA("SYS_VOLT",listener.dataPsu.sysVolt())
-	PRINT_DATA("SYS_CURR",listener.dataPsu.sysCurr())
-	PRINT_DATA("SYS_POW",listener.dataPsu.sysPow())
+	PRINT_DATA("MAIN_VOLT",listener.dataPsu.main_volt())
+	PRINT_DATA("MAIN_CURR",listener.dataPsu.main_curr())
+	PRINT_DATA("MAIN_POW",listener.dataPsu.main_pwr())
+	PRINT_DATA("PWR_VOLT",listener.dataPsu.pwr_volt())
+	PRINT_DATA("PWR_CURR",listener.dataPsu.pwr_curr())
+	PRINT_DATA("PWR_POW",listener.dataPsu.pwr_pwr())
+	PRINT_DATA("SYS_VOLT",listener.dataPsu.sys_volt())
+	PRINT_DATA("SYS_CURR",listener.dataPsu.sys_curr())
+	PRINT_DATA("SYS_POW",listener.dataPsu.sys_pwr())
 	PRINT_DATA("ALIVE",listener.dataPsu.alive())
 
 }
@@ -495,11 +519,11 @@ void Probe::print_Watchdog()
 {
 	std::cout << "Data of " << _topicname << std::endl;
 	PRINT_DATA("TIME",listener.dataWatchdog.time())
-	PRINT_DATA("ALL_ALIVE",listener.allAlive())
-	PRINT_DATA("AHRS_ALIVE",listener.ahrsAlive())
-	PRINT_DATA("AIR_ALIVE",listener.airAlive())
-	PRINT_DATA("CTRL_ALIVE",listener.ctrlAlive())
-	PRINT_DATA("DOWNLINK_ALIVE",listener.downlinkAlive())
+	PRINT_DATA("ALL_ALIVE",listener.dataWatchdog.allAlive())
+	PRINT_DATA("AHRS_ALIVE",listener.dataWatchdog.ahrsAlive())
+	PRINT_DATA("AIR_ALIVE",listener.dataWatchdog.airAlive())
+	PRINT_DATA("CTRL_ALIVE",listener.dataWatchdog.ctrlAlive())
+	PRINT_DATA("DOWNLINK_ALIVE",listener.dataWatchdog.downlinkAlive())
 	PRINT_DATA("GPS_ALIVE",listener.dataWatchdog.gpsAlive())
 	PRINT_DATA("LOG_ALIVE",listener.dataWatchdog.logAlive())
 	PRINT_DATA("PSU_ALIVE",listener.dataWatchdog.psuAlive())
