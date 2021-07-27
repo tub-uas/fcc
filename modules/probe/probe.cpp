@@ -70,6 +70,54 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 		}
 		dataSFusionLock.unlock();		
 	}
+	else if(topic.compare("DataAhrs") == 0)
+	{
+		std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
+		if(reader->take_next_sample(&dataAhrs,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataAhrs = true;
+			}
+		}
+		dataAhrsLock.unlock();		
+	}
+	else if(topic.compare("DataAir") == 0)
+	{
+		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
+		if(reader->take_next_sample(&dataAir,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataAir = true;
+			}
+		}
+		dataAirLock.unlock();		
+	}
+	else if(topic.compare("DataGps") == 0)
+	{
+		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+		if(reader->take_next_sample(&dataGps,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataAhrs = true;
+			}
+		}
+		dataGpsLock.unlock();		
+	}
+	else if(topic.compare("DataAhrs") == 0)
+	{
+		std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
+		if(reader->take_next_sample(&dataPsu,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataPsu = true;
+			}
+		}
+		dataPsuLock.unlock();		
+	}
 
 	// while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
 		// if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
