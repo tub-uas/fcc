@@ -45,30 +45,36 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
-
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
-			if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
-				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
-				reader->take_next_sample(&dataRaiIn, &info);
-				dataRaiInLock.unlock();
+	std::string topic = reader->get_topicdescription()->get_name();
+	
+	if(topic.compare("DataRaiIn") == 0) 
+	{
+		std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+		if(reader->take_next_sample(&dataRaiIn,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if (info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
 				newDataRaiIn = true;
-
-			} else if (reader->get_topicdescription()->get_name().compare("DataSFusion") == 0) {
-				std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
-				reader->take_next_sample(&dataSFusion, &info);
-				dataSFusionLock.unlock();
-				newDataSFusion = true;
-
-			} else {
-				reader->take_next_sample(&data, &info);
 			}
-		} else {
-			reader->take_next_sample(&data, &info);
 		}
+		dataRaiInLock.unlock();
 	}
-
+	else if(topic.compare("DataSFusion") == 0) 
+	{
+		std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
+		if(reader->take_next_sample(&dataSFusion,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if (info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				newDataSFusion = true;
+			}
+		}
+		dataSFusionLock.unlock();
+	}
+	else
+	{
+		// DO NOTHING
+	}
 	// TODO why does this cause a segfault ?!?
 	// reader->type().delete_data(data);
 }
@@ -217,15 +223,17 @@ void Ctrl::publish() {
 		} else {
 			dataCtrl.alive(false);
 		}
-
-		writerCtrl->write(&dataCtrl);
+		if(_publish_now) {
+			writerCtrl->write(&dataCtrl);
+			_publish_now = false;
+		}
 		dataCtrlLock.unlock();
 
 		// print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 }
 
@@ -296,21 +304,15 @@ void Ctrl::run() {
 				std::cout << "no valid flight mode!" << std::endl;
 			}
 			
-
-
-
-
-			
+			_publish_now = true;
 			dataCtrlLock.unlock();
-			
-			// reset the alive timer
 
 			aliveTime = timer.getSysTime();
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(10);
 
 	}
 
@@ -326,6 +328,7 @@ void Ctrl::print() {
 	std::cout << "throttle_sp     " << dataCtrl.throttle_setpoint() << std::endl;
 	std::cout << "flaps_sp        " << dataCtrl.flaps_setpoint() << std::endl;
 	std::cout << "roll_sp         " << dataCtrl.roll_setpoint() << std::endl;
+	std::cout << "pitch_sp        " << dataCtrl.pitch_setpoint() << std::endl;
 	std::cout << "yaw_sp          " << dataCtrl.yaw_setpoint() << std::endl;
 	std::cout << "tas_sp          " << dataCtrl.tas_setpoint() << std::endl;
 	std::cout << "height_sp       " << dataCtrl.hgt_setpoint() << std::endl;

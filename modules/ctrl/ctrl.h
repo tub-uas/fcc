@@ -192,9 +192,10 @@ private:
 	flight_mode_t _flight_mode;
 	flight_fct_t _flight_fct;
 
+	bool _publish_now{false};
 	bool _raiIn_alive{false};
 	bool _sfusion_alive{false};
-
+	
 	// double _turn_compensation();
 	// double _turn_coordination();
 

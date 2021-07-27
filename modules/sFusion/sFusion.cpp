@@ -44,42 +44,60 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
+	std::string topic = reader->get_topicdescription()->get_name();
 
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
-			if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
-				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-				reader->take_next_sample(&dataAhrs, &info);
-				dataAhrsLock.unlock();
+	if(topic.compare("DataAhrs") == 0)
+	{
+		std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
+		if(reader->take_next_sample(&dataAhrs,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
 				newDataAhrs = true;
-
-			} else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
-				std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-				reader->take_next_sample(&dataAir, &info);
-				dataAirLock.unlock();
-				newDataAir = true;
-
-			} else if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
-				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
-				reader->take_next_sample(&dataRaiIn, &info);
-				dataRaiInLock.unlock();
-				newDataRaiIn = true;
-
-			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
-				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
-				reader->take_next_sample(&dataGps, &info);
-				dataGpsLock.unlock();
-				newDataGps = true;
-
-			} else {
-				reader->take_next_sample(&data, &info);
 			}
-		} else {
-			reader->take_next_sample(&data, &info);
 		}
+		dataAhrsLock.unlock();
 	}
-
+	else if(topic.compare("DataAir") == 0)
+	{
+		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
+		if(reader->take_next_sample(&dataAir,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataAir = true;
+			}
+		}
+		dataAirLock.unlock();
+	}
+	else if(topic.compare("DataRaiIn") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+		if(reader->take_next_sample(&dataRaiIn,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataRaiIn = true;
+			}
+		}
+		dataRaiInLock.unlock();
+	}
+	else if(topic.compare("DataGps") == 0)
+	{
+		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+		if(reader->take_next_sample(&dataGps,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataGps = true;
+			}
+		}
+		dataGpsLock.unlock();
+	}
+	else 
+	{
+		// DO NOTHING
+	}
 	// TODO why does this cause a segfault ?!?
 	// reader->type().delete_data(data);
 }
@@ -271,62 +289,63 @@ void SFusion::publish() {
 		} else {
 			dataSFusion.alive(false);
 		}
-
-		writerSFusion->write(&dataSFusion);
+		if(_publish_now) {
+			writerSFusion->write(&dataSFusion);
+			_publish_now = false;
+		}
 		dataSFusionLock.unlock();
 
 		// print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 
 }
 
 
 void SFusion::run() {
+	
 	estimator_height.init(0.0,0.2,0.01);
-	double time = 0.0, time_last = 0.0;
-	double dt = 0.0;  
 	double a_z_n = 0.0;
+	static double last_time = timer.getSysTimeS();
+	static double time;
 	while (1) {
 
-		// std::cout << this->name << " run" << std::endl;
+		if (update_ahrs_data() || 
+			update_raiIn_data() ||
+			update_air_data() ||
+			update_gps_data() ) 
+		{
 
-		if (listener.newDataAhrs || listener.newDataAir) {
-
-			std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-			std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
 			std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
-			std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
-			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
 
 			// todo: as soon as we are actually using air, remove comment
-			if (listener.dataAhrs.alive()  && listener.dataAir.alive() && 
-			    listener.dataGps.alive() && listener.dataRaiIn.alive()) {
+			if (_ahrs_alive  && _air_alive && 
+			    _gps_alive && _raiIn_alive) {
 				
-				time = listener.dataAhrs.time()/1.0e9;
-				dt = (time-time_last);
-				time_last = time;
+				time = timer.getSysTimeS();
+				double dt = time-last_time;
+				last_time = time;
 
-				dataSFusion.p(listener.dataAhrs.gyrX());
-				dataSFusion.q(listener.dataAhrs.gyrY());
-				dataSFusion.r(listener.dataAhrs.gyrZ());
-				dataSFusion.a_x(listener.dataAhrs.accX());
-				dataSFusion.a_y(listener.dataAhrs.accY());
-				dataSFusion.a_z(listener.dataAhrs.accZ());
-				dataSFusion.phi(listener.dataAhrs.phi());
-				dataSFusion.the(listener.dataAhrs.the());
-				dataSFusion.psi(listener.dataAhrs.psi());
+				dataSFusion.p(_ahrs_data.gyrX());
+				dataSFusion.q(_ahrs_data.gyrY());
+				dataSFusion.r(_ahrs_data.gyrZ());
+				dataSFusion.a_x(_ahrs_data.accX());
+				dataSFusion.a_y(_ahrs_data.accY());
+				dataSFusion.a_z(_ahrs_data.accZ());
+				dataSFusion.phi(_ahrs_data.phi());
+				dataSFusion.the(_ahrs_data.the());
+				dataSFusion.psi(_ahrs_data.psi());
 				a_z_n = get_z_accel(dataSFusion.a_x(),dataSFusion.a_y(),dataSFusion.a_z(),dataSFusion.phi(),dataSFusion.the());
 
-				dataSFusion.true_airspeed(listener.dataAir.true_airspeed());
-				dataSFusion.indicated_airspeed(listener.dataAir.indicated_airspeed());
-				dataSFusion.density(listener.dataAir.density());
-				dataSFusion.dynamic_pressure(listener.dataAir.dynamic_pressure());
-				dataSFusion.barometric_pressure(listener.dataAir.barometric_pressure());
-				estimator_height.update(listener.dataAir.barometric_height(),a_z_n,dt);
+				dataSFusion.true_airspeed(_air_data.true_airspeed());
+				dataSFusion.indicated_airspeed(_air_data.indicated_airspeed());
+				dataSFusion.density(_air_data.density());
+				dataSFusion.dynamic_pressure(_air_data.dynamic_pressure());
+				dataSFusion.barometric_pressure(_air_data.barometric_pressure());
+				estimator_height.update(_air_data.barometric_height(),a_z_n,dt);
 
 				dataSFusion.height(estimator_height.get_height());
 				dataSFusion.height_rate(estimator_height.get_height_rate());
@@ -339,8 +358,8 @@ void SFusion::run() {
 
 
 
-				dataSFusion.latitude(listener.dataGps.latitude());
-				dataSFusion.longitude(listener.dataGps.longitude());
+				dataSFusion.latitude(_gps_data.latitude());
+				dataSFusion.longitude(_gps_data.longitude());
 				// TRANSFORMATION TO CARTESIAN COORDINATE SYSTEM XYZ
 				
 				dataSFusion.posN(-1.0);
@@ -360,13 +379,7 @@ void SFusion::run() {
 				aliveTime = timer.getSysTime();
 			}
 
-			listener.newDataAhrs = false;
-			listener.newDataAir = false;
-
-			dataAhrsLock.unlock();
-			dataAirLock.unlock();
-			dataGpsLock.unlock();
-			dataRaiInLock.unlock();
+			_publish_now = true;
 			dataSFusionLock.unlock();
 		}
 
@@ -384,6 +397,66 @@ double SFusion::get_z_accel(double a_x, double a_y, double a_z,double phi, doubl
 	return gravity*(-a_x*std::cos(the) + a_y*std::sin(phi)*std::cos(the) + a_z*std::cos(phi)*cos(the));
 }
 
+
+bool SFusion::update_raiIn_data()
+{
+	if(listener.newDataRaiIn) 
+	{
+		std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
+		memcpy(&_raiIn_data,&listener.dataRaiIn,sizeof(DataRaiIn));
+		_raiIn_alive = listener.dataRaiIn.alive();
+		dataRaiInLock.unlock();
+		listener.newDataRaiIn = false;
+		return true;
+	}
+	
+	return false;
+}
+
+bool SFusion::update_ahrs_data()
+{
+	if(listener.newDataAhrs) 
+	{
+		std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
+		memcpy(&_ahrs_data,&listener.dataAhrs,sizeof(DataAhrs));
+		_ahrs_alive = listener.dataAhrs.alive();
+		dataAhrsLock.unlock();
+		listener.newDataAhrs = false;
+		return true;
+	}
+	
+	return false;
+}
+
+bool SFusion::update_air_data()
+{
+	if(listener.newDataAir) 
+	{
+		std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
+		memcpy(&_air_data,&listener.dataAir,sizeof(DataAir));
+		_air_alive = listener.dataRaiIn.alive();
+		dataAirLock.unlock();
+		listener.newDataAir = false;
+		return true;
+	}
+	
+	return false;
+}
+
+bool SFusion::update_gps_data()
+{
+	if(listener.newDataAir) 
+	{
+		std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
+		memcpy(&_gps_data,&listener.dataGps,sizeof(DataGps));
+		_gps_alive = listener.dataGps.alive();
+		dataGpsLock.unlock();
+		listener.newDataGps = false;
+		return true;
+	}
+	
+	return false;
+}
 
 void SFusion::print() {
 

@@ -38,6 +38,7 @@ set(DRIVER_PATH "../../driver")
 set(ECF_LIB_PATH "../../lib/ecf")
 
 add_library(timer ${UTIL_PATH}/timer/timer.cpp)
+add_library(mixer ${UTIL_PATH}/mixer/mixer.cpp)
 add_library(ecf_height ${ECF_LIB_PATH}/ecf_height/height.cpp)
 add_library(drv_can ${DRIVER_PATH}/drv_can/drv_can.cpp)
 add_library(raiCom ${UTIL_PATH}/raiCom/raiCom.cpp)
@@ -51,4 +52,4 @@ add_library(DataRaiIn ../raiIn/${IDL_PATH}/DataRaiIn.cxx ../raiIn/${IDL_PATH}/Da
 add_executable(${PROJECT_NAME} ${PROJECT_NAME}.cpp main.cpp)
 # target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs DataAir timer)
 target_link_libraries(${PROJECT_NAME} fastcdr fastrtps DataSFusion DataAhrs
-                                       DataAir DataGps DataRaiIn drv_can raiCom timer ecf_height)
+                                       DataAir DataGps DataRaiIn drv_can raiCom mixer timer ecf_height)

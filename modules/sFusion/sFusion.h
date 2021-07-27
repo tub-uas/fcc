@@ -28,6 +28,7 @@
 #include "./../raiIn/idl/DataRaiInPubSubTypes.h"
 
 #include "../../util/timer/timer.h"
+#include "../../util/mixer/mixer.h"
 // #include "../../lib/ecf/ecf_aoa_ssa/aoa_ssa.h"
 #include "../../lib/ecf/ecf_height/height.h"
 // #include "../../lib/ecf/ecf_wind/wind.h"
@@ -85,6 +86,11 @@ public:
 	void publish();
 	void print();
 
+	bool update_raiIn_data();
+	bool update_ahrs_data();
+	bool update_air_data();
+	bool update_gps_data();
+
 	double get_z_accel(double a_x, double a_y, double a_z, double phi, double the);
 	Height estimator_height;
 
@@ -122,6 +128,24 @@ private:
 
 	Timer  timer;
 
+	// RAI IN
+	DataRaiIn _raiIn_data;
+	bool _raiIn_alive{false};
+
+	// AHRS
+	DataAhrs _ahrs_data;
+	bool _ahrs_alive{false};
+
+	// AIR
+	DataAir _air_data;
+	bool _air_alive{false};
+	
+
+	// GPS
+	DataGps _gps_data;
+	bool _gps_alive{false};
+
+	bool _publish_now{false};
 };
 
 #endif // SFUSION_H

@@ -59,6 +59,7 @@ public:
 	void publish();
 	void print();
 
+	
 	const unsigned long long aliveReset = 1e5;  // in us
 	std::atomic_ullong aliveTime;
 
@@ -77,7 +78,7 @@ private:
 	RaiCom raiCom;
 	Mixer  mixer;
 	Timer  timer;
-
+	
 };
 
 #endif // RAIIN_H
