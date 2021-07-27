@@ -148,7 +148,6 @@ void Air::run() {
 
 			dataAirLock.unlock();
 
-			// airCom.print();
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);

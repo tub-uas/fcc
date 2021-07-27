@@ -187,17 +187,23 @@ bool Probe::init() {
 
 	// Register the Type
 	type_probe[_topicname].register_type(participant);
+
+	// Create the Subscriber
+	subscriber = participant->create_subscriber(eprosima::fastdds::dds::SUBSCRIBER_QOS_DEFAULT, nullptr);
+	if (subscriber == nullptr) {
+		return false;
+	}
 	// Create the subscriptions Topic
 	topic_probe = participant->create_topic(_data_topic_name, _data_topic_name, eprosima::fastdds::dds::TOPIC_QOS_DEFAULT);
 	if (topic_probe == nullptr) {
 		return false;
 	}
 	
-	// Create the Subscriber
-	subscriber = participant->create_subscriber(eprosima::fastdds::dds::SUBSCRIBER_QOS_DEFAULT, nullptr);
-	if (subscriber == nullptr) {
-		return false;
-	}
+	
+	
+	
+	
+	
 
 	// Create the DataReader
 	reader_probe = subscriber->create_datareader(topic_probe, eprosima::fastdds::dds::DATAREADER_QOS_DEFAULT, &listener);
