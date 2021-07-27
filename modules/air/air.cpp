@@ -114,7 +114,6 @@ void Air::publish() {
 		writerAir->write(&dataAir);
 		dataAirLock.unlock();
 
-		print();
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
