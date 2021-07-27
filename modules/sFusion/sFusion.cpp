@@ -322,8 +322,8 @@ void SFusion::run() {
 			std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
 
 			// todo: as soon as we are actually using air, remove comment
-			if (_ahrs_alive  && _air_alive && 
-			    _gps_alive && _raiIn_alive) {
+			if (_ahrs_alive  || _air_alive || 
+			    _gps_alive || _raiIn_alive) {
 				
 				time = timer.getSysTimeS();
 				double dt = time-last_time;
