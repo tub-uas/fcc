@@ -58,6 +58,18 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 		}
 		dataCtrlLock.unlock();		
 	}
+	else if(topic.compare("DataSFusion") == 0)
+	{
+		std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
+		if(reader->take_next_sample(&dataSFusion,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataSFusion = true;
+			}
+		}
+		dataSFusionLock.unlock();		
+	}
 
 	// while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
 		// if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
