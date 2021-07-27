@@ -44,62 +44,75 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
-
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
-			if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
-				
-				reader->take_next_sample(&dataRaiIn, &info);
-				
-				newDataRaiIn = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataRaiOut") == 0) {
-				std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
-				reader->take_next_sample(&dataRaiOut, &info);
-				dataRaiOutLock.unlock();
-				newDataRaiOut = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataSFusion") == 0) {
-				std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
-				reader->take_next_sample(&dataSFusion, &info);
-				dataSFusionLock.unlock();
-				newDataSFusion = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
-				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-				reader->take_next_sample(&dataAhrs, &info);
-				dataAhrsLock.unlock();
-				newDataAhrs = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
-				std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-				reader->take_next_sample(&dataAir, &info);
-				dataAirLock.unlock();
-				newDataAir = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
-				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
-				reader->take_next_sample(&dataGps, &info);
-				dataGpsLock.unlock();
-				newDataGps = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
-				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
-				reader->take_next_sample(&dataPsu, &info);
-				dataPsuLock.unlock();
-				newDataPsu = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
-				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
-				reader->take_next_sample(&dataCtrl, &info);
-				dataCtrlLock.unlock();
+	
+	std::string topic = reader->get_topicdescription()->get_name();
+	if(topic.compare("DataCtrl") == 0)
+	{
+		std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
+		if(reader->take_next_sample(&dataCtrl,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
 				newDataCtrl = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataWatchdog") == 0) {
-				std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
-				reader->take_next_sample(&dataWatchdog, &info);
-				dataWatchdogLock.unlock();
-				newDataWatchdog = true;
-			} else {
-				reader->take_next_sample(&data, &info);
 			}
-		} else {
-			reader->take_next_sample(&data, &info);
 		}
+		dataCtrlLock.unlock();		
 	}
+
+	// while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
+		// if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
+			// if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
+				// 
+				// reader->take_next_sample(&dataRaiIn, &info);
+				// 
+				// newDataRaiIn = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataRaiOut") == 0) {
+				// std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
+				// reader->take_next_sample(&dataRaiOut, &info);
+				// dataRaiOutLock.unlock();
+				// newDataRaiOut = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataSFusion") == 0) {
+				// std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
+				// reader->take_next_sample(&dataSFusion, &info);
+				// dataSFusionLock.unlock();
+				// newDataSFusion = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
+				// std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
+				// reader->take_next_sample(&dataAhrs, &info);
+				// dataAhrsLock.unlock();
+				// newDataAhrs = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
+				// std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
+				// reader->take_next_sample(&dataAir, &info);
+				// dataAirLock.unlock();
+				// newDataAir = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
+				// std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+				// reader->take_next_sample(&dataGps, &info);
+				// dataGpsLock.unlock();
+				// newDataGps = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
+				// std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
+				// reader->take_next_sample(&dataPsu, &info);
+				// dataPsuLock.unlock();
+				// newDataPsu = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
+				// std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
+				// reader->take_next_sample(&dataCtrl, &info);
+				// dataCtrlLock.unlock();
+				// newDataCtrl = true;
+			// } else if (reader->get_topicdescription()->get_name().compare("DataWatchdog") == 0) {
+				// std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+				// reader->take_next_sample(&dataWatchdog, &info);
+				// dataWatchdogLock.unlock();
+				// newDataWatchdog = true;
+			// } else {
+				// reader->take_next_sample(&data, &info);
+			// }
+		// } else {
+			// reader->take_next_sample(&data, &info);
+		// }
+	// }
 }
 
 Probe::Probe(std::string to_listen) : participant(nullptr),
