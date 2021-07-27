@@ -49,9 +49,9 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
 		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
 			if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
-				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+				
 				reader->take_next_sample(&dataRaiIn, &info);
-				dataRaiInLock.unlock();
+				
 				newDataRaiIn = true;
 			} else if (reader->get_topicdescription()->get_name().compare("DataRaiOut") == 0) {
 				std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
@@ -216,11 +216,11 @@ void Probe::run() {
 
 		if (listener.newDataRaiIn) {
 		    
-			std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
+			
 			print_RaiIn();
 			_run = false;
 			listener.newDataRaiIn = false;
-			dataRaiInLock.unlock();
+			
 			break;
 		}
 
