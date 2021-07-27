@@ -41,7 +41,8 @@ Start by setting up a "normal" RaspberryPi system. Then, follow the steps below:
 
 ```
 # Enable can (dtparam=spi=on must be set)
-dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25,spimaxfrequency=2000000
+# spimaxfrequency is optional to reduce or increase spi speed if errors occur on bus lane
 ```
 into your `/boot/config.txt` and these
 ```
