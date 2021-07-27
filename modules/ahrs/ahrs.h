@@ -74,7 +74,7 @@ private:
 
 	AhrsCom ahrsCom;
 	Timer   timer;
-
+	bool _publish_now{false};
 };
 
 #endif // AHRS_H

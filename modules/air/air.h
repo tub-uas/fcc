@@ -80,6 +80,7 @@ private:
 	AirCom  airCom;
 	Timer   timer;
 
+	bool _publish_now{false};
 };
 
 #endif // AIR_H

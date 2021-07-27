@@ -109,15 +109,17 @@ void Gps::publish() {
 		} else {
 			dataGps.alive(false);
 		}
-
-		writerGps->write(&dataGps);
+		if(_publish_now) {
+			writerGps->write(&dataGps);
+			_publish_now = false;
+		}
 		dataGpsLock.unlock();
 
 		// print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 
 }
@@ -156,7 +158,7 @@ void Gps::run() {
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
-
+			_publish_now = true;
 			dataGpsLock.unlock();
 
 			// print();

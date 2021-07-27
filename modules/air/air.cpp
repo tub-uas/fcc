@@ -110,8 +110,10 @@ void Air::publish() {
 		} else {
 			dataAir.alive(false);
 		}
-
-		writerAir->write(&dataAir);
+		if(_publish_now) {
+			writerAir->write(&dataAir);
+			_publish_now = false;
+		}
 		dataAirLock.unlock();
 
 
@@ -144,7 +146,7 @@ void Air::run() {
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
-
+			_publish_now = true;
 			dataAirLock.unlock();
 
 		}
