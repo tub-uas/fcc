@@ -322,62 +322,59 @@ void SFusion::run() {
 			std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
 
 			// todo: as soon as we are actually using air, remove comment
-			if (_ahrs_alive  || _air_alive || 
-			    _gps_alive || _raiIn_alive) {
 				
-				time = timer.getSysTimeS();
-				double dt = time-last_time;
-				last_time = time;
+			time = timer.getSysTimeS();
+			double dt = time-last_time;
+			last_time = time;
 
-				dataSFusion.p(_ahrs_data.gyrX());
-				dataSFusion.q(_ahrs_data.gyrY());
-				dataSFusion.r(_ahrs_data.gyrZ());
-				dataSFusion.a_x(_ahrs_data.accX());
-				dataSFusion.a_y(_ahrs_data.accY());
-				dataSFusion.a_z(_ahrs_data.accZ());
-				dataSFusion.phi(_ahrs_data.phi());
-				dataSFusion.the(_ahrs_data.the());
-				dataSFusion.psi(_ahrs_data.psi());
-				a_z_n = get_z_accel(dataSFusion.a_x(),dataSFusion.a_y(),dataSFusion.a_z(),dataSFusion.phi(),dataSFusion.the());
+			dataSFusion.p(_p);
+			dataSFusion.q(_q);
+			dataSFusion.r(_r);
+			dataSFusion.a_x(_a_x);
+			dataSFusion.a_y(_a_y);
+			dataSFusion.a_z(_a_z);
+			dataSFusion.phi(_phi);
+			dataSFusion.the(_the);
+			dataSFusion.psi(_psi);
+			a_z_n = get_z_accel(dataSFusion.a_x(),dataSFusion.a_y(),dataSFusion.a_z(),dataSFusion.phi(),dataSFusion.the());
 
-				dataSFusion.true_airspeed(_air_data.true_airspeed());
-				dataSFusion.indicated_airspeed(_air_data.indicated_airspeed());
-				dataSFusion.density(_air_data.density());
-				dataSFusion.dynamic_pressure(_air_data.dynamic_pressure());
-				dataSFusion.barometric_pressure(_air_data.barometric_pressure());
-				estimator_height.update(_air_data.barometric_height(),a_z_n,dt);
+			dataSFusion.true_airspeed(_true_airspeed);
+			dataSFusion.indicated_airspeed(_indicated_airspeed);
+			dataSFusion.density(_density);
+			dataSFusion.dynamic_pressure(_dynamic_pressure);
+			dataSFusion.barometric_pressure(_barometric_pressure);
+			estimator_height.update(_barometric_height,a_z_n,dt);
 
-				dataSFusion.height(estimator_height.get_height());
-				dataSFusion.height_rate(estimator_height.get_height_rate());
-
-
-				// AoA and Ssa estimation
-				dataSFusion.aoa(-1.0);
-				dataSFusion.ssa(-1.0);
-				dataSFusion.gamma(dataSFusion.the()-dataSFusion.aoa());
+			dataSFusion.height(estimator_height.get_height());
+			dataSFusion.height_rate(estimator_height.get_height_rate());
 
 
+			// AoA and Ssa estimation
+			dataSFusion.aoa(-1.0);
+			dataSFusion.ssa(-1.0);
+			dataSFusion.gamma(_the-dataSFusion.aoa());
 
-				dataSFusion.latitude(_gps_data.latitude());
-				dataSFusion.longitude(_gps_data.longitude());
-				// TRANSFORMATION TO CARTESIAN COORDINATE SYSTEM XYZ
+
+
+			dataSFusion.latitude(_latitude);
+			dataSFusion.longitude(_longitude);
+			// TRANSFORMATION TO CARTESIAN COORDINATE SYSTEM XYZ
 				
-				dataSFusion.posN(-1.0);
-				dataSFusion.posE(-1.0);
-				dataSFusion.posD(-1.0);
-				dataSFusion.speedN(-1.0);
-				dataSFusion.speedE(-1.0);
-				dataSFusion.speedD(-1.0);
-				dataSFusion.windN(-1.0);
-				dataSFusion.windE(-1.0);
-				dataSFusion.windD(-1.0);
+			dataSFusion.posN(-1.0);
+			dataSFusion.posE(-1.0);
+			dataSFusion.posD(-1.0);
+			dataSFusion.speedN(-1.0);
+			dataSFusion.speedE(-1.0);
+			dataSFusion.speedD(-1.0);
+			dataSFusion.windN(-1.0);
+			dataSFusion.windE(-1.0);
+			dataSFusion.windD(-1.0);
 				
 				
 				
 
-				// reset the alive timer
-				aliveTime = timer.getSysTime();
-			}
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
 			_publish_now = true;
 			dataSFusionLock.unlock();
@@ -403,13 +400,30 @@ bool SFusion::update_raiIn_data()
 	if(listener.newDataRaiIn) 
 	{
 		std::unique_lock<std::mutex> dataRaiInLock {listener.dataRaiInMutex};
-		memcpy(&_raiIn_data,&listener.dataRaiIn,sizeof(DataRaiIn));
+		_xi_setpoint = listener.dataRaiIn.xi_setpoint();
+		_eta_setpoint = listener.dataRaiIn.eta_setpoint();
+		_zeta_setpoint = listener.dataRaiIn.zeta_setpoint();
+		_throttle_setpoint = listener.dataRaiIn.throttle_setpoint();
+		_flaps_setpoint = listener.dataRaiIn.flaps_setpoint();
+		_roll_setpoint = listener.dataRaiIn.roll_setpoint();
+		_pitch_setpoint = listener.dataRaiIn.pitch_setpoint();
+		_yaw_setpoint = listener.dataRaiIn.yaw_setpoint();
+		_hgt_setpoint = listener.dataRaiIn.hgt_setpoint();
+		_tas_setpoint = listener.dataRaiIn.tas_setpoint();
+		_roll_rate_setpoint = listener.dataRaiIn.roll_rate_setpoint();
+		_pitch_rate_setpoint = listener.dataRaiIn.pitch_rate_setpoint();
+		_yaw_rate_setpoint = listener.dataRaiIn.yaw_rate_setpoint();
+		_hgt_rate_setpoint = listener.dataRaiIn.hgt_rate_setpoint();
+		_tas_rate_setpoint = listener.dataRaiIn.tas_rate_setpoint();
+		_flight_mode = (flight_mode_t)listener.dataRaiIn.flight_mode();
+		_flight_fct = (flight_fct_t)listener.dataRaiIn.flight_fct();
+
 		_raiIn_alive = listener.dataRaiIn.alive();
 		dataRaiInLock.unlock();
 		listener.newDataRaiIn = false;
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -418,7 +432,15 @@ bool SFusion::update_ahrs_data()
 	if(listener.newDataAhrs) 
 	{
 		std::unique_lock<std::mutex> dataAhrsLock {listener.dataAhrsMutex};
-		memcpy(&_ahrs_data,&listener.dataAhrs,sizeof(DataAhrs));
+		_p = listener.dataAhrs.gyrX();
+		_q = listener.dataAhrs.gyrY();
+		_r = listener.dataAhrs.gyrZ();
+		_a_x = listener.dataAhrs.accX();
+		_a_y = listener.dataAhrs.accY();
+		_a_z = listener.dataAhrs.accZ();
+		_phi = listener.dataAhrs.phi();
+		_the = listener.dataAhrs.the();
+		_psi = listener.dataAhrs.psi();
 		_ahrs_alive = listener.dataAhrs.alive();
 		dataAhrsLock.unlock();
 		listener.newDataAhrs = false;
@@ -433,7 +455,14 @@ bool SFusion::update_air_data()
 	if(listener.newDataAir) 
 	{
 		std::unique_lock<std::mutex> dataAirLock {listener.dataAirMutex};
-		memcpy(&_air_data,&listener.dataAir,sizeof(DataAir));
+		
+		_true_airspeed = listener.dataAir.true_airspeed();
+		_indicated_airspeed = listener.dataAir.indicated_airspeed();
+		_density = listener.dataAir.density();
+		_dynamic_pressure = listener.dataAir.dynamic_pressure();
+		_barometric_pressure = listener.dataAir.barometric_pressure();
+		_barometric_height = listener.dataAir.barometric_height();
+
 		_air_alive = listener.dataRaiIn.alive();
 		dataAirLock.unlock();
 		listener.newDataAir = false;
@@ -448,7 +477,10 @@ bool SFusion::update_gps_data()
 	if(listener.newDataAir) 
 	{
 		std::unique_lock<std::mutex> dataGpsLock {listener.dataGpsMutex};
-		memcpy(&_gps_data,&listener.dataGps,sizeof(DataGps));
+		_latitude = listener.dataGps.latitude();
+		_longitude = listener.dataGps.longitude();
+		_course_over_ground = listener.dataGps.course_over_ground();
+		_groundspeed = listener.dataGps.groundspeed();
 		_gps_alive = listener.dataGps.alive();
 		dataGpsLock.unlock();
 		listener.newDataGps = false;

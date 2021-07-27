@@ -129,20 +129,62 @@ private:
 	Timer  timer;
 
 	// RAI IN
-	DataRaiIn _raiIn_data;
+	
+	double _xi_setpoint;
+	double _eta_setpoint;
+	double _zeta_setpoint;
+	double _throttle_setpoint;
+	double _flaps_setpoint;
+	double _roll_setpoint;
+	double _pitch_setpoint;
+	double _yaw_setpoint;
+	double _hgt_setpoint;
+	double _tas_setpoint;
+	double _roll_rate_setpoint;
+	double _pitch_rate_setpoint;
+	double _yaw_rate_setpoint;
+	double _hgt_rate_setpoint;
+	double _tas_rate_setpoint;
+	flight_mode_t _flight_mode;
+	flight_fct_t _flight_fct;
 	bool _raiIn_alive{false};
 
 	// AHRS
-	DataAhrs _ahrs_data;
+	double _p;
+	double _q;
+	double _r;
+	double _a_x;
+	double _a_y;
+	double _a_z;
+	double _phi;
+	double _the;
+	double _psi;
 	bool _ahrs_alive{false};
 
 	// AIR
-	DataAir _air_data;
+	double _true_airspeed;
+	double _indicated_airspeed;
+	double _density;
+	double _dynamic_pressure;
+	double _barometric_pressure;
+	double _barometric_height;
 	bool _air_alive{false};
 	
 
 	// GPS
-	DataGps _gps_data;
+	double _latitude;
+	double _longitude;
+	double _course_over_ground;
+	double _groundspeed;
+	double _posN;
+	double _posE;
+	double _posD;
+	double _speedN;
+	double _speedE;
+	double _speedD;
+	double _windN;
+	double _windE;
+	double _windD;
 	bool _gps_alive{false};
 
 	bool _publish_now{false};
