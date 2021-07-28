@@ -7,7 +7,7 @@ struct DataGps {
 	double              groundspeed;
 	double              course_over_ground;
 	double              dop_position;
-	double              dop_height;
+	double              dop_horizontal;
 	double              dop_velocity;
 	unsigned short     sats;
 	unsigned short     sats_in_view;

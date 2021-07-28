@@ -52,8 +52,8 @@ DataGps::DataGps()
     m_course_over_ground = 0.0;
     // m_dop_position com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
     m_dop_position = 0.0;
-    // m_dop_height com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
-    m_dop_height = 0.0;
+    // m_dop_horizontal com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
+    m_dop_horizontal = 0.0;
     // m_dop_velocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
     m_dop_velocity = 0.0;
     // m_sats com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
@@ -129,7 +129,7 @@ DataGps::DataGps(
     m_groundspeed = x.m_groundspeed;
     m_course_over_ground = x.m_course_over_ground;
     m_dop_position = x.m_dop_position;
-    m_dop_height = x.m_dop_height;
+    m_dop_horizontal = x.m_dop_horizontal;
     m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
     m_sats_in_view = x.m_sats_in_view;
@@ -159,7 +159,7 @@ DataGps::DataGps(
     m_groundspeed = x.m_groundspeed;
     m_course_over_ground = x.m_course_over_ground;
     m_dop_position = x.m_dop_position;
-    m_dop_height = x.m_dop_height;
+    m_dop_horizontal = x.m_dop_horizontal;
     m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
     m_sats_in_view = x.m_sats_in_view;
@@ -190,7 +190,7 @@ DataGps& DataGps::operator =(
     m_groundspeed = x.m_groundspeed;
     m_course_over_ground = x.m_course_over_ground;
     m_dop_position = x.m_dop_position;
-    m_dop_height = x.m_dop_height;
+    m_dop_horizontal = x.m_dop_horizontal;
     m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
     m_sats_in_view = x.m_sats_in_view;
@@ -223,7 +223,7 @@ DataGps& DataGps::operator =(
     m_groundspeed = x.m_groundspeed;
     m_course_over_ground = x.m_course_over_ground;
     m_dop_position = x.m_dop_position;
-    m_dop_height = x.m_dop_height;
+    m_dop_horizontal = x.m_dop_horizontal;
     m_dop_velocity = x.m_dop_velocity;
     m_sats = x.m_sats;
     m_sats_in_view = x.m_sats_in_view;
@@ -428,7 +428,7 @@ void DataGps::serialize(
     scdr << m_groundspeed;
     scdr << m_course_over_ground;
     scdr << m_dop_position;
-    scdr << m_dop_height;
+    scdr << m_dop_horizontal;
     scdr << m_dop_velocity;
     scdr << m_sats;
     scdr << m_sats_in_view;
@@ -460,7 +460,7 @@ void DataGps::deserialize(
     dcdr >> m_groundspeed;
     dcdr >> m_course_over_ground;
     dcdr >> m_dop_position;
-    dcdr >> m_dop_height;
+    dcdr >> m_dop_horizontal;
     dcdr >> m_dop_velocity;
     dcdr >> m_sats;
     dcdr >> m_sats_in_view;
@@ -704,31 +704,31 @@ double& DataGps::dop_position()
 }
 
 /*!
- * @brief This function sets a value in member dop_height
- * @param _dop_height New value for member dop_height
+ * @brief This function sets a value in member dop_horizontal
+ * @param _dop_horizontal New value for member dop_horizontal
  */
-void DataGps::dop_height(
-        double _dop_height)
+void DataGps::dop_horizontal(
+        double _dop_horizontal)
 {
-    m_dop_height = _dop_height;
+    m_dop_horizontal = _dop_horizontal;
 }
 
 /*!
- * @brief This function returns the value of member dop_height
- * @return Value of member dop_height
+ * @brief This function returns the value of member dop_horizontal
+ * @return Value of member dop_horizontal
  */
-double DataGps::dop_height() const
+double DataGps::dop_horizontal() const
 {
-    return m_dop_height;
+    return m_dop_horizontal;
 }
 
 /*!
- * @brief This function returns a reference to member dop_height
- * @return Reference to member dop_height
+ * @brief This function returns a reference to member dop_horizontal
+ * @return Reference to member dop_horizontal
  */
-double& DataGps::dop_height()
+double& DataGps::dop_horizontal()
 {
-    return m_dop_height;
+    return m_dop_horizontal;
 }
 
 /*!

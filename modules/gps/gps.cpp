@@ -140,7 +140,7 @@ void Gps::run() {
 			dataGps.course_over_ground(gpsCom.cog);
 			dataGps.groundspeed(gpsCom.speed);
 			dataGps.dop_position(gpsCom.dop_p);
-			dataGps.dop_height(gpsCom.dop_h);
+			dataGps.dop_horizontal(gpsCom.dop_h);
 			dataGps.dop_velocity(gpsCom.dop_v);
 			dataGps.sats(gpsCom.sats_in_use);
 			dataGps.sats_in_view(gpsCom.sats_in_view);
@@ -186,7 +186,7 @@ void Gps::print() {
 	std::cout << "cog        " << dataGps.course_over_ground() << std::endl;
 	std::cout << "speed      " << dataGps.groundspeed() << std::endl;
 	std::cout << "dopP       " << dataGps.dop_position() << std::endl;
-	std::cout << "dopH       " << dataGps.dop_height() << std::endl;
+	std::cout << "dopH       " << dataGps.dop_horizontal() << std::endl;
 	std::cout << "dopV       " << dataGps.dop_velocity() << std::endl;
 	std::cout << "sats       " << dataGps.sats() << std::endl;
 	std::cout << "satsInView " << dataGps.sats_in_view() << std::endl;

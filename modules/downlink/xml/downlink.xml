@@ -8,23 +8,37 @@
             <field type="uint64_t" name="time">System time at publication</field>
             <field type="float" name="senseTime">Time of data creation at sensor</field>
             <field type="uint16_t[12]" name="chnl">Channels with raw PWM values</field>
-            <field type="float" name="roll">Roll input from pilot (aka. setpoint)</field>
-            <field type="float" name="pitch">Pitch input from pilot (aka. setpoint)</field>
-            <field type="float" name="yaw">Yaw input from pilot (aka. setpoint)</field>
-            <field type="float" name="thr">Thr input from pilot (aka. setpoint)</field>
-            <field type="uint16_t" name="fltMode">Flightmode set by pilot</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="float" name="xi_setpoint">xi input from pilot (aka. setpoint)</field>
+            <field type="float" name="eta_setpoint">eta input from pilot (aka. setpoint)</field>
+            <field type="float" name="zeta_setpoint">zeta input from pilot (aka. setpoint)</field>
+            <field type="float" name="throttle_setpoint">Throttle input from pilot (aka. setpoint)</field>
+			<field type="float" name="flaps_setpoint">Flaps input from pilot (aka. setpoint)</field>
+			<field type="float" name="roll_setpoint">Roll input from pilot (aka. setpoint)</field>
+			<field type="float" name="roll_rate_setpoint">Rollrate input from pilot (aka. setpoint)</field>
+			<field type="float" name="pitch_setpoint">Pitch input from pilot (aka. setpoint)</field>
+			<field type="float" name="pitch_rate_setpoint">Pitchrate input from pilot (aka. setpoint)</field>
+			<field type="float" name="yaw_setpoint">Yaw input from pilot (aka. setpoint)</field>
+			<field type="float" name="yaw_rate_setpoint">Yaw_rate input from pilot (aka. setpoint)</field>
+			<field type="float" name="tas_setpoint">TAS input from pilot (aka. setpoint)</field>
+			<field type="float" name="tas_rate_setpoint">TAS rate input from pilot (aka. setpoint)</field>
+			<field type="float" name="hgt_setpoint">Hgt input from pilot (aka. setpoint)</field>
+			<field type="float" name="hgt_rate_setpoint">Hgt_rate input from pilot (aka. setpoint)</field>
+            <field type="uint16_t" name="flight_mode">Flightmode set by pilot</field>
+			<field type="uint16_t" name="flight_fct">Flightfunction set by pilot</field>
+            <field type="uint8_t" name="alive">Is Module alive?</field>
         </message>
         <message id="15000" name="DataRaiOut">
             <description>Data from RaiOut</description>
             <field type="uint64_t" name="time">System time at publication</field>
             <field type="uint16_t[12]" name="chnl">Channels with raw PWM values</field>
-            <field type="float" name="roll">Roll command from fcc</field>
-            <field type="float" name="pitch">Pitch command from fcc</field>
-            <field type="float" name="yaw">Yaw command from fcc</field>
-            <field type="float" name="thr">Thr command from fcc</field>
-            <field type="uint16_t" name="fltMode">Flightmode</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="float" name="xi_setpoint">xi command from fcc</field>
+            <field type="float" name="eta_setpoint">eta command from fcc</field>
+            <field type="float" name="zeta_setpoint">zeta command from fcc</field>
+            <field type="float" name="throttle_setpoint">Thr command from fcc</field>
+			<field type="float" name="flaps_setpoint">Flaps command from fcc</field>
+            <field type="uint16_t" name="flight_mode">Flightmode</field>
+			<field type="uint16_t" name="flight_fct">Flightfunction</field>
+            <field type="uint8_t" name="alive">Is Module alive?</field>
         </message>
         <message id="20000" name="DataAhrs">
             <description>Data from Ahrs</description>
@@ -39,49 +53,50 @@
             <field type="float" name="magX">Magnetometer X-Axis</field>
             <field type="float" name="magY">Magnetometer Y-Axis</field>
             <field type="float" name="magZ">Magnetometer Z-Axis</field>
-            <field type="float" name="temp">Temperature</field>
-            <field type="float" name="press">Barometric pressure</field>
+            <field type="float" name="temperature">Temperature</field>
+            <field type="float" name="barometric_pressure">Barometric pressure</field>
             <field type="float" name="phi">Phi</field>
             <field type="float" name="the">Theta</field>
             <field type="float" name="psi">Psi</field>
-            <field type="float" name="q0">Quaternion 0</field>
-            <field type="float" name="q1">Quaternion 1</field>
-            <field type="float" name="q2">Quaternion 2</field>
-            <field type="float" name="q3">Quaternion 3</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="uint8_t" name="alive">Is Module alive?</field>
         </message>
         <message id="30000" name="DataAir">
             <description>Data from Air</description>
             <field type="uint64_t" name="time">System time at publication</field>
             <field type="float" name="senseTime">Time of data creation at sensor</field>
-            <field type="float" name="dynamicPress">Dynamic Pressure</field>
-            <field type="float" name="velocity">Velocitiy (TAS)</field>
-            <field type="float" name="baroPress">Barometric pressure</field>
+            <field type="float" name="dynamic_pressure">Dynamic Pressure</field>
+            <field type="float" name="true_airspeed">TAS</field>
+            <field type="float" name="indicated_airspeed">IAS</field>
+			<field type="float" name="barometric_pressure">Barometric pressure</field>
+			<field type="float" name="barometric_height">Barometric height</field>
             <field type="float" name="density">Density</field>
-            <field type="float" name="temp">Temperature</field>
+            <field type="float" name="temperature">Temperature</field>
             <field type="uint8_t" name="alive">Is message valid?</field>
         </message>
         <message id="40000" name="DataSFusion">
             <description>Data from SFusion</description>
             <field type="uint64_t" name="time">System time at publication</field>
-            <field type="float" name="gyrX">Gyro X-Axis</field>
-            <field type="float" name="gyrY">Gyro Y-Axis</field>
-            <field type="float" name="gyrZ">Gyro Z-Axis</field>
-            <field type="float" name="accX">Accelerometer X-Axis</field>
-            <field type="float" name="accY">Accelerometer Y-Axis</field>
-            <field type="float" name="accZ">Accelerometer Z-Axis</field>
-            <field type="float" name="magX">Magnetometer X-Axis</field>
-            <field type="float" name="magY">Magnetometer Y-Axis</field>
-            <field type="float" name="magZ">Magnetometer Z-Axis</field>
-            <field type="float" name="temp">Temperature</field>
-            <field type="float" name="press">Barometric pressure</field>
-            <field type="float" name="phi">Phi</field>
+            <field type="float" name="p">Gyro X-Axis</field>
+            <field type="float" name="q">Gyro Y-Axis</field>
+            <field type="float" name="r">Gyro Z-Axis</field>
+            <field type="float" name="a_x">Accelerometer X-Axis</field>
+            <field type="float" name="a_y">Accelerometer Y-Axis</field>
+            <field type="float" name="a_z">Accelerometer Z-Axis</field>
+            <field type="float" name="true_airspeed">Magnetometer X-Axis</field>
+            <field type="float" name="indicated_airspeed">Magnetometer Y-Axis</field>
+            <field type="float" name="density">Magnetometer Z-Axis</field>
+            <field type="float" name="dynamic_pressure">Temperature</field>
+            <field type="float" name="barometric_pressure">Barometric pressure</field>
+            <field type="float" name="height_rate">Heightrate</field>
+			<field type="float" name="height">Height</field>
+			<field type="float" name="ssa">Sideslip angle</field>
+			<field type="float" name="aoa">Angle of Attack</field>
+			<field type="float" name="gamma">Flightpath angle</field>
+			<field type="float" name="phi">Phi</field>
             <field type="float" name="the">Theta</field>
             <field type="float" name="psi">Psi</field>
-            <field type="float" name="q0">Quaternion 0</field>
-            <field type="float" name="q1">Quaternion 1</field>
-            <field type="float" name="q2">Quaternion 2</field>
-            <field type="float" name="q3">Quaternion 3</field>
+            <field type="double" name="latitude">Latitude</field>
+            <field type="double" name="longitude">Longitude</field>
             <field type="float" name="posN">Position north estimation</field>
             <field type="float" name="posE">Position east estimation</field>
             <field type="float" name="posD">Position down estimation</field>
@@ -91,34 +106,49 @@
             <field type="float" name="windN">Wind north estimation</field>
             <field type="float" name="windE">Wind east estimation</field>
             <field type="float" name="windD">Wind down estimation</field>
-            <field type="float" name="ssa">Sideslip angle estimation</field>
-            <field type="float" name="aoa">Angle of attack estimation</field>
-            <field type="float" name="gamma">Pathangle estimation</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="uint8_t" name="alive">Is Module alive?</field>
         </message>
         <message id="50000" name="DataCtrl">
             <description>Data from Ctrl</description>
             <field type="uint64_t" name="time">System time at publication</field>
-            <field type="float" name="xi">Roll (Aileron)</field>
-            <field type="float" name="eta">Pich (Elevator)</field>
-            <field type="float" name="zeta">Yaw (Rudder)</field>
-            <field type="float" name="etaT">Thrust (Throttle)</field>
-            <field type="float" name="etaF">Flaps</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="float" name="xi_setpoint">xi controller output (aka. setpoint)</field>
+			<field type="float" name="eta_setpoint">eta controller output (aka. setpoint)</field>
+			<field type="float" name="zeta_setpoint">zeta controller output (aka. setpoint)</field>
+			<field type="float" name="throttle_setpoint">Throttle controller output (aka. setpoint)</field>
+			<field type="float" name="flaps_setpoint">Flaps controller output (aka. setpoint)</field>
+			<field type="float" name="roll_setpoint">Roll controller output (aka. setpoint)</field>
+			<field type="float" name="roll_rate_setpoint">Rollrate controller output (aka. setpoint)</field>
+			<field type="float" name="pitch_setpoint">Pitch controller output (aka. setpoint)</field>
+			<field type="float" name="pitch_rate_setpoint">Pitchrate controller output (aka. setpoint)</field>
+			<field type="float" name="yaw_setpoint">Yaw controller output (aka. setpoint)</field>
+			<field type="float" name="yaw_rate_setpoint">Yaw_rate controller output (aka. setpoint)</field>
+			<field type="float" name="tas_setpoint">TAS controller output (aka. setpoint)</field>
+			<field type="float" name="tas_rate_setpoint">TAS controller output (aka. setpoint)</field>
+			<field type="float" name="hgt_setpoint">Hgt controller output (aka. setpoint)</field>
+			<field type="float" name="hgt_rate_setpoint">Hgt_rate controller output (aka. setpoint)</field>
+			<field type="uint16_t" name="flight_mode">Flightmode set by pilot</field>
+			<field type="uint16_t" name="flight_fct">Flightfunction set by pilot</field>
+			<field type="uint8_t" name="alive">Is Module alive?</field>
+            
+            
+            
+            
+			
+            
         </message>
         <message id="60000" name="DataPsu">
             <description>Data from Psu</description>
             <field type="uint64_t" name="time">System time at publication</field>
             <field type="float" name="senseTime">Time of data creation at sensor</field>
-            <field type="float" name="mainVolt">Voltage of battery</field>
-            <field type="float" name="mainCurr">Current drawn from battery</field>
-            <field type="float" name="mainPow">Power drawn from battery</field>
-            <field type="float" name="pwrVolt">Voltage of servo supply (5V)</field>
-            <field type="float" name="pwrCurr">Current drawn from servo supply (5V)</field>
-            <field type="float" name="pwrPow">Power drawn from servo supply (5V)</field>
-            <field type="float" name="sysVolt">Voltage of system supply (5V)</field>
-            <field type="float" name="sysCurr">Current drawn from system supply (5V)</field>
-            <field type="float" name="sysPow">Power drawn from system supply (5V)</field>
+            <field type="float" name="main_volt">Voltage of battery</field>
+            <field type="float" name="main_curr">Current drawn from battery</field>
+            <field type="float" name="main_pwr">Power drawn from battery</field>
+            <field type="float" name="pwr_volt">Voltage of servo supply (5V)</field>
+            <field type="float" name="pwr_curr">Current drawn from servo supply (5V)</field>
+            <field type="float" name="pwr_pwr">Power drawn from servo supply (5V)</field>
+            <field type="float" name="sys_volt">Voltage of system supply (5V)</field>
+            <field type="float" name="sys_curr">Current drawn from system supply (5V)</field>
+            <field type="float" name="sys_pwr">Power drawn from system supply (5V)</field>
             <field type="uint8_t" name="alive">Is message valid?</field>
         </message>
         <message id="70000" name="DataWatchdog">
@@ -136,24 +166,25 @@
             <field type="uint8_t" name="raiOutAlive">Is RaiOut alive?</field>
             <field type="uint8_t" name="sFusionAlive">Is SFusion alive?</field>
             <field type="uint8_t" name="uplinkAlive">Is Uplink alive?</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="uint8_t" name="alive">Is Module alive?</field>
         </message>
         <message id="80000" name="DataGps">
             <description>Data fromGps</description>
             <field type="uint64_t" name="time">System time at publication</field>
             <field type="float" name="senseTime">Time of data creation at sensor</field>
-            <field type="float" name="lat">Latitude in deg</field>
-            <field type="float" name="lon">Longitude in deg</field>
-            <field type="float" name="alt">Altitude in m</field>
-            <field type="float" name="speed">Speed in m/s</field>
-            <field type="float" name="cog">Course over ground in deg</field>
+            <field type="float" name="latitude">Latitude in deg</field>
+            <field type="float" name="longitude">Longitude in deg</field>
+            <field type="float" name="alt_msl">Altitude in m</field>
+            <field type="float" name="groundspeed">Speed in m/s</field>
+            <field type="float" name="course_over_ground">Course over ground in deg</field>
             <field type="float" name="sats">Number of satellites currently using</field>
+			<field type="float" name="sats_in_view">Number of satellites in view</field>
             <field type="float" name="fix">0=No fix, 1=Fix, 2=Differential fix</field>
-            <field type="float" name="fixMode">1=No fix, 2=2D fix, 3=3D fix</field>
-            <field type="float" name="dopP">Positional dilution of precision</field>
-            <field type="float" name="dopH">Horizontal dilution of precision</field>
-            <field type="float" name="dopV">Vertical dilution of precision</field>
-            <field type="uint8_t" name="alive">Is message valid?</field>
+            <field type="float" name="fix_mode">1=No fix, 2=2D fix, 3=3D fix</field>
+            <field type="float" name="dop_position">Positional dilution of precision</field>
+            <field type="float" name="dop_horizontal">Horizontal dilution of precision</field>
+            <field type="float" name="dop_velocity">Vertical dilution of precision</field>
+            <field type="uint8_t" name="alive">Is Module alive?</field>
         </message>
     </messages>
 </mavlink>

@@ -260,23 +260,23 @@ public:
     eProsima_user_DllExport double& dop_position();
 
     /*!
-     * @brief This function sets a value in member dop_height
-     * @param _dop_height New value for member dop_height
+     * @brief This function sets a value in member dop_horizontal
+     * @param _dop_horizontal New value for member dop_horizontal
      */
-    eProsima_user_DllExport void dop_height(
-            double _dop_height);
+    eProsima_user_DllExport void dop_horizontal(
+            double _dop_horizontal);
 
     /*!
-     * @brief This function returns the value of member dop_height
-     * @return Value of member dop_height
+     * @brief This function returns the value of member dop_horizontal
+     * @return Value of member dop_horizontal
      */
-    eProsima_user_DllExport double dop_height() const;
+    eProsima_user_DllExport double dop_horizontal() const;
 
     /*!
-     * @brief This function returns a reference to member dop_height
-     * @return Reference to member dop_height
+     * @brief This function returns a reference to member dop_horizontal
+     * @return Reference to member dop_horizontal
      */
-    eProsima_user_DllExport double& dop_height();
+    eProsima_user_DllExport double& dop_horizontal();
 
     /*!
      * @brief This function sets a value in member dop_velocity
@@ -650,7 +650,7 @@ private:
     double m_groundspeed;
     double m_course_over_ground;
     double m_dop_position;
-    double m_dop_height;
+    double m_dop_horizontal;
     double m_dop_velocity;
     uint16_t m_sats;
     uint16_t m_sats_in_view;
