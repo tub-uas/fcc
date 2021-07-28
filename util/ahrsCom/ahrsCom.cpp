@@ -35,12 +35,12 @@ bool AhrsCom::receive() {
 		can_frame_t frame;
 		drv_can_read(can_sckt, &frame);
 
-		if (frame.can_id != in_ids[i]) {
-			std::cout << "AhrsCom decode error, can id should be "
-			          << std::hex << in_ids[i] << std::dec << " but is "
-			          << std::hex << frame.can_id << std::dec << std::endl;
+		// if (frame.can_id != in_ids[i]) {
+			// std::cout << "AhrsCom decode error, can id should be "
+			        //   << std::hex << in_ids[i] << std::dec << " but is "
+			        //   << std::hex << frame.can_id << std::dec << std::endl;
 			// return false;
-		}
+		// }
 		// else {
 		// 	std::cout << "AhrsCom decode succe, can ids are      "
 		// 	          << std::hex << in_ids[i] << std::dec << " but is "
