@@ -274,8 +274,8 @@ void Ctrl::run() {
 							// ONLY ATTITUDE SETPOINTS FOR ROLL AND PITCH
 							dataCtrl.roll_setpoint(_roll_setpoint);
 							dataCtrl.pitch_setpoint(_pitch_setpoint);
-							// _xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
-							// _eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
+							_xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
+							_eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
 
 							// DAMPER SETPOINT 
 							_xi_setpoint = ctrl_roll_damper(-0.2);
