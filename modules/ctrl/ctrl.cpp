@@ -274,14 +274,17 @@ void Ctrl::run() {
 						// ONLY ATTITUDE SETPOINTS FOR ROLL AND PITCH
 						dataCtrl.roll_setpoint(_roll_setpoint);
 						dataCtrl.pitch_setpoint(_pitch_setpoint);
-						_xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
-						_eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
+						// _xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
+						// _eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
 						
 						// DAMPER SETPOINT 
-						_xi_setpoint = ctrl_roll_damper(-0.05);
-						_eta_setpoint = ctrl_pitch_damper(-0.05);
-						_zeta_setpoint = ctrl_yaw_damper(-0.05,3.183e-02);
-						// == NO BREAK ==
+						_xi_setpoint = ctrl_roll_damper(-0.5);
+						_eta_setpoint = ctrl_pitch_damper(-0.5);
+						// _zeta_setpoint = ctrl_yaw_damper(-0.05,3.183e-02);
+						dataCtrl.xi_setpoint(_xi_setpoint);
+						dataCtrl.eta_setpoint(_eta_setpoint);
+						dataCtrl.zeta_setpoint(0.0);
+						break;
 
 					// == MANUAL ===============================================
 					case FCT_0:
@@ -369,8 +372,9 @@ bool Ctrl::update_raiIn_data()
 		_flight_fct = (flight_fct_t)listener.dataRaiIn.flight_fct();
 		
 		_raiIn_alive = listener.dataRaiIn.alive();
-		dataRaiInLock.unlock();
 		listener.newDataRaiIn = false;
+		dataRaiInLock.unlock();
+		
 
 		return true;
 	}
@@ -415,7 +419,7 @@ bool Ctrl::update_sfusion_data()
 		_windD = listener.dataSFusion.windD();
 
 		_sfusion_alive = listener.dataSFusion.alive();
-
+		listener.newDataSFusion = false;
 		dataSFusionLock.unlock();
 		return true;
 	}
