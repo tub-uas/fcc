@@ -55,7 +55,7 @@ bool RaiCom::receive() {
 				for(int j = 0; j < CAN_META_RAI_CHNL_PER_MSG; ++j)
 				{
 					uint16_t pwm= frame.data[2*j+1] << 8 | frame.data[2*j];
-					channel[j+4] = pwm; 
+					channel[j+8] = pwm; 
 				}
 				break;
 			case CAN_ID_RAI_DATA3:
