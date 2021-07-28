@@ -245,7 +245,7 @@ void Ctrl::run() {
 	while (1) {
 
 		// == RUN CONTROLLER IF NEW DATA AVAILABLE
-		if (update_raiIn_data() || update_sfusion_data()) {
+		if (update_raiIn_data()) {
 
 			
 			std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
@@ -270,20 +270,21 @@ void Ctrl::run() {
 
 					// == STABILIZED ===========================================
 					case FCT_1:
+						if(update_sfusion_data()) {
+							// ONLY ATTITUDE SETPOINTS FOR ROLL AND PITCH
+							dataCtrl.roll_setpoint(_roll_setpoint);
+							dataCtrl.pitch_setpoint(_pitch_setpoint);
+							// _xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
+							// _eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
 
-						// ONLY ATTITUDE SETPOINTS FOR ROLL AND PITCH
-						dataCtrl.roll_setpoint(_roll_setpoint);
-						dataCtrl.pitch_setpoint(_pitch_setpoint);
-						// _xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
-						// _eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
-						
-						// DAMPER SETPOINT 
-						_xi_setpoint = ctrl_roll_damper(-0.5);
-						_eta_setpoint = ctrl_pitch_damper(-0.5);
-						// _zeta_setpoint = ctrl_yaw_damper(-0.05,3.183e-02);
-						dataCtrl.xi_setpoint(_xi_setpoint);
-						dataCtrl.eta_setpoint(_eta_setpoint);
-						dataCtrl.zeta_setpoint(0.0);
+							// DAMPER SETPOINT 
+							_xi_setpoint = ctrl_roll_damper(-0.05);
+							_eta_setpoint = ctrl_pitch_damper(-0.05);
+							_zeta_setpoint = ctrl_yaw_damper(-0.05,3.183e-02);
+							dataCtrl.xi_setpoint(_xi_setpoint);
+							dataCtrl.eta_setpoint(_eta_setpoint);
+							
+						}
 						break;
 
 					// == MANUAL ===============================================
@@ -314,9 +315,9 @@ void Ctrl::run() {
 			
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 
 	}
 
