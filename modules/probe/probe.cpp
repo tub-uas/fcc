@@ -101,12 +101,12 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 		{
 			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
 			{
-				newDataAhrs = true;
+				newDataGps = true;
 			}
 		}
 		dataGpsLock.unlock();		
 	}
-	else if(topic.compare("DataAhrs") == 0)
+	else if(topic.compare("DataPsu") == 0)
 	{
 		std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
 		if(reader->read_next_sample(&dataPsu,&info) == ReturnCode_t::RETCODE_OK)
@@ -118,7 +118,30 @@ void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 		}
 		dataPsuLock.unlock();		
 	}
-
+	else if(topic.compare("DataRaiIn") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+		if(reader->read_next_sample(&dataRaiIn,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataRaiIn = true;
+			}
+		}
+		dataRaiInLock.unlock();		
+	}
+	else if(topic.compare("DataRaiOut") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
+		if(reader->read_next_sample(&dataRaiOut,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
+				newDataRaiOut = true;
+			}
+		}
+		dataRaiOutLock.unlock();		
+	}
 	// while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
 		// if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
 			// if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
