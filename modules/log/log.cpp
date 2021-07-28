@@ -50,71 +50,132 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
+	std::string topic = reader->get_topicdescription()->get_name();
 
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
-			/***PYTHON_GEN_ON_DATA_CALLBACK*/
-			if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
-				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-				reader->take_next_sample(&dataAhrs, &info);
-				dataAhrsLock.unlock();
-				newDataAhrs = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
-				std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-				reader->take_next_sample(&dataAir, &info);
-				dataAirLock.unlock();
-				newDataAir = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
-				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
-				reader->take_next_sample(&dataCtrl, &info);
-				dataCtrlLock.unlock();
-				newDataCtrl = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataDownlink") == 0) {
-				std::unique_lock<std::mutex> dataDownlinkLock {dataDownlinkMutex};
-				reader->take_next_sample(&dataDownlink, &info);
-				dataDownlinkLock.unlock();
-				newDataDownlink = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
-				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
-				reader->take_next_sample(&dataGps, &info);
-				dataGpsLock.unlock();
-				newDataGps = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
-				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
-				reader->take_next_sample(&dataPsu, &info);
-				dataPsuLock.unlock();
-				newDataPsu = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
-				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
-				reader->take_next_sample(&dataRaiIn, &info);
-				dataRaiInLock.unlock();
-				newDataRaiIn = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataRaiOut") == 0) {
-				std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
-				reader->take_next_sample(&dataRaiOut, &info);
-				dataRaiOutLock.unlock();
-				newDataRaiOut = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataSFusion") == 0) {
-				std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
-				reader->take_next_sample(&dataSFusion, &info);
-				dataSFusionLock.unlock();
-				newDataSFusion = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataWatchdog") == 0) {
-				std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
-				reader->take_next_sample(&dataWatchdog, &info);
-				dataWatchdogLock.unlock();
-				newDataWatchdog = true;
-			} else {
-				reader->take_next_sample(&data, &info);
+	/***PYTHON_GEN_ON_DATA_CALLBACK*/
+	if (topic.compare("DataAhrs") == 0)
+	{
+		std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
+		if(reader->take_next_sample(&dataAhrs, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataAhrs = true;
 			}
-		} else {
-			reader->take_next_sample(&data, &info);
 		}
+		dataAhrsLock.unlock();
+	}
+	else if (topic.compare("DataAir") == 0)
+	{
+		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
+		if(reader->take_next_sample(&dataAir, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataAir = true;
+			}
+		}
+		dataAirLock.unlock();
+	}
+	else if (topic.compare("DataCtrl") == 0)
+	{
+		std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
+		if(reader->take_next_sample(&dataCtrl, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataCtrl = true;
+			}
+		}
+		dataCtrlLock.unlock();
+	}
+	else if (topic.compare("DataDownlink") == 0)
+	{
+		std::unique_lock<std::mutex> dataDownlinkLock {dataDownlinkMutex};
+		if(reader->take_next_sample(&dataDownlink, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataDownlink = true;
+			}
+		}
+		dataDownlinkLock.unlock();
+	}
+	else if (topic.compare("DataGps") == 0)
+	{
+		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+		if(reader->take_next_sample(&dataGps, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataGps = true;
+			}
+		}
+		dataGpsLock.unlock();
+	}
+	else if (topic.compare("DataPsu") == 0)
+	{
+		std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
+		if(reader->take_next_sample(&dataPsu, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataPsu = true;
+			}
+		}
+		dataPsuLock.unlock();
+	}
+	else if (topic.compare("DataRaiIn") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+		if(reader->take_next_sample(&dataRaiIn, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataRaiIn = true;
+			}
+		}
+		dataRaiInLock.unlock();
+	}
+	else if (topic.compare("DataRaiOut") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
+		if(reader->take_next_sample(&dataRaiOut, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataRaiOut = true;
+			}
+		}
+		dataRaiOutLock.unlock();
+	}
+	else if (topic.compare("DataSFusion") == 0)
+	{
+		std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
+		if(reader->take_next_sample(&dataSFusion, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataSFusion = true;
+			}
+		}
+		dataSFusionLock.unlock();
+	}
+	else if (topic.compare("DataWatchdog") == 0)
+	{
+		std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+		if(reader->take_next_sample(&dataWatchdog, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataWatchdog = true;
+			}
+		}
+		dataWatchdogLock.unlock();
+	} else {
+		
 	}
 
-	// TODO why does this cause a segfault ?!?
-	// reader->type().delete_data(data);
 }
 
 Log::Log() : participant(nullptr),
