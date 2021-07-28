@@ -222,6 +222,7 @@ void Ctrl::publish() {
 			dataCtrl.alive(true);
 		} else {
 			dataCtrl.alive(false);
+			std::cerr << "CTRL NOT ALIVE" << std::endl;
 		}
 		if(_publish_now) {
 			writerCtrl->write(&dataCtrl);
@@ -303,11 +304,11 @@ void Ctrl::run() {
 			else {
 				std::cout << "no valid flight mode!" << std::endl;
 			}
-			
+			aliveTime = timer.getSysTime();
 			_publish_now = true;
 			dataCtrlLock.unlock();
 
-			aliveTime = timer.getSysTime();
+			
 		}
 
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);

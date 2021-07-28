@@ -108,6 +108,7 @@ void Ahrs::publish() {
 			dataAhrs.alive(true);
 		} else {
 			dataAhrs.alive(false);
+			std::cerr << "AHRS NOT ALIVE" << std::endl;
 		}
 		if(_publish_now) {
 			writerAhrs->write(&dataAhrs);
@@ -159,9 +160,9 @@ void Ahrs::run() {
 			// print();
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(10);
 
 	}
 

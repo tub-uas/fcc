@@ -109,6 +109,7 @@ void Air::publish() {
 			dataAir.alive(true);
 		} else {
 			dataAir.alive(false);
+			std::cerr << "AIR NOT ALIVE" << std::endl;
 		}
 		if(_publish_now) {
 			writerAir->write(&dataAir);
@@ -117,9 +118,9 @@ void Air::publish() {
 		dataAirLock.unlock();
 
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 
 }
@@ -151,9 +152,9 @@ void Air::run() {
 
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(10);
 
 	}
 

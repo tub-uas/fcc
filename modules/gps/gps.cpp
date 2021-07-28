@@ -108,6 +108,7 @@ void Gps::publish() {
 			dataGps.alive(true);
 		} else {
 			dataGps.alive(false);
+			std::cerr << "GPS NOT ALIVE" << std::endl;
 		}
 		if(_publish_now) {
 			writerGps->write(&dataGps);
@@ -164,9 +165,9 @@ void Gps::run() {
 			// print();
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(5);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(5);
+		next_wakeup += std::chrono::milliseconds(10);
 
 	}
 

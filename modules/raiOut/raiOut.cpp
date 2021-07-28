@@ -191,7 +191,7 @@ void RaiOut::publish() {
 			
 		} else {
 			dataRaiOut.alive(false);
-			std::cout << "timeout..." << std::endl;
+			std::cout << "RAI OUT NOT ALIVE" << std::endl;
 		}
 
 		if(_publish_now) {

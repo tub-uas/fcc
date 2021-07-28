@@ -78,6 +78,8 @@ private:
 	RaiCom raiCom;
 	Mixer  mixer;
 	Timer  timer;
+
+	bool _publish_now{false};
 	
 };
 

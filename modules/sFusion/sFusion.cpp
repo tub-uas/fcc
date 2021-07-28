@@ -288,6 +288,7 @@ void SFusion::publish() {
 			dataSFusion.alive(true);
 		} else {
 			dataSFusion.alive(false);
+			std::cerr << "SFUSION NOT ALIVE" << std::endl;
 		}
 		if(_publish_now) {
 			writerSFusion->write(&dataSFusion);
@@ -380,9 +381,9 @@ void SFusion::run() {
 			dataSFusionLock.unlock();
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(5);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(2);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(5);
+		next_wakeup += std::chrono::milliseconds(2);
 
 	}
 
