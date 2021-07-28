@@ -39,7 +39,7 @@ bool RaiCom::receive() {
 			std::cout << "RaiCom decode error, can id should be "
 			          << std::hex << in_ids[i] << std::dec << " but is "
 			          << std::hex << frame.can_id << std::dec << std::endl;
-			return false;
+			// return false;
 		}
 
 		if (i == (CAN_META_RAI_MSG_NUM-1)) {
@@ -93,7 +93,7 @@ bool RaiCom::send(std::array<uint16_t, CAN_META_RAI_CHNL_NUM> channel, float tim
 
 			memcpy(&frame.data[2*j], &pwm, sizeof(uint16_t));
 		}
-		std::cout << "sending ..." << std::endl;
+		// std::cout << "sending ..." << std::endl;
 		drv_can_send(can_sckt, frame);
 	}
 

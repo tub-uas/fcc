@@ -41,7 +41,7 @@ bool GpsCom::receive() {
 			std::cout << "GpsCom decode error, can id should be "
 			          << std::hex << in_ids[i] << std::dec << " but is "
 			          << std::hex << frame.can_id << std::dec << std::endl;
-			return false;
+			// return false;
 		}
 		// else {
 		// 	std::cout << "GpsCom decode succe, can ids are      "

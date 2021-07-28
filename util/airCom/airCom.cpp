@@ -39,7 +39,7 @@ bool AirCom::receive() {
 			std::cout << "AirCom decode error, can id should be "
 			          << std::hex << in_ids[i] << std::dec << " but is "
 			          << std::hex << frame.can_id << std::dec << std::endl;
-			return false;
+			// return false;
 		}
 
 		switch (frame.can_id) {
