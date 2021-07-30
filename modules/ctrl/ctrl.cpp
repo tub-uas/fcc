@@ -5,6 +5,8 @@
 #include <typeinfo>
 #include <cmath>
 
+
+
 Listener::Listener() : publication_matched(0),
                        subscription_matched(0) {
 }
@@ -244,10 +246,12 @@ void Ctrl::run() {
 
 	while (1) {
 
-		// == RUN CONTROLLER IF NEW DATA AVAILABLE
+		// UPDATE DATA
 		update_raiIn_data();
+		update_sfusion_data();
 
-			
+
+		// == BEGIN LOCK AREA ==================================================
 		std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
 
 
@@ -258,60 +262,46 @@ void Ctrl::run() {
 
 		if(_flight_mode == MANUAL || _flight_mode == AUTONOMOUS) 
 		{
-			if(_flight_mode == AUTONOMOUS)
+			// == AUTOPILOT == RUN IF FUNCTION FCT_2 OR AUTONOMOUS  ============
+			if(_flight_fct > FCT_1 || _flight_mode == AUTONOMOUS)
 			{
-				_flight_fct = FCT_2;
-			}
-			switch(_flight_fct) {
-				// == AUTOPILOT ============================================
-				case FCT_2:
-
-					// == NO BREAK ==
-
-				// == STABILIZED ===========================================
-				case FCT_1:
-					if(update_sfusion_data()) {
-						// ONLY ATTITUDE SETPOINTS FOR ROLL AND PITCH
-						dataCtrl.roll_setpoint(_roll_setpoint);
-						dataCtrl.pitch_setpoint(_pitch_setpoint);
-						_xi_setpoint = ctrl_att_roll(0.3,0.0,0.0,dt);
-						_eta_setpoint = ctrl_att_pitch(0.3,0.0,0.0,dt);
-
-						// DAMPER SETPOINT 
-						_xi_setpoint = ctrl_roll_damper(-0.2);
-						_eta_setpoint = ctrl_pitch_damper(-0.2);
-						_zeta_setpoint = ctrl_yaw_damper(-0.2,3.183e-02);
-						dataCtrl.xi_setpoint(_xi_setpoint);
-						dataCtrl.eta_setpoint(_eta_setpoint);
-						
-					}
-					break;
-
-				// == MANUAL ===============================================
-				case FCT_0:
-					dataCtrl.xi_setpoint(_xi_setpoint);
-					dataCtrl.eta_setpoint(_eta_setpoint);
-					dataCtrl.zeta_setpoint(_zeta_setpoint);
-					dataCtrl.throttle_setpoint(_throttle_setpoint);
-					break;
-				default:
-						
-						break;
 
 			}
-		}
-		else if(_flight_mode == EXPERIMENTAL)
-		{
 
-		}
+			// == STABILIZED == RUN IF FUNCTION FCT_1 OR FCT_2 OR AUTONOMOUS ===
+			if(_flight_fct > FCT_0 || _flight_mode == AUTONOMOUS)
+			{
+				dataCtrl.roll_setpoint(_roll_setpoint);
+				dataCtrl.pitch_setpoint(_pitch_setpoint);
+
+				_xi_setpoint = ctrl_att_roll(GAIN_K_P_PITCH,GAIN_K_I_PITCH,GAIN_K_D_PITCH,dt);
+				_xi_setpoint = ctrl_att_roll(GAIN_K_P_ROLL,GAIN_K_I_ROLL,GAIN_K_D_ROLL,dt);
+
+				_xi_setpoint = ctrl_roll_damper(GAIN_K_XI_P);
+				_eta_setpoint = ctrl_pitch_damper(GAIN_K_ETA_Q);
+				_zeta_setpoint = ctrl_yaw_damper(GAIN_K_ZETA_R,HP_WASHOUT_TC);
+			}
+			else
+			{
+				_pid_att_pitch.reset_integrator();
+				_pid_att_roll.reset_integrator();
+			}
+		}	
 		else 
 		{
 			std::cout << "no valid flight mode!" << std::endl;
 		}
+
+		// == MANUAL == RUN EVERYTIME ======================================
+		dataCtrl.xi_setpoint(_xi_setpoint);
+		dataCtrl.eta_setpoint(_eta_setpoint);
+		dataCtrl.zeta_setpoint(_zeta_setpoint);
+		dataCtrl.throttle_setpoint(_throttle_setpoint);
+			
 		aliveTime = timer.getSysTime();
 		_publish_now = true;
 		dataCtrlLock.unlock();
-
+		// == END LOCK AREA ====================================================
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
 		next_wakeup += std::chrono::milliseconds(10);

@@ -32,6 +32,8 @@
 #include "../../util/mixer/mixer.h"
 #include "../../util/timer/timer.h"
 
+#include "ctrl_params.h"
+
 typedef enum {
 	MANUAL_MODE = 0,
 	STABILIZED_MODE,
