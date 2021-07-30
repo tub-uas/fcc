@@ -34,31 +34,33 @@ bool RaiCom::receive() {
 
 		can_frame_t frame;
 		drv_can_read(can_sckt, &frame);
-
-		if (frame.can_id != in_ids[i]) {
-			std::cout << "RaiCom decode error, can id should be "
-			          << std::hex << in_ids[i] << std::dec << " but is "
-			          << std::hex << frame.can_id << std::dec << std::endl;
-			return false;
-		}
-
-		if (i == (CAN_META_RAI_MSG_NUM-1)) {
-			memcpy(&time, &frame.data[0], sizeof(float));
-			break;
-		}
-
-		for (int j=0; j<CAN_META_RAI_CHNL_PER_MSG; j++) {
-
-			uint16_t pwm = frame.data[2*j+1] << 8 | frame.data[2*j];
-			int idx = CAN_META_RAI_CHNL_PER_MSG*(frame.can_id-CAN_ID_RAI_DATA0)+j;
-
-			if (pwm > 2200 || pwm < 800) {
-				std::cout << "RaiCom receive error, pwm out of bounds " << pwm
-				          << " at channel " << idx << std::endl;
-				return false;
-			}
-
-			channel[idx] = pwm;
+		
+		switch(frame.can_id) {
+			case CAN_ID_RAI_DATA0:
+				for(int j = 0; j < CAN_META_RAI_CHNL_PER_MSG; ++j)
+				{
+					uint16_t pwm= frame.data[2*j+1] << 8 | frame.data[2*j];
+					channel[j] = pwm; 
+				}
+				break;
+			
+			case CAN_ID_RAI_DATA1:
+				for(int j = 0; j < CAN_META_RAI_CHNL_PER_MSG; ++j)
+				{
+					uint16_t pwm= frame.data[2*j+1] << 8 | frame.data[2*j];
+					channel[j+4] = pwm; 
+				}
+				break;
+			case CAN_ID_RAI_DATA2:
+				for(int j = 0; j < CAN_META_RAI_CHNL_PER_MSG; ++j)
+				{
+					uint16_t pwm= frame.data[2*j+1] << 8 | frame.data[2*j];
+					channel[j+8] = pwm; 
+				}
+				break;
+			case CAN_ID_RAI_DATA3:
+				memcpy(&time, &frame.data[0], sizeof(float));
+				break;
 		}
 	}
 
@@ -93,7 +95,7 @@ bool RaiCom::send(std::array<uint16_t, CAN_META_RAI_CHNL_NUM> channel, float tim
 
 			memcpy(&frame.data[2*j], &pwm, sizeof(uint16_t));
 		}
-
+		// std::cout << "sending ..." << std::endl;
 		drv_can_send(can_sckt, frame);
 	}
 

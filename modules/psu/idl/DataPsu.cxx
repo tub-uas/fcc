@@ -36,29 +36,29 @@ using namespace eprosima::fastcdr::exception;
 
 DataPsu::DataPsu()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
     m_senseTime = 0.0;
-    // m_mainVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
-    m_mainVolt = 0.0;
-    // m_mainCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
-    m_mainCurr = 0.0;
-    // m_mainPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
-    m_mainPow = 0.0;
-    // m_pwrVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
-    m_pwrVolt = 0.0;
-    // m_pwrCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
-    m_pwrCurr = 0.0;
-    // m_pwrPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
-    m_pwrPow = 0.0;
-    // m_sysVolt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
-    m_sysVolt = 0.0;
-    // m_sysCurr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
-    m_sysCurr = 0.0;
-    // m_sysPow com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
-    m_sysPow = 0.0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
+    // m_main_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
+    m_main_volt = 0.0;
+    // m_main_curr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
+    m_main_curr = 0.0;
+    // m_main_pwr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
+    m_main_pwr = 0.0;
+    // m_pwr_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
+    m_pwr_volt = 0.0;
+    // m_pwr_curr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
+    m_pwr_curr = 0.0;
+    // m_pwr_pwr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@c81cdd1
+    m_pwr_pwr = 0.0;
+    // m_sys_volt com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
+    m_sys_volt = 0.0;
+    // m_sys_curr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
+    m_sys_curr = 0.0;
+    // m_sys_pwr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
+    m_sys_pwr = 0.0;
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
     m_alive = false;
 
 }
@@ -84,15 +84,15 @@ DataPsu::DataPsu(
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_mainVolt = x.m_mainVolt;
-    m_mainCurr = x.m_mainCurr;
-    m_mainPow = x.m_mainPow;
-    m_pwrVolt = x.m_pwrVolt;
-    m_pwrCurr = x.m_pwrCurr;
-    m_pwrPow = x.m_pwrPow;
-    m_sysVolt = x.m_sysVolt;
-    m_sysCurr = x.m_sysCurr;
-    m_sysPow = x.m_sysPow;
+    m_main_volt = x.m_main_volt;
+    m_main_curr = x.m_main_curr;
+    m_main_pwr = x.m_main_pwr;
+    m_pwr_volt = x.m_pwr_volt;
+    m_pwr_curr = x.m_pwr_curr;
+    m_pwr_pwr = x.m_pwr_pwr;
+    m_sys_volt = x.m_sys_volt;
+    m_sys_curr = x.m_sys_curr;
+    m_sys_pwr = x.m_sys_pwr;
     m_alive = x.m_alive;
 }
 
@@ -101,15 +101,15 @@ DataPsu::DataPsu(
 {
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_mainVolt = x.m_mainVolt;
-    m_mainCurr = x.m_mainCurr;
-    m_mainPow = x.m_mainPow;
-    m_pwrVolt = x.m_pwrVolt;
-    m_pwrCurr = x.m_pwrCurr;
-    m_pwrPow = x.m_pwrPow;
-    m_sysVolt = x.m_sysVolt;
-    m_sysCurr = x.m_sysCurr;
-    m_sysPow = x.m_sysPow;
+    m_main_volt = x.m_main_volt;
+    m_main_curr = x.m_main_curr;
+    m_main_pwr = x.m_main_pwr;
+    m_pwr_volt = x.m_pwr_volt;
+    m_pwr_curr = x.m_pwr_curr;
+    m_pwr_pwr = x.m_pwr_pwr;
+    m_sys_volt = x.m_sys_volt;
+    m_sys_curr = x.m_sys_curr;
+    m_sys_pwr = x.m_sys_pwr;
     m_alive = x.m_alive;
 }
 
@@ -119,15 +119,15 @@ DataPsu& DataPsu::operator =(
 
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_mainVolt = x.m_mainVolt;
-    m_mainCurr = x.m_mainCurr;
-    m_mainPow = x.m_mainPow;
-    m_pwrVolt = x.m_pwrVolt;
-    m_pwrCurr = x.m_pwrCurr;
-    m_pwrPow = x.m_pwrPow;
-    m_sysVolt = x.m_sysVolt;
-    m_sysCurr = x.m_sysCurr;
-    m_sysPow = x.m_sysPow;
+    m_main_volt = x.m_main_volt;
+    m_main_curr = x.m_main_curr;
+    m_main_pwr = x.m_main_pwr;
+    m_pwr_volt = x.m_pwr_volt;
+    m_pwr_curr = x.m_pwr_curr;
+    m_pwr_pwr = x.m_pwr_pwr;
+    m_sys_volt = x.m_sys_volt;
+    m_sys_curr = x.m_sys_curr;
+    m_sys_pwr = x.m_sys_pwr;
     m_alive = x.m_alive;
 
     return *this;
@@ -139,15 +139,15 @@ DataPsu& DataPsu::operator =(
 
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
-    m_mainVolt = x.m_mainVolt;
-    m_mainCurr = x.m_mainCurr;
-    m_mainPow = x.m_mainPow;
-    m_pwrVolt = x.m_pwrVolt;
-    m_pwrCurr = x.m_pwrCurr;
-    m_pwrPow = x.m_pwrPow;
-    m_sysVolt = x.m_sysVolt;
-    m_sysCurr = x.m_sysCurr;
-    m_sysPow = x.m_sysPow;
+    m_main_volt = x.m_main_volt;
+    m_main_curr = x.m_main_curr;
+    m_main_pwr = x.m_main_pwr;
+    m_pwr_volt = x.m_pwr_volt;
+    m_pwr_curr = x.m_pwr_curr;
+    m_pwr_pwr = x.m_pwr_pwr;
+    m_sys_volt = x.m_sys_volt;
+    m_sys_curr = x.m_sys_curr;
+    m_sys_pwr = x.m_sys_pwr;
     m_alive = x.m_alive;
 
     return *this;
@@ -162,34 +162,34 @@ size_t DataPsu::getMaxCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -210,34 +210,34 @@ size_t DataPsu::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
@@ -253,15 +253,15 @@ void DataPsu::serialize(
 
     scdr << m_time;
     scdr << m_senseTime;
-    scdr << m_mainVolt;
-    scdr << m_mainCurr;
-    scdr << m_mainPow;
-    scdr << m_pwrVolt;
-    scdr << m_pwrCurr;
-    scdr << m_pwrPow;
-    scdr << m_sysVolt;
-    scdr << m_sysCurr;
-    scdr << m_sysPow;
+    scdr << m_main_volt;
+    scdr << m_main_curr;
+    scdr << m_main_pwr;
+    scdr << m_pwr_volt;
+    scdr << m_pwr_curr;
+    scdr << m_pwr_pwr;
+    scdr << m_sys_volt;
+    scdr << m_sys_curr;
+    scdr << m_sys_pwr;
     scdr << m_alive;
 
 }
@@ -272,15 +272,15 @@ void DataPsu::deserialize(
 
     dcdr >> m_time;
     dcdr >> m_senseTime;
-    dcdr >> m_mainVolt;
-    dcdr >> m_mainCurr;
-    dcdr >> m_mainPow;
-    dcdr >> m_pwrVolt;
-    dcdr >> m_pwrCurr;
-    dcdr >> m_pwrPow;
-    dcdr >> m_sysVolt;
-    dcdr >> m_sysCurr;
-    dcdr >> m_sysPow;
+    dcdr >> m_main_volt;
+    dcdr >> m_main_curr;
+    dcdr >> m_main_pwr;
+    dcdr >> m_pwr_volt;
+    dcdr >> m_pwr_curr;
+    dcdr >> m_pwr_pwr;
+    dcdr >> m_sys_volt;
+    dcdr >> m_sys_curr;
+    dcdr >> m_sys_pwr;
     dcdr >> m_alive;
 }
 
@@ -317,7 +317,7 @@ uint64_t& DataPsu::time()
  * @param _senseTime New value for member senseTime
  */
 void DataPsu::senseTime(
-        float _senseTime)
+        double _senseTime)
 {
     m_senseTime = _senseTime;
 }
@@ -326,7 +326,7 @@ void DataPsu::senseTime(
  * @brief This function returns the value of member senseTime
  * @return Value of member senseTime
  */
-float DataPsu::senseTime() const
+double DataPsu::senseTime() const
 {
     return m_senseTime;
 }
@@ -335,261 +335,261 @@ float DataPsu::senseTime() const
  * @brief This function returns a reference to member senseTime
  * @return Reference to member senseTime
  */
-float& DataPsu::senseTime()
+double& DataPsu::senseTime()
 {
     return m_senseTime;
 }
 
 /*!
- * @brief This function sets a value in member mainVolt
- * @param _mainVolt New value for member mainVolt
+ * @brief This function sets a value in member main_volt
+ * @param _main_volt New value for member main_volt
  */
-void DataPsu::mainVolt(
-        float _mainVolt)
+void DataPsu::main_volt(
+        double _main_volt)
 {
-    m_mainVolt = _mainVolt;
+    m_main_volt = _main_volt;
 }
 
 /*!
- * @brief This function returns the value of member mainVolt
- * @return Value of member mainVolt
+ * @brief This function returns the value of member main_volt
+ * @return Value of member main_volt
  */
-float DataPsu::mainVolt() const
+double DataPsu::main_volt() const
 {
-    return m_mainVolt;
+    return m_main_volt;
 }
 
 /*!
- * @brief This function returns a reference to member mainVolt
- * @return Reference to member mainVolt
+ * @brief This function returns a reference to member main_volt
+ * @return Reference to member main_volt
  */
-float& DataPsu::mainVolt()
+double& DataPsu::main_volt()
 {
-    return m_mainVolt;
+    return m_main_volt;
 }
 
 /*!
- * @brief This function sets a value in member mainCurr
- * @param _mainCurr New value for member mainCurr
+ * @brief This function sets a value in member main_curr
+ * @param _main_curr New value for member main_curr
  */
-void DataPsu::mainCurr(
-        float _mainCurr)
+void DataPsu::main_curr(
+        double _main_curr)
 {
-    m_mainCurr = _mainCurr;
+    m_main_curr = _main_curr;
 }
 
 /*!
- * @brief This function returns the value of member mainCurr
- * @return Value of member mainCurr
+ * @brief This function returns the value of member main_curr
+ * @return Value of member main_curr
  */
-float DataPsu::mainCurr() const
+double DataPsu::main_curr() const
 {
-    return m_mainCurr;
+    return m_main_curr;
 }
 
 /*!
- * @brief This function returns a reference to member mainCurr
- * @return Reference to member mainCurr
+ * @brief This function returns a reference to member main_curr
+ * @return Reference to member main_curr
  */
-float& DataPsu::mainCurr()
+double& DataPsu::main_curr()
 {
-    return m_mainCurr;
+    return m_main_curr;
 }
 
 /*!
- * @brief This function sets a value in member mainPow
- * @param _mainPow New value for member mainPow
+ * @brief This function sets a value in member main_pwr
+ * @param _main_pwr New value for member main_pwr
  */
-void DataPsu::mainPow(
-        float _mainPow)
+void DataPsu::main_pwr(
+        double _main_pwr)
 {
-    m_mainPow = _mainPow;
+    m_main_pwr = _main_pwr;
 }
 
 /*!
- * @brief This function returns the value of member mainPow
- * @return Value of member mainPow
+ * @brief This function returns the value of member main_pwr
+ * @return Value of member main_pwr
  */
-float DataPsu::mainPow() const
+double DataPsu::main_pwr() const
 {
-    return m_mainPow;
+    return m_main_pwr;
 }
 
 /*!
- * @brief This function returns a reference to member mainPow
- * @return Reference to member mainPow
+ * @brief This function returns a reference to member main_pwr
+ * @return Reference to member main_pwr
  */
-float& DataPsu::mainPow()
+double& DataPsu::main_pwr()
 {
-    return m_mainPow;
+    return m_main_pwr;
 }
 
 /*!
- * @brief This function sets a value in member pwrVolt
- * @param _pwrVolt New value for member pwrVolt
+ * @brief This function sets a value in member pwr_volt
+ * @param _pwr_volt New value for member pwr_volt
  */
-void DataPsu::pwrVolt(
-        float _pwrVolt)
+void DataPsu::pwr_volt(
+        double _pwr_volt)
 {
-    m_pwrVolt = _pwrVolt;
+    m_pwr_volt = _pwr_volt;
 }
 
 /*!
- * @brief This function returns the value of member pwrVolt
- * @return Value of member pwrVolt
+ * @brief This function returns the value of member pwr_volt
+ * @return Value of member pwr_volt
  */
-float DataPsu::pwrVolt() const
+double DataPsu::pwr_volt() const
 {
-    return m_pwrVolt;
+    return m_pwr_volt;
 }
 
 /*!
- * @brief This function returns a reference to member pwrVolt
- * @return Reference to member pwrVolt
+ * @brief This function returns a reference to member pwr_volt
+ * @return Reference to member pwr_volt
  */
-float& DataPsu::pwrVolt()
+double& DataPsu::pwr_volt()
 {
-    return m_pwrVolt;
+    return m_pwr_volt;
 }
 
 /*!
- * @brief This function sets a value in member pwrCurr
- * @param _pwrCurr New value for member pwrCurr
+ * @brief This function sets a value in member pwr_curr
+ * @param _pwr_curr New value for member pwr_curr
  */
-void DataPsu::pwrCurr(
-        float _pwrCurr)
+void DataPsu::pwr_curr(
+        double _pwr_curr)
 {
-    m_pwrCurr = _pwrCurr;
+    m_pwr_curr = _pwr_curr;
 }
 
 /*!
- * @brief This function returns the value of member pwrCurr
- * @return Value of member pwrCurr
+ * @brief This function returns the value of member pwr_curr
+ * @return Value of member pwr_curr
  */
-float DataPsu::pwrCurr() const
+double DataPsu::pwr_curr() const
 {
-    return m_pwrCurr;
+    return m_pwr_curr;
 }
 
 /*!
- * @brief This function returns a reference to member pwrCurr
- * @return Reference to member pwrCurr
+ * @brief This function returns a reference to member pwr_curr
+ * @return Reference to member pwr_curr
  */
-float& DataPsu::pwrCurr()
+double& DataPsu::pwr_curr()
 {
-    return m_pwrCurr;
+    return m_pwr_curr;
 }
 
 /*!
- * @brief This function sets a value in member pwrPow
- * @param _pwrPow New value for member pwrPow
+ * @brief This function sets a value in member pwr_pwr
+ * @param _pwr_pwr New value for member pwr_pwr
  */
-void DataPsu::pwrPow(
-        float _pwrPow)
+void DataPsu::pwr_pwr(
+        double _pwr_pwr)
 {
-    m_pwrPow = _pwrPow;
+    m_pwr_pwr = _pwr_pwr;
 }
 
 /*!
- * @brief This function returns the value of member pwrPow
- * @return Value of member pwrPow
+ * @brief This function returns the value of member pwr_pwr
+ * @return Value of member pwr_pwr
  */
-float DataPsu::pwrPow() const
+double DataPsu::pwr_pwr() const
 {
-    return m_pwrPow;
+    return m_pwr_pwr;
 }
 
 /*!
- * @brief This function returns a reference to member pwrPow
- * @return Reference to member pwrPow
+ * @brief This function returns a reference to member pwr_pwr
+ * @return Reference to member pwr_pwr
  */
-float& DataPsu::pwrPow()
+double& DataPsu::pwr_pwr()
 {
-    return m_pwrPow;
+    return m_pwr_pwr;
 }
 
 /*!
- * @brief This function sets a value in member sysVolt
- * @param _sysVolt New value for member sysVolt
+ * @brief This function sets a value in member sys_volt
+ * @param _sys_volt New value for member sys_volt
  */
-void DataPsu::sysVolt(
-        float _sysVolt)
+void DataPsu::sys_volt(
+        double _sys_volt)
 {
-    m_sysVolt = _sysVolt;
+    m_sys_volt = _sys_volt;
 }
 
 /*!
- * @brief This function returns the value of member sysVolt
- * @return Value of member sysVolt
+ * @brief This function returns the value of member sys_volt
+ * @return Value of member sys_volt
  */
-float DataPsu::sysVolt() const
+double DataPsu::sys_volt() const
 {
-    return m_sysVolt;
+    return m_sys_volt;
 }
 
 /*!
- * @brief This function returns a reference to member sysVolt
- * @return Reference to member sysVolt
+ * @brief This function returns a reference to member sys_volt
+ * @return Reference to member sys_volt
  */
-float& DataPsu::sysVolt()
+double& DataPsu::sys_volt()
 {
-    return m_sysVolt;
+    return m_sys_volt;
 }
 
 /*!
- * @brief This function sets a value in member sysCurr
- * @param _sysCurr New value for member sysCurr
+ * @brief This function sets a value in member sys_curr
+ * @param _sys_curr New value for member sys_curr
  */
-void DataPsu::sysCurr(
-        float _sysCurr)
+void DataPsu::sys_curr(
+        double _sys_curr)
 {
-    m_sysCurr = _sysCurr;
+    m_sys_curr = _sys_curr;
 }
 
 /*!
- * @brief This function returns the value of member sysCurr
- * @return Value of member sysCurr
+ * @brief This function returns the value of member sys_curr
+ * @return Value of member sys_curr
  */
-float DataPsu::sysCurr() const
+double DataPsu::sys_curr() const
 {
-    return m_sysCurr;
+    return m_sys_curr;
 }
 
 /*!
- * @brief This function returns a reference to member sysCurr
- * @return Reference to member sysCurr
+ * @brief This function returns a reference to member sys_curr
+ * @return Reference to member sys_curr
  */
-float& DataPsu::sysCurr()
+double& DataPsu::sys_curr()
 {
-    return m_sysCurr;
+    return m_sys_curr;
 }
 
 /*!
- * @brief This function sets a value in member sysPow
- * @param _sysPow New value for member sysPow
+ * @brief This function sets a value in member sys_pwr
+ * @param _sys_pwr New value for member sys_pwr
  */
-void DataPsu::sysPow(
-        float _sysPow)
+void DataPsu::sys_pwr(
+        double _sys_pwr)
 {
-    m_sysPow = _sysPow;
+    m_sys_pwr = _sys_pwr;
 }
 
 /*!
- * @brief This function returns the value of member sysPow
- * @return Value of member sysPow
+ * @brief This function returns the value of member sys_pwr
+ * @return Value of member sys_pwr
  */
-float DataPsu::sysPow() const
+double DataPsu::sys_pwr() const
 {
-    return m_sysPow;
+    return m_sys_pwr;
 }
 
 /*!
- * @brief This function returns a reference to member sysPow
- * @return Reference to member sysPow
+ * @brief This function returns a reference to member sys_pwr
+ * @return Reference to member sys_pwr
  */
-float& DataPsu::sysPow()
+double& DataPsu::sys_pwr()
 {
-    return m_sysPow;
+    return m_sys_pwr;
 }
 
 /*!

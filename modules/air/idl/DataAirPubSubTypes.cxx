@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataAirPubSubType::DataAirPubSubType()
 {
     setName("DataAir");
-    m_typeSize = static_cast<uint32_t>(DataAir::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataAir::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataAir::isKeyDefined();
     size_t keyLength = DataAir::getKeyMaxCdrSerializedSize() > 16 ?
             DataAir::getKeyMaxCdrSerializedSize() : 16;

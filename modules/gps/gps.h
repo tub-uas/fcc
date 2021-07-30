@@ -74,7 +74,7 @@ private:
 
 	GpsCom  gpsCom;
 	Timer   timer;
-
+	bool _publish_now{false};
 };
 
 #endif // GPS_H

@@ -10,7 +10,7 @@
  * ============================================================================
  */
 
-#include "height.hpp"
+#include "height.h"
 #include <math.h>
 
 
@@ -24,7 +24,7 @@ Height::~Height()
 
 }
 
-void Height::init(double height, double var_height, double acc, double var_acc)
+void Height::init(double height, double var_height, double var_acc)
 {
 	_state_last[0] = height;
 	_state_last[1] = 0.0f;
@@ -50,10 +50,10 @@ void Height::reset()
 	_var_acc = 1.0f;
 }
 
-void Height::reinit(double height, double var_height, double acc, double var_acc)
+void Height::reinit(double height, double var_height, double var_acc)
 {
 	reset();
-	init(height,var_height,acc,var_acc);
+	init(height,var_height,var_acc);
 }
 
 double Height::get_height()

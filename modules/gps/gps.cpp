@@ -104,21 +104,23 @@ void Gps::publish() {
 		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
 		dataGps.time(timer.getSysTime());
 
-		if (timer.getSysTime() < aliveTime + aliveReset
-		    && gpsCom.valid) {
+		if (timer.getSysTime() < aliveTime + aliveReset) {
 			dataGps.alive(true);
 		} else {
 			dataGps.alive(false);
+			std::cerr << "GPS NOT ALIVE" << std::endl;
 		}
-
-		writerGps->write(&dataGps);
+		if(_publish_now) {
+			writerGps->write(&dataGps);
+			_publish_now = false;
+		}
 		dataGpsLock.unlock();
 
 		// print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 
 }
@@ -132,18 +134,18 @@ void Gps::run() {
 			std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
 
 			dataGps.senseTime(gpsCom.time);
-			dataGps.lat(gpsCom.latitude);
-			dataGps.lon(gpsCom.longitude);
-			dataGps.alt(gpsCom.altitude);
-			dataGps.cog(gpsCom.cog);
-			dataGps.speed(gpsCom.speed);
-			dataGps.dopP(gpsCom.dop_p);
-			dataGps.dopH(gpsCom.dop_h);
-			dataGps.dopV(gpsCom.dop_v);
+			dataGps.latitude(gpsCom.latitude);
+			dataGps.longitude(gpsCom.longitude);
+			dataGps.alt_msl(gpsCom.altitude);
+			dataGps.course_over_ground(gpsCom.cog);
+			dataGps.groundspeed(gpsCom.speed);
+			dataGps.dop_position(gpsCom.dop_p);
+			dataGps.dop_horizontal(gpsCom.dop_h);
+			dataGps.dop_velocity(gpsCom.dop_v);
 			dataGps.sats(gpsCom.sats_in_use);
-			dataGps.satsInView(gpsCom.sats_in_view);
+			dataGps.sats_in_view(gpsCom.sats_in_view);
 			dataGps.fix(gpsCom.fix);
-			dataGps.fixMode(gpsCom.fix_mode);
+			dataGps.fix_mode(gpsCom.fix_mode);
 			dataGps.second(gpsCom.second);
 			dataGps.minute(gpsCom.minute);
 			dataGps.hour(gpsCom.hour);
@@ -157,15 +159,15 @@ void Gps::run() {
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
-
+			_publish_now = true;
 			dataGpsLock.unlock();
 
-			// gpsCom.print();
+			// print();
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(10);
 
 	}
 
@@ -177,19 +179,19 @@ void Gps::print() {
 
 	std::cout << "senseTime  " << dataGps.senseTime() << std::endl;
 	std::cout << std::setprecision(10) << std::fixed;
-	std::cout << "lat        " << dataGps.lat() << std::endl;
-	std::cout << "lon        " << dataGps.lon() << std::endl;
+	std::cout << "lat        " << dataGps.latitude() << std::endl;
+	std::cout << "lon        " << dataGps.longitude() << std::endl;
 	std::cout << std::setprecision(4) << std::fixed;
-	std::cout << "alt        " << dataGps.alt() << std::endl;
-	std::cout << "cog        " << dataGps.cog() << std::endl;
-	std::cout << "speed      " << dataGps.speed() << std::endl;
-	std::cout << "dopP       " << dataGps.dopP() << std::endl;
-	std::cout << "dopH       " << dataGps.dopH() << std::endl;
-	std::cout << "dopV       " << dataGps.dopV() << std::endl;
+	std::cout << "alt        " << dataGps.alt_msl() << std::endl;
+	std::cout << "cog        " << dataGps.course_over_ground() << std::endl;
+	std::cout << "speed      " << dataGps.groundspeed() << std::endl;
+	std::cout << "dopP       " << dataGps.dop_position() << std::endl;
+	std::cout << "dopH       " << dataGps.dop_horizontal() << std::endl;
+	std::cout << "dopV       " << dataGps.dop_velocity() << std::endl;
 	std::cout << "sats       " << dataGps.sats() << std::endl;
-	std::cout << "satsInView " << dataGps.satsInView() << std::endl;
+	std::cout << "satsInView " << dataGps.sats_in_view() << std::endl;
 	std::cout << "fix        " << dataGps.fix() << std::endl;
-	std::cout << "fixMode    " << dataGps.fixMode() << std::endl;
+	std::cout << "fixMode    " << dataGps.fix_mode() << std::endl;
 	std::cout << "second     " << dataGps.second() << std::endl;
 	std::cout << "minute     " << dataGps.minute() << std::endl;
 	std::cout << "hour       " << dataGps.hour() << std::endl;

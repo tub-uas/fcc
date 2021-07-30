@@ -127,6 +127,25 @@ public:
     eProsima_user_DllExport uint64_t& time();
 
     /*!
+     * @brief This function sets a value in member senseTime
+     * @param _senseTime New value for member senseTime
+     */
+    eProsima_user_DllExport void senseTime(
+            double _senseTime);
+
+    /*!
+     * @brief This function returns the value of member senseTime
+     * @return Value of member senseTime
+     */
+    eProsima_user_DllExport double senseTime() const;
+
+    /*!
+     * @brief This function returns a reference to member senseTime
+     * @return Reference to member senseTime
+     */
+    eProsima_user_DllExport double& senseTime();
+
+    /*!
      * @brief This function copies the value in member chnl
      * @param _chnl New value to be copied in member chnl
      */
@@ -152,118 +171,137 @@ public:
      */
     eProsima_user_DllExport std::array<uint16_t, 12>& chnl();
     /*!
-     * @brief This function sets a value in member roll
-     * @param _roll New value for member roll
+     * @brief This function sets a value in member xi_setpoint
+     * @param _xi_setpoint New value for member xi_setpoint
      */
-    eProsima_user_DllExport void roll(
-            float _roll);
+    eProsima_user_DllExport void xi_setpoint(
+            double _xi_setpoint);
 
     /*!
-     * @brief This function returns the value of member roll
-     * @return Value of member roll
+     * @brief This function returns the value of member xi_setpoint
+     * @return Value of member xi_setpoint
      */
-    eProsima_user_DllExport float roll() const;
+    eProsima_user_DllExport double xi_setpoint() const;
 
     /*!
-     * @brief This function returns a reference to member roll
-     * @return Reference to member roll
+     * @brief This function returns a reference to member xi_setpoint
+     * @return Reference to member xi_setpoint
      */
-    eProsima_user_DllExport float& roll();
+    eProsima_user_DllExport double& xi_setpoint();
 
     /*!
-     * @brief This function sets a value in member pitch
-     * @param _pitch New value for member pitch
+     * @brief This function sets a value in member eta_setpoint
+     * @param _eta_setpoint New value for member eta_setpoint
      */
-    eProsima_user_DllExport void pitch(
-            float _pitch);
+    eProsima_user_DllExport void eta_setpoint(
+            double _eta_setpoint);
 
     /*!
-     * @brief This function returns the value of member pitch
-     * @return Value of member pitch
+     * @brief This function returns the value of member eta_setpoint
+     * @return Value of member eta_setpoint
      */
-    eProsima_user_DllExport float pitch() const;
+    eProsima_user_DllExport double eta_setpoint() const;
 
     /*!
-     * @brief This function returns a reference to member pitch
-     * @return Reference to member pitch
+     * @brief This function returns a reference to member eta_setpoint
+     * @return Reference to member eta_setpoint
      */
-    eProsima_user_DllExport float& pitch();
+    eProsima_user_DllExport double& eta_setpoint();
 
     /*!
-     * @brief This function sets a value in member yaw
-     * @param _yaw New value for member yaw
+     * @brief This function sets a value in member zeta_setpoint
+     * @param _zeta_setpoint New value for member zeta_setpoint
      */
-    eProsima_user_DllExport void yaw(
-            float _yaw);
+    eProsima_user_DllExport void zeta_setpoint(
+            double _zeta_setpoint);
 
     /*!
-     * @brief This function returns the value of member yaw
-     * @return Value of member yaw
+     * @brief This function returns the value of member zeta_setpoint
+     * @return Value of member zeta_setpoint
      */
-    eProsima_user_DllExport float yaw() const;
+    eProsima_user_DllExport double zeta_setpoint() const;
 
     /*!
-     * @brief This function returns a reference to member yaw
-     * @return Reference to member yaw
+     * @brief This function returns a reference to member zeta_setpoint
+     * @return Reference to member zeta_setpoint
      */
-    eProsima_user_DllExport float& yaw();
+    eProsima_user_DllExport double& zeta_setpoint();
 
     /*!
-     * @brief This function sets a value in member thr
-     * @param _thr New value for member thr
+     * @brief This function sets a value in member throttle_setpoint
+     * @param _throttle_setpoint New value for member throttle_setpoint
      */
-    eProsima_user_DllExport void thr(
-            float _thr);
+    eProsima_user_DllExport void throttle_setpoint(
+            double _throttle_setpoint);
 
     /*!
-     * @brief This function returns the value of member thr
-     * @return Value of member thr
+     * @brief This function returns the value of member throttle_setpoint
+     * @return Value of member throttle_setpoint
      */
-    eProsima_user_DllExport float thr() const;
+    eProsima_user_DllExport double throttle_setpoint() const;
 
     /*!
-     * @brief This function returns a reference to member thr
-     * @return Reference to member thr
+     * @brief This function returns a reference to member throttle_setpoint
+     * @return Reference to member throttle_setpoint
      */
-    eProsima_user_DllExport float& thr();
+    eProsima_user_DllExport double& throttle_setpoint();
 
     /*!
-     * @brief This function sets a value in member fltMode
-     * @param _fltMode New value for member fltMode
+     * @brief This function sets a value in member flaps_setpoint
+     * @param _flaps_setpoint New value for member flaps_setpoint
      */
-    eProsima_user_DllExport void fltMode(
-            uint16_t _fltMode);
+    eProsima_user_DllExport void flaps_setpoint(
+            double _flaps_setpoint);
 
     /*!
-     * @brief This function returns the value of member fltMode
-     * @return Value of member fltMode
+     * @brief This function returns the value of member flaps_setpoint
+     * @return Value of member flaps_setpoint
      */
-    eProsima_user_DllExport uint16_t fltMode() const;
+    eProsima_user_DllExport double flaps_setpoint() const;
 
     /*!
-     * @brief This function returns a reference to member fltMode
-     * @return Reference to member fltMode
+     * @brief This function returns a reference to member flaps_setpoint
+     * @return Reference to member flaps_setpoint
      */
-    eProsima_user_DllExport uint16_t& fltMode();
+    eProsima_user_DllExport double& flaps_setpoint();
 
     /*!
-     * @brief This function sets a value in member fltFunc
-     * @param _fltFunc New value for member fltFunc
+     * @brief This function sets a value in member flight_mode
+     * @param _flight_mode New value for member flight_mode
      */
-    eProsima_user_DllExport void fltFunc(
-            uint16_t _fltFunc);
+    eProsima_user_DllExport void flight_mode(
+            uint16_t _flight_mode);
 
     /*!
-     * @brief This function returns the value of member fltFunc
-     * @return Value of member fltFunc
+     * @brief This function returns the value of member flight_mode
+     * @return Value of member flight_mode
      */
-    eProsima_user_DllExport uint16_t fltFunc() const;
+    eProsima_user_DllExport uint16_t flight_mode() const;
 
     /*!
-     * @brief This function returns a reference to member fltFunc
-     * @return Reference to member fltFunc
+     * @brief This function returns a reference to member flight_mode
+     * @return Reference to member flight_mode
      */
-    eProsima_user_DllExport uint16_t& fltFunc();
+    eProsima_user_DllExport uint16_t& flight_mode();
+
+    /*!
+     * @brief This function sets a value in member flight_fct
+     * @param _flight_fct New value for member flight_fct
+     */
+    eProsima_user_DllExport void flight_fct(
+            uint16_t _flight_fct);
+
+    /*!
+     * @brief This function returns the value of member flight_fct
+     * @return Value of member flight_fct
+     */
+    eProsima_user_DllExport uint16_t flight_fct() const;
+
+    /*!
+     * @brief This function returns a reference to member flight_fct
+     * @return Reference to member flight_fct
+     */
+    eProsima_user_DllExport uint16_t& flight_fct();
 
     /*!
      * @brief This function sets a value in member alive
@@ -345,13 +383,15 @@ public:
 private:
 
     uint64_t m_time;
+    double m_senseTime;
     std::array<uint16_t, 12> m_chnl;
-    float m_roll;
-    float m_pitch;
-    float m_yaw;
-    float m_thr;
-    uint16_t m_fltMode;
-    uint16_t m_fltFunc;
+    double m_xi_setpoint;
+    double m_eta_setpoint;
+    double m_zeta_setpoint;
+    double m_throttle_setpoint;
+    double m_flaps_setpoint;
+    uint16_t m_flight_mode;
+    uint16_t m_flight_fct;
     bool m_alive;
 };
 

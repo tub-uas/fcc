@@ -59,6 +59,7 @@ public:
 	void publish();
 	void print();
 
+	
 	const unsigned long long aliveReset = 1e5;  // in us
 	std::atomic_ullong aliveTime;
 
@@ -78,6 +79,8 @@ private:
 	Mixer  mixer;
 	Timer  timer;
 
+	bool _publish_now{false};
+	
 };
 
 #endif // RAIIN_H

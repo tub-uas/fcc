@@ -75,6 +75,8 @@ public:
 	void publish();
 	void print();
 
+	bool update_ctrl_data();
+
 	const unsigned long long aliveReset = 1e5;  // in us
 	std::atomic_ullong aliveTime;
 
@@ -98,6 +100,27 @@ private:
 	RaiCom raiCom;
 	Mixer  mixer;
 	Timer  timer;
+
+	double _xi;
+	double _eta;
+	double _zeta;
+	double _throttle;
+	double _flaps;
+	double _roll;
+	double _pitch;
+	double _yaw;
+	double _tas;
+	double _hgt;
+	double _roll_rate;
+	double _pitch_rate;
+	double _yaw_rate;
+	double _tas_rate;
+	double _hgt_rate;
+	flight_mode_t _flight_mode;
+	flight_fct_t _flight_fct;
+	
+	bool _ctrl_alive{false};
+	bool _publish_now{false};
 
 };
 

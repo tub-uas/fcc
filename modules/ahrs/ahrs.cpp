@@ -108,16 +108,19 @@ void Ahrs::publish() {
 			dataAhrs.alive(true);
 		} else {
 			dataAhrs.alive(false);
+			std::cerr << "AHRS NOT ALIVE" << std::endl;
 		}
-
-		writerAhrs->write(&dataAhrs);
+		if(_publish_now) {
+			writerAhrs->write(&dataAhrs);
+			_publish_now = false;
+		}
 		dataAhrsLock.unlock();
 
 		// print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
 
 }
@@ -143,27 +146,23 @@ void Ahrs::run() {
 			dataAhrs.magX(ahrsCom.mag[0]);
 			dataAhrs.magY(ahrsCom.mag[1]);
 			dataAhrs.magZ(ahrsCom.mag[2]);
-			dataAhrs.temp(ahrsCom.temp);
-			dataAhrs.press(ahrsCom.press);
+			dataAhrs.temperature(ahrsCom.temp);
+			dataAhrs.barometric_pressure(ahrsCom.press);
 			dataAhrs.phi(ahrsCom.att[0]);
 			dataAhrs.the(ahrsCom.att[1]);
 			dataAhrs.psi(ahrsCom.att[2]);
-			dataAhrs.q0(-1.0);
-			dataAhrs.q1(-2.0);
-			dataAhrs.q2(-3.0);
-			dataAhrs.q3(-4.0);
 
 			// reset the alive timer
 			aliveTime = timer.getSysTime();
-
+			_publish_now = true;
 			dataAhrsLock.unlock();
 
-			// ahrsCom.print();
+			// print();
 		}
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
+		next_wakeup += std::chrono::milliseconds(10);
 
 	}
 
@@ -183,15 +182,11 @@ void Ahrs::print() {
 	std::cout << "magX      " << dataAhrs.magX() << std::endl;
 	std::cout << "magY      " << dataAhrs.magY() << std::endl;
 	std::cout << "magZ      " << dataAhrs.magZ() << std::endl;
-	std::cout << "temp      " << dataAhrs.temp() << std::endl;
-	std::cout << "press     " << dataAhrs.press() << std::endl;
+	std::cout << "temp      " << dataAhrs.temperature() << std::endl;
+	std::cout << "press     " << dataAhrs.barometric_pressure() << std::endl;
 	std::cout << "phi       " << dataAhrs.phi() << std::endl;
 	std::cout << "the       " << dataAhrs.the() << std::endl;
 	std::cout << "psi       " << dataAhrs.psi() << std::endl;
-	std::cout << "q0        " << dataAhrs.q0() << std::endl;
-	std::cout << "q1        " << dataAhrs.q1() << std::endl;
-	std::cout << "q2        " << dataAhrs.q2() << std::endl;
-	std::cout << "q3        " << dataAhrs.q3() << std::endl;
 	std::cout << "alive     " << dataAhrs.alive() << std::endl;
 
 }

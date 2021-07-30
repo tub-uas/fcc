@@ -1,10 +1,12 @@
 struct DataAir {
 	unsigned long long time;
-	float    senseTime;
-	float    dynamicPress;
-	float    velocity;
-	float    baroPress;
-	float    density;
-	float    temp;
+	double    senseTime;
+	double    dynamic_pressure;
+	double    true_airspeed;
+	double    indicated_airspeed;
+	double    barometric_pressure;
+	double    barometric_height;
+	double    density;
+	double    temperature;
 	boolean  alive;
 };

@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataAhrsPubSubType::DataAhrsPubSubType()
 {
     setName("DataAhrs");
-    m_typeSize = static_cast<uint32_t>(DataAhrs::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataAhrs::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataAhrs::isKeyDefined();
     size_t keyLength = DataAhrs::getKeyMaxCdrSerializedSize() > 16 ?
             DataAhrs::getKeyMaxCdrSerializedSize() : 16;

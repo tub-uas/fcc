@@ -44,22 +44,24 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
+	std::string topic = reader->get_topicdescription()->get_name();
 
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
-			if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
-				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
-				reader->take_next_sample(&dataCtrl, &info);
-				dataCtrlLock.unlock();
+	if(topic.compare("DataCtrl") == 0)
+	{
+
+		std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
+		if(reader->take_next_sample(&dataCtrl,&info) == ReturnCode_t::RETCODE_OK)
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data)
+			{
 				newDataCtrl = true;
-
-			} else {
-				reader->take_next_sample(&data, &info);
 			}
-		} else {
-			reader->take_next_sample(&data, &info);
 		}
+		dataCtrlLock.unlock();		
+	}
+	else
+	{
+		// DO NOTHING
 	}
 
 	// TODO why does this cause a segfault ?!?
@@ -169,7 +171,7 @@ bool RaiOut::init() {
 	if (raiCom.init() == false) {
 		return false;
 	}
-
+	mixer.init(1000,2000);
 	return true;
 }
 
@@ -185,21 +187,27 @@ void RaiOut::publish() {
 
 		if (timer.getSysTime() < aliveTime + aliveReset) {
 			dataRaiOut.alive(true);
-			raiCom.send(); // Send the commands to RAI over CAN
+			 // Send the commands to RAI over CAN
+			
 		} else {
 			dataRaiOut.alive(false);
+			std::cout << "RAI OUT NOT ALIVE" << std::endl;
 		}
 
-		writerRaiOut->write(&dataRaiOut);
+		if(_publish_now) {
+			writerRaiOut->write(&dataRaiOut);
+			raiCom.send();
+			_publish_now = false;
+		}
 		dataRaiOutLock.unlock();
 
 		// print();
 
-		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(10);
+		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(10);
+		next_wakeup += std::chrono::milliseconds(1);
 	}
-
+	
 }
 
 
@@ -209,57 +217,78 @@ void RaiOut::run() {
 
 		// std::cout << this->name << " run" << std::endl;
 
-		if (listener.newDataCtrl) {
-
-			std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
+		if(update_ctrl_data()) {
 			std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
 
-			// std::array<uint16_t, CAN_META_RAI_CHNL_NUM> fix =  {900, 1000, 1100, 1200, 1300, 1400,
-			//                                                    1500, 1600, 1700, 1800, 1900, 2000};
+			dataRaiOut.chnl(raiCom.channel);
+			dataRaiOut.xi_setpoint(_xi);
+			dataRaiOut.eta_setpoint(_eta);
+			dataRaiOut.zeta_setpoint(_zeta);
+			dataRaiOut.throttle_setpoint(_throttle);
+			dataRaiOut.flaps_setpoint(_flaps);
+			dataRaiOut.flight_mode((uint16_t)_flight_mode);
+			dataRaiOut.flight_fct((uint16_t)_flight_fct);
 
-			if (listener.dataCtrl.alive()) {
+			raiCom.time = timer.getSysTimeS();
+			raiCom.channel[0] = mixer.get_thr_pwm_setpoint(dataRaiOut.throttle_setpoint()/mixer.get_thr_max());
+			raiCom.channel[1] = mixer.get_ail_right_pwm_setpoint(dataRaiOut.xi_setpoint()/mixer.get_ail_max());
+			raiCom.channel[2] = mixer.get_ele_pwm_setpoint(dataRaiOut.eta_setpoint()/mixer.get_ele_max());
+			raiCom.channel[3] = mixer.get_rud_pwm_setpoint(dataRaiOut.zeta_setpoint()/mixer.get_rud_max());
+			raiCom.channel[4] = mixer.get_ail_left_pwm_setpoint(dataRaiOut.xi_setpoint()/mixer.get_ail_max());
+			raiCom.channel[5] = mixer.get_flight_fct_pwm((flight_fct_t)dataRaiOut.flight_fct());
+			raiCom.channel[6] = mixer.get_flight_mode_pwm((flight_mode_t)dataRaiOut.flight_mode());
+			raiCom.channel[7] = 1500;
+			raiCom.channel[8] = 1500;
+			raiCom.channel[9] = 1500;
+			raiCom.channel[10] = 1500;
+			raiCom.channel[11] = 1500;
 
-				dataRaiOut.chnl(raiCom.channel);
-				dataRaiOut.roll(listener.dataCtrl.xi());
-				dataRaiOut.pitch(listener.dataCtrl.eta());
-				dataRaiOut.yaw(listener.dataCtrl.zeta());
-				dataRaiOut.thr(listener.dataCtrl.etaT());
-				dataRaiOut.fltMode(listener.dataCtrl.fltMode());
-				dataRaiOut.fltFunc(listener.dataCtrl.fltFunc());
+			// reset the alive timer
+			aliveTime = timer.getSysTime();
 
-				raiCom.time = timer.getSysTimeS();
-				raiCom.channel[0] = mixer.rad2pwm(Mixer::THR, listener.dataCtrl.etaT());
-				raiCom.channel[1] = mixer.rad2pwm(Mixer::AILR, listener.dataCtrl.xi());
-				raiCom.channel[2] = mixer.rad2pwm(Mixer::ELE, listener.dataCtrl.eta());
-				raiCom.channel[3] = mixer.rad2pwm(Mixer::RUD, listener.dataCtrl.zeta());
-				raiCom.channel[4] = mixer.rad2pwm(Mixer::AILL, -listener.dataCtrl.xi());
-				raiCom.channel[5] = mixer.func2pwm((Mixer::Func)listener.dataCtrl.fltFunc());
-				raiCom.channel[6] = mixer.mode2pwm((Mixer::Mode)listener.dataCtrl.fltMode());
-				raiCom.channel[7] = 1500;
-				raiCom.channel[8] = 1500;
-				raiCom.channel[9] = 1500;
-				raiCom.channel[10] = 1500;
-				raiCom.channel[11] = 1500;
-
-				// reset the alive timer
-				aliveTime = timer.getSysTime();
-
-				// raiCom.print();
-
-			}
-
-			listener.newDataCtrl = false;
-
-			dataCtrlLock.unlock();
+			
 			dataRaiOutLock.unlock();
-		}
 
+		}
+		_publish_now = true;
 		static auto next_wakeup = std::chrono::steady_clock::now() + std::chrono::milliseconds(1);
 		std::this_thread::sleep_until(next_wakeup);
-		next_wakeup += std::chrono::milliseconds(1);
-
+		next_wakeup += std::chrono::milliseconds(10);
 	}
 
+}
+
+
+bool RaiOut::update_ctrl_data()
+{
+	if(listener.newDataCtrl)
+	{
+		std::unique_lock<std::mutex> dataCtrlLock {listener.dataCtrlMutex};
+		_xi = listener.dataCtrl.xi_setpoint();
+		_eta = listener.dataCtrl.eta_setpoint();
+		_zeta = listener.dataCtrl.zeta_setpoint();
+		_throttle = listener.dataCtrl.throttle_setpoint();
+		_flaps = listener.dataCtrl.flaps_setpoint();
+		_roll = listener.dataCtrl.roll_setpoint();
+		_pitch = listener.dataCtrl.pitch_setpoint();
+		_yaw = listener.dataCtrl.yaw_setpoint();
+		_hgt = listener.dataCtrl.hgt_setpoint();
+		_tas = listener.dataCtrl.tas_setpoint();
+		_roll_rate = listener.dataCtrl.roll_rate_setpoint();
+		_pitch_rate = listener.dataCtrl.pitch_rate_setpoint();
+		_yaw_rate = listener.dataCtrl.yaw_rate_setpoint();
+		_hgt_rate = listener.dataCtrl.hgt_rate_setpoint();
+		_tas_rate = listener.dataCtrl.tas_rate_setpoint();
+
+		_flight_mode = (flight_mode_t)listener.dataCtrl.flight_mode();
+		_flight_fct = (flight_fct_t)listener.dataCtrl.flight_fct();
+
+		_ctrl_alive = listener.dataCtrl.alive();
+
+		listener.newDataCtrl = false;
+		return true;
+	}
+	return false;
 }
 
 void RaiOut::print() {
@@ -270,11 +299,13 @@ void RaiOut::print() {
 		std::cout << "chnl[" << i << "]" << " " << dataRaiOut.chnl().at(i) << std::endl;
 	}
 
-	std::cout << "roll      " << dataRaiOut.roll() << std::endl;
-	std::cout << "pitch     " << dataRaiOut.pitch() << std::endl;
-	std::cout << "yaw       " << dataRaiOut.yaw() << std::endl;
-	std::cout << "thr       " << dataRaiOut.thr() << std::endl;
-	std::cout << "fltMode   " << dataRaiOut.fltMode() << std::endl;
-	std::cout << "alive     " << dataRaiOut.alive() << std::endl;
+	std::cout << "xi_sp       " << dataRaiOut.xi_setpoint() << std::endl;
+	std::cout << "eta_sp      " << dataRaiOut.eta_setpoint() << std::endl;
+	std::cout << "zeta_sp     " << dataRaiOut.zeta_setpoint() << std::endl;
+	std::cout << "throttle_sp " << dataRaiOut.throttle_setpoint() << std::endl;
+	std::cout << "flaps_sp    " << dataRaiOut.flaps_setpoint() << std::endl;
+	std::cout << "flight_mode " << dataRaiOut.flight_mode() << std::endl;
+	std::cout << "flight_fct  " << dataRaiOut.flight_fct() << std::endl;
+	std::cout << "alive       " << dataRaiOut.alive() << std::endl;
 
 }

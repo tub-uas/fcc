@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataCtrlPubSubType::DataCtrlPubSubType()
 {
     setName("DataCtrl");
-    m_typeSize = static_cast<uint32_t>(DataCtrl::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataCtrl::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataCtrl::isKeyDefined();
     size_t keyLength = DataCtrl::getKeyMaxCdrSerializedSize() > 16 ?
             DataCtrl::getKeyMaxCdrSerializedSize() : 16;

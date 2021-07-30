@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataSFusionPubSubType::DataSFusionPubSubType()
 {
     setName("DataSFusion");
-    m_typeSize = static_cast<uint32_t>(DataSFusion::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataSFusion::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataSFusion::isKeyDefined();
     size_t keyLength = DataSFusion::getKeyMaxCdrSerializedSize() > 16 ?
             DataSFusion::getKeyMaxCdrSerializedSize() : 16;

@@ -1,196 +1,268 @@
+/****************************************************************************
+ * 
+ * Author: Christopher Ruwisch
+ * Date  : 15/07/2021 
+ * 
+ * 
+ * File  : Mixer.cpp
+ * 
+ *
+ ****************************************************************************/
+
+
 #include "mixer.h"
 
-#include <iostream>
 
-Mixer::Mixer() {
 
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::init(uint16_t min_pwm, uint16_t max_pwm)
+{
+	_min_pwm = min_pwm;
+	_max_pwm = max_pwm;
 }
 
-Mixer::Mixer(float ail_max_cmd, float ele_max_cmd, float rud_max_cmd) {
-	this->ail_max_cmd = ail_max_cmd;
-	this->ele_max_cmd = ele_max_cmd;
-	this->rud_max_cmd = rud_max_cmd;
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_flight_mode(uint16_t mode_pwm) 
+{
+	// GET RANGE FROM PWM 0 1 2 by scaling Motor
+	double modelevel = 2.0*_get_normalized_pwm(mode_pwm,MOTOR);
+	if(modelevel < 0.5f) {
+		_flight_mode = AUTONOMOUS;
+	}
+	else if(modelevel > 1.5f) {
+		_flight_mode = EXPERIMENTAL;
+	}
+	else {
+		_flight_mode = MANUAL;
+	}
 }
 
-Mixer::~Mixer() {
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+uint16_t Mixer::get_flight_mode_pwm(flight_mode_t mode) 
+{
+	uint16_t pwm_val_mode = 1500;
+	switch(mode)
+	{
+		case MANUAL:
+			pwm_val_mode = 1500;
+			break;
+		
+		case AUTONOMOUS:
+			pwm_val_mode = 1000;
+			break;
+		
+		case EXPERIMENTAL:
+			pwm_val_mode = 2000;
+			break;
+	}
+	return pwm_val_mode;
+}		
 
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_flight_fct(uint16_t fct_pwm)
+{
+	// GET RANGE FROM PWM 0 1 2 by scaling Motor
+	double fctlevel = 2.0*_get_normalized_pwm(fct_pwm,MOTOR);
+	if( fctlevel < 0.5f ) {
+		_flight_fct = FCT_0;
+	}
+	else if( fctlevel > 1.5f ) {
+		_flight_fct = FCT_2;
+	}
+	else {
+		_flight_fct = FCT_1;
+	}
 }
 
-float Mixer::pwm2rad(enum Surface surf, uint16_t pwm, enum Mode mode) {
+uint16_t Mixer::get_flight_fct_pwm(flight_fct_t fct) 
+{
+	uint16_t pwm_val_fct = 1500;
+	switch(fct)
+	{
+		case FCT_0:
+			pwm_val_fct = 1000;
+			break;
+		
+		case FCT_1:
+			pwm_val_fct = 1500;
+			break;
+		
+		case FCT_2:
+			pwm_val_fct = 2000;
+			break;
+	}
+	return pwm_val_fct;
+}		
 
-	if (pwm > 2200 || pwm < 800) {
-		std::cout << "Mixer pwm2rad error, pwm out of bounds " << pwm << std::endl;
-		return -69.0;
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_thr_setpoint(uint16_t thr_pwm)
+{
+	_thr_setpoint = _get_normalized_pwm(thr_pwm, MOTOR); 
+}
+
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_ail_left_setpoint(uint16_t ail_left_pwm)
+{
+	_ail_left_setpoint = _get_normalized_pwm(ail_left_pwm, SURFACE);
+}
+
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_ail_right_setpoint(uint16_t ail_right_pwm)
+{
+	_ail_right_setpoint = _get_normalized_pwm(ail_right_pwm, SURFACE);
+	_ail_setpoint = _ail_right_setpoint;
+}
+
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_ele_setpoint(uint16_t ele_pwm)
+{
+	_ele_setpoint = _get_normalized_pwm(ele_pwm, SURFACE);
+}
+
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_rud_setpoint(uint16_t rud_pwm)
+{
+	_rud_setpoint = _get_normalized_pwm(rud_pwm, SURFACE);
+}
+
+/**
+ * [Mixer description]
+ *
+ * @return  void    [return description]
+ */
+void Mixer::set_flp_setpoint(uint16_t flp_pwm)
+{
+	_flp_setpoint = _get_normalized_pwm(flp_pwm, MOTOR);
+}
+
+/**
+ * [Mixer description]
+ *
+ * @return  double  [return description]
+ */
+double Mixer::get_hgt_setpoint()
+{
+	// SANITY CHECK
+	if(_hgt_max < _hgt_default) {
+		_hgt_max = _hgt_default;
+	}
+	
+	if(_hgt_min > _hgt_default) {
+		_hgt_min = _hgt_default;
 	}
 
-	switch (mode) {
-		case MAN:
-			switch (surf) {
-				case THR:
-					return ((pwm - 1000.0) / 1000.0) * THR_MAX;
+	if(_ele_setpoint > _hgt_deadband) {
+		return (_hgt_max-_hgt_default)*_ele_setpoint + _hgt_default;
+	}
+	else if(_ele_setpoint < -_hgt_deadband) {
+		return (_hgt_default-_hgt_min)*_ele_setpoint + _hgt_default;
+	}
+	else {
+		return _hgt_default;
+	}
+}
 
-				case AILR:
-					return ((pwm - 1500.0) / 500.0) * -AIL_MAX;
-
-				case AILL:
-					return ((pwm - 1500.0) / 500.0) * AIL_MAX;
-
-				case ELE:
-					return ((pwm - 1500.0) / 500.0) * -ELE_MAX;
-
-				case RUD:
-					return ((pwm - 1500.0) / 500.0) * RUD_MAX;
-
-				case FLP:
-					// TODO not yet implemented
-
-				default:
-					std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
-					break;
-			}
+/**
+ * [Mixer description]
+ *
+ * @return  double  [return description]
+ */
+double Mixer::_get_normalized_pwm(uint16_t pwm, controltype_t type)
+{
+	uint16_t constrained_pwm = 0.0;
+	double output = 0.0;
+	switch(type) {
+		case SURFACE:
+				constrained_pwm = _limit_pwm(pwm);
+				output = -2.0/(_min_pwm-_max_pwm)*constrained_pwm + (double)(_min_pwm+_max_pwm)/((double)(_min_pwm-_max_pwm));
+			break;
+		
+		case MOTOR:
+				constrained_pwm = _limit_pwm(pwm);
+				output = -1.0/(_min_pwm-_max_pwm)*constrained_pwm + (_min_pwm)/((double)(_min_pwm-_max_pwm));
 			break;
 
-		case ATT:
-		case NAV:
-			switch (surf) {
-				case THR:
-					return ((pwm - 1000.0) / 1000.0) * THR_MAX;
-
-				case AILR:
-					return ((pwm - 1500.0) / 500.0) * -ail_max_cmd;
-
-				case AILL:
-					return ((pwm - 1500.0) / 500.0) * ail_max_cmd;
-
-				case ELE:
-					return ((pwm - 1500.0) / 500.0) * -ele_max_cmd;
-
-				case RUD:
-					return ((pwm - 1500.0) / 500.0) * rud_max_cmd;
-
-				case FLP:
-					// TODO not yet implemented
-
-				default:
-					std::cout << "Mixer pwm2rad error, unkown surface" << std::endl;
-					break;
-			}
-			break;
-
-		case INV:
 		default:
-			std::cout << "Mixer pwm2rad error, unkown mode" << std::endl;
+			output = 0.0;
+	}
+	return output;
+}
+
+/**
+ * [Mixer description]
+ *
+ * @param   double    type  [type description]
+ *
+ * @return  uint16_t        [return description]
+ */
+uint16_t Mixer::_get_pwm_from_normalized(double norm, controltype_t type)
+{
+
+	uint16_t output = 0;
+	switch(type) {
+		case SURFACE:
+			output = (_max_pwm-_min_pwm)/2*norm + (_min_pwm+_max_pwm)/2;
+			output = _limit_pwm(output);
+			break;
+		
+		case MOTOR:
+			output = (_max_pwm-_min_pwm)*norm + _min_pwm;
+			output = _limit_pwm(output);
 			break;
 	}
-
-	return -69.0;
+	return output;
 }
 
-uint16_t Mixer::rad2pwm(enum Surface surf, float angle) {
-
-	uint16_t pwm = 0;
-
-	switch (surf) {
-		case THR:
-			return (uint16_t)(((angle / THR_MAX) * 1000.0) + 1000.0);
-
-		case AILR:
-			return (uint16_t)(((angle / -AIL_MAX) * 500.0) + 1500.0);
-
-		case AILL:
-			return (uint16_t)(((angle / AIL_MAX) * 500.0) + 1500.0);
-
-		case ELE:
-			return (uint16_t)(((angle / -ELE_MAX) * 500.0) + 1500.0);
-
-		case RUD:
-			return (uint16_t)(((angle / RUD_MAX) * 500.0) + 1500.0);
-
-		case FLP:
-			// TODO not yet implemented
-
-		default:
-			std::cout << "Mixer rad2pwm error, unkown surface" << std::endl;
-			break;
+/**
+ * [Mixer description]
+ *
+ * @return  uint16_t[return description]
+ */
+uint16_t Mixer::_limit_pwm(uint16_t pwm)
+{
+	if(pwm < _min_pwm) {
+		return _min_pwm;
 	}
-
-	if (pwm > 2200 || pwm < 800) {
-		std::cout << "Mixer rad2pwm error, pwm out of bounds " << pwm << std::endl;
-		return 0;
+	else if(pwm > _max_pwm) {
+		return _max_pwm;
 	}
-
-	return pwm;
-}
-
-enum Mixer::Mode Mixer::pwm2mode(uint16_t pwm) {
-
-	if (pwm > 800 && pwm < 1250) {
-		return NAV;
-
-	} else if (pwm >= 1250 && pwm <= 1750) {
-		return ATT;
-
-	} else if (pwm > 1750 && pwm < 2200) {
-		return MAN;
+	else {
+		return pwm;
 	}
-
-	std::cout << "Mixer pwm2mode error, pwm out of bounds " << pwm << std::endl;
-	return INV;
-}
-
-uint16_t Mixer::mode2pwm(enum Mode mode) {
-
-	switch (mode) {
-		case NAV:
-			return 1100;
-
-		case ATT:
-			return 1500;
-
-		case MAN:
-			return 1900;
-
-		case INV:
-		default:
-			std::cout << "Mixer mode2pwm error, unkown mode" << std::endl;
-			break;
-	}
-
-	return 0;
-}
-
-enum Mixer::Func Mixer::pwm2func(uint16_t pwm) {
-
-	if (pwm > 800 && pwm < 1250) {
-		return FUNC1;
-
-	} else if (pwm >= 1250 && pwm <= 1750) {
-		return FUNC2;
-
-	} else if (pwm > 1750 && pwm < 2200) {
-		return FUNC3;
-	}
-
-	std::cout << "Mixer pwm2func error, pwm out of bounds " << pwm << std::endl;
-	return FUNC1;
-}
-
-uint16_t Mixer::func2pwm(enum Func func) {
-
-	switch (func) {
-		case FUNC1:
-			return 1100;
-
-		case FUNC2:
-			return 1500;
-
-		case FUNC3:
-			return 1900;
-
-		default:
-			std::cout << "Mixer func2pwm error, unkown func" << std::endl;
-			break;
-	}
-
-	return 0;
 }

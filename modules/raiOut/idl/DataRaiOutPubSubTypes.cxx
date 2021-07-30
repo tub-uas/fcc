@@ -31,7 +31,9 @@ using InstanceHandle_t = eprosima::fastrtps::rtps::InstanceHandle_t;
 DataRaiOutPubSubType::DataRaiOutPubSubType()
 {
     setName("DataRaiOut");
-    m_typeSize = static_cast<uint32_t>(DataRaiOut::getMaxCdrSerializedSize()) + 4 /*encapsulation*/;
+    auto type_size = DataRaiOut::getMaxCdrSerializedSize();
+    type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
+    m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
     m_isGetKeyDefined = DataRaiOut::isKeyDefined();
     size_t keyLength = DataRaiOut::getKeyMaxCdrSerializedSize() > 16 ?
             DataRaiOut::getKeyMaxCdrSerializedSize() : 16;

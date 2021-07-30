@@ -50,18 +50,10 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
+	std::string topic = reader->get_topicdescription()->get_name();
 
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) {
-			/***PYTHON_GEN_ON_DATA_CALLBACK*/
-		} else {
-			reader->take_next_sample(&data, &info);
-		}
-	}
+	/***PYTHON_GEN_ON_DATA_CALLBACK*/
 
-	// TODO why does this cause a segfault ?!?
-	// reader->type().delete_data(data);
 }
 
 Log::Log() : participant(nullptr),

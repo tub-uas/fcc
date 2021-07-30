@@ -44,65 +44,120 @@ void Listener::on_subscription_matched(eprosima::fastdds::dds::DataReader*,
 void Listener::on_data_available(eprosima::fastdds::dds::DataReader* reader) {
 
 	eprosima::fastdds::dds::SampleInfo info;
-	void* data = reader->type().create_data();
+	std::string topic = reader->get_topicdescription()->get_name();
 
-	while (reader->read_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
-		if (info.instance_state == eprosima::fastdds::dds::ALIVE && info.valid_data) {
-			if (reader->get_topicdescription()->get_name().compare("DataRaiIn") == 0) {
-				std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
-				reader->take_next_sample(&dataRaiIn, &info);
-				dataRaiInLock.unlock();
-				newDataRaiIn = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataRaiOut") == 0) {
-				std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
-				reader->take_next_sample(&dataRaiOut, &info);
-				dataRaiOutLock.unlock();
-				newDataRaiOut = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataSFusion") == 0) {
-				std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
-				reader->take_next_sample(&dataSFusion, &info);
-				dataSFusionLock.unlock();
-				newDataSFusion = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAhrs") == 0) {
-				std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
-				reader->take_next_sample(&dataAhrs, &info);
-				dataAhrsLock.unlock();
-				newDataAhrs = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataAir") == 0) {
-				std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
-				reader->take_next_sample(&dataAir, &info);
-				dataAirLock.unlock();
-				newDataAir = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataGps") == 0) {
-				std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
-				reader->take_next_sample(&dataGps, &info);
-				dataGpsLock.unlock();
-				newDataGps = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataPsu") == 0) {
-				std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
-				reader->take_next_sample(&dataPsu, &info);
-				dataPsuLock.unlock();
-				newDataPsu = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataCtrl") == 0) {
-				std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
-				reader->take_next_sample(&dataCtrl, &info);
-				dataCtrlLock.unlock();
-				newDataCtrl = true;
-			} else if (reader->get_topicdescription()->get_name().compare("DataWatchdog") == 0) {
-				std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
-				reader->take_next_sample(&dataWatchdog, &info);
-				dataWatchdogLock.unlock();
-				newDataWatchdog = true;
-			} else {
-				reader->take_next_sample(&data, &info);
+	/***PYTHON_GEN_ON_DATA_CALLBACK*/
+	if (topic.compare("DataAhrs") == 0)
+	{
+		std::unique_lock<std::mutex> dataAhrsLock {dataAhrsMutex};
+		if(reader->take_next_sample(&dataAhrs, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataAhrs = true;
 			}
-		} else {
-			reader->take_next_sample(&data, &info);
 		}
+		dataAhrsLock.unlock();
+	}
+	else if (topic.compare("DataAir") == 0)
+	{
+		std::unique_lock<std::mutex> dataAirLock {dataAirMutex};
+		if(reader->take_next_sample(&dataAir, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataAir = true;
+			}
+		}
+		dataAirLock.unlock();
+	}
+	else if (topic.compare("DataCtrl") == 0)
+	{
+		std::unique_lock<std::mutex> dataCtrlLock {dataCtrlMutex};
+		if(reader->take_next_sample(&dataCtrl, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataCtrl = true;
+			}
+		}
+		dataCtrlLock.unlock();
+	}
+	else if (topic.compare("DataGps") == 0)
+	{
+		std::unique_lock<std::mutex> dataGpsLock {dataGpsMutex};
+		if(reader->take_next_sample(&dataGps, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataGps = true;
+			}
+		}
+		dataGpsLock.unlock();
+	}
+	else if (topic.compare("DataPsu") == 0)
+	{
+		std::unique_lock<std::mutex> dataPsuLock {dataPsuMutex};
+		if(reader->take_next_sample(&dataPsu, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataPsu = true;
+			}
+		}
+		dataPsuLock.unlock();
+	}
+	else if (topic.compare("DataRaiIn") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiInLock {dataRaiInMutex};
+		if(reader->take_next_sample(&dataRaiIn, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataRaiIn = true;
+			}
+		}
+		dataRaiInLock.unlock();
+	}
+	else if (topic.compare("DataRaiOut") == 0)
+	{
+		std::unique_lock<std::mutex> dataRaiOutLock {dataRaiOutMutex};
+		if(reader->take_next_sample(&dataRaiOut, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataRaiOut = true;
+			}
+		}
+		dataRaiOutLock.unlock();
+	}
+	else if (topic.compare("DataSFusion") == 0)
+	{
+		std::unique_lock<std::mutex> dataSFusionLock {dataSFusionMutex};
+		if(reader->take_next_sample(&dataSFusion, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataSFusion = true;
+			}
+		}
+		dataSFusionLock.unlock();
+	}
+	else if (topic.compare("DataWatchdog") == 0)
+	{
+		std::unique_lock<std::mutex> dataWatchdogLock {dataWatchdogMutex};
+		if(reader->take_next_sample(&dataWatchdog, &info) == ReturnCode_t::RETCODE_OK) 
+		{
+			if(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) 
+			{
+				 newDataWatchdog = true;
+			}
+		}
+		dataWatchdogLock.unlock();
+	} else {
+		
 	}
 
-	// TODO why does this cause a segfault ?!?
-	// reader->type().delete_data(data);
 }
 
 Downlink::Downlink() : participant(nullptr),
@@ -439,11 +494,23 @@ void Downlink::run() {
 			for (int i=0; i<12; i++) {
 				msg_raiIn.chnl[i] = listener.dataRaiIn.chnl().at(i);
 			}
-			msg_raiIn.roll = listener.dataRaiIn.roll();
-			msg_raiIn.pitch = listener.dataRaiIn.pitch();
-			msg_raiIn.yaw = listener.dataRaiIn.yaw();
-			msg_raiIn.thr = listener.dataRaiIn.thr();
-			msg_raiIn.fltMode = listener.dataRaiIn.fltMode();
+			msg_raiIn.xi_setpoint = listener.dataRaiIn.xi_setpoint();
+			msg_raiIn.eta_setpoint = listener.dataRaiIn.eta_setpoint();
+			msg_raiIn.zeta_setpoint = listener.dataRaiIn.zeta_setpoint();
+			msg_raiIn.throttle_setpoint = listener.dataRaiIn.throttle_setpoint();
+			msg_raiIn.flaps_setpoint = listener.dataRaiIn.flaps_setpoint();
+			msg_raiIn.roll_setpoint = listener.dataRaiIn.roll_setpoint();
+			msg_raiIn.roll_rate_setpoint = listener.dataRaiIn.roll_rate_setpoint();
+			msg_raiIn.pitch_setpoint = listener.dataRaiIn.pitch_setpoint();
+			msg_raiIn.pitch_rate_setpoint = listener.dataRaiIn.pitch_rate_setpoint();
+			msg_raiIn.yaw_setpoint = listener.dataRaiIn.yaw_setpoint();
+			msg_raiIn.yaw_rate_setpoint = listener.dataRaiIn.yaw_rate_setpoint();
+			msg_raiIn.tas_setpoint = listener.dataRaiIn.tas_setpoint();
+			msg_raiIn.tas_rate_setpoint = listener.dataRaiIn.tas_rate_setpoint();
+			msg_raiIn.hgt_setpoint = listener.dataRaiIn.hgt_setpoint();
+			msg_raiIn.hgt_rate_setpoint = listener.dataRaiIn.hgt_rate_setpoint();
+			msg_raiIn.flight_mode = listener.dataRaiIn.flight_mode();
+			msg_raiIn.flight_fct = listener.dataRaiIn.flight_fct();
 			msg_raiIn.alive = listener.dataRaiIn.alive();
 			mavlink_msg_dataraiin_encode(sysid, compid, &msg, &msg_raiIn);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -472,11 +539,13 @@ void Downlink::run() {
 			for (int i=0; i<12; i++) {
 				msg_raiOut.chnl[i] = listener.dataRaiOut.chnl().at(i);
 			}
-			msg_raiOut.roll = listener.dataRaiOut.roll();
-			msg_raiOut.pitch = listener.dataRaiOut.pitch();
-			msg_raiOut.yaw = listener.dataRaiOut.yaw();
-			msg_raiOut.thr = listener.dataRaiOut.thr();
-			msg_raiOut.fltMode = listener.dataRaiOut.fltMode();
+			msg_raiOut.xi_setpoint = listener.dataRaiOut.xi_setpoint();
+			msg_raiOut.eta_setpoint = listener.dataRaiOut.eta_setpoint();
+			msg_raiOut.zeta_setpoint = listener.dataRaiOut.zeta_setpoint();
+			msg_raiOut.throttle_setpoint = listener.dataRaiOut.throttle_setpoint();
+			msg_raiOut.flaps_setpoint = listener.dataRaiOut.flaps_setpoint();
+			msg_raiOut.flight_mode = listener.dataRaiOut.flight_mode();
+			msg_raiOut.flight_fct = listener.dataRaiOut.flight_fct();
 			msg_raiOut.alive = listener.dataRaiOut.alive();
 			mavlink_msg_dataraiout_encode(sysid, compid, &msg, &msg_raiOut);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -502,24 +571,27 @@ void Downlink::run() {
 			uint8_t buf[200];
 			uint16_t len;
 			msg_sfusion.time = listener.dataSFusion.time();
-			msg_sfusion.gyrX = listener.dataSFusion.gyrX();
-			msg_sfusion.gyrY = listener.dataSFusion.gyrY();
-			msg_sfusion.gyrZ = listener.dataSFusion.gyrZ();
-			msg_sfusion.accX = listener.dataSFusion.accX();
-			msg_sfusion.accY = listener.dataSFusion.accY();
-			msg_sfusion.accZ = listener.dataSFusion.accZ();
-			msg_sfusion.magX = listener.dataSFusion.magX();
-			msg_sfusion.magY = listener.dataSFusion.magY();
-			msg_sfusion.magZ = listener.dataSFusion.magZ();
-			msg_sfusion.temp = listener.dataSFusion.temp();
-			msg_sfusion.press = listener.dataSFusion.press();
+			msg_sfusion.gyrX = listener.dataSFusion.p();
+			msg_sfusion.gyrY = listener.dataSFusion.q();
+			msg_sfusion.gyrZ = listener.dataSFusion.r();
+			msg_sfusion.a_x = listener.dataSFusion.a_x();
+			msg_sfusion.a_y = listener.dataSFusion.a_y();
+			msg_sfusion.a_z = listener.dataSFusion.a_z();
+			msg_sfusion.magX = listener.dataSFusion.true_airspeed();
+			msg_sfusion.magY = listener.dataSFusion.indicated_airspeed();
+			msg_sfusion.magZ = listener.dataSFusion.density();
+			msg_sfusion.dynamic_pressure = listener.dataSFusion.dynamic_pressure();
+			msg_sfusion.barometric_pressure = listener.dataSFusion.barometric_pressure();
+			msg_sfusion.height_rate = listener.dataSFusion.height_rate();
+			msg_sfusion.height = listener.dataSFusion.height();
+			msg_sfusion.ssa = listener.dataSFusion.ssa();
+			msg_sfusion.aoa = listener.dataSFusion.aoa();
+			msg_sfusion.gamma = listener.dataSFusion.gamma();
 			msg_sfusion.phi = listener.dataSFusion.phi();
 			msg_sfusion.the = listener.dataSFusion.the();
 			msg_sfusion.psi = listener.dataSFusion.psi();
-			msg_sfusion.q0 = listener.dataSFusion.q0();
-			msg_sfusion.q1 = listener.dataSFusion.q1();
-			msg_sfusion.q2 = listener.dataSFusion.q2();
-			msg_sfusion.q3 = listener.dataSFusion.q3();
+			msg_sfusion.latitude = listener.dataSFusion.latitude();
+			msg_sfusion.longitude = listener.dataSFusion.longitude();
 			msg_sfusion.posN = listener.dataSFusion.posN();
 			msg_sfusion.posE = listener.dataSFusion.posE();
 			msg_sfusion.posD = listener.dataSFusion.posD();
@@ -529,9 +601,7 @@ void Downlink::run() {
 			msg_sfusion.windN = listener.dataSFusion.windN();
 			msg_sfusion.windE = listener.dataSFusion.windE();
 			msg_sfusion.windD = listener.dataSFusion.windD();
-			msg_sfusion.ssa = listener.dataSFusion.ssa();
-			msg_sfusion.aoa = listener.dataSFusion.aoa();
-			msg_sfusion.gamma = listener.dataSFusion.gamma();
+			
 			msg_sfusion.alive = listener.dataSFusion.alive();
 			mavlink_msg_datasfusion_encode(sysid, compid, &msg, &msg_sfusion);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -567,15 +637,11 @@ void Downlink::run() {
 			msg_ahrs.magX = listener.dataAhrs.magX();
 			msg_ahrs.magY = listener.dataAhrs.magY();
 			msg_ahrs.magZ = listener.dataAhrs.magZ();
-			msg_ahrs.temp = listener.dataAhrs.temp();
-			msg_ahrs.press = listener.dataAhrs.press();
+			msg_ahrs.temperature = listener.dataAhrs.temperature();
+			msg_ahrs.barometric_pressure = listener.dataAhrs.barometric_pressure();
 			msg_ahrs.phi = listener.dataAhrs.phi();
 			msg_ahrs.the = listener.dataAhrs.the();
 			msg_ahrs.psi = listener.dataAhrs.psi();
-			msg_ahrs.q0 = listener.dataAhrs.q0();
-			msg_ahrs.q1 = listener.dataAhrs.q1();
-			msg_ahrs.q2 = listener.dataAhrs.q2();
-			msg_ahrs.q3 = listener.dataAhrs.q3();
 			msg_ahrs.alive = listener.dataAhrs.alive();
 			mavlink_msg_dataahrs_encode(sysid, compid, &msg, &msg_ahrs);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -602,11 +668,13 @@ void Downlink::run() {
 			uint16_t len;
 			msg_air.time = listener.dataAir.time();
 			msg_air.senseTime = listener.dataAir.senseTime();
-			msg_air.dynamicPress = listener.dataAir.dynamicPress();
-			msg_air.velocity = listener.dataAir.velocity();
-			msg_air.baroPress = listener.dataAir.baroPress();
+			msg_air.dynamicPress = listener.dataAir.dynamic_pressure();
+			msg_air.true_airspeed = listener.dataAir.true_airspeed();
+			msg_air.indicated_airspeed = listener.dataAir.indicated_airspeed();
+			msg_air.barometric_pressure = listener.dataAir.barometric_pressure();
+			msg_air.barometric_height = listener.dataAir.barometric_height();
 			msg_air.density = listener.dataAir.density();
-			msg_air.temp = listener.dataAir.temp();
+			msg_air.temperature = listener.dataAir.temperature();
 			msg_air.alive = listener.dataAir.alive();
 			mavlink_msg_dataair_encode(sysid, compid, &msg, &msg_air);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -633,17 +701,18 @@ void Downlink::run() {
 			uint16_t len;
 			msg_gps.time = listener.dataGps.time();
 			msg_gps.senseTime = listener.dataGps.senseTime();
-			msg_gps.lat = listener.dataGps.lat();
-			msg_gps.lon = listener.dataGps.lon();
-			msg_gps.alt = listener.dataGps.alt();
-			msg_gps.speed = listener.dataGps.speed();
-			msg_gps.cog = listener.dataGps.cog();
+			msg_gps.lat = listener.dataGps.latitude();
+			msg_gps.lon = listener.dataGps.longitude();
+			msg_gps.alt = listener.dataGps.alt_msl();
+			msg_gps.groundspeed = listener.dataGps.groundspeed();
+			msg_gps.course_over_ground = listener.dataGps.course_over_ground();
 			msg_gps.sats = listener.dataGps.sats();
+			msg_gps.sats_in_view = listener.dataGps.sats_in_view();
 			msg_gps.fix = listener.dataGps.fix();
-			msg_gps.fixMode = listener.dataGps.fixMode();
-			msg_gps.dopP = listener.dataGps.dopP();
-			msg_gps.dopH = listener.dataGps.dopH();
-			msg_gps.dopV = listener.dataGps.dopV();
+			msg_gps.fix_mode = listener.dataGps.fix_mode();
+			msg_gps.dop_position = listener.dataGps.dop_position();
+			msg_gps.dop_horizontal = listener.dataGps.dop_horizontal();
+			msg_gps.dop_velocity = listener.dataGps.dop_velocity();
 			msg_gps.alive = listener.dataGps.alive();
 			mavlink_msg_datagps_encode(sysid, compid, &msg, &msg_gps);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -669,11 +738,11 @@ void Downlink::run() {
 			uint8_t buf[200];
 			uint16_t len;
 			msg_ctrl.time = listener.dataCtrl.time();
-			msg_ctrl.xi = listener.dataCtrl.xi();
-			msg_ctrl.eta = listener.dataCtrl.eta();
-			msg_ctrl.zeta = listener.dataCtrl.zeta();
-			msg_ctrl.etaT = listener.dataCtrl.etaT();
-			msg_ctrl.etaF = listener.dataCtrl.etaF();
+			msg_ctrl.xi = listener.dataCtrl.xi_setpoint();
+			msg_ctrl.eta = listener.dataCtrl.eta_setpoint();
+			msg_ctrl.zeta = listener.dataCtrl.zeta_setpoint();
+			msg_ctrl.etaT = listener.dataCtrl.throttle_setpoint();
+			msg_ctrl.etaF = listener.dataCtrl.flaps_setpoint();
 			msg_ctrl.alive = listener.dataCtrl.alive();
 			mavlink_msg_datactrl_encode(sysid, compid, &msg, &msg_ctrl);
 			len = mavlink_msg_to_send_buffer(buf, &msg);
@@ -700,15 +769,15 @@ void Downlink::run() {
 			uint16_t len;
 			msg_psu.time = listener.dataPsu.time();
 			msg_psu.senseTime = listener.dataPsu.senseTime();
-			msg_psu.mainVolt = listener.dataPsu.mainVolt();
-			msg_psu.mainCurr = listener.dataPsu.mainCurr();
-			msg_psu.mainPow = listener.dataPsu.mainPow();
-			msg_psu.pwrVolt = listener.dataPsu.pwrVolt();
-			msg_psu.pwrCurr = listener.dataPsu.pwrCurr();
-			msg_psu.pwrPow = listener.dataPsu.pwrPow();
-			msg_psu.sysVolt = listener.dataPsu.sysVolt();
-			msg_psu.sysCurr = listener.dataPsu.sysCurr();
-			msg_psu.sysPow = listener.dataPsu.sysPow();
+			msg_psu.main_volt = listener.dataPsu.main_volt();
+			msg_psu.main_curr = listener.dataPsu.main_curr();
+			msg_psu.main_pwr = listener.dataPsu.main_pwr();
+			msg_psu.pwr_volt = listener.dataPsu.pwr_volt();
+			msg_psu.pwr_curr = listener.dataPsu.pwr_curr();
+			msg_psu.pwr_pwr = listener.dataPsu.pwr_pwr();
+			msg_psu.sys_volt = listener.dataPsu.sys_volt();
+			msg_psu.sys_curr = listener.dataPsu.sys_curr();
+			msg_psu.sys_pwr = listener.dataPsu.sys_pwr();
 			msg_psu.alive = listener.dataPsu.alive();
 			mavlink_msg_datapsu_encode(sysid, compid, &msg, &msg_psu);
 			len = mavlink_msg_to_send_buffer(buf, &msg);

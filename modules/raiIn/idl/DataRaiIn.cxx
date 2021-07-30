@@ -36,25 +36,47 @@ using namespace eprosima::fastcdr::exception;
 
 DataRaiIn::DataRaiIn()
 {
-    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
+    // m_time com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12c8a2c0
     m_time = 0;
-    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
+    // m_senseTime com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
     m_senseTime = 0.0;
-    // m_chnl com.eprosima.idl.parser.typecode.ArrayTypeCode@289d1c02
+    // m_chnl com.eprosima.idl.parser.typecode.ArrayTypeCode@365185bd
     memset(&m_chnl, 0, (12) * 2);
-    // m_roll com.eprosima.idl.parser.typecode.PrimitiveTypeCode@22eeefeb
-    m_roll = 0.0;
-    // m_pitch com.eprosima.idl.parser.typecode.PrimitiveTypeCode@17d0685f
-    m_pitch = 0.0;
-    // m_yaw com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3891771e
-    m_yaw = 0.0;
-    // m_thr com.eprosima.idl.parser.typecode.PrimitiveTypeCode@396e2f39
-    m_thr = 0.0;
-    // m_fltMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7e0e6aa2
-    m_fltMode = 0;
-    // m_fltFunc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@365185bd
-    m_fltFunc = 0;
-    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@18bf3d14
+    // m_xi_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@18bf3d14
+    m_xi_setpoint = 0.0;
+    // m_eta_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4fb64261
+    m_eta_setpoint = 0.0;
+    // m_zeta_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
+    m_zeta_setpoint = 0.0;
+    // m_throttle_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
+    m_throttle_setpoint = 0.0;
+    // m_flaps_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
+    m_flaps_setpoint = 0.0;
+    // m_roll_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
+    m_roll_setpoint = 0.0;
+    // m_roll_rate_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@25bbf683
+    m_roll_rate_setpoint = 0.0;
+    // m_pitch_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6ec8211c
+    m_pitch_setpoint = 0.0;
+    // m_pitch_rate_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7276c8cd
+    m_pitch_rate_setpoint = 0.0;
+    // m_yaw_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@544a2ea6
+    m_yaw_setpoint = 0.0;
+    // m_yaw_rate_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2e3fc542
+    m_yaw_rate_setpoint = 0.0;
+    // m_tas_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@150c158
+    m_tas_setpoint = 0.0;
+    // m_tas_rate_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10dba097
+    m_tas_rate_setpoint = 0.0;
+    // m_hgt_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43a0cee9
+    m_hgt_setpoint = 0.0;
+    // m_hgt_rate_setpoint com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6eceb130
+    m_hgt_rate_setpoint = 0.0;
+    // m_flight_mode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10a035a0
+    m_flight_mode = 0;
+    // m_flight_fct com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b467e9
+    m_flight_fct = 0;
+    // m_alive com.eprosima.idl.parser.typecode.PrimitiveTypeCode@47db50c5
     m_alive = false;
 
 }
@@ -71,6 +93,17 @@ DataRaiIn::~DataRaiIn()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 }
 
 DataRaiIn::DataRaiIn(
@@ -79,12 +112,23 @@ DataRaiIn::DataRaiIn(
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
     m_chnl = x.m_chnl;
-    m_roll = x.m_roll;
-    m_pitch = x.m_pitch;
-    m_yaw = x.m_yaw;
-    m_thr = x.m_thr;
-    m_fltMode = x.m_fltMode;
-    m_fltFunc = x.m_fltFunc;
+    m_xi_setpoint = x.m_xi_setpoint;
+    m_eta_setpoint = x.m_eta_setpoint;
+    m_zeta_setpoint = x.m_zeta_setpoint;
+    m_throttle_setpoint = x.m_throttle_setpoint;
+    m_flaps_setpoint = x.m_flaps_setpoint;
+    m_roll_setpoint = x.m_roll_setpoint;
+    m_roll_rate_setpoint = x.m_roll_rate_setpoint;
+    m_pitch_setpoint = x.m_pitch_setpoint;
+    m_pitch_rate_setpoint = x.m_pitch_rate_setpoint;
+    m_yaw_setpoint = x.m_yaw_setpoint;
+    m_yaw_rate_setpoint = x.m_yaw_rate_setpoint;
+    m_tas_setpoint = x.m_tas_setpoint;
+    m_tas_rate_setpoint = x.m_tas_rate_setpoint;
+    m_hgt_setpoint = x.m_hgt_setpoint;
+    m_hgt_rate_setpoint = x.m_hgt_rate_setpoint;
+    m_flight_mode = x.m_flight_mode;
+    m_flight_fct = x.m_flight_fct;
     m_alive = x.m_alive;
 }
 
@@ -94,12 +138,23 @@ DataRaiIn::DataRaiIn(
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
     m_chnl = std::move(x.m_chnl);
-    m_roll = x.m_roll;
-    m_pitch = x.m_pitch;
-    m_yaw = x.m_yaw;
-    m_thr = x.m_thr;
-    m_fltMode = x.m_fltMode;
-    m_fltFunc = x.m_fltFunc;
+    m_xi_setpoint = x.m_xi_setpoint;
+    m_eta_setpoint = x.m_eta_setpoint;
+    m_zeta_setpoint = x.m_zeta_setpoint;
+    m_throttle_setpoint = x.m_throttle_setpoint;
+    m_flaps_setpoint = x.m_flaps_setpoint;
+    m_roll_setpoint = x.m_roll_setpoint;
+    m_roll_rate_setpoint = x.m_roll_rate_setpoint;
+    m_pitch_setpoint = x.m_pitch_setpoint;
+    m_pitch_rate_setpoint = x.m_pitch_rate_setpoint;
+    m_yaw_setpoint = x.m_yaw_setpoint;
+    m_yaw_rate_setpoint = x.m_yaw_rate_setpoint;
+    m_tas_setpoint = x.m_tas_setpoint;
+    m_tas_rate_setpoint = x.m_tas_rate_setpoint;
+    m_hgt_setpoint = x.m_hgt_setpoint;
+    m_hgt_rate_setpoint = x.m_hgt_rate_setpoint;
+    m_flight_mode = x.m_flight_mode;
+    m_flight_fct = x.m_flight_fct;
     m_alive = x.m_alive;
 }
 
@@ -110,12 +165,23 @@ DataRaiIn& DataRaiIn::operator =(
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
     m_chnl = x.m_chnl;
-    m_roll = x.m_roll;
-    m_pitch = x.m_pitch;
-    m_yaw = x.m_yaw;
-    m_thr = x.m_thr;
-    m_fltMode = x.m_fltMode;
-    m_fltFunc = x.m_fltFunc;
+    m_xi_setpoint = x.m_xi_setpoint;
+    m_eta_setpoint = x.m_eta_setpoint;
+    m_zeta_setpoint = x.m_zeta_setpoint;
+    m_throttle_setpoint = x.m_throttle_setpoint;
+    m_flaps_setpoint = x.m_flaps_setpoint;
+    m_roll_setpoint = x.m_roll_setpoint;
+    m_roll_rate_setpoint = x.m_roll_rate_setpoint;
+    m_pitch_setpoint = x.m_pitch_setpoint;
+    m_pitch_rate_setpoint = x.m_pitch_rate_setpoint;
+    m_yaw_setpoint = x.m_yaw_setpoint;
+    m_yaw_rate_setpoint = x.m_yaw_rate_setpoint;
+    m_tas_setpoint = x.m_tas_setpoint;
+    m_tas_rate_setpoint = x.m_tas_rate_setpoint;
+    m_hgt_setpoint = x.m_hgt_setpoint;
+    m_hgt_rate_setpoint = x.m_hgt_rate_setpoint;
+    m_flight_mode = x.m_flight_mode;
+    m_flight_fct = x.m_flight_fct;
     m_alive = x.m_alive;
 
     return *this;
@@ -128,12 +194,23 @@ DataRaiIn& DataRaiIn::operator =(
     m_time = x.m_time;
     m_senseTime = x.m_senseTime;
     m_chnl = std::move(x.m_chnl);
-    m_roll = x.m_roll;
-    m_pitch = x.m_pitch;
-    m_yaw = x.m_yaw;
-    m_thr = x.m_thr;
-    m_fltMode = x.m_fltMode;
-    m_fltFunc = x.m_fltFunc;
+    m_xi_setpoint = x.m_xi_setpoint;
+    m_eta_setpoint = x.m_eta_setpoint;
+    m_zeta_setpoint = x.m_zeta_setpoint;
+    m_throttle_setpoint = x.m_throttle_setpoint;
+    m_flaps_setpoint = x.m_flaps_setpoint;
+    m_roll_setpoint = x.m_roll_setpoint;
+    m_roll_rate_setpoint = x.m_roll_rate_setpoint;
+    m_pitch_setpoint = x.m_pitch_setpoint;
+    m_pitch_rate_setpoint = x.m_pitch_rate_setpoint;
+    m_yaw_setpoint = x.m_yaw_setpoint;
+    m_yaw_rate_setpoint = x.m_yaw_rate_setpoint;
+    m_tas_setpoint = x.m_tas_setpoint;
+    m_tas_rate_setpoint = x.m_tas_rate_setpoint;
+    m_hgt_setpoint = x.m_hgt_setpoint;
+    m_hgt_rate_setpoint = x.m_hgt_rate_setpoint;
+    m_flight_mode = x.m_flight_mode;
+    m_flight_fct = x.m_flight_fct;
     m_alive = x.m_alive;
 
     return *this;
@@ -148,22 +225,55 @@ size_t DataRaiIn::getMaxCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += ((12) * 2) + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
@@ -190,7 +300,7 @@ size_t DataRaiIn::getCdrSerializedSize(
     current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     if ((12) > 0)
@@ -198,16 +308,49 @@ size_t DataRaiIn::getCdrSerializedSize(
         current_alignment += ((12) * 2) + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
     }
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
-    current_alignment += 4 + eprosima::fastcdr::Cdr::alignment(current_alignment, 4);
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+
+
+    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
 
 
     current_alignment += 2 + eprosima::fastcdr::Cdr::alignment(current_alignment, 2);
@@ -231,12 +374,23 @@ void DataRaiIn::serialize(
     scdr << m_senseTime;
     scdr << m_chnl;
 
-    scdr << m_roll;
-    scdr << m_pitch;
-    scdr << m_yaw;
-    scdr << m_thr;
-    scdr << m_fltMode;
-    scdr << m_fltFunc;
+    scdr << m_xi_setpoint;
+    scdr << m_eta_setpoint;
+    scdr << m_zeta_setpoint;
+    scdr << m_throttle_setpoint;
+    scdr << m_flaps_setpoint;
+    scdr << m_roll_setpoint;
+    scdr << m_roll_rate_setpoint;
+    scdr << m_pitch_setpoint;
+    scdr << m_pitch_rate_setpoint;
+    scdr << m_yaw_setpoint;
+    scdr << m_yaw_rate_setpoint;
+    scdr << m_tas_setpoint;
+    scdr << m_tas_rate_setpoint;
+    scdr << m_hgt_setpoint;
+    scdr << m_hgt_rate_setpoint;
+    scdr << m_flight_mode;
+    scdr << m_flight_fct;
     scdr << m_alive;
 
 }
@@ -249,12 +403,23 @@ void DataRaiIn::deserialize(
     dcdr >> m_senseTime;
     dcdr >> m_chnl;
 
-    dcdr >> m_roll;
-    dcdr >> m_pitch;
-    dcdr >> m_yaw;
-    dcdr >> m_thr;
-    dcdr >> m_fltMode;
-    dcdr >> m_fltFunc;
+    dcdr >> m_xi_setpoint;
+    dcdr >> m_eta_setpoint;
+    dcdr >> m_zeta_setpoint;
+    dcdr >> m_throttle_setpoint;
+    dcdr >> m_flaps_setpoint;
+    dcdr >> m_roll_setpoint;
+    dcdr >> m_roll_rate_setpoint;
+    dcdr >> m_pitch_setpoint;
+    dcdr >> m_pitch_rate_setpoint;
+    dcdr >> m_yaw_setpoint;
+    dcdr >> m_yaw_rate_setpoint;
+    dcdr >> m_tas_setpoint;
+    dcdr >> m_tas_rate_setpoint;
+    dcdr >> m_hgt_setpoint;
+    dcdr >> m_hgt_rate_setpoint;
+    dcdr >> m_flight_mode;
+    dcdr >> m_flight_fct;
     dcdr >> m_alive;
 }
 
@@ -291,7 +456,7 @@ uint64_t& DataRaiIn::time()
  * @param _senseTime New value for member senseTime
  */
 void DataRaiIn::senseTime(
-        float _senseTime)
+        double _senseTime)
 {
     m_senseTime = _senseTime;
 }
@@ -300,7 +465,7 @@ void DataRaiIn::senseTime(
  * @brief This function returns the value of member senseTime
  * @return Value of member senseTime
  */
-float DataRaiIn::senseTime() const
+double DataRaiIn::senseTime() const
 {
     return m_senseTime;
 }
@@ -309,7 +474,7 @@ float DataRaiIn::senseTime() const
  * @brief This function returns a reference to member senseTime
  * @return Reference to member senseTime
  */
-float& DataRaiIn::senseTime()
+double& DataRaiIn::senseTime()
 {
     return m_senseTime;
 }
@@ -352,171 +517,479 @@ std::array<uint16_t, 12>& DataRaiIn::chnl()
     return m_chnl;
 }
 /*!
- * @brief This function sets a value in member roll
- * @param _roll New value for member roll
+ * @brief This function sets a value in member xi_setpoint
+ * @param _xi_setpoint New value for member xi_setpoint
  */
-void DataRaiIn::roll(
-        float _roll)
+void DataRaiIn::xi_setpoint(
+        double _xi_setpoint)
 {
-    m_roll = _roll;
+    m_xi_setpoint = _xi_setpoint;
 }
 
 /*!
- * @brief This function returns the value of member roll
- * @return Value of member roll
+ * @brief This function returns the value of member xi_setpoint
+ * @return Value of member xi_setpoint
  */
-float DataRaiIn::roll() const
+double DataRaiIn::xi_setpoint() const
 {
-    return m_roll;
+    return m_xi_setpoint;
 }
 
 /*!
- * @brief This function returns a reference to member roll
- * @return Reference to member roll
+ * @brief This function returns a reference to member xi_setpoint
+ * @return Reference to member xi_setpoint
  */
-float& DataRaiIn::roll()
+double& DataRaiIn::xi_setpoint()
 {
-    return m_roll;
+    return m_xi_setpoint;
 }
 
 /*!
- * @brief This function sets a value in member pitch
- * @param _pitch New value for member pitch
+ * @brief This function sets a value in member eta_setpoint
+ * @param _eta_setpoint New value for member eta_setpoint
  */
-void DataRaiIn::pitch(
-        float _pitch)
+void DataRaiIn::eta_setpoint(
+        double _eta_setpoint)
 {
-    m_pitch = _pitch;
+    m_eta_setpoint = _eta_setpoint;
 }
 
 /*!
- * @brief This function returns the value of member pitch
- * @return Value of member pitch
+ * @brief This function returns the value of member eta_setpoint
+ * @return Value of member eta_setpoint
  */
-float DataRaiIn::pitch() const
+double DataRaiIn::eta_setpoint() const
 {
-    return m_pitch;
+    return m_eta_setpoint;
 }
 
 /*!
- * @brief This function returns a reference to member pitch
- * @return Reference to member pitch
+ * @brief This function returns a reference to member eta_setpoint
+ * @return Reference to member eta_setpoint
  */
-float& DataRaiIn::pitch()
+double& DataRaiIn::eta_setpoint()
 {
-    return m_pitch;
+    return m_eta_setpoint;
 }
 
 /*!
- * @brief This function sets a value in member yaw
- * @param _yaw New value for member yaw
+ * @brief This function sets a value in member zeta_setpoint
+ * @param _zeta_setpoint New value for member zeta_setpoint
  */
-void DataRaiIn::yaw(
-        float _yaw)
+void DataRaiIn::zeta_setpoint(
+        double _zeta_setpoint)
 {
-    m_yaw = _yaw;
+    m_zeta_setpoint = _zeta_setpoint;
 }
 
 /*!
- * @brief This function returns the value of member yaw
- * @return Value of member yaw
+ * @brief This function returns the value of member zeta_setpoint
+ * @return Value of member zeta_setpoint
  */
-float DataRaiIn::yaw() const
+double DataRaiIn::zeta_setpoint() const
 {
-    return m_yaw;
+    return m_zeta_setpoint;
 }
 
 /*!
- * @brief This function returns a reference to member yaw
- * @return Reference to member yaw
+ * @brief This function returns a reference to member zeta_setpoint
+ * @return Reference to member zeta_setpoint
  */
-float& DataRaiIn::yaw()
+double& DataRaiIn::zeta_setpoint()
 {
-    return m_yaw;
+    return m_zeta_setpoint;
 }
 
 /*!
- * @brief This function sets a value in member thr
- * @param _thr New value for member thr
+ * @brief This function sets a value in member throttle_setpoint
+ * @param _throttle_setpoint New value for member throttle_setpoint
  */
-void DataRaiIn::thr(
-        float _thr)
+void DataRaiIn::throttle_setpoint(
+        double _throttle_setpoint)
 {
-    m_thr = _thr;
+    m_throttle_setpoint = _throttle_setpoint;
 }
 
 /*!
- * @brief This function returns the value of member thr
- * @return Value of member thr
+ * @brief This function returns the value of member throttle_setpoint
+ * @return Value of member throttle_setpoint
  */
-float DataRaiIn::thr() const
+double DataRaiIn::throttle_setpoint() const
 {
-    return m_thr;
+    return m_throttle_setpoint;
 }
 
 /*!
- * @brief This function returns a reference to member thr
- * @return Reference to member thr
+ * @brief This function returns a reference to member throttle_setpoint
+ * @return Reference to member throttle_setpoint
  */
-float& DataRaiIn::thr()
+double& DataRaiIn::throttle_setpoint()
 {
-    return m_thr;
+    return m_throttle_setpoint;
 }
 
 /*!
- * @brief This function sets a value in member fltMode
- * @param _fltMode New value for member fltMode
+ * @brief This function sets a value in member flaps_setpoint
+ * @param _flaps_setpoint New value for member flaps_setpoint
  */
-void DataRaiIn::fltMode(
-        uint16_t _fltMode)
+void DataRaiIn::flaps_setpoint(
+        double _flaps_setpoint)
 {
-    m_fltMode = _fltMode;
+    m_flaps_setpoint = _flaps_setpoint;
 }
 
 /*!
- * @brief This function returns the value of member fltMode
- * @return Value of member fltMode
+ * @brief This function returns the value of member flaps_setpoint
+ * @return Value of member flaps_setpoint
  */
-uint16_t DataRaiIn::fltMode() const
+double DataRaiIn::flaps_setpoint() const
 {
-    return m_fltMode;
+    return m_flaps_setpoint;
 }
 
 /*!
- * @brief This function returns a reference to member fltMode
- * @return Reference to member fltMode
+ * @brief This function returns a reference to member flaps_setpoint
+ * @return Reference to member flaps_setpoint
  */
-uint16_t& DataRaiIn::fltMode()
+double& DataRaiIn::flaps_setpoint()
 {
-    return m_fltMode;
+    return m_flaps_setpoint;
 }
 
 /*!
- * @brief This function sets a value in member fltFunc
- * @param _fltFunc New value for member fltFunc
+ * @brief This function sets a value in member roll_setpoint
+ * @param _roll_setpoint New value for member roll_setpoint
  */
-void DataRaiIn::fltFunc(
-        uint16_t _fltFunc)
+void DataRaiIn::roll_setpoint(
+        double _roll_setpoint)
 {
-    m_fltFunc = _fltFunc;
+    m_roll_setpoint = _roll_setpoint;
 }
 
 /*!
- * @brief This function returns the value of member fltFunc
- * @return Value of member fltFunc
+ * @brief This function returns the value of member roll_setpoint
+ * @return Value of member roll_setpoint
  */
-uint16_t DataRaiIn::fltFunc() const
+double DataRaiIn::roll_setpoint() const
 {
-    return m_fltFunc;
+    return m_roll_setpoint;
 }
 
 /*!
- * @brief This function returns a reference to member fltFunc
- * @return Reference to member fltFunc
+ * @brief This function returns a reference to member roll_setpoint
+ * @return Reference to member roll_setpoint
  */
-uint16_t& DataRaiIn::fltFunc()
+double& DataRaiIn::roll_setpoint()
 {
-    return m_fltFunc;
+    return m_roll_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member roll_rate_setpoint
+ * @param _roll_rate_setpoint New value for member roll_rate_setpoint
+ */
+void DataRaiIn::roll_rate_setpoint(
+        double _roll_rate_setpoint)
+{
+    m_roll_rate_setpoint = _roll_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member roll_rate_setpoint
+ * @return Value of member roll_rate_setpoint
+ */
+double DataRaiIn::roll_rate_setpoint() const
+{
+    return m_roll_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member roll_rate_setpoint
+ * @return Reference to member roll_rate_setpoint
+ */
+double& DataRaiIn::roll_rate_setpoint()
+{
+    return m_roll_rate_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member pitch_setpoint
+ * @param _pitch_setpoint New value for member pitch_setpoint
+ */
+void DataRaiIn::pitch_setpoint(
+        double _pitch_setpoint)
+{
+    m_pitch_setpoint = _pitch_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member pitch_setpoint
+ * @return Value of member pitch_setpoint
+ */
+double DataRaiIn::pitch_setpoint() const
+{
+    return m_pitch_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member pitch_setpoint
+ * @return Reference to member pitch_setpoint
+ */
+double& DataRaiIn::pitch_setpoint()
+{
+    return m_pitch_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member pitch_rate_setpoint
+ * @param _pitch_rate_setpoint New value for member pitch_rate_setpoint
+ */
+void DataRaiIn::pitch_rate_setpoint(
+        double _pitch_rate_setpoint)
+{
+    m_pitch_rate_setpoint = _pitch_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member pitch_rate_setpoint
+ * @return Value of member pitch_rate_setpoint
+ */
+double DataRaiIn::pitch_rate_setpoint() const
+{
+    return m_pitch_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member pitch_rate_setpoint
+ * @return Reference to member pitch_rate_setpoint
+ */
+double& DataRaiIn::pitch_rate_setpoint()
+{
+    return m_pitch_rate_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member yaw_setpoint
+ * @param _yaw_setpoint New value for member yaw_setpoint
+ */
+void DataRaiIn::yaw_setpoint(
+        double _yaw_setpoint)
+{
+    m_yaw_setpoint = _yaw_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member yaw_setpoint
+ * @return Value of member yaw_setpoint
+ */
+double DataRaiIn::yaw_setpoint() const
+{
+    return m_yaw_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member yaw_setpoint
+ * @return Reference to member yaw_setpoint
+ */
+double& DataRaiIn::yaw_setpoint()
+{
+    return m_yaw_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member yaw_rate_setpoint
+ * @param _yaw_rate_setpoint New value for member yaw_rate_setpoint
+ */
+void DataRaiIn::yaw_rate_setpoint(
+        double _yaw_rate_setpoint)
+{
+    m_yaw_rate_setpoint = _yaw_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member yaw_rate_setpoint
+ * @return Value of member yaw_rate_setpoint
+ */
+double DataRaiIn::yaw_rate_setpoint() const
+{
+    return m_yaw_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member yaw_rate_setpoint
+ * @return Reference to member yaw_rate_setpoint
+ */
+double& DataRaiIn::yaw_rate_setpoint()
+{
+    return m_yaw_rate_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member tas_setpoint
+ * @param _tas_setpoint New value for member tas_setpoint
+ */
+void DataRaiIn::tas_setpoint(
+        double _tas_setpoint)
+{
+    m_tas_setpoint = _tas_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member tas_setpoint
+ * @return Value of member tas_setpoint
+ */
+double DataRaiIn::tas_setpoint() const
+{
+    return m_tas_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member tas_setpoint
+ * @return Reference to member tas_setpoint
+ */
+double& DataRaiIn::tas_setpoint()
+{
+    return m_tas_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member tas_rate_setpoint
+ * @param _tas_rate_setpoint New value for member tas_rate_setpoint
+ */
+void DataRaiIn::tas_rate_setpoint(
+        double _tas_rate_setpoint)
+{
+    m_tas_rate_setpoint = _tas_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member tas_rate_setpoint
+ * @return Value of member tas_rate_setpoint
+ */
+double DataRaiIn::tas_rate_setpoint() const
+{
+    return m_tas_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member tas_rate_setpoint
+ * @return Reference to member tas_rate_setpoint
+ */
+double& DataRaiIn::tas_rate_setpoint()
+{
+    return m_tas_rate_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member hgt_setpoint
+ * @param _hgt_setpoint New value for member hgt_setpoint
+ */
+void DataRaiIn::hgt_setpoint(
+        double _hgt_setpoint)
+{
+    m_hgt_setpoint = _hgt_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member hgt_setpoint
+ * @return Value of member hgt_setpoint
+ */
+double DataRaiIn::hgt_setpoint() const
+{
+    return m_hgt_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member hgt_setpoint
+ * @return Reference to member hgt_setpoint
+ */
+double& DataRaiIn::hgt_setpoint()
+{
+    return m_hgt_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member hgt_rate_setpoint
+ * @param _hgt_rate_setpoint New value for member hgt_rate_setpoint
+ */
+void DataRaiIn::hgt_rate_setpoint(
+        double _hgt_rate_setpoint)
+{
+    m_hgt_rate_setpoint = _hgt_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns the value of member hgt_rate_setpoint
+ * @return Value of member hgt_rate_setpoint
+ */
+double DataRaiIn::hgt_rate_setpoint() const
+{
+    return m_hgt_rate_setpoint;
+}
+
+/*!
+ * @brief This function returns a reference to member hgt_rate_setpoint
+ * @return Reference to member hgt_rate_setpoint
+ */
+double& DataRaiIn::hgt_rate_setpoint()
+{
+    return m_hgt_rate_setpoint;
+}
+
+/*!
+ * @brief This function sets a value in member flight_mode
+ * @param _flight_mode New value for member flight_mode
+ */
+void DataRaiIn::flight_mode(
+        uint16_t _flight_mode)
+{
+    m_flight_mode = _flight_mode;
+}
+
+/*!
+ * @brief This function returns the value of member flight_mode
+ * @return Value of member flight_mode
+ */
+uint16_t DataRaiIn::flight_mode() const
+{
+    return m_flight_mode;
+}
+
+/*!
+ * @brief This function returns a reference to member flight_mode
+ * @return Reference to member flight_mode
+ */
+uint16_t& DataRaiIn::flight_mode()
+{
+    return m_flight_mode;
+}
+
+/*!
+ * @brief This function sets a value in member flight_fct
+ * @param _flight_fct New value for member flight_fct
+ */
+void DataRaiIn::flight_fct(
+        uint16_t _flight_fct)
+{
+    m_flight_fct = _flight_fct;
+}
+
+/*!
+ * @brief This function returns the value of member flight_fct
+ * @return Value of member flight_fct
+ */
+uint16_t DataRaiIn::flight_fct() const
+{
+    return m_flight_fct;
+}
+
+/*!
+ * @brief This function returns a reference to member flight_fct
+ * @return Reference to member flight_fct
+ */
+uint16_t& DataRaiIn::flight_fct()
+{
+    return m_flight_fct;
 }
 
 /*!
@@ -565,6 +1038,17 @@ size_t DataRaiIn::getKeyMaxCdrSerializedSize(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
     return current_align;
 }
 
@@ -577,5 +1061,5 @@ void DataRaiIn::serializeKey(
         eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;
-              
+                         
 }

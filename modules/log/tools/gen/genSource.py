@@ -16,22 +16,27 @@ class GenSource():
     @property
     def dataCallback(self):
         c = list()
-        c.extend(["\t\t\tif (reader->get_topicdescription()->get_name().compare(\"Data%s\") == 0) {\n" % (Idl.toUp(self._modules[0]))])
+        c.extend(["\tif (topic.compare(\"Data%s\") == 0)\n" % (Idl.toUp(self._modules[0]))])
         c.extend(self.dataCallbackHelper(self._modules[0]))
         for m in self._modules[1:]:
-            c.extend(["\t\t\t} else if (reader->get_topicdescription()->get_name().compare(\"Data%s\") == 0) {\n" % (Idl.toUp(m))])
+            c.extend(["\t}\n",
+                      "\telse if (topic.compare(\"Data%s\") == 0)\n" % (Idl.toUp(m))])
             c.extend(self.dataCallbackHelper(m))
-        c.extend(["\t\t\t} else {\n",
-                  "\t\t\t\treader->take_next_sample(&data, &info);\n",
-                  "\t\t\t}\n"])
+        c.extend(["\t} else {\n",
+                  "\t\t\n",
+                  "\t}\n"])
         return c
 
     def dataCallbackHelper(self, m):
         c = list()
-        c.extend(["\t\t\t\tstd::unique_lock<std::mutex> data%sLock {data%sMutex};\n" % (Idl.toUp(m), Idl.toUp(m)),
-                  "\t\t\t\treader->take_next_sample(&data%s, &info);\n" % (Idl.toUp(m)),
-                  "\t\t\t\tdata%sLock.unlock();\n" % (Idl.toUp(m)),
-                  "\t\t\t\tnewData%s = true;\n" % (Idl.toUp(m))])
+        c.extend(["\t{\n"
+                  "\t\tstd::unique_lock<std::mutex> data%sLock {data%sMutex};\n" % (Idl.toUp(m), Idl.toUp(m)),
+                  "\t\tif(reader->take_next_sample(&data%s, &info) == ReturnCode_t::RETCODE_OK) \n\t\t{\n" % (Idl.toUp(m)),
+                  "\t\t\tif(info.instance_state == eprosima::fastdds::dds::ALIVE_INSTANCE_STATE && info.valid_data) \n\t\t\t{\n",
+                  "\t\t\t\t newData%s = true;\n" % (Idl.toUp(m)),
+                  "\t\t\t}\n",
+                  "\t\t}\n",
+                  "\t\tdata%sLock.unlock();\n" % (Idl.toUp(m))])
         return c
 
     @property
