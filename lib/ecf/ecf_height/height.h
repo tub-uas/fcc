@@ -19,12 +19,15 @@ public:
 
 	Height();
 	~Height();
+	
+	void reset(void);
 	void init(double height, double var_height, double var_acc);
-	void update(double height, double acc, double dt);
-	void reset();
 	void reinit(double height=0.0, double var_height=1.0, double var_acc=1.0);
-	double get_height();
-	double get_height_rate();
+
+	void update(double height, double acc, double dt);
+	
+	double get_height(void) { return _state[0]; }
+	double get_height_rate(void) {return _state[1]; }
 private:
 	
 	std::array<double, 2> _state{{0.0,0.0}};

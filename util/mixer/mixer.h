@@ -117,7 +117,7 @@ public:
 private:
 
 	uint16_t _min_pwm{1000};
-	uint16_t _max_pwm{1500};
+	uint16_t _max_pwm{2000};
 
 	// == MODE AND FUNCTIONS ===================================================
 	flight_mode_t _flight_mode{MANUAL};

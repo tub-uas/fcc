@@ -24,13 +24,15 @@ public:
 	~Wind();
 
 	void init(Vectord3d X, Matrix3d P, Matrix3d Q, Matrix3d R);
-	void update();
-	void reinit();
-	void reset_state();
+	void reinit(Vectord3d X, Matrix3d P, Matrix3d Q, Matrix3d R);
+	void reset_state(void);
 
-	get_wind_north();
-	get_wind_east();
-	get_wind_down();
+	void update(double v_N_n, double v_E_n, double v_D_n);
+	
+
+	get_wind_north() { return _X(0); }
+	get_wind_east() { return _X(1); }
+	get_wind_down() { return _X(2); }
 
 private:
 
