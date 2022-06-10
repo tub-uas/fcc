@@ -20,10 +20,10 @@ public:
 	double doublet(double time);
 	double three211(double time);
 
-	double unitDuration = 0.0;
-	double offset = 0.0;
-	double amplitude = 0.0;
-	double delay = 0.0;
+	double unitDuration{1.0};
+	double offset{0.0};
+	double amplitude{0.0};
+	double delay{0.0};
 
 private:
 
