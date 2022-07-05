@@ -68,7 +68,7 @@ For more information about the shield and the rest of the custom hardware, have 
 ## Operation
 We are currently supporting 3x 3 Flightmodes `Mode`. Flightfunction `Func` selects which 3 Flightmodes are active. So on total we could theoretically support 9 different actual modes.
 
-The 3 possible states `Mode` can be in are `MANUAL` `AUTNOMOUS` and `EXPERIMENTAL`. The 3 possible states `Func` can be in are `FCT_0` `FCT_1` and `FCT_2`. The `AUTONOMOUS` mode is build on the `MANUAL` mode. This means, if `AUTONOMOUS` mode is active, all `MANUAL` functions are active as well. `EXPERIMENTAL` mode and functions are free to use and not determined to a specific behaviour yet.
+The 3 possible states `Mode` can be in are `MANUAL` `AUTNOMOUS` and `EXPERIMENTAL`. The 3 possible states `Func` are divided in `FCT_0` `FCT_1` and `FCT_2`. The `AUTONOMOUS` mode is build on the `MANUAL` mode. This means, if `AUTONOMOUS` mode is active, all `MANUAL` functions are active as well. `EXPERIMENTAL` mode and functions are free to use and not determined to a specific behaviour yet.
 
 
 | Flightmode / Flightfunction | FCT_0            | FCT_1                           | FCT_2                             |
