@@ -9,35 +9,49 @@ typedef enum {
 	H_DOT_SETPOINT
 } height_mode_t;
 
-class Tecs {
+class Tecs 
+{
 
 public:
+
 	Tecs(float setpoint_v_dot, float setpoint_gam, float keI, float keP, float ktI, float ktP, float k_geps, float k_vdeps, float k_dist, float k_dist_2, height_mode_t mode);
 	~Tecs();
 
-	// METHODS
+	// SETTER METHODS
 	void set_limits_pitch(float min, float max);
 	void set_limits_throttle(float min, float max);
-	bool run(float dt, float setpoint_v, float setpoint_h, float v, float h, float v_dot, float h_dot);
-	void reset(void);
 	bool set_mode(bool mode);
+	void reset(void);
+
+	// GETTER METHODS
+	bool run(float dt, float setpoint_v, float setpoint_h, float v, float h, float v_dot, float h_dot);
+	
+
+	// RUN / UPDATE METHODS
+	
+	
+	
 	bool get_mode(void);
 	float get_throttle_setpoint(void);
 	float get_pitch_setpoint(void);
+	float get_setpoint_gam(float h_cmd, float h, float v);
+	float get_setpoint_gam(float h_dot_cmd, float v);
+	float get_setpoint_vdot(float v_cmd, float v);
+	float get_gam(float h_dot, float v);
 
 private:
 
 	// LIMITS PITCH
-	float _pitch_limits_max = 45*M_PI/180.0;
-	float _pitch_limits_min = -45*M_PI/180.0;
+	float _pitch_limits_max{45*M_PI/180.0};
+	float _pitch_limits_min{-45*M_PI/180.0};
 
 	// LIMITS THROTTLE
-	float _thrt_limits_max = 1.0;
-	float _thrt_limits_min = 0.0;
+	float _thrt_limits_max{1.0};
+	float _thrt_limits_min{0.0};
 
 	// INTEGRATOR VALUES
-	float _thrt_integrator = 0;
-	float _pitch_integrator = 0;
+	float _thrt_integrator{0};
+	float _pitch_integrator{0};
 
 	// FEED FORWARD (KTP, KEP)
 	float _thrt_add;
@@ -85,12 +99,7 @@ private:
 	// CONTROLLER OUTPUTS
 	float _setpoint_throttle;
 	float _setpoint_pitch;
-
-	// PRIVATE METHODS
-	float _get_setpoint_gam(float h_cmd, float h, float v);
-	float _get_setpoint_gam(float h_dot_cmd, float v);
-	float _get_setpoint_vdot(float v_cmd, float v);
-	float _get_gam(float h_dot, float v);
+	
 };
 
 
