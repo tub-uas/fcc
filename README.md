@@ -68,14 +68,14 @@ For more information about the shield and the rest of the custom hardware, have 
 ## Operation
 We are currently supporting 3x 3 Flightmodes `Mode`. Flightfunction `Func` selects which 3 Flightmodes are active. So on total we could theoretically support 9 different actual modes.
 
-The 3 possible states `Mode` can be in are `MAN` `ATT` and `NAV`. The 3 possible states `Func` can be in are `FUNC1` `FUNC2` and `FUNC3`.
+The 3 possible states `Mode` can be in are `MANUAL` `AUTNOMOUS` and `EXPERIMENTAL`. The 3 possible states `Func` can be in are `FCT_0` `FCT_1` and `FCT_2`. The `AUTONOMOUS` mode is build on the `MANUAL` mode. This means, if `AUTONOMOUS` mode is active, all `MANUAL` functions are active as well. `EXPERIMENTAL` mode and functions are free to use and not determined to a specific behaviour yet.
 
 
-| Flightmode / Flightfunction | MAN            | ATT                           | NAV                             |
+| Flightmode / Flightfunction | FCT_0            | FCT_1                           | FCT_2                             |
 |:---------------------------:|:--------------:|:-----------------------------:|:-------------------------------:|
-| FUNC1                       | Manual control | Pitch attitude control        | Pitch attitude and roll control |
-| FUNC2                       | Manual control | Pitch rate damper             | Pitch attitude and roll damper  |
-| FUNC3                       | Manual control | Pitch identification sequence | Yaw identification sequence     |
+| MANUAL                       | Manual control | Attitude control        | Height, velocity and course control |
+| AUTONOMOUS                       | Mission | Tracker             | Advanced  |
+| EXPERIMENTAL                       | TBA | TBA | TBA     |
 
 In addition to above presented modes / functions the pilot can decide whether the control output from the RaspberryPi should actually be used as control input to the aircraft or whether the aircraft should directly be controlled (without going through the RaspberryPi) from pilot commands. This is in addition to the "Manual control" option as seen in the table above where the signals are send through the RaspberryPi but not being modified. This is controlled via software running on the RAI board. We will call this pilot-overwrite.
 
