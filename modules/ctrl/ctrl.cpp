@@ -265,6 +265,11 @@ void Ctrl::run() {
 			// == AUTOPILOT == RUN IF FUNCTION FCT_2 OR AUTONOMOUS  ============
 			if(_flight_fct > FCT_1 || _flight_mode == AUTONOMOUS)
 			{
+				// Velocity, Height and course controller
+				// Step 1 - Gather commands - Stick with deadband for height (Rotary knob), 
+				// velocity (Throttle) and delta course (aileron) or directly from mission navigator
+				// Step 2 - Compute commands for roll pitch yaw setpoints
+				
 
 			}
 
