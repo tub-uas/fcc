@@ -55,13 +55,3 @@ void Height::reinit(double height, double var_height, double var_acc)
 	reset();
 	init(height,var_height,var_acc);
 }
-
-double Height::get_height()
-{
-	return _state[0];
-}
-
-double Height::get_height_rate()
-{
-	return _state[1];
-}
