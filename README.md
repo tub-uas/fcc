@@ -8,6 +8,17 @@ This repository contains the code running on the Flight Control Computer (FCC). 
 ## General
 Use the readme and scripts in the `scripts/` directory to compile, run and manage the code. You might need to install some dependencies, such as `boost` (a C++ library) and `wiringpi`.
 
+*Boost installation*
+```
+$ sudo apt-get install libboost-all-dev
+```
+
+*Wiring Pi installation*
+```
+$ wget https://project-downloads.drogon.net/wiringpi-latest.deb
+$ sudo dpkg -i wiringpi-latest.deb
+```
+
 ## Architecture
 
 #### Directories
