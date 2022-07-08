@@ -631,7 +631,7 @@ void Log::run() {
 			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.groundspeed()), sizeof(listener.dataGps.groundspeed()));
 			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.course_over_ground()), sizeof(listener.dataGps.course_over_ground()));
 			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dop_position()), sizeof(listener.dataGps.dop_position()));
-			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dop_height()), sizeof(listener.dataGps.dop_height()));
+			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dop_horizontal()), sizeof(listener.dataGps.dop_horizontal()));
 			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.dop_velocity()), sizeof(listener.dataGps.dop_velocity()));
 			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.sats()), sizeof(listener.dataGps.sats()));
 			gpsFile.write(reinterpret_cast<const char*>(&listener.dataGps.sats_in_view()), sizeof(listener.dataGps.sats_in_view()));
