@@ -32,7 +32,7 @@ struct DataWatchdog : mavlink::Message {
     uint8_t raiOutAlive; /*<  Is RaiOut alive? */
     uint8_t sFusionAlive; /*<  Is SFusion alive? */
     uint8_t uplinkAlive; /*<  Is Uplink alive? */
-    uint8_t alive; /*<  Is message valid? */
+    uint8_t alive; /*<  Is Module alive? */
 
 
     inline std::string get_name(void) const override

@@ -24,13 +24,25 @@ TEST(downlink, DataRaiIn)
     mavlink::downlink::msg::DataRaiIn packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.chnl = {{ 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }};
-    packet_in.roll = 101.0;
-    packet_in.pitch = 129.0;
-    packet_in.yaw = 157.0;
-    packet_in.thr = 185.0;
-    packet_in.fltMode = 19939;
-    packet_in.alive = 39;
+    packet_in.chnl = {{ 20979, 20980, 20981, 20982, 20983, 20984, 20985, 20986, 20987, 20988, 20989, 20990 }};
+    packet_in.xi_setpoint = 101.0;
+    packet_in.eta_setpoint = 129.0;
+    packet_in.zeta_setpoint = 157.0;
+    packet_in.throttle_setpoint = 185.0;
+    packet_in.flaps_setpoint = 213.0;
+    packet_in.roll_setpoint = 241.0;
+    packet_in.roll_rate_setpoint = 269.0;
+    packet_in.pitch_setpoint = 297.0;
+    packet_in.pitch_rate_setpoint = 325.0;
+    packet_in.yaw_setpoint = 353.0;
+    packet_in.yaw_rate_setpoint = 381.0;
+    packet_in.tas_setpoint = 409.0;
+    packet_in.tas_rate_setpoint = 437.0;
+    packet_in.hgt_setpoint = 465.0;
+    packet_in.hgt_rate_setpoint = 493.0;
+    packet_in.flight_mode = 22227;
+    packet_in.flight_fct = 22331;
+    packet_in.alive = 49;
 
     mavlink::downlink::msg::DataRaiIn packet1{};
     mavlink::downlink::msg::DataRaiIn packet2{};
@@ -48,11 +60,23 @@ TEST(downlink, DataRaiIn)
     EXPECT_EQ(packet1.time, packet2.time);
     EXPECT_EQ(packet1.senseTime, packet2.senseTime);
     EXPECT_EQ(packet1.chnl, packet2.chnl);
-    EXPECT_EQ(packet1.roll, packet2.roll);
-    EXPECT_EQ(packet1.pitch, packet2.pitch);
-    EXPECT_EQ(packet1.yaw, packet2.yaw);
-    EXPECT_EQ(packet1.thr, packet2.thr);
-    EXPECT_EQ(packet1.fltMode, packet2.fltMode);
+    EXPECT_EQ(packet1.xi_setpoint, packet2.xi_setpoint);
+    EXPECT_EQ(packet1.eta_setpoint, packet2.eta_setpoint);
+    EXPECT_EQ(packet1.zeta_setpoint, packet2.zeta_setpoint);
+    EXPECT_EQ(packet1.throttle_setpoint, packet2.throttle_setpoint);
+    EXPECT_EQ(packet1.flaps_setpoint, packet2.flaps_setpoint);
+    EXPECT_EQ(packet1.roll_setpoint, packet2.roll_setpoint);
+    EXPECT_EQ(packet1.roll_rate_setpoint, packet2.roll_rate_setpoint);
+    EXPECT_EQ(packet1.pitch_setpoint, packet2.pitch_setpoint);
+    EXPECT_EQ(packet1.pitch_rate_setpoint, packet2.pitch_rate_setpoint);
+    EXPECT_EQ(packet1.yaw_setpoint, packet2.yaw_setpoint);
+    EXPECT_EQ(packet1.yaw_rate_setpoint, packet2.yaw_rate_setpoint);
+    EXPECT_EQ(packet1.tas_setpoint, packet2.tas_setpoint);
+    EXPECT_EQ(packet1.tas_rate_setpoint, packet2.tas_rate_setpoint);
+    EXPECT_EQ(packet1.hgt_setpoint, packet2.hgt_setpoint);
+    EXPECT_EQ(packet1.hgt_rate_setpoint, packet2.hgt_rate_setpoint);
+    EXPECT_EQ(packet1.flight_mode, packet2.flight_mode);
+    EXPECT_EQ(packet1.flight_fct, packet2.flight_fct);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -65,19 +89,31 @@ TEST(downlink_interop, DataRaiIn)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_dataraiin_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, { 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }, 19939, 39
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 493.0, { 20979, 20980, 20981, 20982, 20983, 20984, 20985, 20986, 20987, 20988, 20989, 20990 }, 22227, 22331, 49
     };
 
     mavlink::downlink::msg::DataRaiIn packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.chnl = {{ 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }};
-    packet_in.roll = 101.0;
-    packet_in.pitch = 129.0;
-    packet_in.yaw = 157.0;
-    packet_in.thr = 185.0;
-    packet_in.fltMode = 19939;
-    packet_in.alive = 39;
+    packet_in.chnl = {{ 20979, 20980, 20981, 20982, 20983, 20984, 20985, 20986, 20987, 20988, 20989, 20990 }};
+    packet_in.xi_setpoint = 101.0;
+    packet_in.eta_setpoint = 129.0;
+    packet_in.zeta_setpoint = 157.0;
+    packet_in.throttle_setpoint = 185.0;
+    packet_in.flaps_setpoint = 213.0;
+    packet_in.roll_setpoint = 241.0;
+    packet_in.roll_rate_setpoint = 269.0;
+    packet_in.pitch_setpoint = 297.0;
+    packet_in.pitch_rate_setpoint = 325.0;
+    packet_in.yaw_setpoint = 353.0;
+    packet_in.yaw_rate_setpoint = 381.0;
+    packet_in.tas_setpoint = 409.0;
+    packet_in.tas_rate_setpoint = 437.0;
+    packet_in.hgt_setpoint = 465.0;
+    packet_in.hgt_rate_setpoint = 493.0;
+    packet_in.flight_mode = 22227;
+    packet_in.flight_fct = 22331;
+    packet_in.alive = 49;
 
     mavlink::downlink::msg::DataRaiIn packet2{};
 
@@ -93,11 +129,23 @@ TEST(downlink_interop, DataRaiIn)
     EXPECT_EQ(packet_in.time, packet2.time);
     EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
     EXPECT_EQ(packet_in.chnl, packet2.chnl);
-    EXPECT_EQ(packet_in.roll, packet2.roll);
-    EXPECT_EQ(packet_in.pitch, packet2.pitch);
-    EXPECT_EQ(packet_in.yaw, packet2.yaw);
-    EXPECT_EQ(packet_in.thr, packet2.thr);
-    EXPECT_EQ(packet_in.fltMode, packet2.fltMode);
+    EXPECT_EQ(packet_in.xi_setpoint, packet2.xi_setpoint);
+    EXPECT_EQ(packet_in.eta_setpoint, packet2.eta_setpoint);
+    EXPECT_EQ(packet_in.zeta_setpoint, packet2.zeta_setpoint);
+    EXPECT_EQ(packet_in.throttle_setpoint, packet2.throttle_setpoint);
+    EXPECT_EQ(packet_in.flaps_setpoint, packet2.flaps_setpoint);
+    EXPECT_EQ(packet_in.roll_setpoint, packet2.roll_setpoint);
+    EXPECT_EQ(packet_in.roll_rate_setpoint, packet2.roll_rate_setpoint);
+    EXPECT_EQ(packet_in.pitch_setpoint, packet2.pitch_setpoint);
+    EXPECT_EQ(packet_in.pitch_rate_setpoint, packet2.pitch_rate_setpoint);
+    EXPECT_EQ(packet_in.yaw_setpoint, packet2.yaw_setpoint);
+    EXPECT_EQ(packet_in.yaw_rate_setpoint, packet2.yaw_rate_setpoint);
+    EXPECT_EQ(packet_in.tas_setpoint, packet2.tas_setpoint);
+    EXPECT_EQ(packet_in.tas_rate_setpoint, packet2.tas_rate_setpoint);
+    EXPECT_EQ(packet_in.hgt_setpoint, packet2.hgt_setpoint);
+    EXPECT_EQ(packet_in.hgt_rate_setpoint, packet2.hgt_rate_setpoint);
+    EXPECT_EQ(packet_in.flight_mode, packet2.flight_mode);
+    EXPECT_EQ(packet_in.flight_fct, packet2.flight_fct);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -114,13 +162,15 @@ TEST(downlink, DataRaiOut)
 
     mavlink::downlink::msg::DataRaiOut packet_in{};
     packet_in.time = 93372036854775807ULL;
-    packet_in.chnl = {{ 18483, 18484, 18485, 18486, 18487, 18488, 18489, 18490, 18491, 18492, 18493, 18494 }};
-    packet_in.roll = 73.0;
-    packet_in.pitch = 101.0;
-    packet_in.yaw = 129.0;
-    packet_in.thr = 157.0;
-    packet_in.fltMode = 19731;
-    packet_in.alive = 27;
+    packet_in.chnl = {{ 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }};
+    packet_in.xi_setpoint = 73.0;
+    packet_in.eta_setpoint = 101.0;
+    packet_in.zeta_setpoint = 129.0;
+    packet_in.throttle_setpoint = 157.0;
+    packet_in.flaps_setpoint = 185.0;
+    packet_in.flight_mode = 19939;
+    packet_in.flight_fct = 20043;
+    packet_in.alive = 173;
 
     mavlink::downlink::msg::DataRaiOut packet1{};
     mavlink::downlink::msg::DataRaiOut packet2{};
@@ -137,11 +187,13 @@ TEST(downlink, DataRaiOut)
 
     EXPECT_EQ(packet1.time, packet2.time);
     EXPECT_EQ(packet1.chnl, packet2.chnl);
-    EXPECT_EQ(packet1.roll, packet2.roll);
-    EXPECT_EQ(packet1.pitch, packet2.pitch);
-    EXPECT_EQ(packet1.yaw, packet2.yaw);
-    EXPECT_EQ(packet1.thr, packet2.thr);
-    EXPECT_EQ(packet1.fltMode, packet2.fltMode);
+    EXPECT_EQ(packet1.xi_setpoint, packet2.xi_setpoint);
+    EXPECT_EQ(packet1.eta_setpoint, packet2.eta_setpoint);
+    EXPECT_EQ(packet1.zeta_setpoint, packet2.zeta_setpoint);
+    EXPECT_EQ(packet1.throttle_setpoint, packet2.throttle_setpoint);
+    EXPECT_EQ(packet1.flaps_setpoint, packet2.flaps_setpoint);
+    EXPECT_EQ(packet1.flight_mode, packet2.flight_mode);
+    EXPECT_EQ(packet1.flight_fct, packet2.flight_fct);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -154,18 +206,20 @@ TEST(downlink_interop, DataRaiOut)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_dataraiout_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, { 18483, 18484, 18485, 18486, 18487, 18488, 18489, 18490, 18491, 18492, 18493, 18494 }, 19731, 27
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, { 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }, 19939, 20043, 173
     };
 
     mavlink::downlink::msg::DataRaiOut packet_in{};
     packet_in.time = 93372036854775807ULL;
-    packet_in.chnl = {{ 18483, 18484, 18485, 18486, 18487, 18488, 18489, 18490, 18491, 18492, 18493, 18494 }};
-    packet_in.roll = 73.0;
-    packet_in.pitch = 101.0;
-    packet_in.yaw = 129.0;
-    packet_in.thr = 157.0;
-    packet_in.fltMode = 19731;
-    packet_in.alive = 27;
+    packet_in.chnl = {{ 18691, 18692, 18693, 18694, 18695, 18696, 18697, 18698, 18699, 18700, 18701, 18702 }};
+    packet_in.xi_setpoint = 73.0;
+    packet_in.eta_setpoint = 101.0;
+    packet_in.zeta_setpoint = 129.0;
+    packet_in.throttle_setpoint = 157.0;
+    packet_in.flaps_setpoint = 185.0;
+    packet_in.flight_mode = 19939;
+    packet_in.flight_fct = 20043;
+    packet_in.alive = 173;
 
     mavlink::downlink::msg::DataRaiOut packet2{};
 
@@ -180,11 +234,13 @@ TEST(downlink_interop, DataRaiOut)
 
     EXPECT_EQ(packet_in.time, packet2.time);
     EXPECT_EQ(packet_in.chnl, packet2.chnl);
-    EXPECT_EQ(packet_in.roll, packet2.roll);
-    EXPECT_EQ(packet_in.pitch, packet2.pitch);
-    EXPECT_EQ(packet_in.yaw, packet2.yaw);
-    EXPECT_EQ(packet_in.thr, packet2.thr);
-    EXPECT_EQ(packet_in.fltMode, packet2.fltMode);
+    EXPECT_EQ(packet_in.xi_setpoint, packet2.xi_setpoint);
+    EXPECT_EQ(packet_in.eta_setpoint, packet2.eta_setpoint);
+    EXPECT_EQ(packet_in.zeta_setpoint, packet2.zeta_setpoint);
+    EXPECT_EQ(packet_in.throttle_setpoint, packet2.throttle_setpoint);
+    EXPECT_EQ(packet_in.flaps_setpoint, packet2.flaps_setpoint);
+    EXPECT_EQ(packet_in.flight_mode, packet2.flight_mode);
+    EXPECT_EQ(packet_in.flight_fct, packet2.flight_fct);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -211,16 +267,12 @@ TEST(downlink, DataAhrs)
     packet_in.magX = 269.0;
     packet_in.magY = 297.0;
     packet_in.magZ = 325.0;
-    packet_in.temp = 353.0;
-    packet_in.press = 381.0;
+    packet_in.temperature = 353.0;
+    packet_in.barometric_pressure = 381.0;
     packet_in.phi = 409.0;
     packet_in.the = 437.0;
     packet_in.psi = 465.0;
-    packet_in.q0 = 493.0;
-    packet_in.q1 = 521.0;
-    packet_in.q2 = 549.0;
-    packet_in.q3 = 577.0;
-    packet_in.alive = 1;
+    packet_in.alive = 209;
 
     mavlink::downlink::msg::DataAhrs packet1{};
     mavlink::downlink::msg::DataAhrs packet2{};
@@ -246,15 +298,11 @@ TEST(downlink, DataAhrs)
     EXPECT_EQ(packet1.magX, packet2.magX);
     EXPECT_EQ(packet1.magY, packet2.magY);
     EXPECT_EQ(packet1.magZ, packet2.magZ);
-    EXPECT_EQ(packet1.temp, packet2.temp);
-    EXPECT_EQ(packet1.press, packet2.press);
+    EXPECT_EQ(packet1.temperature, packet2.temperature);
+    EXPECT_EQ(packet1.barometric_pressure, packet2.barometric_pressure);
     EXPECT_EQ(packet1.phi, packet2.phi);
     EXPECT_EQ(packet1.the, packet2.the);
     EXPECT_EQ(packet1.psi, packet2.psi);
-    EXPECT_EQ(packet1.q0, packet2.q0);
-    EXPECT_EQ(packet1.q1, packet2.q1);
-    EXPECT_EQ(packet1.q2, packet2.q2);
-    EXPECT_EQ(packet1.q3, packet2.q3);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -267,7 +315,7 @@ TEST(downlink_interop, DataAhrs)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_dataahrs_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 493.0, 521.0, 549.0, 577.0, 1
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 209
     };
 
     mavlink::downlink::msg::DataAhrs packet_in{};
@@ -282,16 +330,12 @@ TEST(downlink_interop, DataAhrs)
     packet_in.magX = 269.0;
     packet_in.magY = 297.0;
     packet_in.magZ = 325.0;
-    packet_in.temp = 353.0;
-    packet_in.press = 381.0;
+    packet_in.temperature = 353.0;
+    packet_in.barometric_pressure = 381.0;
     packet_in.phi = 409.0;
     packet_in.the = 437.0;
     packet_in.psi = 465.0;
-    packet_in.q0 = 493.0;
-    packet_in.q1 = 521.0;
-    packet_in.q2 = 549.0;
-    packet_in.q3 = 577.0;
-    packet_in.alive = 1;
+    packet_in.alive = 209;
 
     mavlink::downlink::msg::DataAhrs packet2{};
 
@@ -315,15 +359,11 @@ TEST(downlink_interop, DataAhrs)
     EXPECT_EQ(packet_in.magX, packet2.magX);
     EXPECT_EQ(packet_in.magY, packet2.magY);
     EXPECT_EQ(packet_in.magZ, packet2.magZ);
-    EXPECT_EQ(packet_in.temp, packet2.temp);
-    EXPECT_EQ(packet_in.press, packet2.press);
+    EXPECT_EQ(packet_in.temperature, packet2.temperature);
+    EXPECT_EQ(packet_in.barometric_pressure, packet2.barometric_pressure);
     EXPECT_EQ(packet_in.phi, packet2.phi);
     EXPECT_EQ(packet_in.the, packet2.the);
     EXPECT_EQ(packet_in.psi, packet2.psi);
-    EXPECT_EQ(packet_in.q0, packet2.q0);
-    EXPECT_EQ(packet_in.q1, packet2.q1);
-    EXPECT_EQ(packet_in.q2, packet2.q2);
-    EXPECT_EQ(packet_in.q3, packet2.q3);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -341,12 +381,14 @@ TEST(downlink, DataAir)
     mavlink::downlink::msg::DataAir packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.dynamicPress = 101.0;
-    packet_in.velocity = 129.0;
-    packet_in.baroPress = 157.0;
-    packet_in.density = 185.0;
-    packet_in.temp = 213.0;
-    packet_in.alive = 101;
+    packet_in.dynamic_pressure = 101.0;
+    packet_in.true_airspeed = 129.0;
+    packet_in.indicated_airspeed = 157.0;
+    packet_in.barometric_pressure = 185.0;
+    packet_in.barometric_height = 213.0;
+    packet_in.density = 241.0;
+    packet_in.temperature = 269.0;
+    packet_in.alive = 125;
 
     mavlink::downlink::msg::DataAir packet1{};
     mavlink::downlink::msg::DataAir packet2{};
@@ -363,11 +405,13 @@ TEST(downlink, DataAir)
 
     EXPECT_EQ(packet1.time, packet2.time);
     EXPECT_EQ(packet1.senseTime, packet2.senseTime);
-    EXPECT_EQ(packet1.dynamicPress, packet2.dynamicPress);
-    EXPECT_EQ(packet1.velocity, packet2.velocity);
-    EXPECT_EQ(packet1.baroPress, packet2.baroPress);
+    EXPECT_EQ(packet1.dynamic_pressure, packet2.dynamic_pressure);
+    EXPECT_EQ(packet1.true_airspeed, packet2.true_airspeed);
+    EXPECT_EQ(packet1.indicated_airspeed, packet2.indicated_airspeed);
+    EXPECT_EQ(packet1.barometric_pressure, packet2.barometric_pressure);
+    EXPECT_EQ(packet1.barometric_height, packet2.barometric_height);
     EXPECT_EQ(packet1.density, packet2.density);
-    EXPECT_EQ(packet1.temp, packet2.temp);
+    EXPECT_EQ(packet1.temperature, packet2.temperature);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -380,18 +424,20 @@ TEST(downlink_interop, DataAir)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_dataair_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 101
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 125
     };
 
     mavlink::downlink::msg::DataAir packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.dynamicPress = 101.0;
-    packet_in.velocity = 129.0;
-    packet_in.baroPress = 157.0;
-    packet_in.density = 185.0;
-    packet_in.temp = 213.0;
-    packet_in.alive = 101;
+    packet_in.dynamic_pressure = 101.0;
+    packet_in.true_airspeed = 129.0;
+    packet_in.indicated_airspeed = 157.0;
+    packet_in.barometric_pressure = 185.0;
+    packet_in.barometric_height = 213.0;
+    packet_in.density = 241.0;
+    packet_in.temperature = 269.0;
+    packet_in.alive = 125;
 
     mavlink::downlink::msg::DataAir packet2{};
 
@@ -406,11 +452,13 @@ TEST(downlink_interop, DataAir)
 
     EXPECT_EQ(packet_in.time, packet2.time);
     EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
-    EXPECT_EQ(packet_in.dynamicPress, packet2.dynamicPress);
-    EXPECT_EQ(packet_in.velocity, packet2.velocity);
-    EXPECT_EQ(packet_in.baroPress, packet2.baroPress);
+    EXPECT_EQ(packet_in.dynamic_pressure, packet2.dynamic_pressure);
+    EXPECT_EQ(packet_in.true_airspeed, packet2.true_airspeed);
+    EXPECT_EQ(packet_in.indicated_airspeed, packet2.indicated_airspeed);
+    EXPECT_EQ(packet_in.barometric_pressure, packet2.barometric_pressure);
+    EXPECT_EQ(packet_in.barometric_height, packet2.barometric_height);
     EXPECT_EQ(packet_in.density, packet2.density);
-    EXPECT_EQ(packet_in.temp, packet2.temp);
+    EXPECT_EQ(packet_in.temperature, packet2.temperature);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -427,37 +475,37 @@ TEST(downlink, DataSFusion)
 
     mavlink::downlink::msg::DataSFusion packet_in{};
     packet_in.time = 93372036854775807ULL;
-    packet_in.gyrX = 73.0;
-    packet_in.gyrY = 101.0;
-    packet_in.gyrZ = 129.0;
-    packet_in.accX = 157.0;
-    packet_in.accY = 185.0;
-    packet_in.accZ = 213.0;
-    packet_in.magX = 241.0;
-    packet_in.magY = 269.0;
-    packet_in.magZ = 297.0;
-    packet_in.temp = 325.0;
-    packet_in.press = 353.0;
-    packet_in.phi = 381.0;
-    packet_in.the = 409.0;
-    packet_in.psi = 437.0;
-    packet_in.q0 = 465.0;
-    packet_in.q1 = 493.0;
-    packet_in.q2 = 521.0;
-    packet_in.q3 = 549.0;
-    packet_in.posN = 577.0;
-    packet_in.posE = 605.0;
-    packet_in.posD = 633.0;
-    packet_in.speedN = 661.0;
-    packet_in.speedE = 689.0;
-    packet_in.speedD = 717.0;
-    packet_in.windN = 745.0;
-    packet_in.windE = 773.0;
-    packet_in.windD = 801.0;
-    packet_in.ssa = 829.0;
-    packet_in.aoa = 857.0;
-    packet_in.gamma = 885.0;
-    packet_in.alive = 133;
+    packet_in.p = 185.0;
+    packet_in.q = 213.0;
+    packet_in.r = 241.0;
+    packet_in.a_x = 269.0;
+    packet_in.a_y = 297.0;
+    packet_in.a_z = 325.0;
+    packet_in.true_airspeed = 353.0;
+    packet_in.indicated_airspeed = 381.0;
+    packet_in.density = 409.0;
+    packet_in.dynamic_pressure = 437.0;
+    packet_in.barometric_pressure = 465.0;
+    packet_in.height_rate = 493.0;
+    packet_in.height = 521.0;
+    packet_in.ssa = 549.0;
+    packet_in.aoa = 577.0;
+    packet_in.gamma = 605.0;
+    packet_in.phi = 633.0;
+    packet_in.the = 661.0;
+    packet_in.psi = 689.0;
+    packet_in.latitude = 179.0;
+    packet_in.longitude = 235.0;
+    packet_in.posN = 717.0;
+    packet_in.posE = 745.0;
+    packet_in.posD = 773.0;
+    packet_in.speedN = 801.0;
+    packet_in.speedE = 829.0;
+    packet_in.speedD = 857.0;
+    packet_in.windN = 885.0;
+    packet_in.windE = 913.0;
+    packet_in.windD = 941.0;
+    packet_in.alive = 157;
 
     mavlink::downlink::msg::DataSFusion packet1{};
     mavlink::downlink::msg::DataSFusion packet2{};
@@ -473,24 +521,27 @@ TEST(downlink, DataSFusion)
     packet2.deserialize(map2);
 
     EXPECT_EQ(packet1.time, packet2.time);
-    EXPECT_EQ(packet1.gyrX, packet2.gyrX);
-    EXPECT_EQ(packet1.gyrY, packet2.gyrY);
-    EXPECT_EQ(packet1.gyrZ, packet2.gyrZ);
-    EXPECT_EQ(packet1.accX, packet2.accX);
-    EXPECT_EQ(packet1.accY, packet2.accY);
-    EXPECT_EQ(packet1.accZ, packet2.accZ);
-    EXPECT_EQ(packet1.magX, packet2.magX);
-    EXPECT_EQ(packet1.magY, packet2.magY);
-    EXPECT_EQ(packet1.magZ, packet2.magZ);
-    EXPECT_EQ(packet1.temp, packet2.temp);
-    EXPECT_EQ(packet1.press, packet2.press);
+    EXPECT_EQ(packet1.p, packet2.p);
+    EXPECT_EQ(packet1.q, packet2.q);
+    EXPECT_EQ(packet1.r, packet2.r);
+    EXPECT_EQ(packet1.a_x, packet2.a_x);
+    EXPECT_EQ(packet1.a_y, packet2.a_y);
+    EXPECT_EQ(packet1.a_z, packet2.a_z);
+    EXPECT_EQ(packet1.true_airspeed, packet2.true_airspeed);
+    EXPECT_EQ(packet1.indicated_airspeed, packet2.indicated_airspeed);
+    EXPECT_EQ(packet1.density, packet2.density);
+    EXPECT_EQ(packet1.dynamic_pressure, packet2.dynamic_pressure);
+    EXPECT_EQ(packet1.barometric_pressure, packet2.barometric_pressure);
+    EXPECT_EQ(packet1.height_rate, packet2.height_rate);
+    EXPECT_EQ(packet1.height, packet2.height);
+    EXPECT_EQ(packet1.ssa, packet2.ssa);
+    EXPECT_EQ(packet1.aoa, packet2.aoa);
+    EXPECT_EQ(packet1.gamma, packet2.gamma);
     EXPECT_EQ(packet1.phi, packet2.phi);
     EXPECT_EQ(packet1.the, packet2.the);
     EXPECT_EQ(packet1.psi, packet2.psi);
-    EXPECT_EQ(packet1.q0, packet2.q0);
-    EXPECT_EQ(packet1.q1, packet2.q1);
-    EXPECT_EQ(packet1.q2, packet2.q2);
-    EXPECT_EQ(packet1.q3, packet2.q3);
+    EXPECT_EQ(packet1.latitude, packet2.latitude);
+    EXPECT_EQ(packet1.longitude, packet2.longitude);
     EXPECT_EQ(packet1.posN, packet2.posN);
     EXPECT_EQ(packet1.posE, packet2.posE);
     EXPECT_EQ(packet1.posD, packet2.posD);
@@ -500,9 +551,6 @@ TEST(downlink, DataSFusion)
     EXPECT_EQ(packet1.windN, packet2.windN);
     EXPECT_EQ(packet1.windE, packet2.windE);
     EXPECT_EQ(packet1.windD, packet2.windD);
-    EXPECT_EQ(packet1.ssa, packet2.ssa);
-    EXPECT_EQ(packet1.aoa, packet2.aoa);
-    EXPECT_EQ(packet1.gamma, packet2.gamma);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -515,42 +563,42 @@ TEST(downlink_interop, DataSFusion)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_datasfusion_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 493.0, 521.0, 549.0, 577.0, 605.0, 633.0, 661.0, 689.0, 717.0, 745.0, 773.0, 801.0, 829.0, 857.0, 885.0, 133
+         93372036854775807ULL, 179.0, 235.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 493.0, 521.0, 549.0, 577.0, 605.0, 633.0, 661.0, 689.0, 717.0, 745.0, 773.0, 801.0, 829.0, 857.0, 885.0, 913.0, 941.0, 157
     };
 
     mavlink::downlink::msg::DataSFusion packet_in{};
     packet_in.time = 93372036854775807ULL;
-    packet_in.gyrX = 73.0;
-    packet_in.gyrY = 101.0;
-    packet_in.gyrZ = 129.0;
-    packet_in.accX = 157.0;
-    packet_in.accY = 185.0;
-    packet_in.accZ = 213.0;
-    packet_in.magX = 241.0;
-    packet_in.magY = 269.0;
-    packet_in.magZ = 297.0;
-    packet_in.temp = 325.0;
-    packet_in.press = 353.0;
-    packet_in.phi = 381.0;
-    packet_in.the = 409.0;
-    packet_in.psi = 437.0;
-    packet_in.q0 = 465.0;
-    packet_in.q1 = 493.0;
-    packet_in.q2 = 521.0;
-    packet_in.q3 = 549.0;
-    packet_in.posN = 577.0;
-    packet_in.posE = 605.0;
-    packet_in.posD = 633.0;
-    packet_in.speedN = 661.0;
-    packet_in.speedE = 689.0;
-    packet_in.speedD = 717.0;
-    packet_in.windN = 745.0;
-    packet_in.windE = 773.0;
-    packet_in.windD = 801.0;
-    packet_in.ssa = 829.0;
-    packet_in.aoa = 857.0;
-    packet_in.gamma = 885.0;
-    packet_in.alive = 133;
+    packet_in.p = 185.0;
+    packet_in.q = 213.0;
+    packet_in.r = 241.0;
+    packet_in.a_x = 269.0;
+    packet_in.a_y = 297.0;
+    packet_in.a_z = 325.0;
+    packet_in.true_airspeed = 353.0;
+    packet_in.indicated_airspeed = 381.0;
+    packet_in.density = 409.0;
+    packet_in.dynamic_pressure = 437.0;
+    packet_in.barometric_pressure = 465.0;
+    packet_in.height_rate = 493.0;
+    packet_in.height = 521.0;
+    packet_in.ssa = 549.0;
+    packet_in.aoa = 577.0;
+    packet_in.gamma = 605.0;
+    packet_in.phi = 633.0;
+    packet_in.the = 661.0;
+    packet_in.psi = 689.0;
+    packet_in.latitude = 179.0;
+    packet_in.longitude = 235.0;
+    packet_in.posN = 717.0;
+    packet_in.posE = 745.0;
+    packet_in.posD = 773.0;
+    packet_in.speedN = 801.0;
+    packet_in.speedE = 829.0;
+    packet_in.speedD = 857.0;
+    packet_in.windN = 885.0;
+    packet_in.windE = 913.0;
+    packet_in.windD = 941.0;
+    packet_in.alive = 157;
 
     mavlink::downlink::msg::DataSFusion packet2{};
 
@@ -564,24 +612,27 @@ TEST(downlink_interop, DataSFusion)
     } (&msg);
 
     EXPECT_EQ(packet_in.time, packet2.time);
-    EXPECT_EQ(packet_in.gyrX, packet2.gyrX);
-    EXPECT_EQ(packet_in.gyrY, packet2.gyrY);
-    EXPECT_EQ(packet_in.gyrZ, packet2.gyrZ);
-    EXPECT_EQ(packet_in.accX, packet2.accX);
-    EXPECT_EQ(packet_in.accY, packet2.accY);
-    EXPECT_EQ(packet_in.accZ, packet2.accZ);
-    EXPECT_EQ(packet_in.magX, packet2.magX);
-    EXPECT_EQ(packet_in.magY, packet2.magY);
-    EXPECT_EQ(packet_in.magZ, packet2.magZ);
-    EXPECT_EQ(packet_in.temp, packet2.temp);
-    EXPECT_EQ(packet_in.press, packet2.press);
+    EXPECT_EQ(packet_in.p, packet2.p);
+    EXPECT_EQ(packet_in.q, packet2.q);
+    EXPECT_EQ(packet_in.r, packet2.r);
+    EXPECT_EQ(packet_in.a_x, packet2.a_x);
+    EXPECT_EQ(packet_in.a_y, packet2.a_y);
+    EXPECT_EQ(packet_in.a_z, packet2.a_z);
+    EXPECT_EQ(packet_in.true_airspeed, packet2.true_airspeed);
+    EXPECT_EQ(packet_in.indicated_airspeed, packet2.indicated_airspeed);
+    EXPECT_EQ(packet_in.density, packet2.density);
+    EXPECT_EQ(packet_in.dynamic_pressure, packet2.dynamic_pressure);
+    EXPECT_EQ(packet_in.barometric_pressure, packet2.barometric_pressure);
+    EXPECT_EQ(packet_in.height_rate, packet2.height_rate);
+    EXPECT_EQ(packet_in.height, packet2.height);
+    EXPECT_EQ(packet_in.ssa, packet2.ssa);
+    EXPECT_EQ(packet_in.aoa, packet2.aoa);
+    EXPECT_EQ(packet_in.gamma, packet2.gamma);
     EXPECT_EQ(packet_in.phi, packet2.phi);
     EXPECT_EQ(packet_in.the, packet2.the);
     EXPECT_EQ(packet_in.psi, packet2.psi);
-    EXPECT_EQ(packet_in.q0, packet2.q0);
-    EXPECT_EQ(packet_in.q1, packet2.q1);
-    EXPECT_EQ(packet_in.q2, packet2.q2);
-    EXPECT_EQ(packet_in.q3, packet2.q3);
+    EXPECT_EQ(packet_in.latitude, packet2.latitude);
+    EXPECT_EQ(packet_in.longitude, packet2.longitude);
     EXPECT_EQ(packet_in.posN, packet2.posN);
     EXPECT_EQ(packet_in.posE, packet2.posE);
     EXPECT_EQ(packet_in.posD, packet2.posD);
@@ -591,9 +642,6 @@ TEST(downlink_interop, DataSFusion)
     EXPECT_EQ(packet_in.windN, packet2.windN);
     EXPECT_EQ(packet_in.windE, packet2.windE);
     EXPECT_EQ(packet_in.windD, packet2.windD);
-    EXPECT_EQ(packet_in.ssa, packet2.ssa);
-    EXPECT_EQ(packet_in.aoa, packet2.aoa);
-    EXPECT_EQ(packet_in.gamma, packet2.gamma);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -610,12 +658,24 @@ TEST(downlink, DataCtrl)
 
     mavlink::downlink::msg::DataCtrl packet_in{};
     packet_in.time = 93372036854775807ULL;
-    packet_in.xi = 73.0;
-    packet_in.eta = 101.0;
-    packet_in.zeta = 129.0;
-    packet_in.etaT = 157.0;
-    packet_in.etaF = 185.0;
-    packet_in.alive = 89;
+    packet_in.xi_setpoint = 73.0;
+    packet_in.eta_setpoint = 101.0;
+    packet_in.zeta_setpoint = 129.0;
+    packet_in.throttle_setpoint = 157.0;
+    packet_in.flaps_setpoint = 185.0;
+    packet_in.roll_setpoint = 213.0;
+    packet_in.roll_rate_setpoint = 241.0;
+    packet_in.pitch_setpoint = 269.0;
+    packet_in.pitch_rate_setpoint = 297.0;
+    packet_in.yaw_setpoint = 325.0;
+    packet_in.yaw_rate_setpoint = 353.0;
+    packet_in.tas_setpoint = 381.0;
+    packet_in.tas_rate_setpoint = 409.0;
+    packet_in.hgt_setpoint = 437.0;
+    packet_in.hgt_rate_setpoint = 465.0;
+    packet_in.flight_mode = 20771;
+    packet_in.flight_fct = 20875;
+    packet_in.alive = 221;
 
     mavlink::downlink::msg::DataCtrl packet1{};
     mavlink::downlink::msg::DataCtrl packet2{};
@@ -631,11 +691,23 @@ TEST(downlink, DataCtrl)
     packet2.deserialize(map2);
 
     EXPECT_EQ(packet1.time, packet2.time);
-    EXPECT_EQ(packet1.xi, packet2.xi);
-    EXPECT_EQ(packet1.eta, packet2.eta);
-    EXPECT_EQ(packet1.zeta, packet2.zeta);
-    EXPECT_EQ(packet1.etaT, packet2.etaT);
-    EXPECT_EQ(packet1.etaF, packet2.etaF);
+    EXPECT_EQ(packet1.xi_setpoint, packet2.xi_setpoint);
+    EXPECT_EQ(packet1.eta_setpoint, packet2.eta_setpoint);
+    EXPECT_EQ(packet1.zeta_setpoint, packet2.zeta_setpoint);
+    EXPECT_EQ(packet1.throttle_setpoint, packet2.throttle_setpoint);
+    EXPECT_EQ(packet1.flaps_setpoint, packet2.flaps_setpoint);
+    EXPECT_EQ(packet1.roll_setpoint, packet2.roll_setpoint);
+    EXPECT_EQ(packet1.roll_rate_setpoint, packet2.roll_rate_setpoint);
+    EXPECT_EQ(packet1.pitch_setpoint, packet2.pitch_setpoint);
+    EXPECT_EQ(packet1.pitch_rate_setpoint, packet2.pitch_rate_setpoint);
+    EXPECT_EQ(packet1.yaw_setpoint, packet2.yaw_setpoint);
+    EXPECT_EQ(packet1.yaw_rate_setpoint, packet2.yaw_rate_setpoint);
+    EXPECT_EQ(packet1.tas_setpoint, packet2.tas_setpoint);
+    EXPECT_EQ(packet1.tas_rate_setpoint, packet2.tas_rate_setpoint);
+    EXPECT_EQ(packet1.hgt_setpoint, packet2.hgt_setpoint);
+    EXPECT_EQ(packet1.hgt_rate_setpoint, packet2.hgt_rate_setpoint);
+    EXPECT_EQ(packet1.flight_mode, packet2.flight_mode);
+    EXPECT_EQ(packet1.flight_fct, packet2.flight_fct);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -648,17 +720,29 @@ TEST(downlink_interop, DataCtrl)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_datactrl_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 89
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 437.0, 465.0, 20771, 20875, 221
     };
 
     mavlink::downlink::msg::DataCtrl packet_in{};
     packet_in.time = 93372036854775807ULL;
-    packet_in.xi = 73.0;
-    packet_in.eta = 101.0;
-    packet_in.zeta = 129.0;
-    packet_in.etaT = 157.0;
-    packet_in.etaF = 185.0;
-    packet_in.alive = 89;
+    packet_in.xi_setpoint = 73.0;
+    packet_in.eta_setpoint = 101.0;
+    packet_in.zeta_setpoint = 129.0;
+    packet_in.throttle_setpoint = 157.0;
+    packet_in.flaps_setpoint = 185.0;
+    packet_in.roll_setpoint = 213.0;
+    packet_in.roll_rate_setpoint = 241.0;
+    packet_in.pitch_setpoint = 269.0;
+    packet_in.pitch_rate_setpoint = 297.0;
+    packet_in.yaw_setpoint = 325.0;
+    packet_in.yaw_rate_setpoint = 353.0;
+    packet_in.tas_setpoint = 381.0;
+    packet_in.tas_rate_setpoint = 409.0;
+    packet_in.hgt_setpoint = 437.0;
+    packet_in.hgt_rate_setpoint = 465.0;
+    packet_in.flight_mode = 20771;
+    packet_in.flight_fct = 20875;
+    packet_in.alive = 221;
 
     mavlink::downlink::msg::DataCtrl packet2{};
 
@@ -672,11 +756,23 @@ TEST(downlink_interop, DataCtrl)
     } (&msg);
 
     EXPECT_EQ(packet_in.time, packet2.time);
-    EXPECT_EQ(packet_in.xi, packet2.xi);
-    EXPECT_EQ(packet_in.eta, packet2.eta);
-    EXPECT_EQ(packet_in.zeta, packet2.zeta);
-    EXPECT_EQ(packet_in.etaT, packet2.etaT);
-    EXPECT_EQ(packet_in.etaF, packet2.etaF);
+    EXPECT_EQ(packet_in.xi_setpoint, packet2.xi_setpoint);
+    EXPECT_EQ(packet_in.eta_setpoint, packet2.eta_setpoint);
+    EXPECT_EQ(packet_in.zeta_setpoint, packet2.zeta_setpoint);
+    EXPECT_EQ(packet_in.throttle_setpoint, packet2.throttle_setpoint);
+    EXPECT_EQ(packet_in.flaps_setpoint, packet2.flaps_setpoint);
+    EXPECT_EQ(packet_in.roll_setpoint, packet2.roll_setpoint);
+    EXPECT_EQ(packet_in.roll_rate_setpoint, packet2.roll_rate_setpoint);
+    EXPECT_EQ(packet_in.pitch_setpoint, packet2.pitch_setpoint);
+    EXPECT_EQ(packet_in.pitch_rate_setpoint, packet2.pitch_rate_setpoint);
+    EXPECT_EQ(packet_in.yaw_setpoint, packet2.yaw_setpoint);
+    EXPECT_EQ(packet_in.yaw_rate_setpoint, packet2.yaw_rate_setpoint);
+    EXPECT_EQ(packet_in.tas_setpoint, packet2.tas_setpoint);
+    EXPECT_EQ(packet_in.tas_rate_setpoint, packet2.tas_rate_setpoint);
+    EXPECT_EQ(packet_in.hgt_setpoint, packet2.hgt_setpoint);
+    EXPECT_EQ(packet_in.hgt_rate_setpoint, packet2.hgt_rate_setpoint);
+    EXPECT_EQ(packet_in.flight_mode, packet2.flight_mode);
+    EXPECT_EQ(packet_in.flight_fct, packet2.flight_fct);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -694,15 +790,15 @@ TEST(downlink, DataPsu)
     mavlink::downlink::msg::DataPsu packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.mainVolt = 101.0;
-    packet_in.mainCurr = 129.0;
-    packet_in.mainPow = 157.0;
-    packet_in.pwrVolt = 185.0;
-    packet_in.pwrCurr = 213.0;
-    packet_in.pwrPow = 241.0;
-    packet_in.sysVolt = 269.0;
-    packet_in.sysCurr = 297.0;
-    packet_in.sysPow = 325.0;
+    packet_in.main_volt = 101.0;
+    packet_in.main_curr = 129.0;
+    packet_in.main_pwr = 157.0;
+    packet_in.pwr_volt = 185.0;
+    packet_in.pwr_curr = 213.0;
+    packet_in.pwr_pwr = 241.0;
+    packet_in.sys_volt = 269.0;
+    packet_in.sys_curr = 297.0;
+    packet_in.sys_pwr = 325.0;
     packet_in.alive = 149;
 
     mavlink::downlink::msg::DataPsu packet1{};
@@ -720,15 +816,15 @@ TEST(downlink, DataPsu)
 
     EXPECT_EQ(packet1.time, packet2.time);
     EXPECT_EQ(packet1.senseTime, packet2.senseTime);
-    EXPECT_EQ(packet1.mainVolt, packet2.mainVolt);
-    EXPECT_EQ(packet1.mainCurr, packet2.mainCurr);
-    EXPECT_EQ(packet1.mainPow, packet2.mainPow);
-    EXPECT_EQ(packet1.pwrVolt, packet2.pwrVolt);
-    EXPECT_EQ(packet1.pwrCurr, packet2.pwrCurr);
-    EXPECT_EQ(packet1.pwrPow, packet2.pwrPow);
-    EXPECT_EQ(packet1.sysVolt, packet2.sysVolt);
-    EXPECT_EQ(packet1.sysCurr, packet2.sysCurr);
-    EXPECT_EQ(packet1.sysPow, packet2.sysPow);
+    EXPECT_EQ(packet1.main_volt, packet2.main_volt);
+    EXPECT_EQ(packet1.main_curr, packet2.main_curr);
+    EXPECT_EQ(packet1.main_pwr, packet2.main_pwr);
+    EXPECT_EQ(packet1.pwr_volt, packet2.pwr_volt);
+    EXPECT_EQ(packet1.pwr_curr, packet2.pwr_curr);
+    EXPECT_EQ(packet1.pwr_pwr, packet2.pwr_pwr);
+    EXPECT_EQ(packet1.sys_volt, packet2.sys_volt);
+    EXPECT_EQ(packet1.sys_curr, packet2.sys_curr);
+    EXPECT_EQ(packet1.sys_pwr, packet2.sys_pwr);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -747,15 +843,15 @@ TEST(downlink_interop, DataPsu)
     mavlink::downlink::msg::DataPsu packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.mainVolt = 101.0;
-    packet_in.mainCurr = 129.0;
-    packet_in.mainPow = 157.0;
-    packet_in.pwrVolt = 185.0;
-    packet_in.pwrCurr = 213.0;
-    packet_in.pwrPow = 241.0;
-    packet_in.sysVolt = 269.0;
-    packet_in.sysCurr = 297.0;
-    packet_in.sysPow = 325.0;
+    packet_in.main_volt = 101.0;
+    packet_in.main_curr = 129.0;
+    packet_in.main_pwr = 157.0;
+    packet_in.pwr_volt = 185.0;
+    packet_in.pwr_curr = 213.0;
+    packet_in.pwr_pwr = 241.0;
+    packet_in.sys_volt = 269.0;
+    packet_in.sys_curr = 297.0;
+    packet_in.sys_pwr = 325.0;
     packet_in.alive = 149;
 
     mavlink::downlink::msg::DataPsu packet2{};
@@ -771,15 +867,15 @@ TEST(downlink_interop, DataPsu)
 
     EXPECT_EQ(packet_in.time, packet2.time);
     EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
-    EXPECT_EQ(packet_in.mainVolt, packet2.mainVolt);
-    EXPECT_EQ(packet_in.mainCurr, packet2.mainCurr);
-    EXPECT_EQ(packet_in.mainPow, packet2.mainPow);
-    EXPECT_EQ(packet_in.pwrVolt, packet2.pwrVolt);
-    EXPECT_EQ(packet_in.pwrCurr, packet2.pwrCurr);
-    EXPECT_EQ(packet_in.pwrPow, packet2.pwrPow);
-    EXPECT_EQ(packet_in.sysVolt, packet2.sysVolt);
-    EXPECT_EQ(packet_in.sysCurr, packet2.sysCurr);
-    EXPECT_EQ(packet_in.sysPow, packet2.sysPow);
+    EXPECT_EQ(packet_in.main_volt, packet2.main_volt);
+    EXPECT_EQ(packet_in.main_curr, packet2.main_curr);
+    EXPECT_EQ(packet_in.main_pwr, packet2.main_pwr);
+    EXPECT_EQ(packet_in.pwr_volt, packet2.pwr_volt);
+    EXPECT_EQ(packet_in.pwr_curr, packet2.pwr_curr);
+    EXPECT_EQ(packet_in.pwr_pwr, packet2.pwr_pwr);
+    EXPECT_EQ(packet_in.sys_volt, packet2.sys_volt);
+    EXPECT_EQ(packet_in.sys_curr, packet2.sys_curr);
+    EXPECT_EQ(packet_in.sys_pwr, packet2.sys_pwr);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG
@@ -908,18 +1004,19 @@ TEST(downlink, DataGps)
     mavlink::downlink::msg::DataGps packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.lat = 101.0;
-    packet_in.lon = 129.0;
-    packet_in.alt = 157.0;
-    packet_in.speed = 185.0;
-    packet_in.cog = 213.0;
+    packet_in.latitude = 101.0;
+    packet_in.longitude = 129.0;
+    packet_in.alt_msl = 157.0;
+    packet_in.groundspeed = 185.0;
+    packet_in.course_over_ground = 213.0;
     packet_in.sats = 241.0;
-    packet_in.fix = 269.0;
-    packet_in.fixMode = 297.0;
-    packet_in.dopP = 325.0;
-    packet_in.dopH = 353.0;
-    packet_in.dopV = 381.0;
-    packet_in.alive = 173;
+    packet_in.sats_in_view = 269.0;
+    packet_in.fix = 297.0;
+    packet_in.fix_mode = 325.0;
+    packet_in.dop_position = 353.0;
+    packet_in.dop_horizontal = 381.0;
+    packet_in.dop_velocity = 409.0;
+    packet_in.alive = 185;
 
     mavlink::downlink::msg::DataGps packet1{};
     mavlink::downlink::msg::DataGps packet2{};
@@ -936,17 +1033,18 @@ TEST(downlink, DataGps)
 
     EXPECT_EQ(packet1.time, packet2.time);
     EXPECT_EQ(packet1.senseTime, packet2.senseTime);
-    EXPECT_EQ(packet1.lat, packet2.lat);
-    EXPECT_EQ(packet1.lon, packet2.lon);
-    EXPECT_EQ(packet1.alt, packet2.alt);
-    EXPECT_EQ(packet1.speed, packet2.speed);
-    EXPECT_EQ(packet1.cog, packet2.cog);
+    EXPECT_EQ(packet1.latitude, packet2.latitude);
+    EXPECT_EQ(packet1.longitude, packet2.longitude);
+    EXPECT_EQ(packet1.alt_msl, packet2.alt_msl);
+    EXPECT_EQ(packet1.groundspeed, packet2.groundspeed);
+    EXPECT_EQ(packet1.course_over_ground, packet2.course_over_ground);
     EXPECT_EQ(packet1.sats, packet2.sats);
+    EXPECT_EQ(packet1.sats_in_view, packet2.sats_in_view);
     EXPECT_EQ(packet1.fix, packet2.fix);
-    EXPECT_EQ(packet1.fixMode, packet2.fixMode);
-    EXPECT_EQ(packet1.dopP, packet2.dopP);
-    EXPECT_EQ(packet1.dopH, packet2.dopH);
-    EXPECT_EQ(packet1.dopV, packet2.dopV);
+    EXPECT_EQ(packet1.fix_mode, packet2.fix_mode);
+    EXPECT_EQ(packet1.dop_position, packet2.dop_position);
+    EXPECT_EQ(packet1.dop_horizontal, packet2.dop_horizontal);
+    EXPECT_EQ(packet1.dop_velocity, packet2.dop_velocity);
     EXPECT_EQ(packet1.alive, packet2.alive);
 }
 
@@ -959,24 +1057,25 @@ TEST(downlink_interop, DataGps)
     memset(&msg, 0, sizeof(msg));
 
     mavlink_datagps_t packet_c {
-         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 173
+         93372036854775807ULL, 73.0, 101.0, 129.0, 157.0, 185.0, 213.0, 241.0, 269.0, 297.0, 325.0, 353.0, 381.0, 409.0, 185
     };
 
     mavlink::downlink::msg::DataGps packet_in{};
     packet_in.time = 93372036854775807ULL;
     packet_in.senseTime = 73.0;
-    packet_in.lat = 101.0;
-    packet_in.lon = 129.0;
-    packet_in.alt = 157.0;
-    packet_in.speed = 185.0;
-    packet_in.cog = 213.0;
+    packet_in.latitude = 101.0;
+    packet_in.longitude = 129.0;
+    packet_in.alt_msl = 157.0;
+    packet_in.groundspeed = 185.0;
+    packet_in.course_over_ground = 213.0;
     packet_in.sats = 241.0;
-    packet_in.fix = 269.0;
-    packet_in.fixMode = 297.0;
-    packet_in.dopP = 325.0;
-    packet_in.dopH = 353.0;
-    packet_in.dopV = 381.0;
-    packet_in.alive = 173;
+    packet_in.sats_in_view = 269.0;
+    packet_in.fix = 297.0;
+    packet_in.fix_mode = 325.0;
+    packet_in.dop_position = 353.0;
+    packet_in.dop_horizontal = 381.0;
+    packet_in.dop_velocity = 409.0;
+    packet_in.alive = 185;
 
     mavlink::downlink::msg::DataGps packet2{};
 
@@ -991,17 +1090,18 @@ TEST(downlink_interop, DataGps)
 
     EXPECT_EQ(packet_in.time, packet2.time);
     EXPECT_EQ(packet_in.senseTime, packet2.senseTime);
-    EXPECT_EQ(packet_in.lat, packet2.lat);
-    EXPECT_EQ(packet_in.lon, packet2.lon);
-    EXPECT_EQ(packet_in.alt, packet2.alt);
-    EXPECT_EQ(packet_in.speed, packet2.speed);
-    EXPECT_EQ(packet_in.cog, packet2.cog);
+    EXPECT_EQ(packet_in.latitude, packet2.latitude);
+    EXPECT_EQ(packet_in.longitude, packet2.longitude);
+    EXPECT_EQ(packet_in.alt_msl, packet2.alt_msl);
+    EXPECT_EQ(packet_in.groundspeed, packet2.groundspeed);
+    EXPECT_EQ(packet_in.course_over_ground, packet2.course_over_ground);
     EXPECT_EQ(packet_in.sats, packet2.sats);
+    EXPECT_EQ(packet_in.sats_in_view, packet2.sats_in_view);
     EXPECT_EQ(packet_in.fix, packet2.fix);
-    EXPECT_EQ(packet_in.fixMode, packet2.fixMode);
-    EXPECT_EQ(packet_in.dopP, packet2.dopP);
-    EXPECT_EQ(packet_in.dopH, packet2.dopH);
-    EXPECT_EQ(packet_in.dopV, packet2.dopV);
+    EXPECT_EQ(packet_in.fix_mode, packet2.fix_mode);
+    EXPECT_EQ(packet_in.dop_position, packet2.dop_position);
+    EXPECT_EQ(packet_in.dop_horizontal, packet2.dop_horizontal);
+    EXPECT_EQ(packet_in.dop_velocity, packet2.dop_velocity);
     EXPECT_EQ(packet_in.alive, packet2.alive);
 
 #ifdef PRINT_MSG

@@ -13,9 +13,9 @@ namespace msg {
  */
 struct DataAhrs : mavlink::Message {
     static constexpr msgid_t MSG_ID = 20000;
-    static constexpr size_t LENGTH = 85;
-    static constexpr size_t MIN_LENGTH = 85;
-    static constexpr uint8_t CRC_EXTRA = 109;
+    static constexpr size_t LENGTH = 69;
+    static constexpr size_t MIN_LENGTH = 69;
+    static constexpr uint8_t CRC_EXTRA = 55;
     static constexpr auto NAME = "DataAhrs";
 
 
@@ -30,16 +30,12 @@ struct DataAhrs : mavlink::Message {
     float magX; /*<  Magnetometer X-Axis */
     float magY; /*<  Magnetometer Y-Axis */
     float magZ; /*<  Magnetometer Z-Axis */
-    float temp; /*<  Temperature */
-    float press; /*<  Barometric pressure */
+    float temperature; /*<  Temperature */
+    float barometric_pressure; /*<  Barometric pressure */
     float phi; /*<  Phi */
     float the; /*<  Theta */
     float psi; /*<  Psi */
-    float q0; /*<  Quaternion 0 */
-    float q1; /*<  Quaternion 1 */
-    float q2; /*<  Quaternion 2 */
-    float q3; /*<  Quaternion 3 */
-    uint8_t alive; /*<  Is message valid? */
+    uint8_t alive; /*<  Is Module alive? */
 
 
     inline std::string get_name(void) const override
@@ -68,15 +64,11 @@ struct DataAhrs : mavlink::Message {
         ss << "  magX: " << magX << std::endl;
         ss << "  magY: " << magY << std::endl;
         ss << "  magZ: " << magZ << std::endl;
-        ss << "  temp: " << temp << std::endl;
-        ss << "  press: " << press << std::endl;
+        ss << "  temperature: " << temperature << std::endl;
+        ss << "  barometric_pressure: " << barometric_pressure << std::endl;
         ss << "  phi: " << phi << std::endl;
         ss << "  the: " << the << std::endl;
         ss << "  psi: " << psi << std::endl;
-        ss << "  q0: " << q0 << std::endl;
-        ss << "  q1: " << q1 << std::endl;
-        ss << "  q2: " << q2 << std::endl;
-        ss << "  q3: " << q3 << std::endl;
         ss << "  alive: " << +alive << std::endl;
 
         return ss.str();
@@ -97,16 +89,12 @@ struct DataAhrs : mavlink::Message {
         map << magX;                          // offset: 36
         map << magY;                          // offset: 40
         map << magZ;                          // offset: 44
-        map << temp;                          // offset: 48
-        map << press;                         // offset: 52
+        map << temperature;                   // offset: 48
+        map << barometric_pressure;           // offset: 52
         map << phi;                           // offset: 56
         map << the;                           // offset: 60
         map << psi;                           // offset: 64
-        map << q0;                            // offset: 68
-        map << q1;                            // offset: 72
-        map << q2;                            // offset: 76
-        map << q3;                            // offset: 80
-        map << alive;                         // offset: 84
+        map << alive;                         // offset: 68
     }
 
     inline void deserialize(mavlink::MsgMap &map) override
@@ -122,16 +110,12 @@ struct DataAhrs : mavlink::Message {
         map >> magX;                          // offset: 36
         map >> magY;                          // offset: 40
         map >> magZ;                          // offset: 44
-        map >> temp;                          // offset: 48
-        map >> press;                         // offset: 52
+        map >> temperature;                   // offset: 48
+        map >> barometric_pressure;           // offset: 52
         map >> phi;                           // offset: 56
         map >> the;                           // offset: 60
         map >> psi;                           // offset: 64
-        map >> q0;                            // offset: 68
-        map >> q1;                            // offset: 72
-        map >> q2;                            // offset: 76
-        map >> q3;                            // offset: 80
-        map >> alive;                         // offset: 84
+        map >> alive;                         // offset: 68
     }
 };
 

@@ -16,25 +16,21 @@ typedef struct __mavlink_dataahrs_t {
  float magX; /*<  Magnetometer X-Axis*/
  float magY; /*<  Magnetometer Y-Axis*/
  float magZ; /*<  Magnetometer Z-Axis*/
- float temp; /*<  Temperature*/
- float press; /*<  Barometric pressure*/
+ float temperature; /*<  Temperature*/
+ float barometric_pressure; /*<  Barometric pressure*/
  float phi; /*<  Phi*/
  float the; /*<  Theta*/
  float psi; /*<  Psi*/
- float q0; /*<  Quaternion 0*/
- float q1; /*<  Quaternion 1*/
- float q2; /*<  Quaternion 2*/
- float q3; /*<  Quaternion 3*/
- uint8_t alive; /*<  Is message valid?*/
+ uint8_t alive; /*<  Is Module alive?*/
 } mavlink_dataahrs_t;
 
-#define MAVLINK_MSG_ID_DataAhrs_LEN 85
-#define MAVLINK_MSG_ID_DataAhrs_MIN_LEN 85
-#define MAVLINK_MSG_ID_20000_LEN 85
-#define MAVLINK_MSG_ID_20000_MIN_LEN 85
+#define MAVLINK_MSG_ID_DataAhrs_LEN 69
+#define MAVLINK_MSG_ID_DataAhrs_MIN_LEN 69
+#define MAVLINK_MSG_ID_20000_LEN 69
+#define MAVLINK_MSG_ID_20000_MIN_LEN 69
 
-#define MAVLINK_MSG_ID_DataAhrs_CRC 109
-#define MAVLINK_MSG_ID_20000_CRC 109
+#define MAVLINK_MSG_ID_DataAhrs_CRC 55
+#define MAVLINK_MSG_ID_20000_CRC 55
 
 
 
@@ -42,7 +38,7 @@ typedef struct __mavlink_dataahrs_t {
 #define MAVLINK_MESSAGE_INFO_DataAhrs { \
     20000, \
     "DataAhrs", \
-    21, \
+    17, \
     {  { "time", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_dataahrs_t, time) }, \
          { "senseTime", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_dataahrs_t, senseTime) }, \
          { "gyrX", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_dataahrs_t, gyrX) }, \
@@ -54,22 +50,18 @@ typedef struct __mavlink_dataahrs_t {
          { "magX", NULL, MAVLINK_TYPE_FLOAT, 0, 36, offsetof(mavlink_dataahrs_t, magX) }, \
          { "magY", NULL, MAVLINK_TYPE_FLOAT, 0, 40, offsetof(mavlink_dataahrs_t, magY) }, \
          { "magZ", NULL, MAVLINK_TYPE_FLOAT, 0, 44, offsetof(mavlink_dataahrs_t, magZ) }, \
-         { "temp", NULL, MAVLINK_TYPE_FLOAT, 0, 48, offsetof(mavlink_dataahrs_t, temp) }, \
-         { "press", NULL, MAVLINK_TYPE_FLOAT, 0, 52, offsetof(mavlink_dataahrs_t, press) }, \
+         { "temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 48, offsetof(mavlink_dataahrs_t, temperature) }, \
+         { "barometric_pressure", NULL, MAVLINK_TYPE_FLOAT, 0, 52, offsetof(mavlink_dataahrs_t, barometric_pressure) }, \
          { "phi", NULL, MAVLINK_TYPE_FLOAT, 0, 56, offsetof(mavlink_dataahrs_t, phi) }, \
          { "the", NULL, MAVLINK_TYPE_FLOAT, 0, 60, offsetof(mavlink_dataahrs_t, the) }, \
          { "psi", NULL, MAVLINK_TYPE_FLOAT, 0, 64, offsetof(mavlink_dataahrs_t, psi) }, \
-         { "q0", NULL, MAVLINK_TYPE_FLOAT, 0, 68, offsetof(mavlink_dataahrs_t, q0) }, \
-         { "q1", NULL, MAVLINK_TYPE_FLOAT, 0, 72, offsetof(mavlink_dataahrs_t, q1) }, \
-         { "q2", NULL, MAVLINK_TYPE_FLOAT, 0, 76, offsetof(mavlink_dataahrs_t, q2) }, \
-         { "q3", NULL, MAVLINK_TYPE_FLOAT, 0, 80, offsetof(mavlink_dataahrs_t, q3) }, \
-         { "alive", NULL, MAVLINK_TYPE_UINT8_T, 0, 84, offsetof(mavlink_dataahrs_t, alive) }, \
+         { "alive", NULL, MAVLINK_TYPE_UINT8_T, 0, 68, offsetof(mavlink_dataahrs_t, alive) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_DataAhrs { \
     "DataAhrs", \
-    21, \
+    17, \
     {  { "time", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_dataahrs_t, time) }, \
          { "senseTime", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_dataahrs_t, senseTime) }, \
          { "gyrX", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_dataahrs_t, gyrX) }, \
@@ -81,16 +73,12 @@ typedef struct __mavlink_dataahrs_t {
          { "magX", NULL, MAVLINK_TYPE_FLOAT, 0, 36, offsetof(mavlink_dataahrs_t, magX) }, \
          { "magY", NULL, MAVLINK_TYPE_FLOAT, 0, 40, offsetof(mavlink_dataahrs_t, magY) }, \
          { "magZ", NULL, MAVLINK_TYPE_FLOAT, 0, 44, offsetof(mavlink_dataahrs_t, magZ) }, \
-         { "temp", NULL, MAVLINK_TYPE_FLOAT, 0, 48, offsetof(mavlink_dataahrs_t, temp) }, \
-         { "press", NULL, MAVLINK_TYPE_FLOAT, 0, 52, offsetof(mavlink_dataahrs_t, press) }, \
+         { "temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 48, offsetof(mavlink_dataahrs_t, temperature) }, \
+         { "barometric_pressure", NULL, MAVLINK_TYPE_FLOAT, 0, 52, offsetof(mavlink_dataahrs_t, barometric_pressure) }, \
          { "phi", NULL, MAVLINK_TYPE_FLOAT, 0, 56, offsetof(mavlink_dataahrs_t, phi) }, \
          { "the", NULL, MAVLINK_TYPE_FLOAT, 0, 60, offsetof(mavlink_dataahrs_t, the) }, \
          { "psi", NULL, MAVLINK_TYPE_FLOAT, 0, 64, offsetof(mavlink_dataahrs_t, psi) }, \
-         { "q0", NULL, MAVLINK_TYPE_FLOAT, 0, 68, offsetof(mavlink_dataahrs_t, q0) }, \
-         { "q1", NULL, MAVLINK_TYPE_FLOAT, 0, 72, offsetof(mavlink_dataahrs_t, q1) }, \
-         { "q2", NULL, MAVLINK_TYPE_FLOAT, 0, 76, offsetof(mavlink_dataahrs_t, q2) }, \
-         { "q3", NULL, MAVLINK_TYPE_FLOAT, 0, 80, offsetof(mavlink_dataahrs_t, q3) }, \
-         { "alive", NULL, MAVLINK_TYPE_UINT8_T, 0, 84, offsetof(mavlink_dataahrs_t, alive) }, \
+         { "alive", NULL, MAVLINK_TYPE_UINT8_T, 0, 68, offsetof(mavlink_dataahrs_t, alive) }, \
          } \
 }
 #endif
@@ -112,20 +100,16 @@ typedef struct __mavlink_dataahrs_t {
  * @param magX  Magnetometer X-Axis
  * @param magY  Magnetometer Y-Axis
  * @param magZ  Magnetometer Z-Axis
- * @param temp  Temperature
- * @param press  Barometric pressure
+ * @param temperature  Temperature
+ * @param barometric_pressure  Barometric pressure
  * @param phi  Phi
  * @param the  Theta
  * @param psi  Psi
- * @param q0  Quaternion 0
- * @param q1  Quaternion 1
- * @param q2  Quaternion 2
- * @param q3  Quaternion 3
- * @param alive  Is message valid?
+ * @param alive  Is Module alive?
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_dataahrs_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint64_t time, float senseTime, float gyrX, float gyrY, float gyrZ, float accX, float accY, float accZ, float magX, float magY, float magZ, float temp, float press, float phi, float the, float psi, float q0, float q1, float q2, float q3, uint8_t alive)
+                               uint64_t time, float senseTime, float gyrX, float gyrY, float gyrZ, float accX, float accY, float accZ, float magX, float magY, float magZ, float temperature, float barometric_pressure, float phi, float the, float psi, uint8_t alive)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_DataAhrs_LEN];
@@ -140,16 +124,12 @@ static inline uint16_t mavlink_msg_dataahrs_pack(uint8_t system_id, uint8_t comp
     _mav_put_float(buf, 36, magX);
     _mav_put_float(buf, 40, magY);
     _mav_put_float(buf, 44, magZ);
-    _mav_put_float(buf, 48, temp);
-    _mav_put_float(buf, 52, press);
+    _mav_put_float(buf, 48, temperature);
+    _mav_put_float(buf, 52, barometric_pressure);
     _mav_put_float(buf, 56, phi);
     _mav_put_float(buf, 60, the);
     _mav_put_float(buf, 64, psi);
-    _mav_put_float(buf, 68, q0);
-    _mav_put_float(buf, 72, q1);
-    _mav_put_float(buf, 76, q2);
-    _mav_put_float(buf, 80, q3);
-    _mav_put_uint8_t(buf, 84, alive);
+    _mav_put_uint8_t(buf, 68, alive);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_DataAhrs_LEN);
 #else
@@ -165,15 +145,11 @@ static inline uint16_t mavlink_msg_dataahrs_pack(uint8_t system_id, uint8_t comp
     packet.magX = magX;
     packet.magY = magY;
     packet.magZ = magZ;
-    packet.temp = temp;
-    packet.press = press;
+    packet.temperature = temperature;
+    packet.barometric_pressure = barometric_pressure;
     packet.phi = phi;
     packet.the = the;
     packet.psi = psi;
-    packet.q0 = q0;
-    packet.q1 = q1;
-    packet.q2 = q2;
-    packet.q3 = q3;
     packet.alive = alive;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_DataAhrs_LEN);
@@ -200,21 +176,17 @@ static inline uint16_t mavlink_msg_dataahrs_pack(uint8_t system_id, uint8_t comp
  * @param magX  Magnetometer X-Axis
  * @param magY  Magnetometer Y-Axis
  * @param magZ  Magnetometer Z-Axis
- * @param temp  Temperature
- * @param press  Barometric pressure
+ * @param temperature  Temperature
+ * @param barometric_pressure  Barometric pressure
  * @param phi  Phi
  * @param the  Theta
  * @param psi  Psi
- * @param q0  Quaternion 0
- * @param q1  Quaternion 1
- * @param q2  Quaternion 2
- * @param q3  Quaternion 3
- * @param alive  Is message valid?
+ * @param alive  Is Module alive?
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_dataahrs_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint64_t time,float senseTime,float gyrX,float gyrY,float gyrZ,float accX,float accY,float accZ,float magX,float magY,float magZ,float temp,float press,float phi,float the,float psi,float q0,float q1,float q2,float q3,uint8_t alive)
+                                   uint64_t time,float senseTime,float gyrX,float gyrY,float gyrZ,float accX,float accY,float accZ,float magX,float magY,float magZ,float temperature,float barometric_pressure,float phi,float the,float psi,uint8_t alive)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_DataAhrs_LEN];
@@ -229,16 +201,12 @@ static inline uint16_t mavlink_msg_dataahrs_pack_chan(uint8_t system_id, uint8_t
     _mav_put_float(buf, 36, magX);
     _mav_put_float(buf, 40, magY);
     _mav_put_float(buf, 44, magZ);
-    _mav_put_float(buf, 48, temp);
-    _mav_put_float(buf, 52, press);
+    _mav_put_float(buf, 48, temperature);
+    _mav_put_float(buf, 52, barometric_pressure);
     _mav_put_float(buf, 56, phi);
     _mav_put_float(buf, 60, the);
     _mav_put_float(buf, 64, psi);
-    _mav_put_float(buf, 68, q0);
-    _mav_put_float(buf, 72, q1);
-    _mav_put_float(buf, 76, q2);
-    _mav_put_float(buf, 80, q3);
-    _mav_put_uint8_t(buf, 84, alive);
+    _mav_put_uint8_t(buf, 68, alive);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_DataAhrs_LEN);
 #else
@@ -254,15 +222,11 @@ static inline uint16_t mavlink_msg_dataahrs_pack_chan(uint8_t system_id, uint8_t
     packet.magX = magX;
     packet.magY = magY;
     packet.magZ = magZ;
-    packet.temp = temp;
-    packet.press = press;
+    packet.temperature = temperature;
+    packet.barometric_pressure = barometric_pressure;
     packet.phi = phi;
     packet.the = the;
     packet.psi = psi;
-    packet.q0 = q0;
-    packet.q1 = q1;
-    packet.q2 = q2;
-    packet.q3 = q3;
     packet.alive = alive;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_DataAhrs_LEN);
@@ -282,7 +246,7 @@ static inline uint16_t mavlink_msg_dataahrs_pack_chan(uint8_t system_id, uint8_t
  */
 static inline uint16_t mavlink_msg_dataahrs_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_dataahrs_t* dataahrs)
 {
-    return mavlink_msg_dataahrs_pack(system_id, component_id, msg, dataahrs->time, dataahrs->senseTime, dataahrs->gyrX, dataahrs->gyrY, dataahrs->gyrZ, dataahrs->accX, dataahrs->accY, dataahrs->accZ, dataahrs->magX, dataahrs->magY, dataahrs->magZ, dataahrs->temp, dataahrs->press, dataahrs->phi, dataahrs->the, dataahrs->psi, dataahrs->q0, dataahrs->q1, dataahrs->q2, dataahrs->q3, dataahrs->alive);
+    return mavlink_msg_dataahrs_pack(system_id, component_id, msg, dataahrs->time, dataahrs->senseTime, dataahrs->gyrX, dataahrs->gyrY, dataahrs->gyrZ, dataahrs->accX, dataahrs->accY, dataahrs->accZ, dataahrs->magX, dataahrs->magY, dataahrs->magZ, dataahrs->temperature, dataahrs->barometric_pressure, dataahrs->phi, dataahrs->the, dataahrs->psi, dataahrs->alive);
 }
 
 /**
@@ -296,7 +260,7 @@ static inline uint16_t mavlink_msg_dataahrs_encode(uint8_t system_id, uint8_t co
  */
 static inline uint16_t mavlink_msg_dataahrs_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_dataahrs_t* dataahrs)
 {
-    return mavlink_msg_dataahrs_pack_chan(system_id, component_id, chan, msg, dataahrs->time, dataahrs->senseTime, dataahrs->gyrX, dataahrs->gyrY, dataahrs->gyrZ, dataahrs->accX, dataahrs->accY, dataahrs->accZ, dataahrs->magX, dataahrs->magY, dataahrs->magZ, dataahrs->temp, dataahrs->press, dataahrs->phi, dataahrs->the, dataahrs->psi, dataahrs->q0, dataahrs->q1, dataahrs->q2, dataahrs->q3, dataahrs->alive);
+    return mavlink_msg_dataahrs_pack_chan(system_id, component_id, chan, msg, dataahrs->time, dataahrs->senseTime, dataahrs->gyrX, dataahrs->gyrY, dataahrs->gyrZ, dataahrs->accX, dataahrs->accY, dataahrs->accZ, dataahrs->magX, dataahrs->magY, dataahrs->magZ, dataahrs->temperature, dataahrs->barometric_pressure, dataahrs->phi, dataahrs->the, dataahrs->psi, dataahrs->alive);
 }
 
 /**
@@ -314,20 +278,16 @@ static inline uint16_t mavlink_msg_dataahrs_encode_chan(uint8_t system_id, uint8
  * @param magX  Magnetometer X-Axis
  * @param magY  Magnetometer Y-Axis
  * @param magZ  Magnetometer Z-Axis
- * @param temp  Temperature
- * @param press  Barometric pressure
+ * @param temperature  Temperature
+ * @param barometric_pressure  Barometric pressure
  * @param phi  Phi
  * @param the  Theta
  * @param psi  Psi
- * @param q0  Quaternion 0
- * @param q1  Quaternion 1
- * @param q2  Quaternion 2
- * @param q3  Quaternion 3
- * @param alive  Is message valid?
+ * @param alive  Is Module alive?
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_dataahrs_send(mavlink_channel_t chan, uint64_t time, float senseTime, float gyrX, float gyrY, float gyrZ, float accX, float accY, float accZ, float magX, float magY, float magZ, float temp, float press, float phi, float the, float psi, float q0, float q1, float q2, float q3, uint8_t alive)
+static inline void mavlink_msg_dataahrs_send(mavlink_channel_t chan, uint64_t time, float senseTime, float gyrX, float gyrY, float gyrZ, float accX, float accY, float accZ, float magX, float magY, float magZ, float temperature, float barometric_pressure, float phi, float the, float psi, uint8_t alive)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_DataAhrs_LEN];
@@ -342,16 +302,12 @@ static inline void mavlink_msg_dataahrs_send(mavlink_channel_t chan, uint64_t ti
     _mav_put_float(buf, 36, magX);
     _mav_put_float(buf, 40, magY);
     _mav_put_float(buf, 44, magZ);
-    _mav_put_float(buf, 48, temp);
-    _mav_put_float(buf, 52, press);
+    _mav_put_float(buf, 48, temperature);
+    _mav_put_float(buf, 52, barometric_pressure);
     _mav_put_float(buf, 56, phi);
     _mav_put_float(buf, 60, the);
     _mav_put_float(buf, 64, psi);
-    _mav_put_float(buf, 68, q0);
-    _mav_put_float(buf, 72, q1);
-    _mav_put_float(buf, 76, q2);
-    _mav_put_float(buf, 80, q3);
-    _mav_put_uint8_t(buf, 84, alive);
+    _mav_put_uint8_t(buf, 68, alive);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_DataAhrs, buf, MAVLINK_MSG_ID_DataAhrs_MIN_LEN, MAVLINK_MSG_ID_DataAhrs_LEN, MAVLINK_MSG_ID_DataAhrs_CRC);
 #else
@@ -367,15 +323,11 @@ static inline void mavlink_msg_dataahrs_send(mavlink_channel_t chan, uint64_t ti
     packet.magX = magX;
     packet.magY = magY;
     packet.magZ = magZ;
-    packet.temp = temp;
-    packet.press = press;
+    packet.temperature = temperature;
+    packet.barometric_pressure = barometric_pressure;
     packet.phi = phi;
     packet.the = the;
     packet.psi = psi;
-    packet.q0 = q0;
-    packet.q1 = q1;
-    packet.q2 = q2;
-    packet.q3 = q3;
     packet.alive = alive;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_DataAhrs, (const char *)&packet, MAVLINK_MSG_ID_DataAhrs_MIN_LEN, MAVLINK_MSG_ID_DataAhrs_LEN, MAVLINK_MSG_ID_DataAhrs_CRC);
@@ -390,7 +342,7 @@ static inline void mavlink_msg_dataahrs_send(mavlink_channel_t chan, uint64_t ti
 static inline void mavlink_msg_dataahrs_send_struct(mavlink_channel_t chan, const mavlink_dataahrs_t* dataahrs)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_dataahrs_send(chan, dataahrs->time, dataahrs->senseTime, dataahrs->gyrX, dataahrs->gyrY, dataahrs->gyrZ, dataahrs->accX, dataahrs->accY, dataahrs->accZ, dataahrs->magX, dataahrs->magY, dataahrs->magZ, dataahrs->temp, dataahrs->press, dataahrs->phi, dataahrs->the, dataahrs->psi, dataahrs->q0, dataahrs->q1, dataahrs->q2, dataahrs->q3, dataahrs->alive);
+    mavlink_msg_dataahrs_send(chan, dataahrs->time, dataahrs->senseTime, dataahrs->gyrX, dataahrs->gyrY, dataahrs->gyrZ, dataahrs->accX, dataahrs->accY, dataahrs->accZ, dataahrs->magX, dataahrs->magY, dataahrs->magZ, dataahrs->temperature, dataahrs->barometric_pressure, dataahrs->phi, dataahrs->the, dataahrs->psi, dataahrs->alive);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_DataAhrs, (const char *)dataahrs, MAVLINK_MSG_ID_DataAhrs_MIN_LEN, MAVLINK_MSG_ID_DataAhrs_LEN, MAVLINK_MSG_ID_DataAhrs_CRC);
 #endif
@@ -398,13 +350,13 @@ static inline void mavlink_msg_dataahrs_send_struct(mavlink_channel_t chan, cons
 
 #if MAVLINK_MSG_ID_DataAhrs_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This varient of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by re-using
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_dataahrs_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time, float senseTime, float gyrX, float gyrY, float gyrZ, float accX, float accY, float accZ, float magX, float magY, float magZ, float temp, float press, float phi, float the, float psi, float q0, float q1, float q2, float q3, uint8_t alive)
+static inline void mavlink_msg_dataahrs_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time, float senseTime, float gyrX, float gyrY, float gyrZ, float accX, float accY, float accZ, float magX, float magY, float magZ, float temperature, float barometric_pressure, float phi, float the, float psi, uint8_t alive)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -419,16 +371,12 @@ static inline void mavlink_msg_dataahrs_send_buf(mavlink_message_t *msgbuf, mavl
     _mav_put_float(buf, 36, magX);
     _mav_put_float(buf, 40, magY);
     _mav_put_float(buf, 44, magZ);
-    _mav_put_float(buf, 48, temp);
-    _mav_put_float(buf, 52, press);
+    _mav_put_float(buf, 48, temperature);
+    _mav_put_float(buf, 52, barometric_pressure);
     _mav_put_float(buf, 56, phi);
     _mav_put_float(buf, 60, the);
     _mav_put_float(buf, 64, psi);
-    _mav_put_float(buf, 68, q0);
-    _mav_put_float(buf, 72, q1);
-    _mav_put_float(buf, 76, q2);
-    _mav_put_float(buf, 80, q3);
-    _mav_put_uint8_t(buf, 84, alive);
+    _mav_put_uint8_t(buf, 68, alive);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_DataAhrs, buf, MAVLINK_MSG_ID_DataAhrs_MIN_LEN, MAVLINK_MSG_ID_DataAhrs_LEN, MAVLINK_MSG_ID_DataAhrs_CRC);
 #else
@@ -444,15 +392,11 @@ static inline void mavlink_msg_dataahrs_send_buf(mavlink_message_t *msgbuf, mavl
     packet->magX = magX;
     packet->magY = magY;
     packet->magZ = magZ;
-    packet->temp = temp;
-    packet->press = press;
+    packet->temperature = temperature;
+    packet->barometric_pressure = barometric_pressure;
     packet->phi = phi;
     packet->the = the;
     packet->psi = psi;
-    packet->q0 = q0;
-    packet->q1 = q1;
-    packet->q2 = q2;
-    packet->q3 = q3;
     packet->alive = alive;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_DataAhrs, (const char *)packet, MAVLINK_MSG_ID_DataAhrs_MIN_LEN, MAVLINK_MSG_ID_DataAhrs_LEN, MAVLINK_MSG_ID_DataAhrs_CRC);
@@ -576,21 +520,21 @@ static inline float mavlink_msg_dataahrs_get_magZ(const mavlink_message_t* msg)
 }
 
 /**
- * @brief Get field temp from dataahrs message
+ * @brief Get field temperature from dataahrs message
  *
  * @return  Temperature
  */
-static inline float mavlink_msg_dataahrs_get_temp(const mavlink_message_t* msg)
+static inline float mavlink_msg_dataahrs_get_temperature(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  48);
 }
 
 /**
- * @brief Get field press from dataahrs message
+ * @brief Get field barometric_pressure from dataahrs message
  *
  * @return  Barometric pressure
  */
-static inline float mavlink_msg_dataahrs_get_press(const mavlink_message_t* msg)
+static inline float mavlink_msg_dataahrs_get_barometric_pressure(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_float(msg,  52);
 }
@@ -626,53 +570,13 @@ static inline float mavlink_msg_dataahrs_get_psi(const mavlink_message_t* msg)
 }
 
 /**
- * @brief Get field q0 from dataahrs message
- *
- * @return  Quaternion 0
- */
-static inline float mavlink_msg_dataahrs_get_q0(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_float(msg,  68);
-}
-
-/**
- * @brief Get field q1 from dataahrs message
- *
- * @return  Quaternion 1
- */
-static inline float mavlink_msg_dataahrs_get_q1(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_float(msg,  72);
-}
-
-/**
- * @brief Get field q2 from dataahrs message
- *
- * @return  Quaternion 2
- */
-static inline float mavlink_msg_dataahrs_get_q2(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_float(msg,  76);
-}
-
-/**
- * @brief Get field q3 from dataahrs message
- *
- * @return  Quaternion 3
- */
-static inline float mavlink_msg_dataahrs_get_q3(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_float(msg,  80);
-}
-
-/**
  * @brief Get field alive from dataahrs message
  *
- * @return  Is message valid?
+ * @return  Is Module alive?
  */
 static inline uint8_t mavlink_msg_dataahrs_get_alive(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  84);
+    return _MAV_RETURN_uint8_t(msg,  68);
 }
 
 /**
@@ -695,15 +599,11 @@ static inline void mavlink_msg_dataahrs_decode(const mavlink_message_t* msg, mav
     dataahrs->magX = mavlink_msg_dataahrs_get_magX(msg);
     dataahrs->magY = mavlink_msg_dataahrs_get_magY(msg);
     dataahrs->magZ = mavlink_msg_dataahrs_get_magZ(msg);
-    dataahrs->temp = mavlink_msg_dataahrs_get_temp(msg);
-    dataahrs->press = mavlink_msg_dataahrs_get_press(msg);
+    dataahrs->temperature = mavlink_msg_dataahrs_get_temperature(msg);
+    dataahrs->barometric_pressure = mavlink_msg_dataahrs_get_barometric_pressure(msg);
     dataahrs->phi = mavlink_msg_dataahrs_get_phi(msg);
     dataahrs->the = mavlink_msg_dataahrs_get_the(msg);
     dataahrs->psi = mavlink_msg_dataahrs_get_psi(msg);
-    dataahrs->q0 = mavlink_msg_dataahrs_get_q0(msg);
-    dataahrs->q1 = mavlink_msg_dataahrs_get_q1(msg);
-    dataahrs->q2 = mavlink_msg_dataahrs_get_q2(msg);
-    dataahrs->q3 = mavlink_msg_dataahrs_get_q3(msg);
     dataahrs->alive = mavlink_msg_dataahrs_get_alive(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_DataAhrs_LEN? msg->len : MAVLINK_MSG_ID_DataAhrs_LEN;

@@ -19,9 +19,9 @@ namespace mavlink {
 namespace downlink {
 
 /**
- * Array of msg_entry needed for @p mavlink_parse_char() (trought @p mavlink_get_msg_entry())
+ * Array of msg_entry needed for @p mavlink_parse_char() (through @p mavlink_get_msg_entry())
  */
-constexpr std::array<mavlink_msg_entry_t, 9> MESSAGE_ENTRIES {{ {10000, 252, 55, 55, 0, 0, 0}, {15000, 187, 51, 51, 0, 0, 0}, {20000, 109, 85, 85, 0, 0, 0}, {30000, 175, 33, 33, 0, 0, 0}, {40000, 64, 129, 129, 0, 0, 0}, {50000, 128, 29, 29, 0, 0, 0}, {60000, 202, 49, 49, 0, 0, 0}, {70000, 77, 21, 21, 0, 0, 0}, {80000, 34, 57, 57, 0, 0, 0} }};
+constexpr std::array<mavlink_msg_entry_t, 9> MESSAGE_ENTRIES {{ {10000, 21, 101, 101, 0, 0, 0}, {15000, 86, 57, 57, 0, 0, 0}, {20000, 55, 69, 69, 0, 0, 0}, {30000, 215, 41, 41, 0, 0, 0}, {40000, 180, 137, 137, 0, 0, 0}, {50000, 247, 73, 73, 0, 0, 0}, {60000, 217, 49, 49, 0, 0, 0}, {70000, 77, 21, 21, 0, 0, 0}, {80000, 161, 61, 61, 0, 0, 0} }};
 
 //! MAVLINK VERSION
 constexpr auto MAVLINK_VERSION = 2;

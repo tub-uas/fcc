@@ -18,7 +18,7 @@ typedef struct __mavlink_datawatchdog_t {
  uint8_t raiOutAlive; /*<  Is RaiOut alive?*/
  uint8_t sFusionAlive; /*<  Is SFusion alive?*/
  uint8_t uplinkAlive; /*<  Is Uplink alive?*/
- uint8_t alive; /*<  Is message valid?*/
+ uint8_t alive; /*<  Is Module alive?*/
 } mavlink_datawatchdog_t;
 
 #define MAVLINK_MSG_ID_DataWatchdog_LEN 21
@@ -93,7 +93,7 @@ typedef struct __mavlink_datawatchdog_t {
  * @param raiOutAlive  Is RaiOut alive?
  * @param sFusionAlive  Is SFusion alive?
  * @param uplinkAlive  Is Uplink alive?
- * @param alive  Is message valid?
+ * @param alive  Is Module alive?
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_datawatchdog_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
@@ -160,7 +160,7 @@ static inline uint16_t mavlink_msg_datawatchdog_pack(uint8_t system_id, uint8_t 
  * @param raiOutAlive  Is RaiOut alive?
  * @param sFusionAlive  Is SFusion alive?
  * @param uplinkAlive  Is Uplink alive?
- * @param alive  Is message valid?
+ * @param alive  Is Module alive?
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_datawatchdog_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
@@ -253,7 +253,7 @@ static inline uint16_t mavlink_msg_datawatchdog_encode_chan(uint8_t system_id, u
  * @param raiOutAlive  Is RaiOut alive?
  * @param sFusionAlive  Is SFusion alive?
  * @param uplinkAlive  Is Uplink alive?
- * @param alive  Is message valid?
+ * @param alive  Is Module alive?
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
@@ -314,7 +314,7 @@ static inline void mavlink_msg_datawatchdog_send_struct(mavlink_channel_t chan, 
 
 #if MAVLINK_MSG_ID_DataWatchdog_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This varient of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by re-using
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -500,7 +500,7 @@ static inline uint8_t mavlink_msg_datawatchdog_get_uplinkAlive(const mavlink_mes
 /**
  * @brief Get field alive from datawatchdog message
  *
- * @return  Is message valid?
+ * @return  Is Module alive?
  */
 static inline uint8_t mavlink_msg_datawatchdog_get_alive(const mavlink_message_t* msg)
 {
